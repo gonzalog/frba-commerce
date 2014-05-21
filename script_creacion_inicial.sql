@@ -386,3 +386,25 @@ ALTER TABLE THE_DISCRETABOY.Subasta ADD CONSTRAINT FK_subasta_ult_oferta
 ALTER TABLE THE_DISCRETABOY.Subasta ADD CONSTRAINT FK_subasta_public
         FOREIGN KEY (publicacion) REFERENCES THE_DISCRETABOY.Publicacion (id)
 ;
+
+--Create other constraints
+
+
+/* ****** Migrar datos existentes ******* */
+
+--Calificaciones
+
+INSERT INTO THE_DISCRETABOY.Calificacion
+        (
+        id,
+        cant_estrellas,
+        descrip
+        )
+        
+        select distinct m.Calificacion_Codigo as id,
+				m.Calificacion_Cant_Estrellas as cant_estrellas,
+				m.Calificacion_Descripcion as descrip
+		from gd_esquema.Maestra m
+			where m.Calificacion_Codigo is not NULL
+;
+
