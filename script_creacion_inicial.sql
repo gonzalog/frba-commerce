@@ -408,3 +408,80 @@ INSERT INTO THE_DISCRETABOY.Calificacion
 			where m.Calificacion_Codigo is not NULL
 ;
 
+INSERT INTO THE_DISCRETABOY.Direccion
+        (
+        calle,
+        numero,
+        piso,
+        depto,
+        cod_post
+        --localidad
+        )
+        
+        select m.Cli_Dom_Calle as calle,
+			m.Cli_Nro_Calle as numero,
+			m.Cli_Piso as piso,
+			m.Cli_Depto as depto,
+			m.Cli_Cod_Postal as cod_post
+			--NULL
+		from gd_esquema.Maestra m
+		GROUP BY m.Cli_Dom_Calle,m.Cli_Nro_Calle,m.Cli_Piso,m.Cli_Depto,m.Cli_Cod_Postal
+		Having Cli_Dom_Calle is not NULL
+		
+		UNION
+		
+		select m.Publ_Empresa_Dom_Calle as calle,
+			m.Publ_Empresa_Nro_Calle as numero,
+			m.Publ_Empresa_Piso as piso,
+			m.Publ_Empresa_Depto as depto,
+			m.Publ_Empresa_Cod_Postal as cod_post
+			--NULL
+		from gd_esquema.Maestra m
+		GROUP BY Publ_Empresa_Dom_Calle,Publ_Empresa_Nro_Calle,Publ_Empresa_Piso,Publ_Empresa_Depto,Publ_Empresa_Cod_Postal
+		Having Publ_Empresa_Dom_Calle is not NULL
+		
+		UNION
+		
+		select m.Publ_Cli_Dom_Calle as calle,
+			m.Publ_Cli_Nro_Calle as numero,
+			m.Publ_Cli_Piso as piso,
+			m.Publ_Cli_Depto as depto,
+			m.Publ_Cli_Cod_Postal as cod_post
+			--NULL	
+		from gd_esquema.Maestra m
+		GROUP BY Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_Piso,Publ_Cli_Depto,Publ_Cli_Cod_Postal
+		Having Publ_Cli_Dom_Calle is not NULL	
+;
+/*
+INSERT INTO THE_DISCRETABOY.Cliente
+	(
+	aprellido,
+	direccion,
+	doc_numero,
+	doc_tipo,
+	fecha_nacimiento,
+	mail,
+	nombre,
+	telefono,
+	usuario
+	)
+	
+	select 
+		m.Cli_Apeliido,
+		(select top 1 d.id from THE_DISCRETABOY.Direccion d
+				where d.calle=m.Cli_Dom_Calle and
+				d.cod_post=m.Cli_Cod_Postal and
+				d.depto=m.Cli_Depto and
+				d.numero=m.Cli_Nro_Calle and
+				d.piso=m.Cli_Piso),
+		m.Cli_Dni,
+		'DNI',
+		m.Cli_Fecha_Nac,
+		m.Cli_Mail,
+		m.Cli_Nombre,
+		NULL,
+		m.
+		
+		 From gd_esquema.Maestra m
+
+---------Procedures
