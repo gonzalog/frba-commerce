@@ -565,6 +565,20 @@ INSERT INTO THE_DISCRETABOY.Empresa
 				m.Publ_Empresa_Piso
 	having m.Publ_Empresa_Cuit is not null
 GO
+
+--Cargo calificaciones
+INSERT INTO THE_DISCRETABOY.Calificacion
+(
+id,
+cant_estrellas,
+descrip
+)
+
+SELECT  m.Calificacion_Codigo,
+		m.Calificacion_Cant_Estrellas,
+		m.Calificacion_Descripcion
+FROM gd_esquema.Maestra m
+WHERE m.Calificacion_Codigo is not null
 ---------Procedures
 ---------Functions
 CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
