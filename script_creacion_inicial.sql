@@ -616,6 +616,24 @@ M.Publicacion_Fecha,
 M.Publicacion_Fecha_Venc
 
 GO
+
+--CARGO CLIENTES POR PUBLICACIONES
+INSERT INTO THE_DISCRETABOY.Cliente_por_publicacion
+(
+cliente,
+publicacion
+)
+SELECT
+(SELECT C.usuario FROM THE_DISCRETABOY.Cliente C
+	WHERE C.doc_numero=M.Publ_Cli_Dni),
+M.Publicacion_Cod
+FROM gd_esquema.Maestra M
+GROUP BY 
+M.Publ_Cli_Dni,
+M.Publicacion_Cod
+HAVING M.Publicacion_Cod IS NOT NULL AND M.Publ_Cli_Dni IS NOT NULL
+
+GO
 ---------Procedures
 ---------Functions
 CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
