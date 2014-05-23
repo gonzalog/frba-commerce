@@ -566,19 +566,29 @@ INSERT INTO THE_DISCRETABOY.Empresa
 	having m.Publ_Empresa_Cuit is not null
 GO
 
---Cargo calificaciones
-INSERT INTO THE_DISCRETABOY.Calificacion
-(
-id,
-cant_estrellas,
-descrip
-)
+--Cargo visibilidades
 
-SELECT  m.Calificacion_Codigo,
-		m.Calificacion_Cant_Estrellas,
-		m.Calificacion_Descripcion
+INSERT INTO THE_DISCRETABOY.Visibilidad
+(codigo,
+descripcion,
+porcentaje,
+precio_por_pub
+)
+SELECT 
+m.Publicacion_Visibilidad_Cod,
+m.Publicacion_Visibilidad_Desc,
+m.Publicacion_Visibilidad_Porcentaje,
+m.Publicacion_Visibilidad_Precio
 FROM gd_esquema.Maestra m
-WHERE m.Calificacion_Codigo is not null
+WHERE M.Publicacion_Visibilidad_Cod IS NOT NULL
+GROUP BY m.Publicacion_Visibilidad_Cod,
+m.Publicacion_Visibilidad_Desc,
+m.Publicacion_Visibilidad_Porcentaje,
+m.Publicacion_Visibilidad_Precio
+
+GO
+
+
 ---------Procedures
 ---------Functions
 CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
