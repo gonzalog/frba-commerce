@@ -24,26 +24,26 @@ GO
 
 -- Create Tables
 CREATE TABLE THE_DISCRETABOY.Empresa (
-	usuario numeric(18) NOT NULL, --FK ---PK
+	usuario nvarchar(20) NOT NULL, --FK --PK
 	cuit [nvarchar](50) NOT NULL,
 	razon_social [nvarchar](255),
 	mail [nvarchar](255),
 	telefono [numeric](18),
-	direccion numeric(18) NOT NULL, ---FK
+	direccion numeric(18) NOT NULL, --FK
 	ciudad [nvarchar](255),
 	nombre_de_contacto [nvarchar](255),
 	fecha_creacion [datetime]
 );
 
 CREATE TABLE THE_DISCRETABOY.Cliente (
-	usuario numeric(18) NOT NULL UNIQUE, --FK ---PK
+	usuario nvarchar(20) NOT NULL UNIQUE, --FK --PK
 	doc_numero [numeric](18, 0),
 	doc_tipo varchar(3) NOT NULL CHECK(doc_tipo = 'DNI' OR doc_tipo = 'LE' OR doc_tipo = 'LC'), -- DNI (Documento Nacional de Identidad), LE (Libreta de Enrolamiento), LC (Libreta Civica)
 	nombre [nvarchar](255),
 	aprellido [nvarchar](255),
 	mail [nvarchar](255),
 	telefono [numeric](18),
-	direccion numeric(18) NOT NULL, ---FK
+	direccion numeric(18) NOT NULL, --FK
 	fecha_nacimiento [datetime]
 );
 
@@ -58,16 +58,15 @@ CREATE TABLE THE_DISCRETABOY.Direccion (
 );
 
 CREATE TABLE THE_DISCRETABOY.Usuario (
-	id numeric(18) NOT NULL Identity(1,1), --PK
-	username nvarchar(20) NOT NULL,
+	username nvarchar(20) NOT NULL,--PK
 	password binary(32) NOT NULL,
 	intentos tinyint,
 	habilitado bit
 );
 
 CREATE TABLE THE_DISCRETABOY.Rol_por_user (
-	usuario numeric(18) NOT NULL, --FK ---PK
-	rol numeric(18) NOT NULL	--FK ---PK
+	usuario nvarchar(20) NOT NULL, --FK --PK
+	rol numeric(18) NOT NULL	--FK --PK
 );
 
 CREATE TABLE THE_DISCRETABOY.Rol(
@@ -77,8 +76,8 @@ CREATE TABLE THE_DISCRETABOY.Rol(
 );
 
 CREATE TABLE THE_DISCRETABOY.Funcion_por_rol (
-	rol numeric(18) NOT NULL, --FK ---PK
-	funcion numeric(18) NOT NULL --FK ---PK
+	rol numeric(18) NOT NULL, --FK --PK
+	funcion numeric(18) NOT NULL --FK --PK
 );
 
 CREATE TABLE THE_DISCRETABOY.Funcion (
@@ -87,8 +86,8 @@ CREATE TABLE THE_DISCRETABOY.Funcion (
 );
 
 CREATE TABLE THE_DISCRETABOY.Visibilidad_por_user (
-	usuario numeric(18) NOT NULL, --FK---pk
-	visibilidad numeric(18) NOT NULL,--FK---pk
+	usuario nvarchar(20) NOT NULL, --FK--PK
+	visibilidad numeric(18) NOT NULL,--FK--PK
 	cant_ventas [numeric](18, 0)
 );
 
@@ -102,7 +101,7 @@ CREATE TABLE THE_DISCRETABOY.Visibilidad (
 CREATE TABLE THE_DISCRETABOY.Publicacion (
 	id [numeric](18, 0) NOT NULL, --PK
 	estado [nvarchar](255),
-	visibilidad numeric(18),---FK
+	visibilidad numeric(18),--FK
 	descripcion [nvarchar](255),
 	fecha [datetime],
 	fecha_venc [datetime]
@@ -116,7 +115,7 @@ CREATE TABLE THE_DISCRETABOY.Venta_directa (
 
 CREATE TABLE THE_DISCRETABOY.Cliente_por_publicacion (
 	id numeric(18) NOT NULL Identity(1,1), ---PK
-	cliente numeric(18) NOT NULL, --FK
+	cliente nvarchar(20) NOT NULL, --FK
 	publicacion [numeric](18, 0) NOT NULL --FK
 );
 
@@ -202,7 +201,7 @@ ALTER TABLE THE_DISCRETABOY.Direccion ADD CONSTRAINT PK_Direccion
 ;
 
 ALTER TABLE THE_DISCRETABOY.Usuario ADD CONSTRAINT PK_Usuario
-        PRIMARY KEY CLUSTERED (id)
+        PRIMARY KEY CLUSTERED (username)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Rol ADD CONSTRAINT PK_Rol
@@ -284,7 +283,7 @@ ALTER TABLE THE_DISCRETABOY.Forma_de_pago ADD CONSTRAINT PK_Forma_de_pago
 -- Create Foreign Key Constraints
 
 ALTER TABLE THE_DISCRETABOY.Empresa ADD CONSTRAINT FK_Empresa_user
-        FOREIGN KEY (usuario) REFERENCES THE_DISCRETABOY.Usuario (id)
+        FOREIGN KEY (usuario) REFERENCES THE_DISCRETABOY.Usuario (username)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Empresa ADD CONSTRAINT FK_Empresa_direccion
@@ -292,7 +291,7 @@ ALTER TABLE THE_DISCRETABOY.Empresa ADD CONSTRAINT FK_Empresa_direccion
 ;
 
 ALTER TABLE THE_DISCRETABOY.Cliente ADD CONSTRAINT FK_Cliente_user
-        FOREIGN KEY (usuario) REFERENCES THE_DISCRETABOY.Usuario (id)
+        FOREIGN KEY (usuario) REFERENCES THE_DISCRETABOY.Usuario (username)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Cliente ADD CONSTRAINT FK_Cliente_direccion
@@ -304,7 +303,7 @@ ALTER TABLE THE_DISCRETABOY.Publicacion ADD CONSTRAINT FK_Public_visib
 ;
 
 ALTER TABLE THE_DISCRETABOY.Rol_por_user ADD CONSTRAINT FK_Rol_por_user_usuario
-        FOREIGN KEY (usuario) REFERENCES THE_DISCRETABOY.Usuario (id)
+        FOREIGN KEY (usuario) REFERENCES THE_DISCRETABOY.Usuario (username)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Rol_por_user ADD CONSTRAINT FK_Rol_por_user_rol
@@ -324,7 +323,7 @@ ALTER TABLE THE_DISCRETABOY.Visibilidad_por_user ADD CONSTRAINT FK_Visibilidad_p
 ;
 
 ALTER TABLE THE_DISCRETABOY.Visibilidad_por_user ADD CONSTRAINT FK_Visibilidad_por_user_usuario
-        FOREIGN KEY (usuario) REFERENCES THE_DISCRETABOY.Usuario (id)
+        FOREIGN KEY (usuario) REFERENCES THE_DISCRETABOY.Usuario (username)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Venta_directa ADD CONSTRAINT FK_Venta_directa
@@ -451,8 +450,26 @@ INSERT INTO THE_DISCRETABOY.Direccion
 		from gd_esquema.Maestra m
 		GROUP BY Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_Piso,Publ_Cli_Depto,Publ_Cli_Cod_Postal
 		Having Publ_Cli_Dom_Calle is not NULL	
-;
-/*
+;GO
+
+INSERT INTO THE_DISCRETABOY.Usuario
+(
+username,
+password,
+intentos,
+habilitado
+)
+select 
+	'Clie_'+CAST(m.Cli_Dni as nvarchar(20)) as username,--Se determina que el nombre de los preexistentes será Clie más el dni.
+	0xe00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29,--La password es UTNFRBA	
+	0,
+	1
+From gd_esquema.Maestra m
+group by m.Cli_Dni
+having m.Cli_Dni is not null
+;GO
+
+
 INSERT INTO THE_DISCRETABOY.Cliente
 	(
 	aprellido,
@@ -468,20 +485,44 @@ INSERT INTO THE_DISCRETABOY.Cliente
 	
 	select 
 		m.Cli_Apeliido,
-		(select top 1 d.id from THE_DISCRETABOY.Direccion d
-				where d.calle=m.Cli_Dom_Calle and
-				d.cod_post=m.Cli_Cod_Postal and
-				d.depto=m.Cli_Depto and
-				d.numero=m.Cli_Nro_Calle and
-				d.piso=m.Cli_Piso),
+		THE_DISCRETABOY.f_buscar_PK_direc(m.Cli_Dom_Calle,
+											m.Cli_Cod_Postal,
+											m.Cli_Depto,
+											m.Cli_Nro_Calle,
+											m.Cli_Piso),
 		m.Cli_Dni,
 		'DNI',
 		m.Cli_Fecha_Nac,
 		m.Cli_Mail,
 		m.Cli_Nombre,
 		NULL,
-		m.
+		m.Cli_Dni--Esto hay que cambiarlo por referencia a user.
 		
-		 From gd_esquema.Maestra m
-
+	From gd_esquema.Maestra m
+	group by m.Cli_Apeliido,m.Cli_Dni,m.Cli_Fecha_Nac,m.Cli_Mail,m.Cli_Nombre,m.Cli_Dni,m.Cli_Dom_Calle,m.Cli_Cod_Postal,m.Cli_Depto,m.Cli_Nro_Calle,m.Cli_Piso
+	having m.Cli_Dni is not null
+GO
 ---------Procedures
+---------Functions
+CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
+(
+@calle nvarchar(255),
+@CP nvarchar(50),
+@departamento nvarchar(50),
+@nro numeric(18,0),
+@piso numeric(18,0)
+)
+RETURNS numeric(18,0)
+AS
+BEGIN
+	declare @dir numeric(18,0)=(select d.id from THE_DISCRETABOY.Direccion d
+				where d.calle=@calle and
+				d.cod_post=@CP and
+				d.depto=@departamento and
+				d.numero=@nro and
+				d.piso=@piso)
+	if @dir is null
+		set @dir = 999
+	return @dir
+END;
+GO
