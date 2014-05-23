@@ -588,7 +588,34 @@ m.Publicacion_Visibilidad_Precio
 
 GO
 
+--CARGO PUBLICACIONES
+INSERT INTO THE_DISCRETABOY.Publicacion
+(
+id,
+estado,
+visibilidad,
+descripcion,
+fecha,
+fecha_venc
+)
+SELECT
+M.Publicacion_Cod,
+M.Publicacion_Estado,
+M.Publicacion_Visibilidad_Cod,
+M.Publicacion_Descripcion,
+M.Publicacion_Fecha,
+M.Publicacion_Fecha_Venc
+FROM gd_esquema.Maestra M
+WHERE M.Publicacion_Cod IS NOT NULL
+GROUP BY 
+M.Publicacion_Cod,
+M.Publicacion_Estado,
+M.Publicacion_Visibilidad_Cod,
+M.Publicacion_Descripcion,
+M.Publicacion_Fecha,
+M.Publicacion_Fecha_Venc
 
+GO
 ---------Procedures
 ---------Functions
 CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
