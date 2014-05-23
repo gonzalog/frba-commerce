@@ -452,6 +452,7 @@ INSERT INTO THE_DISCRETABOY.Direccion
 		Having Publ_Cli_Dom_Calle is not NULL	
 ;GO
 
+--Cargo usuarios de clientes
 INSERT INTO THE_DISCRETABOY.Usuario
 (
 username,
@@ -467,9 +468,29 @@ select
 From gd_esquema.Maestra m
 group by m.Cli_Dni
 having m.Cli_Dni is not null
-;GO
+;
+GO
 
+--Cargo usuarios de Empresas
+INSERT INTO THE_DISCRETABOY.Usuario
+(
+username,
+password,
+intentos,
+habilitado
+)
+select 
+	'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)) as username,--Se determina que el nombre de los preexistentes será Empre_ más el CUIT.
+	0xe00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29,--La password es UTNFRBA	
+	0,
+	1
+From gd_esquema.Maestra m
+group by m.Publ_Empresa_Cuit
+having m.Publ_Empresa_Cuit is not null
+;
+GO
 
+--Cargo clientes
 INSERT INTO THE_DISCRETABOY.Cliente
 	(
 	aprellido,
@@ -496,11 +517,53 @@ INSERT INTO THE_DISCRETABOY.Cliente
 		m.Cli_Mail,
 		m.Cli_Nombre,
 		NULL,
-		m.Cli_Dni--Esto hay que cambiarlo por referencia a user.
+		'Clie_'+CAST(m.Cli_Dni as nvarchar(20))
 		
 	From gd_esquema.Maestra m
 	group by m.Cli_Apeliido,m.Cli_Dni,m.Cli_Fecha_Nac,m.Cli_Mail,m.Cli_Nombre,m.Cli_Dni,m.Cli_Dom_Calle,m.Cli_Cod_Postal,m.Cli_Depto,m.Cli_Nro_Calle,m.Cli_Piso
 	having m.Cli_Dni is not null
+GO
+
+--Cargo empresas
+INSERT INTO THE_DISCRETABOY.Empresa
+	(
+	usuario,
+	cuit,
+	razon_social,
+	mail,
+	telefono,
+	direccion,
+	ciudad,
+	nombre_de_contacto,
+	fecha_creacion
+	)
+	
+	select 
+		'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)),
+		m.Publ_Empresa_Cuit,
+		m.Publ_Empresa_Razon_Social,
+		m.Publ_Empresa_Mail,
+		NULL,
+		THE_DISCRETABOY.f_buscar_PK_direc(m.Publ_Empresa_Dom_Calle,
+											m.Publ_Empresa_Cod_Postal,
+											m.Publ_Empresa_Depto,
+											m.Publ_Empresa_Nro_Calle,
+											m.Publ_Empresa_Piso),
+		NULL,
+		NULL,
+		m.Publ_Empresa_Fecha_Creacion
+		
+	From gd_esquema.Maestra m
+	group by m.Publ_Empresa_Cuit,
+				m.Publ_Empresa_Razon_Social,
+				m.Publ_Empresa_Mail,
+				m.Publ_Empresa_Fecha_Creacion,
+				m.Publ_Empresa_Dom_Calle,
+				m.Publ_Empresa_Cod_Postal,
+				m.Publ_Empresa_Depto,
+				m.Publ_Empresa_Nro_Calle,
+				m.Publ_Empresa_Piso
+	having m.Publ_Empresa_Cuit is not null
 GO
 ---------Procedures
 ---------Functions
