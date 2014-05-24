@@ -114,20 +114,21 @@ CREATE TABLE THE_DISCRETABOY.Venta_directa (
 );
 
 CREATE TABLE THE_DISCRETABOY.Cliente_por_publicacion (
-	id numeric(18) NOT NULL Identity(1,1), ---PK
-	cliente nvarchar(20) NOT NULL, --FK
-	publicacion [numeric](18, 0) NOT NULL --FK
+	cliente nvarchar(20) NOT NULL, --FK --PK
+	publicacion [numeric](18, 0) NOT NULL --FK --PK
 );
 
 CREATE TABLE THE_DISCRETABOY.Pregunta (
 	id numeric(18) NOT NULL Identity(1,1), --PK
 	descripcion [nvarchar](255) NOT NULL,
-	cliente_por_pub numeric(18) NOT NULL, ---FK
+	cliente nvarchar(20) NOT NULL, --FK
+	publicacion [numeric](18, 0) NOT NULL --FK
 );
 
 CREATE TABLE THE_DISCRETABOY.Compra_inmediata (
 	id numeric(18) NOT NULL Identity(1,1), --PK
-	cliente_por_pub numeric(18), ---FK
+	cliente nvarchar(20) NOT NULL, --FK
+	publicacion [numeric](18, 0) NOT NULL, --FK
 	fecha [datetime],
 	cant_comprada [numeric](18, 0),
 	calificacion [numeric](18, 0) ---FK
@@ -141,7 +142,8 @@ CREATE TABLE THE_DISCRETABOY.Calificacion (
 
 CREATE TABLE THE_DISCRETABOY.Oferta (
 	id numeric(18) NOT NULL Identity(1,1), ---PK
-	cliente_por_pub numeric(18) NOT NULL, --FK
+	cliente nvarchar(20) NOT NULL, --FK
+	publicacion [numeric](18, 0) NOT NULL, --FK
 	fecha [datetime],
 	monto_ofertado [numeric](18, 2),
 	calificacion [numeric](18, 0) default NULL ---FK
@@ -233,7 +235,7 @@ ALTER TABLE THE_DISCRETABOY.Publicacion ADD CONSTRAINT PK_Publicacion
 ;
 
 ALTER TABLE THE_DISCRETABOY.Cliente_por_publicacion ADD CONSTRAINT PK_Cliente_por_publicacion
-        PRIMARY KEY CLUSTERED (id)
+        PRIMARY KEY CLUSTERED (cliente,publicacion)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Venta_directa ADD CONSTRAINT PK_Venta_directa
@@ -339,7 +341,7 @@ ALTER TABLE THE_DISCRETABOY.Cliente_por_publicacion ADD CONSTRAINT FK_Cliente_po
 ;
 
 ALTER TABLE THE_DISCRETABOY.Oferta with check ADD CONSTRAINT FK_Oferta_cli_pub
-        FOREIGN KEY (cliente_por_pub) REFERENCES THE_DISCRETABOY.Cliente_por_publicacion (id)
+        FOREIGN KEY (cliente,publicacion) REFERENCES THE_DISCRETABOY.Cliente_por_publicacion (cliente,publicacion)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Oferta with check ADD CONSTRAINT FK_Oferta_calif
@@ -347,7 +349,7 @@ ALTER TABLE THE_DISCRETABOY.Oferta with check ADD CONSTRAINT FK_Oferta_calif
 ;
 
 ALTER TABLE THE_DISCRETABOY.Compra_inmediata with check ADD CONSTRAINT FK_Compra_inmed_clien_pub
-        FOREIGN KEY (cliente_por_pub) REFERENCES THE_DISCRETABOY.Cliente_por_publicacion (id)
+        FOREIGN KEY (cliente,publicacion) REFERENCES THE_DISCRETABOY.Cliente_por_publicacion (cliente,publicacion)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Compra_inmediata with check ADD CONSTRAINT FK_Compra_inmed_calif
@@ -355,7 +357,7 @@ ALTER TABLE THE_DISCRETABOY.Compra_inmediata with check ADD CONSTRAINT FK_Compra
 ;
 
 ALTER TABLE THE_DISCRETABOY.Pregunta with check ADD CONSTRAINT FK_Pregunta
-        FOREIGN KEY (cliente_por_pub) REFERENCES THE_DISCRETABOY.Cliente_por_publicacion (id)
+        FOREIGN KEY (cliente,publicacion) REFERENCES THE_DISCRETABOY.Cliente_por_publicacion (cliente,publicacion)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Renglon_factura ADD CONSTRAINT FK_Renglon_factura_fact
@@ -414,7 +416,6 @@ INSERT INTO THE_DISCRETABOY.Direccion
         piso,
         depto,
         cod_post
-        --localidad
         )
         
         select m.Cli_Dom_Calle as calle,
@@ -422,7 +423,6 @@ INSERT INTO THE_DISCRETABOY.Direccion
 			m.Cli_Piso as piso,
 			m.Cli_Depto as depto,
 			m.Cli_Cod_Postal as cod_post
-			--NULL
 		from gd_esquema.Maestra m
 		GROUP BY m.Cli_Dom_Calle,m.Cli_Nro_Calle,m.Cli_Piso,m.Cli_Depto,m.Cli_Cod_Postal
 		Having Cli_Dom_Calle is not NULL
@@ -450,7 +450,7 @@ INSERT INTO THE_DISCRETABOY.Direccion
 		from gd_esquema.Maestra m
 		GROUP BY Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_Piso,Publ_Cli_Depto,Publ_Cli_Cod_Postal
 		Having Publ_Cli_Dom_Calle is not NULL	
-;GO
+GO
 
 --Cargo usuarios de clientes
 INSERT INTO THE_DISCRETABOY.Usuario
@@ -624,16 +624,37 @@ cliente,
 publicacion
 )
 SELECT
-(SELECT C.usuario FROM THE_DISCRETABOY.Cliente C
-	WHERE C.doc_numero=M.Publ_Cli_Dni),
+'Clie_'+cast(M.Cli_Dni as nvarchar(20)),
 M.Publicacion_Cod
 FROM gd_esquema.Maestra M
-GROUP BY 
-M.Publ_Cli_Dni,
-M.Publicacion_Cod
-HAVING M.Publicacion_Cod IS NOT NULL AND M.Publ_Cli_Dni IS NOT NULL
+WHERE M.Publicacion_Cod IS NOT NULL  AND M.Cli_Dni IS NOT NULL
+GROUP BY
+M.Publicacion_Cod,
+M.Cli_Dni
 
 GO
+
+
+--CARGO COMPRAS INMEDIATAS
+INSERT INTO THE_DISCRETABOY.Compra_inmediata
+(
+cliente,
+publicacion,
+fecha,
+cant_comprada,
+calificacion
+)
+SELECT
+'Clie_'+CAST(m.Cli_Dni as nvarchar(20)),
+M.Publicacion_Cod,
+M.Compra_Fecha,
+M.Compra_Cantidad,
+M.Calificacion_Codigo
+FROM gd_esquema.Maestra M
+WHERE M.Compra_Cantidad IS NOT NULL
+
+GO
+
 ---------Procedures
 ---------Functions
 CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
@@ -647,14 +668,25 @@ CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
 RETURNS numeric(18,0)
 AS
 BEGIN
-	declare @dir numeric(18,0)=(select d.id from THE_DISCRETABOY.Direccion d
+	return (select d.id from THE_DISCRETABOY.Direccion d
 				where d.calle=@calle and
 				d.cod_post=@CP and
 				d.depto=@departamento and
 				d.numero=@nro and
 				d.piso=@piso)
-	if @dir is null
-		set @dir = 999
-	return @dir
-END;
+END
+GO
+
+CREATE FUNCTION THE_DISCRETABOY.f_get_usuario_con_doc
+(
+--@tipo_doc varchar(3),
+@numero numeric(18,0)
+)
+RETURNS nvarchar(20)
+AS
+BEGIN
+	RETURN (SELECT C.usuario
+				FROM THE_DISCRETABOY.Cliente C
+				WHERE /*C.doc_tipo=@tipo_doc and */C.doc_numero=@numero)
+END
 GO
