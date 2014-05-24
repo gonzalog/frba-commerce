@@ -693,15 +693,8 @@ M.Calificacion_Codigo
 FROM
 gd_esquema.Maestra M
 WHERE M.Oferta_Fecha IS NOT NULL
-GROUP BY
-M.Cli_Dni,
-M.Publicacion_Cod,
-M.Oferta_Fecha,
-M.Oferta_Monto,
-M.Calificacion_Codigo
 
 GO
-
 
 ---------Procedures
 ---------Functions
