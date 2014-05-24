@@ -655,6 +655,25 @@ WHERE M.Compra_Cantidad IS NOT NULL
 
 GO
 
+--CARGO FACTURAS
+INSERT INTO THE_DISCRETABOY.Factura
+(
+numero,
+fecha,
+total
+)
+SELECT
+M.Factura_Nro,
+M.Factura_Fecha,
+M.Factura_Total
+FROM gd_esquema.Maestra M
+WHERE M.Factura_Nro IS NOT NULL
+GROUP BY
+M.Factura_Nro,
+M.Factura_Fecha,
+M.Factura_Total
+
+GO
 ---------Procedures
 ---------Functions
 CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
@@ -674,19 +693,5 @@ BEGIN
 				d.depto=@departamento and
 				d.numero=@nro and
 				d.piso=@piso)
-END
-GO
-
-CREATE FUNCTION THE_DISCRETABOY.f_get_usuario_con_doc
-(
---@tipo_doc varchar(3),
-@numero numeric(18,0)
-)
-RETURNS nvarchar(20)
-AS
-BEGIN
-	RETURN (SELECT C.usuario
-				FROM THE_DISCRETABOY.Cliente C
-				WHERE /*C.doc_tipo=@tipo_doc and */C.doc_numero=@numero)
 END
 GO
