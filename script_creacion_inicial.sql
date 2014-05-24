@@ -674,6 +674,35 @@ M.Factura_Fecha,
 M.Factura_Total
 
 GO
+
+--CARGO OFERTAS
+INSERT INTO THE_DISCRETABOY.Oferta
+(
+cliente,
+publicacion,
+fecha,
+monto_ofertado,
+calificacion
+)
+SELECT
+'Clie_'+CAST(M.Cli_Dni as nvarchar(20)),
+M.Publicacion_Cod,
+M.Oferta_Fecha,
+M.Oferta_Monto,
+M.Calificacion_Codigo
+FROM
+gd_esquema.Maestra M
+WHERE M.Oferta_Fecha IS NOT NULL
+GROUP BY
+M.Cli_Dni,
+M.Publicacion_Cod,
+M.Oferta_Fecha,
+M.Oferta_Monto,
+M.Calificacion_Codigo
+
+GO
+
+
 ---------Procedures
 ---------Functions
 CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
