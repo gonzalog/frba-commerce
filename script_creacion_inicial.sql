@@ -696,6 +696,38 @@ WHERE M.Oferta_Fecha IS NOT NULL
 
 GO
 
+--CARGO RUBROS
+INSERT INTO THE_DISCRETABOY.Rubro
+(
+descripcion
+)
+SELECT
+M.Publicacion_Rubro_Descripcion
+FROM
+gd_esquema.Maestra M
+GROUP BY
+M.Publicacion_Rubro_Descripcion
+
+GO
+
+--CARGO RUBROS POR PUBLICACION
+INSERT INTO THE_DISCRETABOY.Rubro_por_publicacion
+(
+rubro,
+publicacion
+)
+SELECT
+R.codigo,
+M.Publicacion_Cod
+FROM gd_esquema.Maestra M,THE_DISCRETABOY.Rubro R
+WHERE R.descripcion=M.Publicacion_Rubro_Descripcion AND
+M.Publicacion_Cod IS NOT NULL AND
+M.Publicacion_Rubro_Descripcion IS NOT NULL
+GROUP BY
+R.codigo,
+M.Publicacion_Cod
+
+GO
 ---------Procedures
 ---------Functions
 CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
