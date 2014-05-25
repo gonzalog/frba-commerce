@@ -414,8 +414,8 @@ CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
 RETURNS numeric(18,0)
 AS
 BEGIN
-	return (select d.id from THE_DISCRETABOY.Direccion d
-				where d.calle=@calle and
+	return (SELECT d.id FROM THE_DISCRETABOY.Direccion d
+				WHERE d.calle=@calle and
 				d.cod_post=@CP and
 				d.depto=@departamento and
 				d.numero=@nro and
@@ -423,67 +423,70 @@ BEGIN
 END
 GO
 
-
 /* ****** Migrar datos existentes ******* */
 
---Calificaciones
-
+--CARGO CALIFICACIONES
 INSERT INTO THE_DISCRETABOY.Calificacion
-        (
-        id,
-        cant_estrellas,
-        descrip
-        )
-        
-        select distinct m.Calificacion_Codigo as id,
-				m.Calificacion_Cant_Estrellas as cant_estrellas,
-				m.Calificacion_Descripcion as descrip
-		from gd_esquema.Maestra m
-			where m.Calificacion_Codigo is not NULL
-;
+(
+id,
+cant_estrellas,
+descrip
+)
 
-INSERT INTO THE_DISCRETABOY.Direccion
-        (
-        calle,
-        numero,
-        piso,
-        depto,
-        cod_post
-        )
-        
-        select m.Cli_Dom_Calle as calle,
-			m.Cli_Nro_Calle as numero,
-			m.Cli_Piso as piso,
-			m.Cli_Depto as depto,
-			m.Cli_Cod_Postal as cod_post
-		from gd_esquema.Maestra m
-		GROUP BY m.Cli_Dom_Calle,m.Cli_Nro_Calle,m.Cli_Piso,m.Cli_Depto,m.Cli_Cod_Postal
-		Having Cli_Dom_Calle is not NULL
-		
-		UNION
-		
-		select m.Publ_Empresa_Dom_Calle as calle,
-			m.Publ_Empresa_Nro_Calle as numero,
-			m.Publ_Empresa_Piso as piso,
-			m.Publ_Empresa_Depto as depto,
-			m.Publ_Empresa_Cod_Postal as cod_post
-		from gd_esquema.Maestra m
-		GROUP BY Publ_Empresa_Dom_Calle,Publ_Empresa_Nro_Calle,Publ_Empresa_Piso,Publ_Empresa_Depto,Publ_Empresa_Cod_Postal
-		Having Publ_Empresa_Dom_Calle is not NULL
-		
-		UNION
-		
-		select m.Publ_Cli_Dom_Calle as calle,
-			m.Publ_Cli_Nro_Calle as numero,
-			m.Publ_Cli_Piso as piso,
-			m.Publ_Cli_Depto as depto,
-			m.Publ_Cli_Cod_Postal as cod_post	
-		from gd_esquema.Maestra m
-		GROUP BY Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_Piso,Publ_Cli_Depto,Publ_Cli_Cod_Postal
-		Having Publ_Cli_Dom_Calle is not NULL	
+SELECT 
+DISTINCT m.Calificacion_Codigo as id,
+m.Calificacion_Cant_Estrellas as cant_estrellas,
+m.Calificacion_Descripcion as descrip
+FROM gd_esquema.Maestra m
+WHERE m.Calificacion_Codigo is not NULL
+
 GO
 
---Cargo usuarios de clientes
+--CARGO DIRECCIONES
+INSERT INTO THE_DISCRETABOY.Direccion
+(
+calle,
+numero,
+piso,
+depto,
+cod_post
+)
+SELECT 
+m.Cli_Dom_Calle as calle,
+m.Cli_Nro_Calle as numero,
+m.Cli_Piso as piso,
+m.Cli_Depto as depto,
+m.Cli_Cod_Postal as cod_post
+FROM gd_esquema.Maestra m
+GROUP BY m.Cli_Dom_Calle,m.Cli_Nro_Calle,m.Cli_Piso,m.Cli_Depto,m.Cli_Cod_Postal
+HAVING Cli_Dom_Calle is not NULL
+
+UNION
+
+SELECT 
+m.Publ_Empresa_Dom_Calle as calle,
+m.Publ_Empresa_Nro_Calle as numero,
+m.Publ_Empresa_Piso as piso,
+m.Publ_Empresa_Depto as depto,
+m.Publ_Empresa_Cod_Postal as cod_post
+FROM gd_esquema.Maestra m
+GROUP BY Publ_Empresa_Dom_Calle,Publ_Empresa_Nro_Calle,Publ_Empresa_Piso,Publ_Empresa_Depto,Publ_Empresa_Cod_Postal
+HAVING Publ_Empresa_Dom_Calle is not NULL
+
+UNION
+
+SELECT 
+m.Publ_Cli_Dom_Calle as calle,
+m.Publ_Cli_Nro_Calle as numero,
+m.Publ_Cli_Piso as piso,
+m.Publ_Cli_Depto as depto,
+m.Publ_Cli_Cod_Postal as cod_post	
+FROM gd_esquema.Maestra m
+GROUP BY Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_Piso,Publ_Cli_Depto,Publ_Cli_Cod_Postal
+HAVING Publ_Cli_Dom_Calle is not NULL	
+GO
+
+--CARGO usuarios de clientes
 INSERT INTO THE_DISCRETABOY.Usuario
 (
 username,
@@ -491,18 +494,18 @@ password,
 intentos,
 habilitado
 )
-select 
+SELECT 
 	'Clie_'+CAST(m.Cli_Dni as nvarchar(20)) as username,--Se determina que el nombre de los preexistentes será Clie más el dni.
 	0xe00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29,--La password es UTNFRBA	
 	0,
 	1
-From gd_esquema.Maestra m
-group by m.Cli_Dni
-having m.Cli_Dni is not null
+FROM gd_esquema.Maestra m
+GROUP BY m.Cli_Dni
+HAVING m.Cli_Dni is not null
 ;
 GO
 
---Cargo usuarios de Empresas
+--CARGO usuarios de Empresas
 INSERT INTO THE_DISCRETABOY.Usuario
 (
 username,
@@ -510,18 +513,18 @@ password,
 intentos,
 habilitado
 )
-select 
+SELECT 
 	'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)) as username,--Se determina que el nombre de los preexistentes será Empre_ más el CUIT.
 	0xe00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29,--La password es UTNFRBA	
 	0,
 	1
-From gd_esquema.Maestra m
-group by m.Publ_Empresa_Cuit
-having m.Publ_Empresa_Cuit is not null
+FROM gd_esquema.Maestra m
+GROUP BY m.Publ_Empresa_Cuit
+HAVING m.Publ_Empresa_Cuit is not null
 ;
 GO
 
---Cargo clientes
+--CARGO clientes
 INSERT INTO THE_DISCRETABOY.Cliente
 	(
 	aprellido,
@@ -535,7 +538,7 @@ INSERT INTO THE_DISCRETABOY.Cliente
 	usuario
 	)
 	
-	select 
+	SELECT 
 		m.Cli_Apeliido,
 		THE_DISCRETABOY.f_buscar_PK_direc(m.Cli_Dom_Calle,
 											m.Cli_Cod_Postal,
@@ -550,54 +553,54 @@ INSERT INTO THE_DISCRETABOY.Cliente
 		NULL,
 		'Clie_'+CAST(m.Cli_Dni as nvarchar(20))
 		
-	From gd_esquema.Maestra m
-	group by m.Cli_Apeliido,m.Cli_Dni,m.Cli_Fecha_Nac,m.Cli_Mail,m.Cli_Nombre,m.Cli_Dni,m.Cli_Dom_Calle,m.Cli_Cod_Postal,m.Cli_Depto,m.Cli_Nro_Calle,m.Cli_Piso
-	having m.Cli_Dni is not null
+	FROM gd_esquema.Maestra m
+	GROUP BY m.Cli_Apeliido,m.Cli_Dni,m.Cli_Fecha_Nac,m.Cli_Mail,m.Cli_Nombre,m.Cli_Dni,m.Cli_Dom_Calle,m.Cli_Cod_Postal,m.Cli_Depto,m.Cli_Nro_Calle,m.Cli_Piso
+	HAVING m.Cli_Dni is not null
 GO
 
---Cargo empresas
+--CARGO empresas
 INSERT INTO THE_DISCRETABOY.Empresa
-	(
-	usuario,
-	cuit,
-	razon_social,
-	mail,
-	telefono,
-	direccion,
-	ciudad,
-	nombre_de_contacto,
-	fecha_creacion
-	)
+(
+usuario,
+cuit,
+razon_social,
+mail,
+telefono,
+direccion,
+ciudad,
+nombre_de_contacto,
+fecha_creacion
+)
+
+SELECT 
+	'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)),
+	m.Publ_Empresa_Cuit,
+	m.Publ_Empresa_Razon_Social,
+	m.Publ_Empresa_Mail,
+	NULL,
+	THE_DISCRETABOY.f_buscar_PK_direc(m.Publ_Empresa_Dom_Calle,
+										m.Publ_Empresa_Cod_Postal,
+										m.Publ_Empresa_Depto,
+										m.Publ_Empresa_Nro_Calle,
+										m.Publ_Empresa_Piso),
+	NULL,
+	NULL,
+	m.Publ_Empresa_Fecha_Creacion
 	
-	select 
-		'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)),
-		m.Publ_Empresa_Cuit,
-		m.Publ_Empresa_Razon_Social,
-		m.Publ_Empresa_Mail,
-		NULL,
-		THE_DISCRETABOY.f_buscar_PK_direc(m.Publ_Empresa_Dom_Calle,
-											m.Publ_Empresa_Cod_Postal,
-											m.Publ_Empresa_Depto,
-											m.Publ_Empresa_Nro_Calle,
-											m.Publ_Empresa_Piso),
-		NULL,
-		NULL,
-		m.Publ_Empresa_Fecha_Creacion
-		
-	From gd_esquema.Maestra m
-	group by m.Publ_Empresa_Cuit,
-				m.Publ_Empresa_Razon_Social,
-				m.Publ_Empresa_Mail,
-				m.Publ_Empresa_Fecha_Creacion,
-				m.Publ_Empresa_Dom_Calle,
-				m.Publ_Empresa_Cod_Postal,
-				m.Publ_Empresa_Depto,
-				m.Publ_Empresa_Nro_Calle,
-				m.Publ_Empresa_Piso
-	having m.Publ_Empresa_Cuit is not null
+FROM gd_esquema.Maestra m
+GROUP BY m.Publ_Empresa_Cuit,
+			m.Publ_Empresa_Razon_Social,
+			m.Publ_Empresa_Mail,
+			m.Publ_Empresa_Fecha_Creacion,
+			m.Publ_Empresa_Dom_Calle,
+			m.Publ_Empresa_Cod_Postal,
+			m.Publ_Empresa_Depto,
+			m.Publ_Empresa_Nro_Calle,
+			m.Publ_Empresa_Piso
+HAVING m.Publ_Empresa_Cuit is not null
 GO
 
---Cargo visibilidades
+--CARGO visibilidades
 
 INSERT INTO THE_DISCRETABOY.Visibilidad
 (codigo,
@@ -830,3 +833,36 @@ GROUP BY
 M.Publicacion_Cod
 
 GO
+
+--CARGO VISIBILIDADES POR USUARIOS
+INSERT INTO THE_DISCRETABOY.Visibilidad_por_user
+(
+visibilidad,
+usuario,
+cant_ventas
+)
+(
+SELECT
+M.Publicacion_Visibilidad_Cod,
+C.usuario,
+0
+FROM
+gd_esquema.Maestra M,THE_DISCRETABOY.Cliente C
+WHERE M.Publ_Cli_Dni=C.doc_numero
+GROUP BY 
+M.Publicacion_Visibilidad_Cod,
+C.usuario
+
+UNION
+
+SELECT
+M.Publicacion_Visibilidad_Cod,
+E.usuario,
+0
+FROM
+gd_esquema.Maestra M,THE_DISCRETABOY.Empresa E
+WHERE M.Publ_Empresa_Cuit=E.cuit
+GROUP BY 
+M.Publicacion_Visibilidad_Cod,
+E.usuario
+)
