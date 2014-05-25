@@ -813,3 +813,20 @@ M.Publicacion_Cod,
 FP.id
 
 GO
+
+--CARGO VENTAS DIRECTAS
+INSERT INTO THE_DISCRETABOY.Venta_directa
+(
+publicacion,
+stock
+)
+SELECT
+M.Publicacion_Cod,
+MIN(M.Publicacion_Stock)
+FROM
+gd_esquema.Maestra M
+WHERE M.Publicacion_Tipo='Compra inmediata'
+GROUP BY
+M.Publicacion_Cod
+
+GO
