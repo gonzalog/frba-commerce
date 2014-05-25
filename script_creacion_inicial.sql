@@ -175,7 +175,6 @@ CREATE TABLE THE_DISCRETABOY.Rubro_por_publicacion (
 CREATE TABLE THE_DISCRETABOY.Subasta (
 	id [numeric](18, 0) NOT NULL Identity(1,1), --PK
 	cantidad [numeric](18, 0),
-	precio_inicial [numeric](18, 2),
 	publicacion [numeric](18, 0)---FK
 );
 
@@ -438,6 +437,7 @@ ALTER TABLE THE_DISCRETABOY.Tarjeta_credito ADD CONSTRAINT FK_tarj_cred_renglon_
 ;
 
 GO
+
 --Create other constraints
 ---------Triggers
 CREATE TRIGGER THE_DISCRETABOY.quitar_rol_inhab_a_users
@@ -940,12 +940,10 @@ GO
 INSERT INTO THE_DISCRETABOY.Subasta
 (
 cantidad,
-precio_inicial,
 publicacion
 )
 SELECT
 M.Publicacion_Stock,
-NULL,
 M.Publicacion_Cod
 FROM gd_esquema.Maestra M
 WHERE M.Publicacion_Tipo = 'Subasta'
