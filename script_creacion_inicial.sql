@@ -159,7 +159,7 @@ CREATE TABLE THE_DISCRETABOY.Renglon_factura (
 	factura [numeric](18, 0) NOT NULL, --FK ---PK
 	nro_renglon numeric(18) NOT NULL, ---PK
 	publicacion [numeric](18, 0), ---FK
-	forma_de_pago numeric(18) ---fk
+	forma_de_pago numeric(18) ---FK
 );
 
 CREATE TABLE THE_DISCRETABOY.Forma_de_pago (
@@ -175,8 +175,7 @@ CREATE TABLE THE_DISCRETABOY.Rubro_por_publicacion (
 CREATE TABLE THE_DISCRETABOY.Subasta (
 	id [numeric](18, 0) NOT NULL Identity(1,1), --PK
 	cantidad [numeric](18, 0),
-	precio_actual [numeric](18, 2),
-	ultima_oferta numeric(18) NOT NULL,---FK
+	precio_inicial [numeric](18, 2),
 	publicacion [numeric](18, 0)---FK
 );
 
@@ -184,6 +183,18 @@ CREATE TABLE THE_DISCRETABOY.Rubro (
 	codigo [numeric](18, 0) NOT NULL Identity(1,1), --PK
 	descripcion [nvarchar](255)
 );
+
+CREATE TABLE THE_DISCRETABOY.Tarjeta_credito (
+	numero [numeric](16, 0) NOT NULL, --PK
+	nombre [nvarchar](255),
+	apellido [nvarchar](255),
+	valido_desde datetime NOT NULL,
+	valido_hasta datetime NOT NULL,
+	cod_segur [nvarchar](5),
+	factura [numeric](18, 0) NOT NULL, --FK 
+	nro_renglon numeric(18) NOT NULL --FK
+);
+
 
 -- CHECK Constraints
 
@@ -380,15 +391,37 @@ ALTER TABLE THE_DISCRETABOY.Rubro_por_publicacion ADD CONSTRAINT FK_Rubro_por_pu
         FOREIGN KEY (rubro) REFERENCES THE_DISCRETABOY.Rubro (codigo)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Subasta ADD CONSTRAINT FK_subasta_ult_oferta
-        FOREIGN KEY (ultima_oferta) REFERENCES THE_DISCRETABOY.Oferta (id)
-;
-
 ALTER TABLE THE_DISCRETABOY.Subasta ADD CONSTRAINT FK_subasta_public
         FOREIGN KEY (publicacion) REFERENCES THE_DISCRETABOY.Publicacion (id)
 ;
 
+ALTER TABLE THE_DISCRETABOY.Tarjeta_credito ADD CONSTRAINT FK_tarj_cred_renglon_fact
+        FOREIGN KEY (nro_renglon,factura) REFERENCES THE_DISCRETABOY.Renglon_factura (nro_renglon,factura)
+;
+
+GO
 --Create other constraints
+---------Procedures
+---------Functions
+CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
+(
+@calle nvarchar(255),
+@CP nvarchar(50),
+@departamento nvarchar(50),
+@nro numeric(18,0),
+@piso numeric(18,0)
+)
+RETURNS numeric(18,0)
+AS
+BEGIN
+	return (select d.id from THE_DISCRETABOY.Direccion d
+				where d.calle=@calle and
+				d.cod_post=@CP and
+				d.depto=@departamento and
+				d.numero=@nro and
+				d.piso=@piso)
+END
+GO
 
 
 /* ****** Migrar datos existentes ******* */
@@ -434,7 +467,6 @@ INSERT INTO THE_DISCRETABOY.Direccion
 			m.Publ_Empresa_Piso as piso,
 			m.Publ_Empresa_Depto as depto,
 			m.Publ_Empresa_Cod_Postal as cod_post
-			--NULL
 		from gd_esquema.Maestra m
 		GROUP BY Publ_Empresa_Dom_Calle,Publ_Empresa_Nro_Calle,Publ_Empresa_Piso,Publ_Empresa_Depto,Publ_Empresa_Cod_Postal
 		Having Publ_Empresa_Dom_Calle is not NULL
@@ -445,8 +477,7 @@ INSERT INTO THE_DISCRETABOY.Direccion
 			m.Publ_Cli_Nro_Calle as numero,
 			m.Publ_Cli_Piso as piso,
 			m.Publ_Cli_Depto as depto,
-			m.Publ_Cli_Cod_Postal as cod_post
-			--NULL	
+			m.Publ_Cli_Cod_Postal as cod_post	
 		from gd_esquema.Maestra m
 		GROUP BY Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_Piso,Publ_Cli_Depto,Publ_Cli_Cod_Postal
 		Having Publ_Cli_Dom_Calle is not NULL	
@@ -728,24 +759,22 @@ R.codigo,
 M.Publicacion_Cod
 
 GO
----------Procedures
----------Functions
-CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
+
+--CARGO SUBASTAS
+INSERT INTO THE_DISCRETABOY.Subasta
 (
-@calle nvarchar(255),
-@CP nvarchar(50),
-@departamento nvarchar(50),
-@nro numeric(18,0),
-@piso numeric(18,0)
+cantidad,
+precio_inicial,
+publicacion
 )
-RETURNS numeric(18,0)
-AS
-BEGIN
-	return (select d.id from THE_DISCRETABOY.Direccion d
-				where d.calle=@calle and
-				d.cod_post=@CP and
-				d.depto=@departamento and
-				d.numero=@nro and
-				d.piso=@piso)
-END
+SELECT
+M.Publicacion_Stock,
+NULL,
+M.Publicacion_Cod
+FROM gd_esquema.Maestra M
+WHERE M.Publicacion_Tipo = 'Subasta'
+GROUP BY
+M.Publicacion_Cod,
+M.Publicacion_Stock
+
 GO
