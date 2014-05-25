@@ -195,9 +195,47 @@ CREATE TABLE THE_DISCRETABOY.Tarjeta_credito (
 	nro_renglon numeric(18) NOT NULL --FK
 );
 
+GO
+---------Functions
+CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
+(
+@calle nvarchar(255),
+@CP nvarchar(50),
+@departamento nvarchar(50),
+@nro numeric(18,0),
+@piso numeric(18,0)
+)
+RETURNS numeric(18,0)
+AS
+BEGIN
+	return (SELECT d.id FROM THE_DISCRETABOY.Direccion d
+				WHERE d.calle=@calle and
+				d.cod_post=@CP and
+				d.depto=@departamento and
+				d.numero=@nro and
+				d.piso=@piso)
+END
+GO
+
+CREATE FUNCTION THE_DISCRETABOY.f_get_rol_habilitacion
+(
+@rol numeric (18,0)
+)
+RETURNS BIT
+AS
+BEGIN
+RETURN 
+(
+SELECT r.habilitado from THE_DISCRETABOY.Rol r
+WHERE r.cod_rol = @rol
+)
+END
+GO
 
 -- CHECK Constraints
-
+ALTER TABLE THE_DISCRETABOY.Rol_por_user ADD CONSTRAINT CHK_rol_habilitado
+        CHECK(THE_DISCRETABOY.f_get_rol_habilitacion(ROL)=1)
+;
 -- UNIQUE Constraints ...
 
 -- Create Primary Key Constraints
@@ -401,26 +439,153 @@ ALTER TABLE THE_DISCRETABOY.Tarjeta_credito ADD CONSTRAINT FK_tarj_cred_renglon_
 
 GO
 --Create other constraints
----------Procedures
----------Functions
-CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
-(
-@calle nvarchar(255),
-@CP nvarchar(50),
-@departamento nvarchar(50),
-@nro numeric(18,0),
-@piso numeric(18,0)
-)
-RETURNS numeric(18,0)
+---------Triggers
+CREATE TRIGGER THE_DISCRETABOY.quitar_rol_inhab_a_users
+ON THE_DISCRETABOY.ROL 
+FOR UPDATE --Trigger para quitar un rol que haya quedado inhabilitado
 AS
+IF UPDATE(habilitado)
 BEGIN
-	return (SELECT d.id FROM THE_DISCRETABOY.Direccion d
-				WHERE d.calle=@calle and
-				d.cod_post=@CP and
-				d.depto=@departamento and
-				d.numero=@nro and
-				d.piso=@piso)
+DELETE FROM THE_DISCRETABOY.Rol_por_user
+WHERE
+rol=(select cod_rol from DELETED)
 END
+
+GO
+---------Procedures
+
+--ALTA FUNCION POR ROL
+CREATE PROCEDURE THE_DISCRETABOY.alta_funcion_por_rol( 
+@funcion numeric(18,0),
+@rol numeric(18,0)
+)
+AS
+INSERT INTO THE_DISCRETABOY.Funcion_por_rol
+(
+rol,
+funcion
+)
+VALUES (
+@funcion,
+@rol
+)
+
+GO
+
+--ALTA ROL
+CREATE PROCEDURE THE_DISCRETABOY.alta_rol
+(
+@nombre varchar(255),
+@habilitado bit
+)
+AS
+INSERT INTO THE_DISCRETABOY.Rol
+(
+nombre,
+habilitado
+)
+VALUES
+(
+@nombre,
+@habilitado
+)
+
+GO
+
+--BAJA FUNCION  POR ROL
+CREATE PROCEDURE THE_DISCRETABOY.baja_funcion_por_rol
+(
+@rol numeric(18,0),
+@funcion numeric(18,0)
+)
+AS
+DELETE FROM THE_DISCRETABOY.Funcion_por_rol
+WHERE
+rol = @rol AND
+funcion = @funcion
+
+GO
+--ALTA ROL POR USER
+CREATE PROCEDURE THE_DISCRETABOY.alta_rol_por_user
+(
+@rol numeric(18,0),
+@usuario nvarchar(20)
+)
+AS
+INSERT INTO THE_DISCRETABOY.Rol_por_user
+(
+rol,
+usuario
+)
+VALUES
+(
+@rol,
+@usuario
+)
+
+GO
+--BAJA ROL POR USER
+CREATE PROCEDURE THE_DISCRETABOY.baja_rol_por_user
+(
+@rol numeric(18,0),
+@usuario nvarchar(20)
+)
+AS
+DELETE FROM THE_DISCRETABOY.Rol_por_user
+WHERE
+rol=@rol AND
+usuario=@usuario
+
+GO
+
+--INHABILITACION ROL
+CREATE PROCEDURE THE_DISCRETABOY.inhabilitar_rol
+(
+@rol numeric(18,0)
+)
+AS
+UPDATE THE_DISCRETABOY.Rol
+SET habilitado = 0
+WHERE
+cod_rol=@rol
+
+GO
+
+--HABILITACION ROL
+CREATE PROCEDURE THE_DISCRETABOY.habilitar_rol
+(
+@rol numeric(18,0)
+)
+AS
+UPDATE THE_DISCRETABOY.Rol
+SET habilitado = 1
+WHERE
+cod_rol=@rol
+
+GO
+
+--MODIFICACION NOMBRE DE ROL
+CREATE PROCEDURE THE_DISCRETABOY.modificar_rol_nombre
+(
+@rol numeric(18,0),
+@nuevo_nombre varchar(255)
+)
+AS
+UPDATE THE_DISCRETABOY.Rol
+SET nombre = @nuevo_nombre
+WHERE cod_rol = @rol
+
+GO
+
+--ALTA FUNCION
+CREATE PROCEDURE THE_DISCRETABOY.alta_funcion
+(@nombre varchar(255))
+AS
+INSERT INTO THE_DISCRETABOY.Funcion
+(nombre)
+VALUES
+(@nombre)
+
 GO
 
 /* ****** Migrar datos existentes ******* */
