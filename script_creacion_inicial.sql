@@ -1039,3 +1039,8 @@ GROUP BY
 M.Publicacion_Visibilidad_Cod,
 E.usuario
 )
+
+--Alta roles default.
+EXEC THE_DISCRETABOY.alta_rol 'Empresa', 1
+EXEC THE_DISCRETABOY.alta_rol 'Administrativo', 1
+EXEC THE_DISCRETABOY.alta_rol 'Cliente', 1
