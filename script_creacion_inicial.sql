@@ -539,11 +539,7 @@ usuario
 )
 SELECT 
 m.Cli_Apeliido,
-THE_DISCRETABOY.f_buscar_PK_direc(m.Cli_Dom_Calle,
-	m.Cli_Cod_Postal,
-	m.Cli_Depto,
-	m.Cli_Nro_Calle,
-	m.Cli_Piso),
+D.id,
 m.Cli_Dni,
 'DNI',
 m.Cli_Fecha_Nac,
@@ -552,9 +548,15 @@ m.Cli_Nombre,
 NULL,
 'Clie_'+CAST(m.Cli_Dni as nvarchar(20))
 FROM 
-gd_esquema.Maestra m
+gd_esquema.Maestra M,THE_DISCRETABOY.Direccion D
+WHERE
+m.Cli_Dom_Calle = D.calle AND
+m.Cli_Cod_Postal = D.cod_post AND
+m.Cli_Depto = D.depto AND
+m.Cli_Nro_Calle = D.numero AND
+m.Cli_Piso = D.piso
 GROUP BY 
-m.Cli_Apeliido,m.Cli_Dni,m.Cli_Fecha_Nac,m.Cli_Mail,m.Cli_Nombre,m.Cli_Dni,m.Cli_Dom_Calle,m.Cli_Cod_Postal,m.Cli_Depto,m.Cli_Nro_Calle,m.Cli_Piso
+m.Cli_Apeliido,m.Cli_Dni,m.Cli_Fecha_Nac,m.Cli_Mail,m.Cli_Nombre,m.Cli_Dni,D.id
 HAVING 
 m.Cli_Dni is not null
 GO
