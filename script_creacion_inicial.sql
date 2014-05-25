@@ -526,36 +526,37 @@ GO
 
 --CARGO clientes
 INSERT INTO THE_DISCRETABOY.Cliente
-	(
-	aprellido,
-	direccion,
-	doc_numero,
-	doc_tipo,
-	fecha_nacimiento,
-	mail,
-	nombre,
-	telefono,
-	usuario
-	)
-	
-	SELECT 
-		m.Cli_Apeliido,
-		THE_DISCRETABOY.f_buscar_PK_direc(m.Cli_Dom_Calle,
-											m.Cli_Cod_Postal,
-											m.Cli_Depto,
-											m.Cli_Nro_Calle,
-											m.Cli_Piso),
-		m.Cli_Dni,
-		'DNI',
-		m.Cli_Fecha_Nac,
-		m.Cli_Mail,
-		m.Cli_Nombre,
-		NULL,
-		'Clie_'+CAST(m.Cli_Dni as nvarchar(20))
-		
-	FROM gd_esquema.Maestra m
-	GROUP BY m.Cli_Apeliido,m.Cli_Dni,m.Cli_Fecha_Nac,m.Cli_Mail,m.Cli_Nombre,m.Cli_Dni,m.Cli_Dom_Calle,m.Cli_Cod_Postal,m.Cli_Depto,m.Cli_Nro_Calle,m.Cli_Piso
-	HAVING m.Cli_Dni is not null
+(
+aprellido,
+direccion,
+doc_numero,
+doc_tipo,
+fecha_nacimiento,
+mail,
+nombre,
+telefono,
+usuario
+)
+SELECT 
+m.Cli_Apeliido,
+THE_DISCRETABOY.f_buscar_PK_direc(m.Cli_Dom_Calle,
+	m.Cli_Cod_Postal,
+	m.Cli_Depto,
+	m.Cli_Nro_Calle,
+	m.Cli_Piso),
+m.Cli_Dni,
+'DNI',
+m.Cli_Fecha_Nac,
+m.Cli_Mail,
+m.Cli_Nombre,
+NULL,
+'Clie_'+CAST(m.Cli_Dni as nvarchar(20))
+FROM 
+gd_esquema.Maestra m
+GROUP BY 
+m.Cli_Apeliido,m.Cli_Dni,m.Cli_Fecha_Nac,m.Cli_Mail,m.Cli_Nombre,m.Cli_Dni,m.Cli_Dom_Calle,m.Cli_Cod_Postal,m.Cli_Depto,m.Cli_Nro_Calle,m.Cli_Piso
+HAVING 
+m.Cli_Dni is not null
 GO
 
 --CARGO empresas
@@ -573,31 +574,33 @@ fecha_creacion
 )
 
 SELECT 
-	'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)),
-	m.Publ_Empresa_Cuit,
-	m.Publ_Empresa_Razon_Social,
-	m.Publ_Empresa_Mail,
-	NULL,
-	THE_DISCRETABOY.f_buscar_PK_direc(m.Publ_Empresa_Dom_Calle,
-										m.Publ_Empresa_Cod_Postal,
-										m.Publ_Empresa_Depto,
-										m.Publ_Empresa_Nro_Calle,
-										m.Publ_Empresa_Piso),
-	NULL,
-	NULL,
-	m.Publ_Empresa_Fecha_Creacion
-	
-FROM gd_esquema.Maestra m
-GROUP BY m.Publ_Empresa_Cuit,
-			m.Publ_Empresa_Razon_Social,
-			m.Publ_Empresa_Mail,
-			m.Publ_Empresa_Fecha_Creacion,
-			m.Publ_Empresa_Dom_Calle,
-			m.Publ_Empresa_Cod_Postal,
-			m.Publ_Empresa_Depto,
-			m.Publ_Empresa_Nro_Calle,
-			m.Publ_Empresa_Piso
-HAVING m.Publ_Empresa_Cuit is not null
+'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)),
+m.Publ_Empresa_Cuit,
+m.Publ_Empresa_Razon_Social,
+m.Publ_Empresa_Mail,
+NULL,
+THE_DISCRETABOY.f_buscar_PK_direc(m.Publ_Empresa_Dom_Calle,
+m.Publ_Empresa_Cod_Postal,
+m.Publ_Empresa_Depto,
+m.Publ_Empresa_Nro_Calle,
+m.Publ_Empresa_Piso),
+NULL,
+NULL,
+m.Publ_Empresa_Fecha_Creacion
+FROM 
+gd_esquema.Maestra m
+GROUP BY 
+m.Publ_Empresa_Cuit,
+m.Publ_Empresa_Razon_Social,
+m.Publ_Empresa_Mail,
+m.Publ_Empresa_Fecha_Creacion,
+m.Publ_Empresa_Dom_Calle,
+m.Publ_Empresa_Cod_Postal,
+m.Publ_Empresa_Depto,
+m.Publ_Empresa_Nro_Calle,
+m.Publ_Empresa_Piso
+HAVING 
+m.Publ_Empresa_Cuit is not null
 GO
 
 --CARGO visibilidades
@@ -613,9 +616,12 @@ m.Publicacion_Visibilidad_Cod,
 m.Publicacion_Visibilidad_Desc,
 m.Publicacion_Visibilidad_Porcentaje,
 m.Publicacion_Visibilidad_Precio
-FROM gd_esquema.Maestra m
-WHERE M.Publicacion_Visibilidad_Cod IS NOT NULL
-GROUP BY m.Publicacion_Visibilidad_Cod,
+FROM 
+gd_esquema.Maestra m
+WHERE 
+M.Publicacion_Visibilidad_Cod IS NOT NULL
+GROUP BY 
+m.Publicacion_Visibilidad_Cod,
 m.Publicacion_Visibilidad_Desc,
 m.Publicacion_Visibilidad_Porcentaje,
 m.Publicacion_Visibilidad_Precio
