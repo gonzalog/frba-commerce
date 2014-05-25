@@ -157,7 +157,7 @@ CREATE TABLE THE_DISCRETABOY.Factura (
 
 CREATE TABLE THE_DISCRETABOY.Renglon_factura (
 	factura [numeric](18, 0) NOT NULL, --FK ---PK
-	nro_renglon numeric(18) NOT NULL, ---PK
+	nro_renglon numeric(18) NOT NULL Identity(1,1), ---PK
 	publicacion [numeric](18, 0), ---FK
 	forma_de_pago numeric(18) ---FK
 );
@@ -776,5 +776,40 @@ WHERE M.Publicacion_Tipo = 'Subasta'
 GROUP BY
 M.Publicacion_Cod,
 M.Publicacion_Stock
+
+GO
+
+--CARGO FORMAS DE PAGO
+INSERT INTO THE_DISCRETABOY.Forma_de_pago
+(
+descripcion
+)
+SELECT
+M.Forma_Pago_Desc
+FROM gd_esquema.Maestra M
+WHERE M.Forma_Pago_Desc IS NOT NULL
+GROUP BY M.Forma_Pago_Desc
+
+GO
+
+--CARGO RENGLONES DE FACTURAS
+INSERT INTO THE_DISCRETABOY.Renglon_factura
+(
+factura,
+publicacion,
+forma_de_pago
+)
+SELECT
+M.Factura_Nro,
+M.Publicacion_Cod,
+FP.id
+FROM gd_esquema.Maestra M,THE_DISCRETABOY.Forma_de_pago FP
+WHERE
+M.Factura_Nro IS NOT NULL AND
+FP.descripcion=M.Forma_Pago_Desc
+GROUP BY
+M.Factura_Nro,
+M.Publicacion_Cod,
+FP.id
 
 GO
