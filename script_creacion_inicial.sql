@@ -229,6 +229,24 @@ SELECT r.habilitado from THE_DISCRETABOY.Rol r
 WHERE r.cod_rol = @rol
 )
 END
+
+GO
+
+CREATE FUNCTION THE_DISCRETABOY.f_cod_rol
+(
+@nombre_rol varchar(255)
+)
+RETURNS numeric (18,0)
+AS
+BEGIN
+RETURN
+(
+SELECT R.cod_rol
+FROM THE_DISCRETABOY.Rol R
+WHERE R.nombre = @nombre_rol
+)
+END
+
 GO
 
 -- CHECK Constraints
@@ -1042,3 +1060,62 @@ E.usuario
 EXEC THE_DISCRETABOY.alta_rol 'Empresa', 1
 EXEC THE_DISCRETABOY.alta_rol 'Administrativo', 1
 EXEC THE_DISCRETABOY.alta_rol 'Cliente', 1
+
+--****************Generacion de usuarion admin**********************
+INSERT INTO THE_DISCRETABOY.Usuario
+(
+username,
+password,
+habilitado,
+intentos
+)
+VALUES
+(
+'admin',
+0xe6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7,--w23e
+1,
+0
+)
+--			Creacion de su rol "Administrador General"
+EXEC THE_DISCRETABOY.alta_rol
+'Administrador General',
+1
+--			Se asignan todas las funciones existentes
+INSERT INTO THE_DISCRETABOY.Funcion_por_rol
+(
+funcion,
+rol
+)
+SELECT
+F.cod_funcion,
+R.cod_rol
+FROM THE_DISCRETABOY.Funcion F,THE_DISCRETABOY.Rol R
+WHERE R.nombre = 'Administrador General'
+
+GO
+--			Se determina la asignacion de todas las funciones creadas en el futuro
+CREATE TRIGGER THE_DISCRETABOY.asignar_funcion_a_admin
+ON THE_DISCRETABOY.Funcion
+FOR INSERT --Trigger para que las funciones creadas se le asignen al rol Administrador General.
+AS
+BEGIN
+DECLARE @rol_admin numeric(18,0) = THE_DISCRETABOY.f_cod_rol('Administrador General')
+EXEC THE_DISCRETABOY.alta_funcion_por_rol
+cod_funcion,
+@rol_admin
+END
+
+GO
+--			Se le asigna el rol de Administrador General al admin
+INSERT INTO THE_DISCRETABOY.Rol_por_user
+(
+rol,
+usuario
+)
+SELECT
+R.cod_rol,
+'admin'
+FROM
+THE_DISCRETABOY.Rol R
+WHERE 
+R.nombre = 'Administrador General'
