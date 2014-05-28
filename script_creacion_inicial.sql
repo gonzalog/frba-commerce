@@ -51,7 +51,7 @@ CREATE TABLE THE_DISCRETABOY.Direccion (
 	id numeric(18) NOT NULL Identity(1,1), --PK
 	calle [nvarchar](255),
 	numero [numeric](18, 0),
-	piso [numeric](18, 0),
+	pISo [numeric](18, 0),
 	depto [nvarchar](50),
 	cod_post [nvarchar](50),
 	localidad [nvarchar](255)
@@ -87,7 +87,7 @@ CREATE TABLE THE_DISCRETABOY.Funcion (
 
 CREATE TABLE THE_DISCRETABOY.Visibilidad_por_user (
 	usuario nvarchar(20) NOT NULL, --FK--PK
-	visibilidad numeric(18) NOT NULL,--FK--PK
+	Visibilidad numeric(18) NOT NULL,--FK--PK
 	cant_ventas [numeric](18, 0)
 );
 
@@ -101,7 +101,7 @@ CREATE TABLE THE_DISCRETABOY.Visibilidad (
 CREATE TABLE THE_DISCRETABOY.Publicacion (
 	id [numeric](18, 0) NOT NULL, --PK
 	estado [nvarchar](255),
-	visibilidad numeric(18),--FK
+	Visibilidad numeric(18),--FK
 	descripcion [nvarchar](255),
 	fecha [datetime],
 	fecha_venc [datetime]
@@ -202,17 +202,17 @@ CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
 @CP nvarchar(50),
 @departamento nvarchar(50),
 @nro numeric(18,0),
-@piso numeric(18,0)
+@pISo numeric(18,0)
 )
 RETURNS numeric(18,0)
 AS
 BEGIN
-	return (SELECT d.id FROM THE_DISCRETABOY.Direccion d
+	RETURN (SELECT d.id FROM THE_DISCRETABOY.Direccion d
 				WHERE d.calle=@calle and
 				d.cod_post=@CP and
 				d.depto=@departamento and
 				d.numero=@nro and
-				d.piso=@piso)
+				d.pISo=@pISo)
 END
 GO
 
@@ -253,6 +253,11 @@ GO
 ALTER TABLE THE_DISCRETABOY.Rol_por_user ADD CONSTRAINT CHK_rol_habilitado
         CHECK(THE_DISCRETABOY.f_get_rol_habilitacion(ROL)=1)
 ;
+
+ALTER TABLE THE_DISCRETABOY.Usuario ADD CONSTRAINT CHK_menos_de_cuatro_intentos
+        CHECK(INTENTOS<4)
+;
+
 -- UNIQUE Constraints ...
 
 -- Create Primary Key Constraints
@@ -293,7 +298,7 @@ ALTER TABLE THE_DISCRETABOY.Visibilidad ADD CONSTRAINT PK_Visibilidad
 ;
 
 ALTER TABLE THE_DISCRETABOY.Visibilidad_por_user ADD CONSTRAINT PK_Visibilidad_por_user
-        PRIMARY KEY CLUSTERED (usuario,visibilidad)
+        PRIMARY KEY CLUSTERED (usuario,Visibilidad)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Publicacion ADD CONSTRAINT PK_Publicacion
@@ -366,8 +371,8 @@ ALTER TABLE THE_DISCRETABOY.Cliente ADD CONSTRAINT FK_Cliente_direccion
         FOREIGN KEY (direccion) REFERENCES THE_DISCRETABOY.Direccion (id)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Publicacion ADD CONSTRAINT FK_Public_visib
-        FOREIGN KEY (visibilidad) REFERENCES THE_DISCRETABOY.Visibilidad (codigo)
+ALTER TABLE THE_DISCRETABOY.Publicacion ADD CONSTRAINT FK_Public_vISib
+        FOREIGN KEY (Visibilidad) REFERENCES THE_DISCRETABOY.Visibilidad (codigo)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Rol_por_user ADD CONSTRAINT FK_Rol_por_user_usuario
@@ -386,8 +391,8 @@ ALTER TABLE THE_DISCRETABOY.Funcion_por_rol ADD CONSTRAINT FK_Funcion_por_rol_fu
         FOREIGN KEY (funcion) REFERENCES THE_DISCRETABOY.Funcion (cod_funcion)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Visibilidad_por_user ADD CONSTRAINT FK_Visibilidad_por_user_visib
-        FOREIGN KEY (visibilidad) REFERENCES THE_DISCRETABOY.Visibilidad (codigo)
+ALTER TABLE THE_DISCRETABOY.Visibilidad_por_user ADD CONSTRAINT FK_Visibilidad_por_user_vISib
+        FOREIGN KEY (Visibilidad) REFERENCES THE_DISCRETABOY.Visibilidad (codigo)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Visibilidad_por_user ADD CONSTRAINT FK_Visibilidad_por_user_usuario
@@ -606,7 +611,17 @@ VALUES
 
 GO
 
-/* ****** Migrar datos existentes ******* */
+--INCREMENTAR CANTIDAD DE INTENTOS DE INGRESO DEL USUARIO
+CREATE PROC THE_DISCRETABOY.increm_intent_fallidos_usuario
+(@usuario nvarchar(20))
+AS
+UPDATE THE_DISCRETABOY.Usuario
+SET intentos=intentos+1
+WHERE username=@usuario
+
+GO
+
+/* ****** Migrar datos exIStentes ******* */
 
 --CARGO CALIFICACIONES
 INSERT INTO THE_DISCRETABOY.Calificacion
@@ -621,7 +636,7 @@ DISTINCT m.Calificacion_Codigo as id,
 m.Calificacion_Cant_Estrellas as cant_estrellas,
 m.Calificacion_Descripcion as descrip
 FROM gd_esquema.Maestra m
-WHERE m.Calificacion_Codigo is not NULL
+WHERE m.Calificacion_Codigo IS NOT NULL
 
 GO
 
@@ -630,43 +645,43 @@ INSERT INTO THE_DISCRETABOY.Direccion
 (
 calle,
 numero,
-piso,
+pISo,
 depto,
 cod_post
 )
 SELECT 
 m.Cli_Dom_Calle as calle,
 m.Cli_Nro_Calle as numero,
-m.Cli_Piso as piso,
+m.Cli_PISo as pISo,
 m.Cli_Depto as depto,
 m.Cli_Cod_Postal as cod_post
 FROM gd_esquema.Maestra m
-GROUP BY m.Cli_Dom_Calle,m.Cli_Nro_Calle,m.Cli_Piso,m.Cli_Depto,m.Cli_Cod_Postal
-HAVING Cli_Dom_Calle is not NULL
+GROUP BY m.Cli_Dom_Calle,m.Cli_Nro_Calle,m.Cli_PISo,m.Cli_Depto,m.Cli_Cod_Postal
+HAVING Cli_Dom_Calle IS NOT NULL
 
 UNION
 
 SELECT 
 m.Publ_Empresa_Dom_Calle as calle,
 m.Publ_Empresa_Nro_Calle as numero,
-m.Publ_Empresa_Piso as piso,
+m.Publ_Empresa_PISo as pISo,
 m.Publ_Empresa_Depto as depto,
 m.Publ_Empresa_Cod_Postal as cod_post
 FROM gd_esquema.Maestra m
-GROUP BY Publ_Empresa_Dom_Calle,Publ_Empresa_Nro_Calle,Publ_Empresa_Piso,Publ_Empresa_Depto,Publ_Empresa_Cod_Postal
-HAVING Publ_Empresa_Dom_Calle is not NULL
+GROUP BY Publ_Empresa_Dom_Calle,Publ_Empresa_Nro_Calle,Publ_Empresa_PISo,Publ_Empresa_Depto,Publ_Empresa_Cod_Postal
+HAVING Publ_Empresa_Dom_Calle IS NOT NULL
 
 UNION
 
 SELECT 
 m.Publ_Cli_Dom_Calle as calle,
 m.Publ_Cli_Nro_Calle as numero,
-m.Publ_Cli_Piso as piso,
+m.Publ_Cli_PISo as pISo,
 m.Publ_Cli_Depto as depto,
 m.Publ_Cli_Cod_Postal as cod_post	
 FROM gd_esquema.Maestra m
-GROUP BY Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_Piso,Publ_Cli_Depto,Publ_Cli_Cod_Postal
-HAVING Publ_Cli_Dom_Calle is not NULL	
+GROUP BY Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_PISo,Publ_Cli_Depto,Publ_Cli_Cod_Postal
+HAVING Publ_Cli_Dom_Calle IS NOT NULL	
 GO
 
 --CARGO usuarios de clientes
@@ -678,13 +693,13 @@ intentos,
 habilitado
 )
 SELECT 
-	'Clie_'+CAST(m.Cli_Dni as nvarchar(20)) as username,--Se determina que el nombre de los preexistentes será Clie más el dni.
+	'Clie_'+CAST(m.Cli_Dni as nvarchar(20)) as username,--Se determina que el nombre de los preexIStentes será Clie más el dni.
 	0xe00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29,--La password es UTNFRBA	
 	0,
 	1
 FROM gd_esquema.Maestra m
 GROUP BY m.Cli_Dni
-HAVING m.Cli_Dni is not null
+HAVING m.Cli_Dni IS NOT NULL
 ;
 GO
 
@@ -697,13 +712,13 @@ intentos,
 habilitado
 )
 SELECT 
-	'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)) as username,--Se determina que el nombre de los preexistentes será Empre_ más el CUIT.
+	'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)) as username,--Se determina que el nombre de los preexIStentes será Empre_ más el CUIT.
 	0xe00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29,--La password es UTNFRBA	
 	0,
 	1
 FROM gd_esquema.Maestra m
 GROUP BY m.Publ_Empresa_Cuit
-HAVING m.Publ_Empresa_Cuit is not null
+HAVING m.Publ_Empresa_Cuit IS NOT NULL
 ;
 GO
 
@@ -737,11 +752,43 @@ m.Cli_Dom_Calle = D.calle AND
 m.Cli_Cod_Postal = D.cod_post AND
 m.Cli_Depto = D.depto AND
 m.Cli_Nro_Calle = D.numero AND
-m.Cli_Piso = D.piso
+m.Cli_PISo = D.pISo
 GROUP BY 
 m.Cli_Apeliido,m.Cli_Dni,m.Cli_Fecha_Nac,m.Cli_Mail,m.Cli_Nombre,m.Cli_Dni,D.id
 HAVING 
-m.Cli_Dni is not null
+m.Cli_Dni IS NOT NULL
+
+UNION
+
+SELECT 
+m.Publ_Cli_Apeliido,
+D.id,
+m.Publ_Cli_Dni,
+'DNI',
+m.Publ_Cli_Fecha_Nac,
+m.Publ_Cli_Mail,
+m.Publ_Cli_Nombre,
+NULL,
+'Clie_'+CAST(m.Publ_Cli_Dni as nvarchar(20))
+FROM 
+gd_esquema.Maestra M,THE_DISCRETABOY.Direccion D
+WHERE
+m.Publ_Cli_Dom_Calle = D.calle AND
+m.Publ_Cli_Cod_Postal = D.cod_post AND
+m.Publ_Cli_Depto = D.depto AND
+m.Publ_Cli_Nro_Calle = D.numero AND
+m.Publ_Cli_PISo = D.pISo
+GROUP BY 
+m.Publ_Cli_Apeliido,
+m.Publ_Cli_Dni,
+m.Publ_Cli_Fecha_Nac,
+m.Publ_Cli_Mail,
+m.Publ_Cli_Nombre,
+m.Publ_Cli_Dni,
+D.id
+HAVING 
+m.Publ_Cli_Dni IS NOT NULL
+
 GO
 
 --CARGO empresas
@@ -768,7 +815,7 @@ THE_DISCRETABOY.f_buscar_PK_direc(m.Publ_Empresa_Dom_Calle,
 m.Publ_Empresa_Cod_Postal,
 m.Publ_Empresa_Depto,
 m.Publ_Empresa_Nro_Calle,
-m.Publ_Empresa_Piso),
+m.Publ_Empresa_PISo),
 NULL,
 NULL,
 m.Publ_Empresa_Fecha_Creacion
@@ -783,12 +830,12 @@ m.Publ_Empresa_Dom_Calle,
 m.Publ_Empresa_Cod_Postal,
 m.Publ_Empresa_Depto,
 m.Publ_Empresa_Nro_Calle,
-m.Publ_Empresa_Piso
+m.Publ_Empresa_PISo
 HAVING 
-m.Publ_Empresa_Cuit is not null
+m.Publ_Empresa_Cuit IS NOT NULL
 GO
 
---CARGO visibilidades
+--CARGO Visibilidades
 
 INSERT INTO THE_DISCRETABOY.Visibilidad
 (codigo,
@@ -818,7 +865,7 @@ INSERT INTO THE_DISCRETABOY.Publicacion
 (
 id,
 estado,
-visibilidad,
+Visibilidad,
 descripcion,
 fecha,
 fecha_venc
@@ -1023,10 +1070,10 @@ M.Publicacion_Cod
 
 GO
 
---CARGO VISIBILIDADES POR USUARIOS
+--CARGO VisibilidadES POR USUARIOS
 INSERT INTO THE_DISCRETABOY.Visibilidad_por_user
 (
-visibilidad,
+Visibilidad,
 usuario,
 cant_ventas
 )
@@ -1080,7 +1127,7 @@ VALUES
 EXEC THE_DISCRETABOY.alta_rol
 'Administrador General',
 1
---			Se asignan todas las funciones existentes
+--			Se asignan todas las funciones exIStentes
 INSERT INTO THE_DISCRETABOY.Funcion_por_rol
 (
 funcion,
