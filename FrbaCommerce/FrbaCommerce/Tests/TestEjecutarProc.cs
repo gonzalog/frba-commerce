@@ -21,12 +21,18 @@ namespace FrbaCommerce.Tests
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Dictionary<string, object> args = new Dictionary<string, object>() 
-            { 
-                {"@nombre","rol_California"},
-                {"@habilitado",0}
-            };
-            AdaptadorBD.EjecutarProcedimiento("alta_rol",args);
+            AdaptadorBD.ejecutarProcedure("alta_rol", "rol_California",0);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int retorno = AdaptadorBD.ejecutarProcedureWithReturnValue("rol_habilitacion", 1);
+            MessageBox.Show(retorno.ToString());
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Application.Run(new TestMostrarRoles());
         }
     }
 }

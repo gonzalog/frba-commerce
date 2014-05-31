@@ -232,6 +232,17 @@ END
 
 GO
 
+CREATE PROC THE_DISCRETABOY.rol_habilitacion
+(
+@rol numeric (18,0)
+)
+AS
+DECLARE @hab bit
+SELECT @hab = r.habilitado from THE_DISCRETABOY.Rol r
+WHERE r.cod_rol = @rol
+RETURN @hab
+GO
+
 CREATE FUNCTION THE_DISCRETABOY.f_cod_rol
 (
 @nombre_rol varchar(255)
