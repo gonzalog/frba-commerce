@@ -31,6 +31,9 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.rol = new System.Windows.Forms.ColumnHeader();
             this.habilitado = new System.Windows.Forms.ColumnHeader();
+            this.vistaDeRoles = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.vistaDeRoles)).BeginInit();
             this.SuspendLayout();
             // 
             // listView1
@@ -44,7 +47,6 @@
             this.listView1.Size = new System.Drawing.Size(284, 262);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // rol
             // 
@@ -54,14 +56,36 @@
             // 
             this.habilitado.Text = "habilitado";
             // 
+            // vistaDeRoles
+            // 
+            this.vistaDeRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.vistaDeRoles.Location = new System.Drawing.Point(22, 24);
+            this.vistaDeRoles.Name = "vistaDeRoles";
+            this.vistaDeRoles.Size = new System.Drawing.Size(240, 150);
+            this.vistaDeRoles.TabIndex = 1;
+            //this.vistaDeRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.vistaDeRoles_CellContentClick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(100, 202);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Ver";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // TestMostrarRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.vistaDeRoles);
             this.Controls.Add(this.listView1);
             this.Name = "TestMostrarRoles";
             this.Text = "TestMostrarRoles";
+            ((System.ComponentModel.ISupportInitialize)(this.vistaDeRoles)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -71,6 +95,8 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader rol;
         private System.Windows.Forms.ColumnHeader habilitado;
+        private System.Windows.Forms.DataGridView vistaDeRoles;
+        private System.Windows.Forms.Button button1;
 
     }
 }

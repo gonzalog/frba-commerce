@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Data;
 
 
-namespace FrbaCommerce.Conector
+namespace FrbaCommerce.Asistentes
 {
     class AdaptadorBD //objeto que hace de interfaz con la base de datos
     {

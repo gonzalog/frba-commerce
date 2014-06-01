@@ -9,11 +9,14 @@ using System.Windows.Forms;
 
 namespace FrbaCommerce.ABM_Rol
 {
-    public partial class Form1 : Form
+    public partial class AltaRol : Form
     {
-        public Form1()
+        private Form padre {set; get; }
+
+        public AltaRol(Form padre)
         {
             InitializeComponent();
+            this.padre = padre;
         }
     }
 }

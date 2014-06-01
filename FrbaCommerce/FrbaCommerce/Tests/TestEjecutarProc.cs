@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
-using FrbaCommerce.Conector;
+using FrbaCommerce.Asistentes;
 
 namespace FrbaCommerce.Tests
 {
@@ -32,7 +32,8 @@ namespace FrbaCommerce.Tests
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Application.Run(new TestMostrarRoles());
+            Form testMostradorDeRoles = new TestMostrarRoles();
+            Application.Run(testMostradorDeRoles);
         }
     }
 }

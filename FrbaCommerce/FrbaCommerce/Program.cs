@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using FrbaCommerce.Tests;
+using FrbaCommerce.ABM_Rol;
 
 namespace FrbaCommerce
 {
@@ -16,10 +17,12 @@ namespace FrbaCommerce
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new PantallaPrincipal());
 
             //Correr tests
             Application.Run(new TestEjecutarProc());
+            Application.Run(new TestMostrarRoles());
+            Application.Run(new ABMRol(new PantallaPrincipal()));
         }
 
     }

@@ -6,5 +6,8 @@ C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerc
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.exe
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.pdb
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\bin\Debug\FrbaCommerce.exe.config
-C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Form1.resources
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Tests.TestEjecutarProc.resources
+C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Tests.TestMostrarRoles.resources
+C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.ABM_Rol.ABMRol.resources
+C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.ABM_Rol.ListadoRoles.resources
+C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.PantallaPrincipal.resources

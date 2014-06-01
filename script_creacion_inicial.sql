@@ -622,6 +622,40 @@ VALUES
 
 GO
 
+--CONSULTAR ID DEL ROL
+CREATE PROCEDURE THE_DISCRETABOY.get_cod_rol
+(
+@nombre varchar(255)
+)
+AS
+DECLARE @codigo numeric(18,0)
+SELECT
+@codigo = R.cod_rol
+FROM THE_DISCRETABOY.Rol R
+WHERE
+R.nombre=@nombre
+RETURN @codigo
+
+GO
+
+CREATE PROC THE_DISCRETABOY.get_funciones
+AS
+BEGIN
+SELECT cod_funcion 'CodigoFuncion', nombre 'Nombre'
+FROM THE_DISCRETABOY.Funcion
+END
+
+GO
+
+CREATE PROC THE_DISCRETABOY.get_roles
+AS
+BEGIN
+SELECT R.cod_rol 'CodigoRol', R.nombre 'Nombre'
+FROM THE_DISCRETABOY.Rol R
+END
+
+GO
+
 --INCREMENTAR CANTIDAD DE INTENTOS DE INGRESO DEL USUARIO
 CREATE PROC THE_DISCRETABOY.increm_intent_fallidos_usuario
 (@usuario nvarchar(20))
@@ -632,6 +666,11 @@ WHERE username=@usuario
 
 GO
 
+CREATE PROC THE_DISCRETABOY.traer_roles
+AS
+SELECT * FROM THE_DISCRETABOY.Rol
+
+GO
 /* ****** Migrar datos exIStentes ******* */
 
 --CARGO CALIFICACIONES

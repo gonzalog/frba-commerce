@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaCommerce.Asistentes;
+using System.Data.SqlClient;
 
 namespace FrbaCommerce.Tests
 {
@@ -14,6 +16,12 @@ namespace FrbaCommerce.Tests
         public TestMostrarRoles()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataTable tabla = AdaptadorBD.traerDataTable("traer_roles");
+            AsistenteVistas.CargarGrilla(vistaDeRoles, tabla);
         }
 
     }
