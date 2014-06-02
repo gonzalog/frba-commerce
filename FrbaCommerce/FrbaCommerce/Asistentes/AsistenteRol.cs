@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace FrbaCommerce.Asistentes
 {
@@ -35,16 +36,11 @@ namespace FrbaCommerce.Asistentes
             ejecutarProcedure("alta_funcion_por_rol", cod, funcion);
         }
 
-        public static int altaRol(string nombre,int habilitado,int[] funciones)
+        public static int altaRol(string nombre,int habilitado,List<int> funciones)
         {
             ejecutarProcedure("alta_rol",nombre, habilitado);
             int codNuevo = ejecutarProcedureWithReturnValue("get_cod_rol",nombre);
-
-            foreach(int funcion in funciones)
-            {
-                updateAltaFuncionPorRol(codNuevo,funcion);
-            }
-
+            funciones.ForEach((int f)=>updateAltaFuncionPorRol(codNuevo,f));
             return codNuevo;
         }
 
@@ -57,6 +53,49 @@ namespace FrbaCommerce.Asistentes
         public static DataTable getRoles()
         {
             return traerDataTable("get_roles");
+        }
+
+        public static DataTable getRolesBuscando(string nombreABuscar)
+        {
+            return traerDataTable("get_roles_buscando", nombreABuscar);
+        }
+
+        public static Dictionary<int, string> getRolesExistentes()
+        {
+            DataTable tablaRoles = getRoles();
+            DataRowCollection rows = tablaRoles.Rows;
+            //MessageBox.Show("Hay " + rows.Count + " roles cargados");
+            Dictionary<int, string> roles = new Dictionary<int, string>();
+            foreach (DataRow row in rows)
+            {
+                int cod = Convert.ToInt32(row["cod_rol"].ToString());
+                string descripcion = row["nombre"].ToString();
+                roles.Add(cod, descripcion);
+            }
+            return roles;
+        }
+
+        public static DataTable traerDataTableRoles(string nombre)
+        {
+            return traerDataTable("get_roles", nombre);
+        }
+
+        public static Dictionary<int,string> getNombresFunciones() 
+        {
+            DataTable funcionesTraidas = traerDataTable("get_funciones");
+
+            DataRowCollection rows = funcionesTraidas.Rows;
+            //MessageBox.Show("Hay " + rows.Count + " funciones cargadas");
+            
+            Dictionary<int, string> funciones = new Dictionary<int, string>();
+            foreach (DataRow row in rows)
+            {
+                int cod = Convert.ToInt32(row["cod_funcion"].ToString());
+                string descripcion = row["nombre"].ToString();
+                
+                funciones.Add(cod,descripcion);
+            }
+            return funciones;
         }
 
     }

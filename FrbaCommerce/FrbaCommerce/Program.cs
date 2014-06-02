@@ -20,8 +20,6 @@ namespace FrbaCommerce
             Application.Run(new PantallaPrincipal());
 
             //Correr tests
-            Application.Run(new TestEjecutarProc());
-            Application.Run(new TestMostrarRoles());
             Application.Run(new ABMRol(new PantallaPrincipal()));
         }
 

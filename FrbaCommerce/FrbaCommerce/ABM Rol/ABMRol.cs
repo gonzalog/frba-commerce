@@ -27,7 +27,12 @@ namespace FrbaCommerce.ABM_Rol
 
         private void Modificar_Click(object sender, EventArgs e)
         {
-            AsistenteVistas.mostrarNuevaVentana(new ListadoRoles(this, (PantallaPrincipal)padre), this);
+            AsistenteVistas.mostrarNuevaVentana(new ModificionRol(this, (PantallaPrincipal)padre), this);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

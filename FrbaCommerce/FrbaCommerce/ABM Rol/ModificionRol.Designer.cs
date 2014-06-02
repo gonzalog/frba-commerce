@@ -1,6 +1,6 @@
 ﻿namespace FrbaCommerce.ABM_Rol
 {
-    partial class ListadoRoles
+    partial class ModificionRol
     {
         /// <summary>
         /// Required designer variable.
@@ -48,6 +48,7 @@
             this.cancelButton.TabIndex = 19;
             this.cancelButton.Text = "Cancelar";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click_1);
             // 
             // errorBox
             // 
@@ -80,6 +81,7 @@
             this.buscarButton.TabIndex = 0;
             this.buscarButton.Text = "Buscar";
             this.buscarButton.UseVisualStyleBackColor = true;
+            this.buscarButton.Click += new System.EventHandler(this.buscarButton_Click_1);
             // 
             // limpiarButton
             // 
@@ -89,6 +91,7 @@
             this.limpiarButton.TabIndex = 1;
             this.limpiarButton.Text = "Limpiar";
             this.limpiarButton.UseVisualStyleBackColor = true;
+            this.limpiarButton.Click += new System.EventHandler(this.limpiarButton_Click_1);
             // 
             // label2
             // 
@@ -116,7 +119,7 @@
             this.grillaRoles.Size = new System.Drawing.Size(333, 204);
             this.grillaRoles.TabIndex = 16;
             // 
-            // ListadoRoles
+            // ModificionRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,7 +128,7 @@
             this.Controls.Add(this.errorBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grillaRoles);
-            this.Name = "ListadoRoles";
+            this.Name = "ModificionRol";
             this.Text = "ListaRoles";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

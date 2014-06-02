@@ -73,11 +73,11 @@
     <Compile Include="ABM Rol\AltaRol.Designer.cs">
       <DependentUpon>AltaRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Rol\ListadoRoles.cs">
+    <Compile Include="ABM Rol\ModificionRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM Rol\ListadoRoles.Designer.cs">
-      <DependentUpon>ListadoRoles.cs</DependentUpon>
+    <Compile Include="ABM Rol\ModificionRol.Designer.cs">
+      <DependentUpon>ModificionRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rubro\Form1.cs">
       <SubType>Form</SubType>
@@ -159,8 +159,11 @@
     <EmbeddedResource Include="ABM Rol\ABMRol.resx">
       <DependentUpon>ABMRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM Rol\ListadoRoles.resx">
-      <DependentUpon>ListadoRoles.cs</DependentUpon>
+    <EmbeddedResource Include="ABM Rol\AltaRol.resx">
+      <DependentUpon>AltaRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Rol\ModificionRol.resx">
+      <DependentUpon>ModificionRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PantallaPrincipal.resx">
       <DependentUpon>PantallaPrincipal.cs</DependentUpon>

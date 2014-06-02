@@ -638,19 +638,21 @@ RETURN @codigo
 
 GO
 
+--TRAER TODAS LAS FUNCIONES
 CREATE PROC THE_DISCRETABOY.get_funciones
 AS
 BEGIN
-SELECT cod_funcion 'CodigoFuncion', nombre 'Nombre'
+SELECT cod_funcion AS 'cod_funcion', nombre AS 'nombre'
 FROM THE_DISCRETABOY.Funcion
 END
 
 GO
 
+
 CREATE PROC THE_DISCRETABOY.get_roles
 AS
 BEGIN
-SELECT R.cod_rol 'CodigoRol', R.nombre 'Nombre'
+SELECT R.cod_rol 'cod_rol', R.nombre 'nombre'
 FROM THE_DISCRETABOY.Rol R
 END
 
@@ -666,9 +668,25 @@ WHERE username=@usuario
 
 GO
 
-CREATE PROC THE_DISCRETABOY.traer_roles
+--PEDIR LISTADO DE NOMBRES DE FUNCIONES
+CREATE PROC THE_DISCRETABOY.get_funciones_nombres
 AS
-SELECT * FROM THE_DISCRETABOY.Rol
+SELECT
+F.nombre
+FROM
+THE_DISCRETABOY.Funcion F
+
+GO
+
+--BUSCAR EN ROLES
+CREATE PROC THE_DISCRETABOY.get_roles_buscando
+(@nombre_a_buscar nvarchar(255))
+AS
+BEGIN
+SELECT R.cod_rol 'cod_rol', R.nombre 'nombre'
+FROM THE_DISCRETABOY.Rol R
+WHERE R.nombre LIKE '%'+@nombre_a_buscar+'%'
+END
 
 GO
 /* ****** Migrar datos exIStentes ******* */
@@ -1191,15 +1209,26 @@ WHERE R.nombre = 'Administrador General'
 
 GO
 --			Se determina la asignacion de todas las funciones creadas en el futuro
-CREATE TRIGGER THE_DISCRETABOY.asignar_funcion_a_admin
-ON THE_DISCRETABOY.Funcion
-FOR INSERT --Trigger para que las funciones creadas se le asignen al rol Administrador General.
-AS
+Create trigger THE_DISCRETABOY.tr_asignar_funcion_a_admin
+on THE_DISCRETABOY.Funcion
+after insert
+as
 BEGIN
-DECLARE @rol_admin numeric(18,0) = THE_DISCRETABOY.f_cod_rol('Administrador General')
-EXEC THE_DISCRETABOY.alta_funcion_por_rol
-cod_funcion,
-@rol_admin
+
+    set nocount on;
+
+    declare
+    @rol_admin numeric(18,0),
+    @funcion_nueva numeric(18,0)
+
+    select @funcion_nueva = cod_funcion 
+    from inserted
+
+    SET @rol_admin = THE_DISCRETABOY.f_cod_rol('Administrador General')
+
+    begin
+        insert into THE_DISCRETABOY.funcion_por_rol values(@rol_admin, @funcion_nueva)
+    end
 END
 
 GO
