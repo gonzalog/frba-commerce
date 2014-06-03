@@ -22,7 +22,6 @@ namespace FrbaCommerce.ABM_Rol
             this.padre = padre;
             cargarRoles();
             cargarBotonCambiarFunciones();
-            cargarBotonHabilitacion();
         }
 
         public void cargarRoles()
@@ -38,15 +37,6 @@ namespace FrbaCommerce.ABM_Rol
             col.Name = "Funciones";
             col.UseColumnTextForButtonValue = true;
             grillaRoles.Columns.Add(col);
-        }
-
-        private void cargarBotonHabilitacion()
-        {
-            DataGridViewButtonColumn col = new DataGridViewButtonColumn();
-            col.Name = "Habilitar";
-            col.Text = "BAJA-ALTA";
-            grillaRoles.Columns.Add(col);
-           
         }
 
         private void ListadoRoles_Activated(object sender, EventArgs e)
@@ -77,28 +67,11 @@ namespace FrbaCommerce.ABM_Rol
 
         private void grillaRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int rolAModificar = Convert.ToInt32(grillaRoles.Rows[e.RowIndex].Cells[2].Value.ToString());
+            int rolAModificar = Convert.ToInt32(grillaRoles.Rows[e.RowIndex].Cells["cod_rol"].Value.ToString());
             if (e.ColumnIndex == 0)
             {
-                MessageBox.Show("Se desea cambiar funciones del rol " + grillaRoles.Rows[e.RowIndex].Cells[3].Value.ToString()+" .");
-
+                //MessageBox.Show("Se desea cambiar funciones del rol " + grillaRoles.Rows[e.RowIndex].Cells[3].Value.ToString()+" .");
                 AsistenteVistas.mostrarNuevaVentana((new CambiarFunciones(rolAModificar,this)), this);
-
-            }
-            if (e.ColumnIndex == 1) 
-            {
-                DataGridViewCellCollection filaDelRol = grillaRoles.Rows[e.RowIndex].Cells;
-                string nombreRolACambiar = filaDelRol[3].Value.ToString();
-                if (AsistenteRol.rolHabilitado(rolAModificar)) 
-                {
-                    AsistenteVistas.mostrarNuevaVentana((new ConfirmarInhabilitacion(rolAModificar, nombreRolACambiar)), this);
-                }
-                else
-                {
-                    AsistenteRol.habilitarRol(rolAModificar);
-                    MessageBox.Show("Se habilitó el rol "+nombreRolACambiar+".");
-                    cargarRoles();
-                }
             }
         }
 

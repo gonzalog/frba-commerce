@@ -42,7 +42,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(273, 411);
+            this.cancelButton.Location = new System.Drawing.Point(256, 371);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(200, 25);
             this.cancelButton.TabIndex = 19;
@@ -57,7 +57,7 @@
             this.errorBox.Multiline = true;
             this.errorBox.Name = "errorBox";
             this.errorBox.ReadOnly = true;
-            this.errorBox.Size = new System.Drawing.Size(557, 39);
+            this.errorBox.Size = new System.Drawing.Size(450, 39);
             this.errorBox.TabIndex = 18;
             this.errorBox.TextChanged += new System.EventHandler(this.errorBox_TextChanged);
             // 
@@ -69,7 +69,7 @@
             this.groupBox1.Controls.Add(this.nombreBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 68);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(557, 100);
+            this.groupBox1.Size = new System.Drawing.Size(450, 100);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Búsqueda";
@@ -87,7 +87,7 @@
             // 
             // limpiarButton
             // 
-            this.limpiarButton.Location = new System.Drawing.Point(351, 71);
+            this.limpiarButton.Location = new System.Drawing.Point(244, 71);
             this.limpiarButton.Name = "limpiarButton";
             this.limpiarButton.Size = new System.Drawing.Size(200, 23);
             this.limpiarButton.TabIndex = 1;
@@ -118,7 +118,7 @@
             this.grillaRoles.Location = new System.Drawing.Point(12, 190);
             this.grillaRoles.Name = "grillaRoles";
             this.grillaRoles.RowTemplate.ReadOnly = true;
-            this.grillaRoles.Size = new System.Drawing.Size(557, 204);
+            this.grillaRoles.Size = new System.Drawing.Size(451, 168);
             this.grillaRoles.TabIndex = 16;
             this.grillaRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaRoles_CellContentClick);
             // 
@@ -126,7 +126,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 448);
+            this.ClientSize = new System.Drawing.Size(474, 408);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.errorBox);
             this.Controls.Add(this.groupBox1);
