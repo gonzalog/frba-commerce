@@ -90,7 +90,6 @@ namespace FrbaCommerce.Asistentes
             DataTable funcionesTraidas = traerDataTable("get_funciones");
 
             DataRowCollection rows = funcionesTraidas.Rows;
-            //MessageBox.Show("Hay " + rows.Count + " funciones cargadas");
             
             Dictionary<int, string> funciones = new Dictionary<int, string>();
             foreach (DataRow row in rows)

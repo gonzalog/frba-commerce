@@ -121,34 +121,10 @@ namespace FrbaCommerce.Asistentes
 
         private static string _ejecutarProcedureWithReturnString(string procedure, List<string> args, params object[] values)
         {
-            SqlConnection conexion = new SqlConnection();
-            SqlCommand comando = new SqlCommand();
-
-            try
-            {
-                conexionSql(conexion, comando);
-                comando.CommandType = CommandType.StoredProcedure;
-                comando.CommandText = "THE_DISCRETABOY." + procedure;
-                if (_validateArgumentsAndParameters(args, values))
-                {
-                    _loadSqlCommand(args, values, comando);
-                }
-                comando.Parameters.Add("@RETURN_VALUE", SqlDbType.NVarChar).Direction = ParameterDirection.ReturnValue;
-                comando.ExecuteNonQuery();
-                return (string)comando.Parameters["@RETURN_VALUE"].Value;
-            }
-            catch (Exception)
-            {
-                return "";
-            }
-
-            finally
-            {
-                if (conexion != null)
-                {
-                    conexion.Close();
-                }
-            }
+            DataTable stringEnTabla = _traerDataTable(procedure,  args, values);
+            DataRowCollection fila = stringEnTabla.Rows;
+            DataRow primeraFila = fila[0];
+            return primeraFila[0].ToString();
         }
 
         private static DataTable _traerDataTable(string procedure, List<string> args, params object[] values)
