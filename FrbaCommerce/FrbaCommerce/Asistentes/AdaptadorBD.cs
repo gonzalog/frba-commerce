@@ -119,6 +119,37 @@ namespace FrbaCommerce.Asistentes
             }
         }
 
+        private static string _ejecutarProcedureWithReturnString(string procedure, List<string> args, params object[] values)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+
+            try
+            {
+                conexionSql(conexion, comando);
+                comando.CommandType = CommandType.StoredProcedure;
+                comando.CommandText = "THE_DISCRETABOY." + procedure;
+                if (_validateArgumentsAndParameters(args, values))
+                {
+                    _loadSqlCommand(args, values, comando);
+                }
+                comando.Parameters.Add("@RETURN_VALUE", SqlDbType.NVarChar).Direction = ParameterDirection.ReturnValue;
+                comando.ExecuteNonQuery();
+                return (string)comando.Parameters["@RETURN_VALUE"].Value;
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+
+            finally
+            {
+                if (conexion != null)
+                {
+                    conexion.Close();
+                }
+            }
+        }
 
         private static DataTable _traerDataTable(string procedure, List<string> args, params object[] values)
         {
@@ -287,6 +318,14 @@ namespace FrbaCommerce.Asistentes
         {
             List<string> argumentos = _generateArguments(procedure);
             return _ejecutarProcedureWithReturnValue(procedure, argumentos, values);
+        }
+
+        public static string ejecutarProcedureWithReturnString(string procedure, params object[] values)
+        {
+            List<string> argumentos = _generateArguments(procedure);
+            string retorno = _ejecutarProcedureWithReturnString(procedure, argumentos, values);
+            MessageBox.Show("La primitiva trajo: "+retorno);
+            return retorno;
         }
 
         public static void conexionSql(SqlConnection conexion, SqlCommand cm)

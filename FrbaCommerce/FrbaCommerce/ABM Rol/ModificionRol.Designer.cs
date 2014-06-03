@@ -42,9 +42,9 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(254, 416);
+            this.cancelButton.Location = new System.Drawing.Point(273, 411);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(91, 25);
+            this.cancelButton.Size = new System.Drawing.Size(200, 25);
             this.cancelButton.TabIndex = 19;
             this.cancelButton.Text = "Cancelar";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -57,8 +57,9 @@
             this.errorBox.Multiline = true;
             this.errorBox.Name = "errorBox";
             this.errorBox.ReadOnly = true;
-            this.errorBox.Size = new System.Drawing.Size(333, 39);
+            this.errorBox.Size = new System.Drawing.Size(557, 39);
             this.errorBox.TabIndex = 18;
+            this.errorBox.TextChanged += new System.EventHandler(this.errorBox_TextChanged);
             // 
             // groupBox1
             // 
@@ -66,18 +67,19 @@
             this.groupBox1.Controls.Add(this.limpiarButton);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.nombreBox);
-            this.groupBox1.Location = new System.Drawing.Point(12, 69);
+            this.groupBox1.Location = new System.Drawing.Point(12, 68);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(333, 100);
+            this.groupBox1.Size = new System.Drawing.Size(557, 100);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Búsqueda";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // buscarButton
             // 
-            this.buscarButton.Location = new System.Drawing.Point(151, 71);
+            this.buscarButton.Location = new System.Drawing.Point(9, 71);
             this.buscarButton.Name = "buscarButton";
-            this.buscarButton.Size = new System.Drawing.Size(75, 23);
+            this.buscarButton.Size = new System.Drawing.Size(181, 23);
             this.buscarButton.TabIndex = 0;
             this.buscarButton.Text = "Buscar";
             this.buscarButton.UseVisualStyleBackColor = true;
@@ -85,9 +87,9 @@
             // 
             // limpiarButton
             // 
-            this.limpiarButton.Location = new System.Drawing.Point(232, 71);
+            this.limpiarButton.Location = new System.Drawing.Point(351, 71);
             this.limpiarButton.Name = "limpiarButton";
-            this.limpiarButton.Size = new System.Drawing.Size(75, 23);
+            this.limpiarButton.Size = new System.Drawing.Size(200, 23);
             this.limpiarButton.TabIndex = 1;
             this.limpiarButton.Text = "Limpiar";
             this.limpiarButton.UseVisualStyleBackColor = true;
@@ -116,20 +118,22 @@
             this.grillaRoles.Location = new System.Drawing.Point(12, 190);
             this.grillaRoles.Name = "grillaRoles";
             this.grillaRoles.RowTemplate.ReadOnly = true;
-            this.grillaRoles.Size = new System.Drawing.Size(333, 204);
+            this.grillaRoles.Size = new System.Drawing.Size(557, 204);
             this.grillaRoles.TabIndex = 16;
+            this.grillaRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaRoles_CellContentClick);
             // 
             // ModificionRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(360, 448);
+            this.ClientSize = new System.Drawing.Size(581, 448);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.errorBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grillaRoles);
             this.Name = "ModificionRol";
             this.Text = "ListaRoles";
+            this.Load += new System.EventHandler(this.ModificionRol_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grillaRoles)).EndInit();

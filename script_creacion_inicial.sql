@@ -652,8 +652,67 @@ GO
 CREATE PROC THE_DISCRETABOY.get_roles
 AS
 BEGIN
-SELECT R.cod_rol 'cod_rol', R.nombre 'nombre'
+SELECT R.cod_rol 'cod_rol', R.nombre 'nombre',
+(CASE WHEN R.habilitado=1 THEN 'HABILITADO'
+ELSE 'INHABILITADO' END) 'Estado'
 FROM THE_DISCRETABOY.Rol R
+END
+
+GO
+
+CREATE PROC THE_DISCRETABOY.get_nombre_rol
+(@cod numeric (18,0))
+AS
+BEGIN
+SELECT
+R.nombre
+FROM
+THE_DISCRETABOY.Rol R
+WHERE
+R.cod_rol = @cod
+END
+
+GO
+
+CREATE PROC THE_DISCRETABOY.get_funciones_de
+(@rol numeric (18,0))
+AS
+BEGIN
+SELECT
+FR.funcion
+FROM
+THE_DISCRETABOY.Funcion_por_rol FR
+WHERE FR.rol = @rol
+END
+
+GO
+
+CREATE PROC THE_DISCRETABOY.get_funciones_no_de
+(@rol numeric (18,0))
+AS
+BEGIN
+SELECT
+F.cod_funcion
+FROM
+THE_DISCRETABOY.Funcion F
+WHERE
+F.cod_funcion <> ALL (SELECT Funcion from THE_DISCRETABOY.Funcion_por_rol
+						WHERE rol = @rol)
+END
+
+GO
+
+CREATE PROC THE_DISCRETABOY.get_nombre_funcion
+(@cod numeric (18,0))
+AS
+BEGIN 
+SELECT
+F.nombre
+FROM
+THE_DISCRETABOY.Funcion F
+WHERE
+F.cod_funcion = @cod
+
 END
 
 GO

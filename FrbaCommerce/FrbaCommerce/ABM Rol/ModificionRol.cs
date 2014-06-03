@@ -14,78 +14,44 @@ namespace FrbaCommerce.ABM_Rol
     {
         public Form padre;
         PantallaPrincipal pantallaPrincipal;
-        public int rolAModificar;
-        DataTable rolesExistentes;
 
         public ModificionRol(Form padre, PantallaPrincipal pantallaPrincipal)
         {
             InitializeComponent();
             this.pantallaPrincipal = pantallaPrincipal;
             this.padre = padre;
-            rolesExistentes = AsistenteRol.getRoles();
             cargarRoles();
-            cargarBotonFuncionalidad();    
+            cargarBotonCambiarFunciones();
+            cargarBotonHabilitacion();
         }
 
         public void cargarRoles()
         {
+            DataTable rolesExistentes = AsistenteRol.getRoles();
             AsistenteVistas.CargarGrilla(grillaRoles, rolesExistentes);
         }
 
-        private void cargarBotonFuncionalidad()
+        private void cargarBotonCambiarFunciones()
         {
             DataGridViewButtonColumn col = new DataGridViewButtonColumn();
-            col.Text = "Seleccionar Rol";
-            col.Name = "Seleccionar";
+            col.Text = "Cambiar funciones";
+            col.Name = "Funciones";
             col.UseColumnTextForButtonValue = true;
             grillaRoles.Columns.Add(col);
         }
 
-        private bool estaDadoDeBaja(DataGridViewRow fila)
+        private void cargarBotonHabilitacion()
         {
-            int index = grillaRoles.Columns["Habilitado"].Index;
-            return !(bool)fila.Cells[index].Value;
+            DataGridViewButtonColumn col = new DataGridViewButtonColumn();
+            col.Name = "Habilitar";
+            col.Text = "BAJA/ALTA";
+            grillaRoles.Columns.Add(col);
+           
         }
 
         private void ListadoRoles_Activated(object sender, EventArgs e)
         {
             cargarRoles();
-        }
-
-        /*
-        private int  crearRol(int fila)
-        {
-            Rol rol = new Rol();
-            int index = grillaRoles.Columns["ID Rol"].Index;
-            rol.id = Convert.ToInt32(grillaRoles.Rows.SharedRow(fila).Cells[index].Value.ToString());
-            index = grillaRoles.Columns["Nombre"].Index;
-            rol.nombre = grillaRoles.Rows.SharedRow(fila).Cells[index].Value.ToString();
-            index = grillaRoles.Columns["Habilitado"].Index;
-            rol.habilitado = Convert.ToBoolean(grillaRoles.Rows.SharedRow(fila).Cells[index].Value.ToString());
-            return rol;
-        }*/
-        
-        private void grillaRoles_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {/*
-            if (e.ColumnIndex == grillaRoles.Columns["Seleccionar"].Index && e.RowIndex >= 0 && e.RowIndex < (grillaRoles.Rows.Count - 1)) //Para que la accion de click sea valida solo sobre el boton
-            {
-                DataGridViewRow fila = grillaRoles.Rows[e.RowIndex];
-
-                Rol rol = crearRol(e.RowIndex); //instancia un afiliado y luego depende de la funcionalidad, abrirá otra ventana
-                if (funcion == "Baja")
-                {
-                    if (!estaDadoDeBaja(fila))
-                    {
-                        AsistenteVistas.mostrarNuevaVentana(new Baja_Rol(this, rol), this);
-                    }
-                    else
-                    {
-                        MessageBox.Show("El Rol seleccionado ya se encuentra inhabilitado");
-                    }
-                }
-                if (funcion == "Modificar") AsistenteVistas.mostrarNuevaVentana(new Modificar_Rol2(this, rol, pantallaPrincipal), this);
-                //en modificar no muestro la ventana de error si esta dado de baja, porque se puede volver a habilitar
-            }*/
         }
 
         private void cancelButton_Click_1(object sender, EventArgs e)
@@ -95,15 +61,55 @@ namespace FrbaCommerce.ABM_Rol
 
         private void buscarButton_Click_1(object sender, EventArgs e)
         {
-            rolesExistentes = AsistenteRol.getRolesBuscando(nombreBox.Text);
-            cargarRoles();
+            AsistenteVistas.CargarGrilla(grillaRoles,AsistenteRol.getRolesBuscando(nombreBox.Text));
         }
 
         private void limpiarButton_Click_1(object sender, EventArgs e)
         {
             nombreBox.Text = "";
-            rolesExistentes = AsistenteRol.getRoles();
             cargarRoles();
+        }
+
+        private void ModificionRol_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grillaRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rolAModificar = Convert.ToInt32(grillaRoles.Rows[e.RowIndex].Cells[2].Value.ToString());
+            if (e.ColumnIndex == 0)
+            {
+                MessageBox.Show("Se desea cambiar funciones del rol " + grillaRoles.Rows[e.RowIndex].Cells[3].Value.ToString()+" .");
+
+                AsistenteVistas.mostrarNuevaVentana((new CambiarFunciones(rolAModificar)), this);
+
+            }
+            if (e.ColumnIndex == 1) 
+            {
+                DataGridViewCellCollection filaDelRol = grillaRoles.Rows[e.RowIndex].Cells;
+                string nombreRolACambiar = filaDelRol[3].Value.ToString();
+                if (AsistenteRol.rolHabilitado(rolAModificar)) 
+                {
+                    AsistenteVistas.mostrarNuevaVentana((new ConfirmarInhabilitacion(rolAModificar, nombreRolACambiar)), this);
+                }
+                else
+                {
+                    AsistenteRol.habilitarRol(rolAModificar);
+                    MessageBox.Show("Se habilitó el rol "+nombreRolACambiar+".");
+                    cargarRoles();
+                }
+            }
+        }
+
+        private void errorBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
 
     }

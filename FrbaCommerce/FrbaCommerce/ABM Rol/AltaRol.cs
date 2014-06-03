@@ -32,7 +32,7 @@ namespace FrbaCommerce.ABM_Rol
         private void cargarNombresFunciones()
         {
             funciones = AsistenteRol.getNombresFunciones();
-            MessageBox.Show("Hay "+funciones.Count()+" funciones cargadas");
+            Console.WriteLine("Hay "+funciones.Count()+" funciones cargadas");
             foreach (KeyValuePair<int, string> entry in funciones)
             {
                 checkedListBox1.Items.Add(entry.Value);
@@ -48,7 +48,7 @@ namespace FrbaCommerce.ABM_Rol
                 int codigoFuncion = getIdFuncion(funcion);
                 funcionesElegidas.Add(codigoFuncion);
             }
-            MessageBox.Show("Seleccionaste " + funcionesElegidas.Count+" funciones.");
+            Console.WriteLine("Seleccionaste " + funcionesElegidas.Count + " funciones.");
             return funcionesElegidas;
         }
 

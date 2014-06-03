@@ -80,6 +80,11 @@ namespace FrbaCommerce.Asistentes
             return traerDataTable("get_roles", nombre);
         }
 
+        public static bool rolHabilitado(int rol) 
+        {
+            return (ejecutarProcedureWithReturnValue("rol_habilitacion",rol)==1);
+        }
+
         public static Dictionary<int,string> getNombresFunciones() 
         {
             DataTable funcionesTraidas = traerDataTable("get_funciones");
@@ -98,5 +103,39 @@ namespace FrbaCommerce.Asistentes
             return funciones;
         }
 
+        public static string getNombreRol(int cod)
+        {
+            string nombre = ejecutarProcedureWithReturnString("get_nombre_rol",cod);
+            MessageBox.Show("El nombre es: "+nombre);
+            return nombre;
+        }
+
+        public static List<int> getFuncionesDe(int rol)
+        {
+            return _getFuncionesSegun("get_funciones_de", rol);
+        }
+
+        public static List<int> getFuncionesNoDe(int rol)
+        {
+            return _getFuncionesSegun("get_funciones_no_de", rol);
+        }
+
+        private static List<int> _getFuncionesSegun( string proc,int rol)
+        {
+            List<int> funcionesARetornar = new List<int>();
+
+            DataTable funciones = traerDataTable(proc, rol);
+            DataRowCollection filas = funciones.Rows;
+            foreach (DataRow row in filas)
+            {
+                funcionesARetornar.Add(Convert.ToInt32(row["cod_funcion"].ToString()));
+            }
+            return funcionesARetornar;
+        }
+
+        public static string getNombreFuncion(int cod)
+        {
+            return ejecutarProcedureWithReturnString("get_nombre_funcion",cod);
+        }
     }
 }
