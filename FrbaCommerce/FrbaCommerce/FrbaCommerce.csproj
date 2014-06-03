@@ -103,6 +103,7 @@
     <Compile Include="Abm Visibilidad\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Asistentes\AsistenteBotones.cs" />
     <Compile Include="Asistentes\AsistenteColecciones.cs" />
     <Compile Include="Asistentes\AsistenteRol.cs" />
     <Compile Include="Asistentes\AsistenteVistas.cs" />

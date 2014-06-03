@@ -44,7 +44,7 @@ namespace FrbaCommerce.ABM_Rol
         {
             DataGridViewButtonColumn col = new DataGridViewButtonColumn();
             col.Name = "Habilitar";
-            col.Text = "BAJA/ALTA";
+            col.Text = "BAJA-ALTA";
             grillaRoles.Columns.Add(col);
            
         }
@@ -82,7 +82,7 @@ namespace FrbaCommerce.ABM_Rol
             {
                 MessageBox.Show("Se desea cambiar funciones del rol " + grillaRoles.Rows[e.RowIndex].Cells[3].Value.ToString()+" .");
 
-                AsistenteVistas.mostrarNuevaVentana((new CambiarFunciones(rolAModificar)), this);
+                AsistenteVistas.mostrarNuevaVentana((new CambiarFunciones(rolAModificar,this)), this);
 
             }
             if (e.ColumnIndex == 1) 

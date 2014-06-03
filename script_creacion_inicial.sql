@@ -712,7 +712,6 @@ FROM
 THE_DISCRETABOY.Funcion F
 WHERE
 F.cod_funcion = @cod
-
 END
 
 GO
@@ -745,6 +744,21 @@ BEGIN
 SELECT R.cod_rol 'cod_rol', R.nombre 'nombre'
 FROM THE_DISCRETABOY.Rol R
 WHERE R.nombre LIKE '%'+@nombre_a_buscar+'%'
+END
+
+GO
+
+--GET CODIGO DE FUNCION
+CREATE PROC THE_DISCRETABOY.get_cod_funcion
+(@nombre NVARCHAR(255))
+AS
+BEGIN
+SELECT TOP 1
+F.cod_funcion
+FROM
+THE_DISCRETABOY.Funcion F
+WHERE
+F.nombre = @nombre
 END
 
 GO

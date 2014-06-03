@@ -15,51 +15,89 @@ namespace FrbaCommerce.ABM_Rol
     {
         int rol;
 
-        public CambiarFunciones(int rolAModificar)
+        Dictionary<string,int> funcionesQueQuedarian;
+        Dictionary<string, int> lasQueNoQuedarian;
+        Form padre;
+
+        public CambiarFunciones(int rolAModificar,Form ventanaPadre)
         {
             InitializeComponent();
+            this.padre = ventanaPadre;
             rol = rolAModificar;
             this.nombreDelRol.Text = AsistenteRol.getNombreRol(rol);
-            
+
+            funcionesQueQuedarian = asociarNombresFunciones(AsistenteRol.getFuncionesDe(rol));
+            lasQueNoQuedarian = asociarNombresFunciones(AsistenteRol.getFuncionesNoDe(rol));
             this.actualizarCampos();
         }
 
         public void actualizarCampos()
         {
+            AsistenteBotones.vaciarComboBox(boxParaAgregar);
+            AsistenteBotones.vaciarComboBox(boxParaQuitar);
+            AsistenteBotones.vaciarListBox(funcionesDelRol);
             cargarFuncionesDelRol();
             cargarFuncionesADarDeAlta();
         }
 
         public void cargarFuncionesDelRol()
         {
-            List<int> cods = AsistenteRol.getFuncionesDe(rol);
-            List<string> nombres = new List<string>();
-            foreach (int cod in cods)
-            {
-                nombres.Add(AsistenteRol.getNombreFuncion(cod));
-            }
-            funcionesDelRol.Items.AddRange(nombres.ToArray());
-
-            comboBox1.Items.AddRange(nombres.ToArray());
-
-
+            AsistenteBotones.addListToListBox(funcionesDelRol, funcionesQueQuedarian.Keys.ToList());
+            AsistenteBotones.addListToComboBox(boxParaQuitar, funcionesQueQuedarian.Keys.ToList());
         }
 
         public void cargarFuncionesADarDeAlta()
         {
-            List<int> codsNoTenidos = AsistenteRol.getFuncionesNoDe(rol);
-            List<string> nombresNoTenidos = new List<string>();
-            foreach (int cod in codsNoTenidos)
-            {
-                nombresNoTenidos.Add(AsistenteRol.getNombreFuncion(cod));
-            }
-
-            comboBox2.Items.AddRange(nombresNoTenidos.ToArray());
+            AsistenteBotones.addListToComboBox(boxParaAgregar, lasQueNoQuedarian.Keys.ToList());
         }
 
-        private void nombreDelRol_Click(object sender, EventArgs e)
+        private void boxParaQuitar_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!AsistenteColecciones.cambiarStringIntDeDict(boxParaQuitar.SelectedItem.ToString(), funcionesQueQuedarian, lasQueNoQuedarian))
+            {
+                errorBox.Text = "No está la función " + boxParaQuitar.SelectedItem.ToString() + ".";
+            }
+            else
+            {
+                errorBox.Text = "Se quitó la función " + boxParaQuitar.SelectedItem.ToString() + ".";
+            }
+            actualizarCampos();
+        }
+
+        private void boxParaAgregar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!AsistenteColecciones.cambiarStringIntDeDict(boxParaAgregar.SelectedItem.ToString(), lasQueNoQuedarian, funcionesQueQuedarian))
+            {
+                errorBox.Text = "No está la función " + boxParaAgregar.SelectedItem.ToString() + ".";
+            }
+            else
+            {
+                errorBox.Text = "Se agregó la función " + boxParaAgregar.SelectedItem.ToString() + ".";
+            }
+            actualizarCampos();
+        }
+
+        private void Aceptar_Click(object sender, EventArgs e)
+        {
+            AsistenteRol.perdurarFuncionesA(funcionesQueQuedarian.Values.ToList(), lasQueNoQuedarian.Values.ToList(), rol);
+            AsistenteVistas.volverAPadreYCerrar(this.padre,this);
 
         }
+
+        private void Cancelar_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.volverAPadreYCerrar(this.padre, this);
+        }
+
+        private Dictionary<string, int> asociarNombresFunciones(List<int> cods) 
+        {
+            Dictionary<string, int> asociados = new Dictionary<string, int>();
+            foreach(int codi in cods)
+            {
+                asociados.Add(AsistenteRol.getNombreFuncion(codi),codi);
+            }
+            return asociados;
+        }
+
     }
 }

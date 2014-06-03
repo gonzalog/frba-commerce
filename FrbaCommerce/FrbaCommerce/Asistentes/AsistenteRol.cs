@@ -105,7 +105,6 @@ namespace FrbaCommerce.Asistentes
         public static string getNombreRol(int cod)
         {
             string nombre = ejecutarProcedureWithReturnString("get_nombre_rol",cod);
-            MessageBox.Show("El nombre es: "+nombre);
             return nombre;
         }
 
@@ -127,7 +126,7 @@ namespace FrbaCommerce.Asistentes
             DataRowCollection filas = funciones.Rows;
             foreach (DataRow row in filas)
             {
-                funcionesARetornar.Add(Convert.ToInt32(row["cod_funcion"].ToString()));
+                funcionesARetornar.Add(Convert.ToInt32(row[0].ToString()));
             }
             return funcionesARetornar;
         }
@@ -135,6 +134,45 @@ namespace FrbaCommerce.Asistentes
         public static string getNombreFuncion(int cod)
         {
             return ejecutarProcedureWithReturnString("get_nombre_funcion",cod);
+        }
+
+        public static List<string> getNombresFunciones(List<int> funciones)
+        {
+            List<string> nombres = new List<string>();
+            foreach (int cod in funciones)
+            {
+                nombres.Add(getNombreFuncion(cod));
+            }
+
+            return nombres;
+        }
+
+        public static void perdurarFuncionesA(List<int> aTener,List<int> aNoTener, int rol) 
+        { 
+            foreach(int funcionATener in aTener)
+            {
+                if(!tieneFuncion(funcionATener,rol))
+                {
+                    updateAltaFuncionPorRol(rol, funcionATener);
+                }
+            }
+            foreach(int funcionANoTener in aNoTener)
+            {
+                if(tieneFuncion(funcionANoTener,rol))
+                {
+                    updateBajaFuncionPorRol(rol,funcionANoTener);
+                }
+            }
+        }
+
+        public static bool tieneFuncion(int funcion, int rol) 
+        {
+            return getFuncionesDe(rol).Contains(funcion);
+        }
+
+        public static int getCodFuncion(string funcion) 
+        {
+            return ejecutarProcedureWithReturnValue("get_cod_funcion",funcion);
         }
     }
 }

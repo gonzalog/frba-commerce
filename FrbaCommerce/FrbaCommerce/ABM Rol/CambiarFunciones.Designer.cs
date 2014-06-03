@@ -32,23 +32,23 @@
             this.Aceptar = new System.Windows.Forms.Button();
             this.Cancelar = new System.Windows.Forms.Button();
             this.funcionesDelRol = new System.Windows.Forms.ListBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.boxParaQuitar = new System.Windows.Forms.ComboBox();
+            this.boxParaAgregar = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.errorBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // nombreDelRol
             // 
             this.nombreDelRol.AutoSize = true;
             this.nombreDelRol.Font = new System.Drawing.Font("Nirmala UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreDelRol.Location = new System.Drawing.Point(61, 9);
+            this.nombreDelRol.Location = new System.Drawing.Point(5, 9);
             this.nombreDelRol.Name = "nombreDelRol";
             this.nombreDelRol.Size = new System.Drawing.Size(94, 40);
             this.nombreDelRol.TabIndex = 0;
             this.nombreDelRol.Text = "label1";
-            this.nombreDelRol.Click += new System.EventHandler(this.nombreDelRol_Click);
             // 
             // Aceptar
             // 
@@ -58,6 +58,7 @@
             this.Aceptar.TabIndex = 1;
             this.Aceptar.Text = "Aceptar";
             this.Aceptar.UseVisualStyleBackColor = true;
+            this.Aceptar.Click += new System.EventHandler(this.Aceptar_Click);
             // 
             // Cancelar
             // 
@@ -67,6 +68,7 @@
             this.Cancelar.TabIndex = 2;
             this.Cancelar.Text = "Cancelar";
             this.Cancelar.UseVisualStyleBackColor = true;
+            this.Cancelar.Click += new System.EventHandler(this.Cancelar_Click);
             // 
             // funcionesDelRol
             // 
@@ -76,21 +78,23 @@
             this.funcionesDelRol.Size = new System.Drawing.Size(192, 95);
             this.funcionesDelRol.TabIndex = 3;
             // 
-            // comboBox1
+            // boxParaQuitar
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 207);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(192, 21);
-            this.comboBox1.TabIndex = 4;
+            this.boxParaQuitar.FormattingEnabled = true;
+            this.boxParaQuitar.Location = new System.Drawing.Point(12, 207);
+            this.boxParaQuitar.Name = "boxParaQuitar";
+            this.boxParaQuitar.Size = new System.Drawing.Size(192, 21);
+            this.boxParaQuitar.TabIndex = 4;
+            this.boxParaQuitar.SelectedIndexChanged += new System.EventHandler(this.boxParaQuitar_SelectedIndexChanged);
             // 
-            // comboBox2
+            // boxParaAgregar
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(12, 256);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(192, 21);
-            this.comboBox2.TabIndex = 5;
+            this.boxParaAgregar.FormattingEnabled = true;
+            this.boxParaAgregar.Location = new System.Drawing.Point(12, 256);
+            this.boxParaAgregar.Name = "boxParaAgregar";
+            this.boxParaAgregar.Size = new System.Drawing.Size(192, 21);
+            this.boxParaAgregar.TabIndex = 5;
+            this.boxParaAgregar.SelectedIndexChanged += new System.EventHandler(this.boxParaAgregar_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -119,16 +123,26 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Agregar";
             // 
+            // errorBox
+            // 
+            this.errorBox.Location = new System.Drawing.Point(12, 342);
+            this.errorBox.Multiline = true;
+            this.errorBox.Name = "errorBox";
+            this.errorBox.ReadOnly = true;
+            this.errorBox.Size = new System.Drawing.Size(187, 38);
+            this.errorBox.TabIndex = 43;
+            // 
             // CambiarFunciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(222, 349);
+            this.ClientSize = new System.Drawing.Size(222, 392);
+            this.Controls.Add(this.errorBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.boxParaAgregar);
+            this.Controls.Add(this.boxParaQuitar);
             this.Controls.Add(this.funcionesDelRol);
             this.Controls.Add(this.Cancelar);
             this.Controls.Add(this.Aceptar);
@@ -146,10 +160,11 @@
         private System.Windows.Forms.Button Aceptar;
         private System.Windows.Forms.Button Cancelar;
         private System.Windows.Forms.ListBox funcionesDelRol;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox boxParaQuitar;
+        private System.Windows.Forms.ComboBox boxParaAgregar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox errorBox;
     }
 }

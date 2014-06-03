@@ -300,7 +300,7 @@ namespace FrbaCommerce.Asistentes
         {
             List<string> argumentos = _generateArguments(procedure);
             string retorno = _ejecutarProcedureWithReturnString(procedure, argumentos, values);
-            MessageBox.Show("La primitiva trajo: "+retorno);
+            //MessageBox.Show("La primitiva trajo: "+retorno);
             return retorno;
         }
 
