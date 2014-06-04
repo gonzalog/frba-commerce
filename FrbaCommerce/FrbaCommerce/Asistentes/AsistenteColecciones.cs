@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using FrbaCommerce.Asistentes;
 
 namespace FrbaCommerce.Asistentes
 {
@@ -26,6 +31,16 @@ namespace FrbaCommerce.Asistentes
                 return true;
             }
             return false;
+        }
+
+        public static Dictionary<string, int> crearDic(DataTable tabla) 
+        {
+            Dictionary<string, int> dic = new Dictionary<string, int>();
+            foreach(DataRow row in tabla.Rows)
+            {
+                dic.Add(row[0].ToString(), Convert.ToInt32(row[1].ToString()));
+            }
+            return dic;
         }
 
     }

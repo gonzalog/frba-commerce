@@ -67,11 +67,30 @@ namespace FrbaCommerce.ABM_Rol
 
         private void grillaRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int rolAModificar = Convert.ToInt32(grillaRoles.Rows[e.RowIndex].Cells["cod_rol"].Value.ToString());
-            if (e.ColumnIndex == 0)
+            try
             {
-                //MessageBox.Show("Se desea cambiar funciones del rol " + grillaRoles.Rows[e.RowIndex].Cells[3].Value.ToString()+" .");
-                AsistenteVistas.mostrarNuevaVentana((new CambiarFunciones(rolAModificar,this)), this);
+                if (grillaRoles[0, e.RowIndex].Value == null)
+                {
+                    errorBox.Text = "Click inválido.";
+                    return;
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                errorBox.Text = "Click inválido.";
+                return;
+            }
+            try
+            {
+               int rolAModificar = Convert.ToInt32(grillaRoles.Rows[e.RowIndex].Cells["cod_rol"].Value.ToString());
+               if (e.ColumnIndex == grillaRoles.Rows[e.RowIndex].Cells["Funciones"].ColumnIndex)
+               {
+                   AsistenteVistas.mostrarNuevaVentana((new CambiarFunciones(rolAModificar, this)), this);
+               }
+            }
+            catch (ArgumentOutOfRangeException) 
+            {
+                errorBox.Text = "Click inválido.";
             }
         }
 

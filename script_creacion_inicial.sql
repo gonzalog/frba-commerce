@@ -716,6 +716,22 @@ END
 
 GO
 
+CREATE PROC THE_DISCRETABOY.existe_nombre_rol
+(@nom nvarchar(255))
+AS
+BEGIN
+DECLARE @EXISTE numeric(18,0)
+SELECT
+@existe = CASE WHEN COUNT (*)>0 THEN 1 ELSE 0 END
+FROM
+THE_DISCRETABOY.Rol R
+WHERE
+@nom = R.nombre
+RETURN @existe
+END
+
+GO
+
 --INCREMENTAR CANTIDAD DE INTENTOS DE INGRESO DEL USUARIO
 CREATE PROC THE_DISCRETABOY.increm_intent_fallidos_usuario
 (@usuario nvarchar(20))
@@ -759,6 +775,35 @@ FROM
 THE_DISCRETABOY.Funcion F
 WHERE
 F.nombre = @nombre
+END
+
+GO
+
+--GET ROLES POR HABILITACION
+CREATE PROC THE_DISCRETABOY.get_roles_por_habilitacion
+(@ESTADO bit)
+AS
+BEGIN
+SELECT
+R.nombre,
+R.cod_rol
+FROM
+THE_DISCRETABOY.Rol R
+WHERE
+R.habilitado = @ESTADO
+END
+
+GO
+
+--GET COD NOMBRE ROLES
+CREATE PROC THE_DISCRETABOY.get_cod_nombre_roles
+AS
+BEGIN
+SELECT
+R.cod_rol as 'cod_rol',
+R.nombre as 'nombre'
+FROM
+THE_DISCRETABOY.Rol R
 END
 
 GO

@@ -51,7 +51,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(157, 23);
             this.button4.TabIndex = 9;
-            this.button4.Text = "Dar de baja";
+            this.button4.Text = "Bajas";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -63,6 +63,7 @@
             this.cancelButton.TabIndex = 8;
             this.cancelButton.Text = "Cancelar";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // Modificar
             // 

@@ -75,6 +75,11 @@ namespace FrbaCommerce.ABM_Rol
 
         private void Aceptar_Click(object sender, EventArgs e)
         {
+            if(AsistenteRol.nombreInvalido(nombreDelRol))
+            {
+                errorBox.Text = "Nombre inválido.";
+                return;
+            }
             List<int> funcionesElegidas = encontrarFuncionesElegidas();
             int codNuevo = AsistenteRol.altaRol(nombreDelRol, 1, funcionesElegidas);
             MessageBox.Show("El alta del rol se ha realizado con éxito.\n\nDetalle:\nId: " + codNuevo + "\nRol: " + nombreDelRol);

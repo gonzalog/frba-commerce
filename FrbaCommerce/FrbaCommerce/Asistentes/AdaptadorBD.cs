@@ -121,10 +121,18 @@ namespace FrbaCommerce.Asistentes
 
         private static string _ejecutarProcedureWithReturnString(string procedure, List<string> args, params object[] values)
         {
-            DataTable stringEnTabla = _traerDataTable(procedure,  args, values);
-            DataRowCollection fila = stringEnTabla.Rows;
-            DataRow primeraFila = fila[0];
-            return primeraFila[0].ToString();
+            try
+            {
+                DataTable stringEnTabla = _traerDataTable(procedure, args, values);
+                DataRowCollection fila = stringEnTabla.Rows;
+                DataRow primeraFila = fila[0];
+                return primeraFila[0].ToString();
+            }
+            catch (IndexOutOfRangeException)
+            {
+                MessageBox.Show("Click inválido.");
+                return "";
+            }
         }
 
         private static DataTable _traerDataTable(string procedure, List<string> args, params object[] values)

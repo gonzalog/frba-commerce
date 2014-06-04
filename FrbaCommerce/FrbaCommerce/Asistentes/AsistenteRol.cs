@@ -55,24 +55,62 @@ namespace FrbaCommerce.Asistentes
             return traerDataTable("get_roles");
         }
 
+        public static List<int> getListRoles ()
+        {
+            DataTable tablaRoles = getRoles();
+            DataRowCollection rows = tablaRoles.Rows;
+            List<int> roles = new List<int>();
+            foreach (DataRow row in rows)
+            {   
+                roles.Add(Convert.ToInt32(row["cod_rol"].ToString()));
+            }
+            return roles;
+        }
+
         public static DataTable getRolesBuscando(string nombreABuscar)
         {
             return traerDataTable("get_roles_buscando", nombreABuscar);
         }
 
+        public static DataTable getRolesHabilitados()
+        {
+            return traerDataTable("get_roles_por_habilitacion",1);
+        }
+
+        public static DataTable getRolesInhabilitados()
+        {
+            return traerDataTable("get_roles_por_habilitacion", 0);
+        }
+
+        public static DataTable getCodNombreRoles()
+        {
+            return traerDataTable("get_cod_nombre_roles");
+        }
+        public static int getCodRol(string nombre)
+        {
+            return ejecutarProcedureWithReturnValue("get_cod_rol",nombre);
+        }
+
         public static Dictionary<int, string> getRolesExistentes()
         {
-            DataTable tablaRoles = getRoles();
-            DataRowCollection rows = tablaRoles.Rows;
-            //MessageBox.Show("Hay " + rows.Count + " roles cargados");
-            Dictionary<int, string> roles = new Dictionary<int, string>();
-            foreach (DataRow row in rows)
+            List<int> roles = getListRoles();
+            Dictionary<int, string> dic = new Dictionary<int, string>();
+            foreach (int cod in roles)
             {
-                int cod = Convert.ToInt32(row["cod_rol"].ToString());
-                string descripcion = row["nombre"].ToString();
-                roles.Add(cod, descripcion);
+                dic.Add(cod, getNombreRol(cod));
             }
-            return roles;
+            return dic;
+        }
+
+        public static Dictionary<int, bool> getRolesConEstado() 
+        {
+            List<int> roles = getListRoles();
+            Dictionary<int, bool> dic = new Dictionary<int,bool>();
+            foreach (int cod in roles)
+            {
+                dic.Add(cod, rolHabilitado(cod));
+            }
+            return dic;
         }
 
         public static DataTable traerDataTableRoles(string nombre)
@@ -173,6 +211,20 @@ namespace FrbaCommerce.Asistentes
         public static int getCodFuncion(string funcion) 
         {
             return ejecutarProcedureWithReturnValue("get_cod_funcion",funcion);
+        }
+
+        public static bool nombreInvalido(string nombre)
+        {
+            try
+            {
+                if (nombre.Equals("")) return true;
+                if (ejecutarProcedureWithReturnValue("existe_nombre_rol", nombre).Equals(1)) return true;
+            }
+            catch (NullReferenceException) 
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

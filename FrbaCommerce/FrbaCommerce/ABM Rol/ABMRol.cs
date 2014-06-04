@@ -32,7 +32,12 @@ namespace FrbaCommerce.ABM_Rol
 
         private void button4_Click(object sender, EventArgs e)
         {
+            AsistenteVistas.mostrarNuevaVentana(new Bajas(this, (PantallaPrincipal)padre), this);
+        }
 
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.volverAPadreYCerrar(padre,this);
         }
     }
 }

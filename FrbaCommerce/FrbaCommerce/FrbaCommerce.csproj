@@ -79,11 +79,11 @@
     <Compile Include="ABM Rol\CambiarFunciones.Designer.cs">
       <DependentUpon>CambiarFunciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM Rol\ConfirmarInhabilitacion.cs">
+    <Compile Include="ABM Rol\Bajas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM Rol\ConfirmarInhabilitacion.Designer.cs">
-      <DependentUpon>ConfirmarInhabilitacion.cs</DependentUpon>
+    <Compile Include="ABM Rol\Bajas.Designer.cs">
+      <DependentUpon>Bajas.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM Rol\ModificionRol.cs">
       <SubType>Form</SubType>
@@ -179,8 +179,8 @@
     <EmbeddedResource Include="ABM Rol\CambiarFunciones.resx">
       <DependentUpon>CambiarFunciones.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABM Rol\ConfirmarInhabilitacion.resx">
-      <DependentUpon>ConfirmarInhabilitacion.cs</DependentUpon>
+    <EmbeddedResource Include="ABM Rol\Bajas.resx">
+      <DependentUpon>Bajas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\ModificionRol.resx">
       <DependentUpon>ModificionRol.cs</DependentUpon>
