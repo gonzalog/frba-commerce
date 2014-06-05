@@ -38,6 +38,7 @@
             this.Limpiar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.errorBox = new System.Windows.Forms.TextBox();
+            this.registrarse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,12 +129,23 @@
             this.errorBox.Size = new System.Drawing.Size(163, 83);
             this.errorBox.TabIndex = 43;
             // 
+            // registrarse
+            // 
+            this.registrarse.Location = new System.Drawing.Point(15, 305);
+            this.registrarse.Name = "registrarse";
+            this.registrarse.Size = new System.Drawing.Size(75, 23);
+            this.registrarse.TabIndex = 44;
+            this.registrarse.Text = "Registrarse";
+            this.registrarse.UseVisualStyleBackColor = true;
+            this.registrarse.Click += new System.EventHandler(this.registrarse_Click);
+            // 
             // Logueo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(187, 336);
+            this.Controls.Add(this.registrarse);
             this.Controls.Add(this.errorBox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Limpiar);
@@ -163,5 +175,6 @@
         private System.Windows.Forms.Button Limpiar;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox errorBox;
+        private System.Windows.Forms.Button registrarse;
     }
 }

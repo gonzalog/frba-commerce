@@ -107,6 +107,7 @@
     <Compile Include="Asistentes\AsistenteColecciones.cs" />
     <Compile Include="Asistentes\AsistenteLogin.cs" />
     <Compile Include="Asistentes\AsistenteRol.cs" />
+    <Compile Include="Asistentes\AsistenteUsuario.cs" />
     <Compile Include="Asistentes\AsistenteVistas.cs" />
     <Compile Include="Calificar Vendedor\Form1.cs">
       <SubType>Form</SubType>
@@ -132,6 +133,18 @@
     </Compile>
     <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\OpcionTipoRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\OpcionTipoRegistro.Designer.cs">
+      <DependentUpon>OpcionTipoRegistro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\RegistroCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\RegistroCliente.Designer.cs">
+      <DependentUpon>RegistroCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="PantallaPrincipal.cs">
       <SubType>Form</SubType>
@@ -189,6 +202,12 @@
     <EmbeddedResource Include="Login\Logueo.resx">
       <DependentUpon>Logueo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login\OpcionTipoRegistro.resx">
+      <DependentUpon>OpcionTipoRegistro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\RegistroCliente.resx">
+      <DependentUpon>RegistroCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PantallaPrincipal.resx">
       <DependentUpon>PantallaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
@@ -206,6 +225,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
@@ -235,6 +255,9 @@
     <Compile Include="Tests\TestMostrarRoles.Designer.cs">
       <DependentUpon>TestMostrarRoles.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\commerce2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -52,10 +52,11 @@ CREATE TABLE THE_DISCRETABOY.Direccion (
 	id numeric(18) NOT NULL Identity(1,1), --PK
 	calle [nvarchar](255),
 	numero [numeric](18, 0),
-	pISo [numeric](18, 0),
+	piso [numeric](18, 0),
 	depto [nvarchar](50),
 	cod_post [nvarchar](50),
-	localidad [nvarchar](255)
+	localidad [nvarchar](255),
+	ciudad [nvarchar](255)
 );
 
 CREATE TABLE THE_DISCRETABOY.Usuario (

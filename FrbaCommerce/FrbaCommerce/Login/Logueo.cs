@@ -79,5 +79,10 @@ namespace FrbaCommerce.Login
             
         }
 
+        private void registrarse_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarNuevaVentana(new OpcionTipoRegistro(this),this);
+        }
+
     }
 }
