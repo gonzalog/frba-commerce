@@ -22,6 +22,9 @@ namespace FrbaCommerce.ABM_Rol
             this.padre = padre;
             cargarRoles();
             cargarBotonCambiarFunciones();
+
+            MinimizeBox = false;
+            MaximizeBox = false;
         }
 
         public void cargarRoles()

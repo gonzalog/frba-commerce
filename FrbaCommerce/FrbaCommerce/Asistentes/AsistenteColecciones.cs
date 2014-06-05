@@ -43,5 +43,9 @@ namespace FrbaCommerce.Asistentes
             return dic;
         }
 
+        public static byte[] getBytes(string cadena)
+        {
+            return System.Text.Encoding.UTF8.GetBytes(cadena);
+        }
     }
 }

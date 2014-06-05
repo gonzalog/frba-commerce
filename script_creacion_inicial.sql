@@ -1,3 +1,4 @@
+
 USE [GD1C2014]
 GO
 
@@ -59,7 +60,7 @@ CREATE TABLE THE_DISCRETABOY.Direccion (
 
 CREATE TABLE THE_DISCRETABOY.Usuario (
 	username nvarchar(20) NOT NULL,--PK
-	password binary(32) NOT NULL,
+	password char(64) NOT NULL,
 	intentos tinyint,
 	habilitado bit
 );
@@ -732,12 +733,56 @@ END
 
 GO
 
+--CORROBORA QUE LA CONTRASEÑA INGRESADA SEA CORRECTA
+CREATE PROC THE_DISCRETABOY.corroborar_pass
+(
+@username nvarchar(255),
+@pass char(64)
+)
+AS
+BEGIN
+DECLARE @EXITO BIT
+SELECT
+@EXITO = (CASE WHEN U.password = @pass THEN 1 ELSE 0 END)
+FROM
+THE_DISCRETABOY.Usuario U
+WHERE
+U.USERNAME = @username
+RETURN @EXITO
+END
+
+GO
+
 --INCREMENTAR CANTIDAD DE INTENTOS DE INGRESO DEL USUARIO
 CREATE PROC THE_DISCRETABOY.increm_intent_fallidos_usuario
 (@usuario nvarchar(20))
 AS
 UPDATE THE_DISCRETABOY.Usuario
-SET intentos=intentos+1
+SET intentos += 1
+WHERE username=@usuario
+
+GO
+
+--RETORNAR LA CANTIDAD DE INTENTOS
+CREATE PROC THE_DISCRETABOY.intentos_de
+(@usuario nvarchar(20))
+AS
+DECLARE @intentos tinyint
+SELECT TOP 1
+@intentos = U.intentos
+FROM
+THE_DISCRETABOY.Usuario U
+WHERE U.username = @usuario
+RETURN @intentos
+
+GO
+
+--RESETEAR CONTADOR DE INTENTOS FALLIDOS
+CREATE PROC THE_DISCRETABOY.reset_intentos
+(@usuario nvarchar(20))
+AS
+UPDATE THE_DISCRETABOY.Usuario
+SET intentos=0
 WHERE username=@usuario
 
 GO
@@ -805,6 +850,42 @@ R.nombre as 'nombre'
 FROM
 THE_DISCRETABOY.Rol R
 END
+
+GO
+
+--GET HABILITACION USER
+CREATE PROC THE_DISCRETABOY.habilitado_user
+(@usuario nvarchar(20))
+AS
+BEGIN
+DECLARE @estado bit
+SELECT TOP 1
+@estado = U.habilitado
+FROM
+THE_DISCRETABOY.Usuario U
+WHERE U.username = @usuario
+RETURN @estado
+END
+
+GO
+
+--HABILITAR USER
+CREATE PROC THE_DISCRETABOY.habilitar_user
+(@usuario nvarchar(20))
+AS
+UPDATE THE_DISCRETABOY.Usuario
+SET habilitado = 1
+WHERE username=@usuario
+
+GO
+
+--INHABILITAR USER
+CREATE PROC THE_DISCRETABOY.inhabilitar_user
+(@usuario nvarchar(20))
+AS
+UPDATE THE_DISCRETABOY.Usuario
+SET habilitado = 0
+WHERE username=@usuario
 
 GO
 /* ****** Migrar datos exIStentes ******* */
@@ -880,7 +961,7 @@ habilitado
 )
 SELECT 
 	'Clie_'+CAST(m.Cli_Dni as nvarchar(20)) as username,--Se determina que el nombre de los preexIStentes será Clie más el dni.
-	0xe00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29,--La password es UTNFRBA	
+	'e00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29',--La password es UTNFRBA	
 	0,
 	1
 FROM gd_esquema.Maestra m
@@ -1305,7 +1386,7 @@ intentos
 VALUES
 (
 'admin',
-0xe6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7,--w23e
+'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',--w23e
 1,
 0
 )

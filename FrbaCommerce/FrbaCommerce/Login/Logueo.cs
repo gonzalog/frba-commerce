@@ -1,0 +1,83 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using FrbaCommerce.Asistentes;
+
+namespace FrbaCommerce.Login
+{
+    public partial class Logueo : Form
+    {
+        public Form padre;
+        public Logueo(Form padre)
+        {
+            InitializeComponent();
+            this.padre = padre;
+
+            MinimizeBox = false;
+            MaximizeBox = false;
+
+            passTextBox.PasswordChar = '*';
+            errorBox.Text = "Ingrese nombre de usuario y contraseña.";
+        }
+
+        private void passLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void passTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(AsistenteVistas.nombreProyecto+"\n"+"Desarrollado por THE_DISCRETABOY");
+        }
+
+        private void Limpiar_Click(object sender, EventArgs e)
+        {
+            usrNameTextBox.Text = "";
+            passTextBox.Text = "";
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.volverAPadreYCerrar(padre,this);
+        }
+
+        private void acceptButton_Click(object sender, EventArgs e)
+        {
+            string userName = usrNameTextBox.Text;
+            if (!AsistenteLogin.getHabilitadoUsuario(userName))
+            {
+                errorBox.Text = "'"+userName+"' no es un usuario habilitado. Por favor, compruebe que esté bien escrito y contactese con el administrador.";
+                return;
+            }
+            int intentos = AsistenteLogin.intentarLoguear(userName,passTextBox.Text);
+
+            if (intentos == 0)
+            {
+                errorBox.Text = "Logueo exitoso.";
+                return;
+            }
+            else if (intentos == 3)
+            {
+                AsistenteLogin.inhabilitarUsuario(userName);
+                errorBox.Text = "Combinacion usuario/contraseña incorrecta. El usuario " + userName + " fue inhabilitado. Por favor, contacte al administrador.";
+            }
+            else
+            {
+                errorBox.Text = "Combinacion usuario/contraseña incorrecta. Intente nuevamiente.";
+            }
+
+            
+        }
+
+    }
+}

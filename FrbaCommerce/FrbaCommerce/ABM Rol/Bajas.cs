@@ -27,6 +27,9 @@ namespace FrbaCommerce.ABM_Rol
             this.vista = AsistenteRol.getCodNombreRoles();
 
             cargarRolesEnElListado();
+
+            MinimizeBox = false;
+            MaximizeBox = false;
         }
 
         private void cargarRolesEnElListado()
@@ -47,7 +50,7 @@ namespace FrbaCommerce.ABM_Rol
 
         private void boxDeRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            errorBox.Text = "¡Atención! Se han producido cambios en las selecciones. Esto se efectivizará si presiona 'Efectiviar'.\n Si no está de acuerdo puede presionar 'Cancelar'. \n Si desea ver el estado inicial de cada rol, haga click en 'Recordar el estado inicial'.";
+            errorBox.Text = "¡Atención! Se han producido cambios en las selecciones. Esto se efectivizará si presiona 'Efectivizar'.\n Si no está de acuerdo puede presionar 'Cancelar'. \n Si desea ver el estado inicial de cada rol, haga click en 'Recordar el estado inicial'.";
         }
 
         private string palabraPara(bool estado)

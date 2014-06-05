@@ -19,9 +19,6 @@ namespace FrbaCommerce
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new PantallaPrincipal());
-
-            //Correr tests
-            Application.Run(new ABMRol(new PantallaPrincipal()));
         }
 
     }

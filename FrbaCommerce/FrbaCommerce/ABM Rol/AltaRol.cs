@@ -21,6 +21,8 @@ namespace FrbaCommerce.ABM_Rol
             InitializeComponent();
             this.padre = padre;
             cargarNombresFunciones();
+            MinimizeBox = false;
+            MaximizeBox = false;
 
         }
 

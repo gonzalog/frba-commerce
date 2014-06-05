@@ -29,6 +29,9 @@ namespace FrbaCommerce.ABM_Rol
             funcionesQueQuedarian = asociarNombresFunciones(AsistenteRol.getFuncionesDe(rol));
             lasQueNoQuedarian = asociarNombresFunciones(AsistenteRol.getFuncionesNoDe(rol));
             this.actualizarCampos();
+
+            MinimizeBox = false;
+            MaximizeBox = false;
         }
 
         public void actualizarCampos()

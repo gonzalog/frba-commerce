@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="Asistentes\AsistenteBotones.cs" />
     <Compile Include="Asistentes\AsistenteColecciones.cs" />
+    <Compile Include="Asistentes\AsistenteLogin.cs" />
     <Compile Include="Asistentes\AsistenteRol.cs" />
     <Compile Include="Asistentes\AsistenteVistas.cs" />
     <Compile Include="Calificar Vendedor\Form1.cs">
@@ -162,11 +163,11 @@
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\Form1.cs">
+    <Compile Include="Login\Logueo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Login\Logueo.Designer.cs">
+      <DependentUpon>Logueo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\ModificionRol.resx">
       <DependentUpon>ModificionRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\Logueo.resx">
+      <DependentUpon>Logueo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PantallaPrincipal.resx">
       <DependentUpon>PantallaPrincipal.cs</DependentUpon>
@@ -231,9 +235,6 @@
     <Compile Include="Tests\TestMostrarRoles.Designer.cs">
       <DependentUpon>TestMostrarRoles.cs</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dominio\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

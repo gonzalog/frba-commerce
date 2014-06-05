@@ -18,6 +18,8 @@ namespace FrbaCommerce.ABM_Rol
         {
             InitializeComponent();
             this.padre = padre;
+            MinimizeBox = false;
+            MaximizeBox = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
