@@ -226,5 +226,24 @@ namespace FrbaCommerce.Asistentes
             }
             return false;
         }
+
+        public static void rolValido(string rol,List<string> errores)
+        {
+            if (String.IsNullOrEmpty(rol)) 
+            {
+                errores.Add("Debe seleccionar un rol.");
+                return;
+            }
+            if(getCodRol(rol).Equals(0))
+            {
+                errores.Add("Rol inexistente.");
+                return;
+            }
+            if ( ! (getRolesConEstado()[getCodRol(rol)]))
+            {
+                errores.Add("Rol inhabilitado.");
+                return;
+            }
+        }
     }
 }

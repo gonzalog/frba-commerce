@@ -41,5 +41,10 @@ namespace FrbaCommerce.ABM_Rol
         {
             AsistenteVistas.volverAPadreYCerrar(padre,this);
         }
+
+        private void ABMRol_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

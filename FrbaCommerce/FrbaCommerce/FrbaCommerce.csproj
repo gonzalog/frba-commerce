@@ -134,16 +134,16 @@
     <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\OpcionTipoRegistro.cs">
+    <Compile Include="Registro de Usuario\OpcionTipoRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\OpcionTipoRegistro.Designer.cs">
+    <Compile Include="Registro de Usuario\OpcionTipoRegistro.Designer.cs">
       <DependentUpon>OpcionTipoRegistro.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\RegistroCliente.cs">
+    <Compile Include="Registro de Usuario\RegistroCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\RegistroCliente.Designer.cs">
+    <Compile Include="Registro de Usuario\RegistroCliente.Designer.cs">
       <DependentUpon>RegistroCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="PantallaPrincipal.cs">
@@ -202,10 +202,10 @@
     <EmbeddedResource Include="Login\Logueo.resx">
       <DependentUpon>Logueo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\OpcionTipoRegistro.resx">
+    <EmbeddedResource Include="Registro de Usuario\OpcionTipoRegistro.resx">
       <DependentUpon>OpcionTipoRegistro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\RegistroCliente.resx">
+    <EmbeddedResource Include="Registro de Usuario\RegistroCliente.resx">
       <DependentUpon>RegistroCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PantallaPrincipal.resx">
@@ -236,12 +236,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Registro de Usuario\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registro de Usuario\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Tests\TestEjecutarProc.cs">
       <SubType>Form</SubType>

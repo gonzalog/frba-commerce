@@ -20,17 +20,20 @@ namespace FrbaCommerce.ABM_Rol
             InitializeComponent();
             this.pantallaPrincipal = pantallaPrincipal;
             this.padre = padre;
-            cargarRoles();
+            AsistenteVistas.CargarGrilla(grillaRoles, AsistenteRol.getRoles());
             cargarBotonCambiarFunciones();
 
             MinimizeBox = false;
             MaximizeBox = false;
+
+            //dimensionarColumnas();
         }
 
         public void cargarRoles()
         {
             DataTable rolesExistentes = AsistenteRol.getRoles();
             AsistenteVistas.CargarGrilla(grillaRoles, rolesExistentes);
+            //dimensionarColumnas();
         }
 
         private void cargarBotonCambiarFunciones()
@@ -97,15 +100,13 @@ namespace FrbaCommerce.ABM_Rol
             }
         }
 
-        private void errorBox_TextChanged(object sender, EventArgs e)
+       /* private void dimensionarColumnas()
         {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
+            grillaRoles.Columns[0].Width = 10;
+            grillaRoles.Columns[1].Width = 50;
+            grillaRoles.Columns[2].Width = 100;
+            grillaRoles.Columns[3].Width = 100;
+        }*/
 
     }
 }
