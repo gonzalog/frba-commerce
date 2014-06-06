@@ -17,6 +17,11 @@ namespace FrbaCommerce.Login
         {
             InitializeComponent();
             this.padre = padre;
+            eleccionRol.Items.AddRange(AsistenteRol.getNombresRolesHabilitados());
+            elecTipoDoc.Items.Add("DNI");
+            elecTipoDoc.Items.Add("LE");
+            elecTipoDoc.Items.Add("LC");
+            eleccionPassword.PasswordChar = '*';
         }
 
         private void cancelar_Click(object sender, EventArgs e)
@@ -29,6 +34,7 @@ namespace FrbaCommerce.Login
 
         private void aceptar_Click(object sender, EventArgs e)
         {
+            errorBox.Text = "Evaluando solicitud...";
             List<string> errores = new List<string>();
             
             AsistenteUsuario.userNameValido(eleccionUsername.Text, errores);
@@ -50,12 +56,32 @@ namespace FrbaCommerce.Login
 
             if (errores.Count() > 0)
             {
+                errorBox.Text = "Registro rechazado.";
                 MessageBox.Show(AsistenteBotones.hacerListadoErrores(errores));
                 return;
             }
             else
             {
                 errorBox.Text = "Registro aceptado.";
+                AsistenteCliente.altaCliente(eleccionUsername.Text,
+                                            eleccionPassword.Text,
+                                            eleccionRol.Text,
+                                            elecNombre.Text,
+                                            elecApe.Text,
+                                            elecTipoDoc.Text,
+                                            elecNroDoc.Text,
+                                            elecEMail.Text,
+                                            elecTelefono.Text,
+                                            elecCalle.Text,
+                                            elecNumero.Text,
+                                            elecPiso.Text,
+                                            elecDepartamento.Text,
+                                            elecLocalidad.Text,
+                                            elecCP.Text,
+                                            elecFechaNac.Value.Date
+                                            );
+                MessageBox.Show("Usuario creado con éxito.\n¡Bienvenido "+eleccionUsername.Text+" a FRBA-Commerce!");
+                AsistenteVistas.volverAPadreYCerrar(padre, this);
             }
         }
 
@@ -82,7 +108,6 @@ namespace FrbaCommerce.Login
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(AsistenteVistas.nombreProyecto + "\n" + "Desarrollado por THE_DISCRETABOY");
-        }
-        
+        }    
     }
 }

@@ -55,8 +55,7 @@ CREATE TABLE THE_DISCRETABOY.Direccion (
 	piso [numeric](18, 0),
 	depto [nvarchar](50),
 	cod_post [nvarchar](50),
-	localidad [nvarchar](255),
-	ciudad [nvarchar](255)
+	localidad [nvarchar](255)
 );
 
 CREATE TABLE THE_DISCRETABOY.Usuario (
@@ -204,7 +203,7 @@ CREATE FUNCTION THE_DISCRETABOY.f_buscar_PK_direc
 @CP nvarchar(50),
 @departamento nvarchar(50),
 @nro numeric(18,0),
-@pISo numeric(18,0)
+@piso numeric(18,0)
 )
 RETURNS numeric(18,0)
 AS
@@ -214,7 +213,7 @@ BEGIN
 				d.cod_post=@CP and
 				d.depto=@departamento and
 				d.numero=@nro and
-				d.pISo=@pISo)
+				d.piso=@piso)
 END
 GO
 
@@ -919,6 +918,131 @@ SET habilitado = 0
 WHERE username=@usuario
 
 GO
+
+--ALTA USUARIO
+CREATE PROC THE_DISCRETABOY.alta_usuario
+(
+@username nvarchar(20),
+@password char(64)
+)
+AS
+INSERT INTO THE_DISCRETABOY.Usuario
+(
+username,
+password,
+intentos,
+habilitado
+)
+VALUES
+(
+@username,
+@password,
+0,
+1
+)
+
+GO
+
+--ALTA CLIENTE
+CREATE PROC THE_DISCRETABOY.alta_cliente
+(
+@user nvarchar(20),
+@doc_numero numeric (18,0),
+@doc_tipo varchar(3),
+@Nombre nvarchar(255),
+@apellido nvarchar(255),
+@mail nvarchar(255),
+@telefono numeric(18,0),
+@direccion numeric(18,0),
+@fecha_nac datetime
+)
+AS
+INSERT INTO THE_DISCRETABOY.Cliente
+(
+usuario,
+doc_numero,
+doc_tipo,
+nombre,
+aprellido,
+mail,
+telefono,
+direccion,
+fecha_nacimiento
+)
+VALUES
+(
+@user,
+@doc_numero,
+@doc_tipo,
+@Nombre,
+@apellido,
+@mail,
+@telefono,
+@direccion,
+@fecha_nac
+)
+
+GO
+
+--ALTA DIRECCION
+CREATE PROC THE_DISCRETABOY.alta_direccion
+(
+@calle nvarchar(255),
+@numero numeric(18,0),
+@piso numeric(18,0),
+@depto nvarchar(50),
+@CP nvarchar(50),
+@localidad nvarchar(255)
+)
+AS
+INSERT INTO THE_DISCRETABOY.Direccion
+(
+calle,
+numero,
+piso,
+depto,
+cod_post,
+localidad
+)
+VALUES
+(
+@calle,
+@numero,
+@piso,
+@depto,
+@CP,
+@localidad
+)
+
+GO
+
+--RETORNAR PK DE DIRECCION
+CREATE PROC THE_DISCRETABOY.get_id_direccion
+(
+@calle nvarchar(255),
+@CP nvarchar(50),
+@departamento nvarchar(50),
+@nro numeric(18,0),
+@piso numeric(18,0),
+@localidad nvarchar(255)
+)
+AS
+BEGIN
+DECLARE @ID NUMERIC(18,0) 
+SELECT TOP 1 
+@ID = d.id 
+FROM THE_DISCRETABOY.Direccion d
+WHERE
+(d.calle=@calle and
+d.cod_post=@CP and
+d.depto=@departamento and
+d.numero=@nro and
+d.piso=@piso and
+d.localidad = @localidad)
+RETURN @ID
+END
+
+GO
 /* ****** Migrar datos exIStentes ******* */
 
 --CARGO CALIFICACIONES
@@ -943,18 +1067,18 @@ INSERT INTO THE_DISCRETABOY.Direccion
 (
 calle,
 numero,
-pISo,
+piso,
 depto,
 cod_post
 )
 SELECT 
 m.Cli_Dom_Calle as calle,
 m.Cli_Nro_Calle as numero,
-m.Cli_PISo as pISo,
+m.Cli_piso as piso,
 m.Cli_Depto as depto,
 m.Cli_Cod_Postal as cod_post
 FROM gd_esquema.Maestra m
-GROUP BY m.Cli_Dom_Calle,m.Cli_Nro_Calle,m.Cli_PISo,m.Cli_Depto,m.Cli_Cod_Postal
+GROUP BY m.Cli_Dom_Calle,m.Cli_Nro_Calle,m.Cli_piso,m.Cli_Depto,m.Cli_Cod_Postal
 HAVING Cli_Dom_Calle IS NOT NULL
 
 UNION
@@ -962,11 +1086,11 @@ UNION
 SELECT 
 m.Publ_Empresa_Dom_Calle as calle,
 m.Publ_Empresa_Nro_Calle as numero,
-m.Publ_Empresa_PISo as pISo,
+m.Publ_Empresa_piso as piso,
 m.Publ_Empresa_Depto as depto,
 m.Publ_Empresa_Cod_Postal as cod_post
 FROM gd_esquema.Maestra m
-GROUP BY Publ_Empresa_Dom_Calle,Publ_Empresa_Nro_Calle,Publ_Empresa_PISo,Publ_Empresa_Depto,Publ_Empresa_Cod_Postal
+GROUP BY Publ_Empresa_Dom_Calle,Publ_Empresa_Nro_Calle,Publ_Empresa_piso,Publ_Empresa_Depto,Publ_Empresa_Cod_Postal
 HAVING Publ_Empresa_Dom_Calle IS NOT NULL
 
 UNION
@@ -974,11 +1098,11 @@ UNION
 SELECT 
 m.Publ_Cli_Dom_Calle as calle,
 m.Publ_Cli_Nro_Calle as numero,
-m.Publ_Cli_PISo as pISo,
+m.Publ_Cli_piso as piso,
 m.Publ_Cli_Depto as depto,
 m.Publ_Cli_Cod_Postal as cod_post	
 FROM gd_esquema.Maestra m
-GROUP BY Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_PISo,Publ_Cli_Depto,Publ_Cli_Cod_Postal
+GROUP BY Publ_Cli_Dom_Calle,Publ_Cli_Nro_Calle,Publ_Cli_piso,Publ_Cli_Depto,Publ_Cli_Cod_Postal
 HAVING Publ_Cli_Dom_Calle IS NOT NULL	
 GO
 
@@ -1050,7 +1174,7 @@ m.Cli_Dom_Calle = D.calle AND
 m.Cli_Cod_Postal = D.cod_post AND
 m.Cli_Depto = D.depto AND
 m.Cli_Nro_Calle = D.numero AND
-m.Cli_PISo = D.pISo
+m.Cli_piso = D.piso
 GROUP BY 
 m.Cli_Apeliido,m.Cli_Dni,m.Cli_Fecha_Nac,m.Cli_Mail,m.Cli_Nombre,m.Cli_Dni,D.id
 HAVING 
@@ -1075,7 +1199,7 @@ m.Publ_Cli_Dom_Calle = D.calle AND
 m.Publ_Cli_Cod_Postal = D.cod_post AND
 m.Publ_Cli_Depto = D.depto AND
 m.Publ_Cli_Nro_Calle = D.numero AND
-m.Publ_Cli_PISo = D.pISo
+m.Publ_Cli_piso = D.piso
 GROUP BY 
 m.Publ_Cli_Apeliido,
 m.Publ_Cli_Dni,
@@ -1113,7 +1237,7 @@ THE_DISCRETABOY.f_buscar_PK_direc(m.Publ_Empresa_Dom_Calle,
 m.Publ_Empresa_Cod_Postal,
 m.Publ_Empresa_Depto,
 m.Publ_Empresa_Nro_Calle,
-m.Publ_Empresa_PISo),
+m.Publ_Empresa_piso),
 NULL,
 NULL,
 m.Publ_Empresa_Fecha_Creacion
@@ -1128,7 +1252,7 @@ m.Publ_Empresa_Dom_Calle,
 m.Publ_Empresa_Cod_Postal,
 m.Publ_Empresa_Depto,
 m.Publ_Empresa_Nro_Calle,
-m.Publ_Empresa_PISo
+m.Publ_Empresa_piso
 HAVING 
 m.Publ_Empresa_Cuit IS NOT NULL
 GO

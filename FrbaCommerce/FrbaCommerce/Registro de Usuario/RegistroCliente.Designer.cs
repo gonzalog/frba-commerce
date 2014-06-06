@@ -46,9 +46,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.elecPiso = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.elecLocalidad = new System.Windows.Forms.TextBox();
             this.elecDepartamento = new System.Windows.Forms.TextBox();
             this.elecNumero = new System.Windows.Forms.TextBox();
             this.elecCalle = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.elecNombre = new System.Windows.Forms.TextBox();
@@ -61,10 +65,6 @@
             this.elecFechaNac = new System.Windows.Forms.DateTimePicker();
             this.aceptar = new System.Windows.Forms.Button();
             this.cancelar = new System.Windows.Forms.Button();
-            this.elecLocalidad = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.elecPiso = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -128,7 +128,7 @@
             this.eleccionRol.Name = "eleccionRol";
             this.eleccionRol.Size = new System.Drawing.Size(214, 20);
             this.eleccionRol.TabIndex = 57;
-            this.eleccionRol.Text = "domainUpDown1";
+            this.eleccionRol.Text = "Seleccione un rol asignado";
             // 
             // nombre
             // 
@@ -217,18 +217,44 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.elecLocalidad);
             this.groupBox1.Controls.Add(this.elecDepartamento);
+            this.groupBox1.Controls.Add(this.elecCP);
             this.groupBox1.Controls.Add(this.elecNumero);
             this.groupBox1.Controls.Add(this.elecCalle);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Location = new System.Drawing.Point(12, 303);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 327);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(339, 164);
+            this.groupBox1.Size = new System.Drawing.Size(339, 188);
             this.groupBox1.TabIndex = 68;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dirección";
+            // 
+            // elecPiso
+            // 
+            this.elecPiso.Location = new System.Drawing.Point(125, 75);
+            this.elecPiso.Name = "elecPiso";
+            this.elecPiso.Size = new System.Drawing.Size(208, 20);
+            this.elecPiso.TabIndex = 73;
+            this.elecPiso.TextChanged += new System.EventHandler(this.elecPiso_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 78);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 72;
+            this.label5.Text = "Piso:";
+            // 
+            // elecLocalidad
+            // 
+            this.elecLocalidad.Location = new System.Drawing.Point(125, 131);
+            this.elecLocalidad.Name = "elecLocalidad";
+            this.elecLocalidad.Size = new System.Drawing.Size(208, 20);
+            this.elecLocalidad.TabIndex = 71;
             // 
             // elecDepartamento
             // 
@@ -252,10 +278,19 @@
             this.elecCalle.Size = new System.Drawing.Size(208, 20);
             this.elecCalle.TabIndex = 68;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 134);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 67;
+            this.label1.Text = "Localidad:";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 486);
+            this.label4.Location = new System.Drawing.Point(6, 160);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 69;
@@ -264,7 +299,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(9, 512);
+            this.label12.Location = new System.Drawing.Point(9, 307);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(109, 13);
             this.label12.TabIndex = 70;
@@ -290,7 +325,7 @@
             this.elecTipoDoc.Name = "elecTipoDoc";
             this.elecTipoDoc.Size = new System.Drawing.Size(214, 20);
             this.elecTipoDoc.TabIndex = 73;
-            this.elecTipoDoc.Text = "domainUpDown1";
+            this.elecTipoDoc.Text = "Seleccione un tipo de documento";
             // 
             // elecNroDoc
             // 
@@ -317,21 +352,21 @@
             // 
             // elecCP
             // 
-            this.elecCP.Location = new System.Drawing.Point(134, 483);
+            this.elecCP.Location = new System.Drawing.Point(125, 157);
             this.elecCP.Name = "elecCP";
-            this.elecCP.Size = new System.Drawing.Size(213, 20);
+            this.elecCP.Size = new System.Drawing.Size(208, 20);
             this.elecCP.TabIndex = 77;
             // 
             // elecFechaNac
             // 
-            this.elecFechaNac.Location = new System.Drawing.Point(134, 506);
+            this.elecFechaNac.Location = new System.Drawing.Point(137, 301);
             this.elecFechaNac.Name = "elecFechaNac";
-            this.elecFechaNac.Size = new System.Drawing.Size(213, 20);
+            this.elecFechaNac.Size = new System.Drawing.Size(214, 20);
             this.elecFechaNac.TabIndex = 78;
             // 
             // aceptar
             // 
-            this.aceptar.Location = new System.Drawing.Point(12, 548);
+            this.aceptar.Location = new System.Drawing.Point(12, 540);
             this.aceptar.Name = "aceptar";
             this.aceptar.Size = new System.Drawing.Size(121, 40);
             this.aceptar.TabIndex = 79;
@@ -341,46 +376,13 @@
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(212, 548);
+            this.cancelar.Location = new System.Drawing.Point(215, 540);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(136, 40);
             this.cancelar.TabIndex = 80;
             this.cancelar.Text = "Cancelar";
             this.cancelar.UseVisualStyleBackColor = true;
             this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
-            // 
-            // elecLocalidad
-            // 
-            this.elecLocalidad.Location = new System.Drawing.Point(125, 131);
-            this.elecLocalidad.Name = "elecLocalidad";
-            this.elecLocalidad.Size = new System.Drawing.Size(208, 20);
-            this.elecLocalidad.TabIndex = 71;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 134);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 67;
-            this.label1.Text = "Localidad:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 78);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
-            this.label5.TabIndex = 72;
-            this.label5.Text = "Piso:";
-            // 
-            // elecPiso
-            // 
-            this.elecPiso.Location = new System.Drawing.Point(125, 75);
-            this.elecPiso.Name = "elecPiso";
-            this.elecPiso.Size = new System.Drawing.Size(208, 20);
-            this.elecPiso.TabIndex = 73;
-            this.elecPiso.TextChanged += new System.EventHandler(this.elecPiso_TextChanged);
             // 
             // pictureBox1
             // 
@@ -403,7 +405,6 @@
             this.Controls.Add(this.cancelar);
             this.Controls.Add(this.aceptar);
             this.Controls.Add(this.elecFechaNac);
-            this.Controls.Add(this.elecCP);
             this.Controls.Add(this.elecTelefono);
             this.Controls.Add(this.elecEMail);
             this.Controls.Add(this.elecNroDoc);
@@ -411,7 +412,6 @@
             this.Controls.Add(this.elecApe);
             this.Controls.Add(this.elecNombre);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);

@@ -245,5 +245,16 @@ namespace FrbaCommerce.Asistentes
                 return;
             }
         }
+
+        public static List<string> getNombresRolesHabilitados()
+        { 
+            List<string> rolesHabilitados = new List<string>();
+            DataRowCollection filas = getRolesHabilitados().Rows;
+            foreach (DataRow fila in filas)
+            {
+                rolesHabilitados.Add(fila["nombre"].ToString());
+            }
+            return rolesHabilitados;
+        }
     }
 }

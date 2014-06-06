@@ -104,6 +104,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Asistentes\AsistenteBotones.cs" />
+    <Compile Include="Asistentes\AsistenteCliente.cs" />
     <Compile Include="Asistentes\AsistenteColecciones.cs" />
     <Compile Include="Asistentes\AsistenteLogin.cs" />
     <Compile Include="Asistentes\AsistenteRol.cs" />
