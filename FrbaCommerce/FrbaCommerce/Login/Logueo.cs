@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Asistentes;
+using FrbaCommerce.Registro_de_Usuario;
 
 namespace FrbaCommerce.Login
 {
@@ -64,6 +65,7 @@ namespace FrbaCommerce.Login
             if (intentos == 0)
             {
                 errorBox.Text = "Logueo exitoso.";
+                AsistenteVistas.mostrarNuevaVentana(new ElegirRol(userName,this),this);
                 return;
             }
             else if (intentos == 3)

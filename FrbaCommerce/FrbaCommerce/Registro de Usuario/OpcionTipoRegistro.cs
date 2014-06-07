@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Asistentes;
+using FrbaCommerce.Login;
 
-namespace FrbaCommerce.Login
+namespace FrbaCommerce.Registro_de_Usuario
 {
     public partial class OpcionTipoRegistro : Form
     {
@@ -33,5 +34,11 @@ namespace FrbaCommerce.Login
         {
             AsistenteVistas.volverAPadreYCerrar(padre, this);
         }
+
+        private void nuevaEmpresa_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarNuevaVentana(new RegistroEmpresa(this), this);
+        }
+
     }
 }

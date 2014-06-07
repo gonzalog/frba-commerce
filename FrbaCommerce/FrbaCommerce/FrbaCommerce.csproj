@@ -106,6 +106,7 @@
     <Compile Include="Asistentes\AsistenteBotones.cs" />
     <Compile Include="Asistentes\AsistenteCliente.cs" />
     <Compile Include="Asistentes\AsistenteColecciones.cs" />
+    <Compile Include="Asistentes\AsistenteEmpresa.cs" />
     <Compile Include="Asistentes\AsistenteLogin.cs" />
     <Compile Include="Asistentes\AsistenteRol.cs" />
     <Compile Include="Asistentes\AsistenteUsuario.cs" />
@@ -135,6 +136,18 @@
     <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\ElegirRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\ElegirRol.Designer.cs">
+      <DependentUpon>ElegirRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PantallaPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PantallaPrincipal.Designer.cs">
+      <DependentUpon>PantallaPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro de Usuario\OpcionTipoRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,11 +160,11 @@
     <Compile Include="Registro de Usuario\RegistroCliente.Designer.cs">
       <DependentUpon>RegistroCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="PantallaPrincipal.cs">
+    <Compile Include="IniciarSesion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PantallaPrincipal.Designer.cs">
-      <DependentUpon>PantallaPrincipal.cs</DependentUpon>
+    <Compile Include="IniciarSesion.Designer.cs">
+      <DependentUpon>IniciarSesion.cs</DependentUpon>
     </Compile>
     <Compile Include="Generar Publicacion\Form1.cs">
       <SubType>Form</SubType>
@@ -200,6 +213,9 @@
     <EmbeddedResource Include="ABM Rol\ModificionRol.resx">
       <DependentUpon>ModificionRol.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login\ElegirRol.resx">
+      <DependentUpon>ElegirRol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\Logueo.resx">
       <DependentUpon>Logueo.cs</DependentUpon>
     </EmbeddedResource>
@@ -209,13 +225,16 @@
     <EmbeddedResource Include="Registro de Usuario\RegistroCliente.resx">
       <DependentUpon>RegistroCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PantallaPrincipal.resx">
-      <DependentUpon>PantallaPrincipal.cs</DependentUpon>
+    <EmbeddedResource Include="IniciarSesion.resx">
+      <DependentUpon>IniciarSesion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro de Usuario\RegistroEmpresa.resx">
+      <DependentUpon>RegistroEmpresa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tests\TestEjecutarProc.resx">
       <DependentUpon>TestEjecutarProc.cs</DependentUpon>
@@ -237,6 +256,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Registro de Usuario\RegistroEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro de Usuario\RegistroEmpresa.Designer.cs">
+      <DependentUpon>RegistroEmpresa.cs</DependentUpon>
     </Compile>
     <Compile Include="Tests\TestEjecutarProc.cs">
       <SubType>Form</SubType>

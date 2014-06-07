@@ -22,6 +22,8 @@ namespace FrbaCommerce.Login
             elecTipoDoc.Items.Add("LE");
             elecTipoDoc.Items.Add("LC");
             eleccionPassword.PasswordChar = '*';
+            eleccionRol.ReadOnly = true;
+            elecTipoDoc.ReadOnly = true;
         }
 
         private void cancelar_Click(object sender, EventArgs e)
@@ -40,8 +42,7 @@ namespace FrbaCommerce.Login
             AsistenteUsuario.userNameValido(eleccionUsername.Text, errores);
             AsistenteUsuario.contraseñaValida(eleccionPassword.Text,errores);
             AsistenteRol.rolValido(eleccionRol.Text, errores);
-
-            
+           
             AsistenteBotones.chequearTextboxNoNulo(elecNombre, errores, "Nombre");
             AsistenteBotones.chequearTextboxNoNulo(elecApe, errores, "Apellido");
             AsistenteBotones.chequearTextboxNoNulo(elecNroDoc, errores, "Número documento");
@@ -81,7 +82,7 @@ namespace FrbaCommerce.Login
                                             elecFechaNac.Value.Date
                                             );
                 MessageBox.Show("Usuario creado con éxito.\n¡Bienvenido "+eleccionUsername.Text+" a FRBA-Commerce!");
-                AsistenteVistas.volverAPadreYCerrar(padre, this);
+                AsistenteVistas.mostrarNuevaVentana(new ElegirRol(eleccionUsername.Text, this), this);
             }
         }
 

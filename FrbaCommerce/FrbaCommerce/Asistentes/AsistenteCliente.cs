@@ -38,7 +38,7 @@ namespace FrbaCommerce.Asistentes
                 nombre,
                 apellido,
                 email,
-                Convert.ToInt32(telefono),
+                Convert.ToInt64(telefono),
                 AsistenteUsuario.getIdDireccion(calle,numero,piso,departamento,codPostal,localidad),
                 fechaNac
                 );

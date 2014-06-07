@@ -1,4 +1,4 @@
-﻿namespace FrbaCommerce.Login
+﻿namespace FrbaCommerce.Registro_de_Usuario
 {
     partial class OpcionTipoRegistro
     {
@@ -54,6 +54,7 @@
             this.nuevaEmpresa.TabIndex = 1;
             this.nuevaEmpresa.Text = "Registrar nueva empresa";
             this.nuevaEmpresa.UseVisualStyleBackColor = true;
+            this.nuevaEmpresa.Click += new System.EventHandler(this.nuevaEmpresa_Click);
             // 
             // pictureBox1
             // 

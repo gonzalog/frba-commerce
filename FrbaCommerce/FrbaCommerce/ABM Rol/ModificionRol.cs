@@ -13,9 +13,9 @@ namespace FrbaCommerce.ABM_Rol
     public partial class ModificionRol : Form
     {
         public Form padre;
-        PantallaPrincipal pantallaPrincipal;
+        IniciarSesion pantallaPrincipal;
 
-        public ModificionRol(Form padre, PantallaPrincipal pantallaPrincipal)
+        public ModificionRol(Form padre, IniciarSesion pantallaPrincipal)
         {
             InitializeComponent();
             this.pantallaPrincipal = pantallaPrincipal;

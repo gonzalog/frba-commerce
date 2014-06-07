@@ -661,6 +661,19 @@ END
 
 GO
 
+CREATE PROC THE_DISCRETABOY.get_roles_de
+(@user nvarchar(20))
+AS
+BEGIN
+SELECT R.cod_rol 'cod_rol', R.nombre 'nombre'
+FROM THE_DISCRETABOY.Rol r,THE_DISCRETABOY.Rol_por_user ru
+where
+r.cod_rol = ru.rol and
+ru.usuario = @user
+END
+
+GO
+
 CREATE PROC THE_DISCRETABOY.get_nombre_rol
 (@cod numeric (18,0))
 AS
@@ -1041,6 +1054,47 @@ d.piso=@piso and
 d.localidad = @localidad)
 RETURN @ID
 END
+
+GO
+
+--ALTA EMPRESA
+CREATE PROC THE_DISCRETABOY.alta_empresa
+(
+@usuario nvarchar(20),
+@cuit nvarchar(50),
+@razon_social nvarchar(255),
+@mail nvarchar(255),
+@telefono numeric(18,0),
+@direccion numeric (18,0),
+@ciudad nvarchar (255),
+@nombre_de_contacto nvarchar(255),
+@fecha_creacion datetime
+)
+AS
+INSERT INTO THE_DISCRETABOY.Empresa
+(
+usuario,
+cuit,
+razon_social,
+mail,
+telefono,
+direccion,
+ciudad,
+nombre_de_contacto,
+fecha_creacion
+)
+VALUES
+(
+@usuario ,
+@cuit,
+@razon_social,
+@mail,
+@telefono,
+@direccion,
+@ciudad,
+@nombre_de_contacto,
+@fecha_creacion
+)
 
 GO
 /* ****** Migrar datos exIStentes ******* */

@@ -13,12 +13,12 @@ namespace FrbaCommerce.ABM_Rol
     public partial class Bajas : Form
     {
         Form ventanaPadre { get; set; }
-        PantallaPrincipal pantPrincipal { get; set; }
+        IniciarSesion pantPrincipal { get; set; }
         DataTable vista;
         Dictionary<int, bool> estadoOriginal;
 
 
-        public Bajas(Form padre, PantallaPrincipal pantallaPrincipal)
+        public Bajas(Form padre, IniciarSesion pantallaPrincipal)
         {
             InitializeComponent();
             this.ventanaPadre = padre;

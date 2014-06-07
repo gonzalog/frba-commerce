@@ -256,5 +256,17 @@ namespace FrbaCommerce.Asistentes
             }
             return rolesHabilitados;
         }
+
+        public static Dictionary<string,int> getRolesDe(string user)
+        {
+            Dictionary<string, int> roles = new Dictionary<string, int>();
+            DataTable tabla = traerDataTable("get_roles_de",user);
+            DataRowCollection filas = tabla.Rows;
+            foreach (DataRow rol in filas)
+            {
+                roles.Add(rol["nombre"].ToString(),Convert.ToInt32(rol["cod_rol"].ToString()));
+            }
+            return roles;
+        }
     }
 }
