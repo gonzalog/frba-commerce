@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Asistentes;
+using FrbaCommerce.Abm_Cliente;
 
 namespace FrbaCommerce
 {
@@ -61,6 +62,11 @@ namespace FrbaCommerce
         private void button9_Click(object sender, EventArgs e)
         {
             AsistenteVistas.mostrarNuevaVentana(new ABM_Rol.ABMRol(this), this);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarNuevaVentana(new ABMCliente(this), this);
         }
     }
 }

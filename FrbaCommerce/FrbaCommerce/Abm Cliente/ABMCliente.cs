@@ -9,11 +9,13 @@ using System.Windows.Forms;
 
 namespace FrbaCommerce.Abm_Cliente
 {
-    public partial class Form1 : Form
+    public partial class ABMCliente : Form
     {
-        public Form1()
+        public Form padre;
+        public ABMCliente(Form padre)
         {
             InitializeComponent();
+            this.padre = padre;
         }
     }
 }

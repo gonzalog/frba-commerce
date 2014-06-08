@@ -30,10 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistroCliente));
             this.errorBox = new System.Windows.Forms.TextBox();
-            this.username = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.eleccionUsername = new System.Windows.Forms.TextBox();
-            this.eleccionPassword = new System.Windows.Forms.TextBox();
             this.nombre = new System.Windows.Forms.Label();
             this.apellido = new System.Windows.Forms.Label();
             this.tipoDoc = new System.Windows.Forms.Label();
@@ -64,8 +60,12 @@
             this.aceptar = new System.Windows.Forms.Button();
             this.cancelar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.confirContraseña = new System.Windows.Forms.TextBox();
+            this.username = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.eleccionUsername = new System.Windows.Forms.TextBox();
+            this.eleccionPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.confirContraseña = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -80,38 +80,6 @@
             this.errorBox.ReadOnly = true;
             this.errorBox.Size = new System.Drawing.Size(269, 38);
             this.errorBox.TabIndex = 51;
-            // 
-            // username
-            // 
-            this.username.AutoSize = true;
-            this.username.Location = new System.Drawing.Point(9, 75);
-            this.username.Name = "username";
-            this.username.Size = new System.Drawing.Size(99, 13);
-            this.username.TabIndex = 52;
-            this.username.Text = "Nombre de usuario:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
-            this.label2.TabIndex = 53;
-            this.label2.Text = "Contraseña:";
-            // 
-            // eleccionUsername
-            // 
-            this.eleccionUsername.Location = new System.Drawing.Point(137, 68);
-            this.eleccionUsername.Name = "eleccionUsername";
-            this.eleccionUsername.Size = new System.Drawing.Size(214, 20);
-            this.eleccionUsername.TabIndex = 55;
-            // 
-            // eleccionPassword
-            // 
-            this.eleccionPassword.Location = new System.Drawing.Point(137, 98);
-            this.eleccionPassword.Name = "eleccionPassword";
-            this.eleccionPassword.Size = new System.Drawing.Size(214, 20);
-            this.eleccionPassword.TabIndex = 56;
             // 
             // nombre
             // 
@@ -378,12 +346,37 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // confirContraseña
+            // username
             // 
-            this.confirContraseña.Location = new System.Drawing.Point(137, 124);
-            this.confirContraseña.Name = "confirContraseña";
-            this.confirContraseña.Size = new System.Drawing.Size(214, 20);
-            this.confirContraseña.TabIndex = 109;
+            this.username.AutoSize = true;
+            this.username.Location = new System.Drawing.Point(9, 75);
+            this.username.Name = "username";
+            this.username.Size = new System.Drawing.Size(99, 13);
+            this.username.TabIndex = 52;
+            this.username.Text = "Nombre de usuario:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 101);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.TabIndex = 53;
+            this.label2.Text = "Contraseña:";
+            // 
+            // eleccionUsername
+            // 
+            this.eleccionUsername.Location = new System.Drawing.Point(137, 68);
+            this.eleccionUsername.Name = "eleccionUsername";
+            this.eleccionUsername.Size = new System.Drawing.Size(214, 20);
+            this.eleccionUsername.TabIndex = 55;
+            // 
+            // eleccionPassword
+            // 
+            this.eleccionPassword.Location = new System.Drawing.Point(137, 98);
+            this.eleccionPassword.Name = "eleccionPassword";
+            this.eleccionPassword.Size = new System.Drawing.Size(214, 20);
+            this.eleccionPassword.TabIndex = 56;
             // 
             // label3
             // 
@@ -393,6 +386,13 @@
             this.label3.Size = new System.Drawing.Size(110, 13);
             this.label3.TabIndex = 108;
             this.label3.Text = "Confirmar contraseña:";
+            // 
+            // confirContraseña
+            // 
+            this.confirContraseña.Location = new System.Drawing.Point(137, 124);
+            this.confirContraseña.Name = "confirContraseña";
+            this.confirContraseña.Size = new System.Drawing.Size(214, 20);
+            this.confirContraseña.TabIndex = 109;
             // 
             // RegistroCliente
             // 
@@ -443,10 +443,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox errorBox;
-        private System.Windows.Forms.Label username;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox eleccionUsername;
-        private System.Windows.Forms.TextBox eleccionPassword;
         private System.Windows.Forms.Label nombre;
         private System.Windows.Forms.Label apellido;
         private System.Windows.Forms.Label tipoDoc;
@@ -477,7 +473,11 @@
         private System.Windows.Forms.TextBox elecLocalidad;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox confirContraseña;
+        private System.Windows.Forms.Label username;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox eleccionUsername;
+        private System.Windows.Forms.TextBox eleccionPassword;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox confirContraseña;
     }
 }
