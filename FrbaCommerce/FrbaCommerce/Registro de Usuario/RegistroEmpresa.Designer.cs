@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistroEmpresa));
             this.errorBox = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.eleccionRol = new System.Windows.Forms.DomainUpDown();
             this.eleccionPassword = new System.Windows.Forms.TextBox();
             this.eleccionUsername = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -66,6 +65,7 @@
             this.elecFechaCreacion = new System.Windows.Forms.DateTimePicker();
             this.cancelar = new System.Windows.Forms.Button();
             this.aceptar = new System.Windows.Forms.Button();
+            this.confirContraseña = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -92,14 +92,6 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // eleccionRol
-            // 
-            this.eleccionRol.Location = new System.Drawing.Point(140, 116);
-            this.eleccionRol.Name = "eleccionRol";
-            this.eleccionRol.Size = new System.Drawing.Size(214, 20);
-            this.eleccionRol.TabIndex = 89;
-            this.eleccionRol.Text = "Seleccione un rol asignado";
-            // 
             // eleccionPassword
             // 
             this.eleccionPassword.Location = new System.Drawing.Point(140, 88);
@@ -119,9 +111,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 118);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 13);
+            this.label3.Size = new System.Drawing.Size(110, 13);
             this.label3.TabIndex = 86;
-            this.label3.Text = "Rol asignado:";
+            this.label3.Text = "Confirmar contraseña:";
             // 
             // label2
             // 
@@ -394,12 +386,20 @@
             this.aceptar.UseVisualStyleBackColor = true;
             this.aceptar.Click += new System.EventHandler(this.aceptar_Click);
             // 
+            // confirContraseña
+            // 
+            this.confirContraseña.Location = new System.Drawing.Point(140, 115);
+            this.confirContraseña.Name = "confirContraseña";
+            this.confirContraseña.Size = new System.Drawing.Size(214, 20);
+            this.confirContraseña.TabIndex = 107;
+            // 
             // RegistroEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(369, 590);
+            this.Controls.Add(this.confirContraseña);
             this.Controls.Add(this.cancelar);
             this.Controls.Add(this.aceptar);
             this.Controls.Add(this.elecFechaCreacion);
@@ -417,7 +417,6 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.elecRazonSocial);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.eleccionRol);
             this.Controls.Add(this.eleccionPassword);
             this.Controls.Add(this.eleccionUsername);
             this.Controls.Add(this.label3);
@@ -430,6 +429,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RegistroEmpresa";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Registro de nueva empresa";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -443,7 +443,6 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox errorBox;
-        private System.Windows.Forms.DomainUpDown eleccionRol;
         private System.Windows.Forms.TextBox eleccionPassword;
         private System.Windows.Forms.TextBox eleccionUsername;
         private System.Windows.Forms.Label label3;
@@ -478,5 +477,6 @@
         private System.Windows.Forms.DateTimePicker elecFechaCreacion;
         private System.Windows.Forms.Button cancelar;
         private System.Windows.Forms.Button aceptar;
+        private System.Windows.Forms.TextBox confirContraseña;
     }
 }

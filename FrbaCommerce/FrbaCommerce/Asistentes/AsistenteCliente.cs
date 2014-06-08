@@ -5,10 +5,11 @@ using System.Text;
 
 namespace FrbaCommerce.Asistentes
 {
-    class AsistenteCliente
+    class AsistenteCliente : AdaptadorBD
     {
         public static void altaCliente( string username,
                                         string pass,
+                                        int passDefinitiva,
                                         string rol,
                                         string nombre,
                                         string apellido,
@@ -24,7 +25,7 @@ namespace FrbaCommerce.Asistentes
                                         string codPostal,
                                         DateTime fechaNac)
         {
-            AsistenteUsuario.altaUsuario(username,pass,rol);
+            AsistenteUsuario.altaUsuario(username,pass,passDefinitiva,rol);
             AsistenteUsuario.altaDireccion(calle,
                                             numero,
                                             piso,
@@ -33,7 +34,7 @@ namespace FrbaCommerce.Asistentes
                                             localidad);
             AdaptadorBD.ejecutarProcedure("alta_cliente",
                 username,
-                Convert.ToInt32(numeroDoc),
+                Convert.ToInt64(numeroDoc),
                 tipoDoc,
                 nombre,
                 apellido,
@@ -43,6 +44,24 @@ namespace FrbaCommerce.Asistentes
                 fechaNac
                 );
 
+        }
+
+        public static bool existeTelefonoCliente(string telefono)
+        {
+            return ejecutarProcedureWithReturnValue("existe_telefono_cliente",Convert.ToInt64(telefono))==1;
+        }
+
+        public static void chequearTipoYNroDocNoRepetido(string tipo, string numero, List<string> errores) 
+        {
+            if (existeTipoYNumeroDoc(tipo, Convert.ToInt64(numero)))
+            {
+                errores.Add("Ya existe un cliente con tal tipo y número de documento.\n Se le recuerda que cada cliente puede estar registrado una única vez.");
+            }
+        }
+
+        public static bool existeTipoYNumeroDoc(string tipo, Int64 numero)
+        {
+            return ejecutarProcedureWithReturnValue("existe_tipo_y_numero_doc",tipo,numero) == 1;
         }
     }
 }

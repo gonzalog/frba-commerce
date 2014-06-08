@@ -29,16 +29,18 @@ namespace FrbaCommerce.Asistentes
             return true;
         }
 
-        public static void contraseñaValida(string pass,List<string> errores)
+        public static void contraseñaValida(string pass,string confirPass, List<string> errores)
         {
             if (String.IsNullOrEmpty(pass)) errores.Add("El campo contraseña está vacío.");
+            if (pass != confirPass) errores.Add("La contraseña no coincide con su confirmación.");
         }
 
-        public static void altaUsuario(string username, string pass, string nombreRol)
+        public static void altaUsuario(string username, string pass,int passDefinitiva, string nombreRol)
         {
             AdaptadorBD.ejecutarProcedure("alta_usuario",   
-                                          username, 
-                                          AsistenteLogin.getSha256(pass)
+                                          username,
+                                          AsistenteLogin.getSha256(pass),
+                                          passDefinitiva
                                           );
             altaRolPorUser(username, AsistenteRol.getCodRol(nombreRol));
         }
@@ -82,6 +84,31 @@ namespace FrbaCommerce.Asistentes
                                                                 piso,
                                                                 localidad
                                                                 );
+        }
+
+        public static bool esPasswordCorrecta(string user, string pass)
+        {
+            return getHashPassword(user) == AsistenteLogin.getSha256(pass);
+        }
+
+        public static string getHashPassword(string user)
+        {
+            return ejecutarProcedureWithReturnString("get_hash_password",user);
+        }
+
+        public static void cambiarPassword(string user,string pass)
+        {
+            ejecutarProcedure("cambiar_password",user,AsistenteLogin.getSha256(pass));
+        }
+
+        public static void inhabilitarUsuario(string user)
+        {
+            ejecutarProcedure("inhabilitar_user",user);
+        }
+
+        public static void habilitarUsuario(string user)
+        {
+            ejecutarProcedure("habilitar_user", user);
         }
     }
 }

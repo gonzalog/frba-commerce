@@ -17,12 +17,10 @@ namespace FrbaCommerce.Login
         {
             InitializeComponent();
             this.padre = padre;
-            eleccionRol.Items.AddRange(AsistenteRol.getNombresRolesHabilitados());
             elecTipoDoc.Items.Add("DNI");
             elecTipoDoc.Items.Add("LE");
             elecTipoDoc.Items.Add("LC");
-            eleccionPassword.PasswordChar = '*';
-            eleccionRol.ReadOnly = true;
+            eleccionPassword.PasswordChar = confirContraseña.PasswordChar = '*';
             elecTipoDoc.ReadOnly = true;
         }
 
@@ -40,14 +38,14 @@ namespace FrbaCommerce.Login
             List<string> errores = new List<string>();
             
             AsistenteUsuario.userNameValido(eleccionUsername.Text, errores);
-            AsistenteUsuario.contraseñaValida(eleccionPassword.Text,errores);
-            AsistenteRol.rolValido(eleccionRol.Text, errores);
+            AsistenteUsuario.contraseñaValida(eleccionPassword.Text,confirContraseña.Text,errores);
            
             AsistenteBotones.chequearTextboxNoNulo(elecNombre, errores, "Nombre");
             AsistenteBotones.chequearTextboxNoNulo(elecApe, errores, "Apellido");
             AsistenteBotones.chequearTextboxNoNulo(elecNroDoc, errores, "Número documento");
+            AsistenteCliente.chequearTipoYNroDocNoRepetido(elecTipoDoc.Text,elecNroDoc.Text,errores);
             AsistenteBotones.chequearTextboxNoNuloYMail(elecEMail,errores,"E-Mail");
-            AsistenteBotones.chequearTextboxNoNulo(elecTelefono,errores,"Número de teléfono");
+            AsistenteBotones.chequearTextboxNoNuloYTelCliente(elecTelefono,errores,"Número de teléfono");
             AsistenteBotones.chequearTextboxNoNulo(elecCalle,errores,"Calle");
             AsistenteBotones.chequearTextboxNoNulo(elecNumero,errores,"Número de calle");
             AsistenteBotones.chequearTextboxNoNulo(elecPiso,errores,"Piso");
@@ -66,7 +64,8 @@ namespace FrbaCommerce.Login
                 errorBox.Text = "Registro aceptado.";
                 AsistenteCliente.altaCliente(eleccionUsername.Text,
                                             eleccionPassword.Text,
-                                            eleccionRol.Text,
+                                            1,
+                                            "Cliente",
                                             elecNombre.Text,
                                             elecApe.Text,
                                             elecTipoDoc.Text,

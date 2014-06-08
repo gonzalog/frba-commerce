@@ -2,7 +2,6 @@
 USE [GD1C2014]
 GO
 
---BEGIN TRAN DEFINICION_TABLAS
 GO
 CREATE SCHEMA [THE_DISCRETABOY] AUTHORIZATION [gd]
 GO
@@ -61,6 +60,7 @@ CREATE TABLE THE_DISCRETABOY.Direccion (
 CREATE TABLE THE_DISCRETABOY.Usuario (
 	username nvarchar(20) NOT NULL,--PK
 	password char(64) NOT NULL,
+	pass_definitiva bit NOT NULL,
 	intentos tinyint,
 	habilitado bit
 );
@@ -124,6 +124,12 @@ CREATE TABLE THE_DISCRETABOY.Pregunta (
 	descripcion [nvarchar](255) NOT NULL,
 	cliente nvarchar(20) NOT NULL, --FK
 	publicacion [numeric](18, 0) NOT NULL --FK
+);
+
+CREATE TABLE THE_DISCRETABOY.Respuesta(
+	pregunta numeric (18) NOT NULL, --PK --FK
+	descripcion [nvarchar](255) NOT NULL,
+	fecha datetime	
 );
 
 CREATE TABLE THE_DISCRETABOY.Compra_inmediata (
@@ -261,6 +267,22 @@ END
 
 GO
 
+CREATE FUNCTION THE_DISCRETABOY.f_cod_func
+(
+@nombre_func varchar(255)
+)
+RETURNS numeric (18,0)
+AS
+BEGIN
+RETURN
+(
+SELECT F.cod_funcion
+FROM THE_DISCRETABOY.Funcion F
+WHERE F.nombre = @nombre_func
+)
+END
+
+GO
 -- CHECK Constraints
 ALTER TABLE THE_DISCRETABOY.Rol_por_user ADD CONSTRAINT CHK_rol_habilitado
         CHECK(THE_DISCRETABOY.f_get_rol_habilitacion(ROL)=1)
@@ -327,6 +349,10 @@ ALTER TABLE THE_DISCRETABOY.Venta_directa ADD CONSTRAINT PK_Venta_directa
 
 ALTER TABLE THE_DISCRETABOY.Pregunta ADD CONSTRAINT PK_Pregunta
         PRIMARY KEY CLUSTERED (id)
+;
+
+ALTER TABLE THE_DISCRETABOY.Respuesta ADD CONSTRAINT PK_Respuesta
+        PRIMARY KEY CLUSTERED (pregunta)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Compra_inmediata ADD CONSTRAINT PK_Compra_inmediata
@@ -443,6 +469,9 @@ ALTER TABLE THE_DISCRETABOY.Pregunta with check ADD CONSTRAINT FK_Pregunta
         FOREIGN KEY (cliente,publicacion) REFERENCES THE_DISCRETABOY.Cliente_por_publicacion (cliente,publicacion)
 ;
 
+ALTER TABLE THE_DISCRETABOY.Respuesta ADD CONSTRAINT FK_Respuesta_pregunta
+		FOREIGN KEY (pregunta) REFERENCES THE_DISCRETABOY.Pregunta (id)
+;
 ALTER TABLE THE_DISCRETABOY.Renglon_factura ADD CONSTRAINT FK_Renglon_factura_fact
         FOREIGN KEY (factura) REFERENCES THE_DISCRETABOY.Factura (numero)
 ;
@@ -504,6 +533,30 @@ VALUES (
 @funcion,
 @rol
 )
+
+GO
+
+--ALTA FUNCION POR ROL CON LOS NOMBRES
+CREATE PROCEDURE THE_DISCRETABOY.alta_funcion_por_rol_nombres
+( 
+@funcion varchar(255),
+@rol varchar(255)
+)
+AS
+BEGIN
+DECLARE @CODROL NUMERIC(18,0), @CODFUNCION NUMERIC(18,0)
+SET @CODROL = THE_DISCRETABOY.f_cod_rol(@rol)
+SET @CODFUNCION = THE_DISCRETABOY.f_cod_func(@funcion)
+INSERT INTO THE_DISCRETABOY.Funcion_por_rol
+(
+rol,
+funcion
+)
+VALUES (
+@CODROL,
+@CODFUNCION
+)
+END
 
 GO
 
@@ -936,13 +989,15 @@ GO
 CREATE PROC THE_DISCRETABOY.alta_usuario
 (
 @username nvarchar(20),
-@password char(64)
+@password char(64),
+@pass_definitiva bit
 )
 AS
 INSERT INTO THE_DISCRETABOY.Usuario
 (
 username,
 password,
+pass_definitiva,
 intentos,
 habilitado
 )
@@ -950,6 +1005,7 @@ VALUES
 (
 @username,
 @password,
+@pass_definitiva,
 0,
 1
 )
@@ -1097,7 +1153,115 @@ VALUES
 )
 
 GO
-/* ****** Migrar datos exIStentes ******* */
+
+CREATE PROC THE_DISCRETABOY.get_hash_password
+(@USER NVARCHAR(20))
+AS
+SELECT TOP 1
+U.password
+FROM
+THE_DISCRETABOY.Usuario U
+WHERE U.username = @USER
+
+GO
+
+CREATE PROC THE_DISCRETABOY.cambiar_password
+(
+@USER NVARCHAR(20),
+@PASSNUEVA CHAR(64)
+)
+AS
+UPDATE THE_DISCRETABOY.Usuario
+SET password = @PASSNUEVA , pass_definitiva = 1
+WHERE username = @USER
+
+GO
+
+CREATE PROC THE_DISCRETABOY.existe_telefono_cliente
+(@telefono numeric (18,0))
+AS
+BEGIN
+DECLARE @EXISTE NUMERIC (18,0)
+SELECT
+@EXISTE = CASE WHEN COUNT (*)>0 THEN 1 ELSE 0 END
+FROM
+THE_DISCRETABOY.Cliente C
+WHERE
+@telefono = C.telefono
+RETURN @EXISTE
+END
+
+GO
+
+CREATE PROC THE_DISCRETABOY.existe_tipo_y_numero_doc
+(
+@TIPO VARCHAR(3),
+@NRO NUMERIC (18,0)
+)
+AS
+BEGIN
+DECLARE @EXISTE NUMERIC(18,0)
+SELECT 
+@EXISTE = CASE WHEN COUNT (*)>0 THEN 1 ELSE 0 END
+FROM
+THE_DISCRETABOY.Cliente C
+WHERE
+C.doc_tipo = @TIPO AND
+C.doc_numero = @NRO
+RETURN @EXISTE
+END
+
+GO
+
+--RETORNAR PASSWORDPERMANENTE
+CREATE PROC THE_DISCRETABOY.password_permanente
+(@user nvarchar(20))
+AS
+BEGIN
+DECLARE @PERMANENCIA BIT
+SELECT TOP 1
+@PERMANENCIA = U.pass_definitiva
+FROM
+THE_DISCRETABOY.Usuario U
+WHERE U.username = @user
+RETURN @PERMANENCIA
+END
+
+GO
+
+--RETORNA SI ESXISTE LA RAZON SOCIAL
+CREATE PROC THE_DISCRETABOY.existe_razon_social
+(@RAZON NVARCHAR(255))
+AS
+BEGIN
+DECLARE @EXISTE NUMERIC(18,0)
+SELECT
+@EXISTE = CASE WHEN COUNT (*)>0 THEN 1 ELSE 0 END
+FROM
+THE_DISCRETABOY.Empresa E
+WHERE E.razon_social = @RAZON
+RETURN @EXISTE
+END
+
+GO
+
+--RETORNA SI EXISTE EL CUIT
+CREATE PROC THE_DISCRETABOY.existe_cuit
+(@CUIT NVARCHAR(50))
+AS
+BEGIN
+DECLARE @EXISTE NUMERIC(18,0)
+SELECT
+@EXISTE = CASE WHEN COUNT (*)>0 THEN 1 ELSE 0 END
+FROM
+THE_DISCRETABOY.Empresa E
+WHERE E.cuit = @CUIT
+RETURN @EXISTE
+END
+
+GO
+
+/* ****** Migrar datos existentes ******* */
 
 --CARGO CALIFICACIONES
 INSERT INTO THE_DISCRETABOY.Calificacion
@@ -1165,12 +1329,14 @@ INSERT INTO THE_DISCRETABOY.Usuario
 (
 username,
 password,
+pass_definitiva,
 intentos,
 habilitado
 )
 SELECT 
 	'Clie_'+CAST(m.Cli_Dni as nvarchar(20)) as username,--Se determina que el nombre de los preexIStentes será Clie más el dni.
 	'e00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29',--La password es UTNFRBA	
+	0,
 	0,
 	1
 FROM gd_esquema.Maestra m
@@ -1184,12 +1350,14 @@ INSERT INTO THE_DISCRETABOY.Usuario
 (
 username,
 password,
+pass_definitiva,
 intentos,
 habilitado
 )
 SELECT 
 	'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)) as username,--Se determina que el nombre de los preexIStentes será Empre_ más el CUIT.
-	0xe00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29,--La password es UTNFRBA	
+	'e00c42a301d2d5a17c9f2081ff897f031129c57cae3a55fa7ad6a649f939ea29',--La password es UTNFRBA	
+	0,
 	0,
 	1
 FROM gd_esquema.Maestra m
@@ -1546,7 +1714,7 @@ M.Publicacion_Cod
 
 GO
 
---CARGO VisibilidadES POR USUARIOS
+--CARGO Visibilidades POR USUARIOS
 INSERT INTO THE_DISCRETABOY.Visibilidad_por_user
 (
 Visibilidad,
@@ -1589,6 +1757,7 @@ INSERT INTO THE_DISCRETABOY.Usuario
 (
 username,
 password,
+pass_definitiva,
 habilitado,
 intentos
 )
@@ -1596,6 +1765,7 @@ VALUES
 (
 'admin',
 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',--w23e
+1,
 1,
 0
 )
@@ -1653,3 +1823,66 @@ FROM
 THE_DISCRETABOY.Rol R
 WHERE 
 R.nombre = 'Administrador General'
+
+--CREACION FUNCIONES
+--FUNCIONES COMUNES A TODOS
+EXEC THE_DISCRETABOY.alta_funcion 'Publicar'
+EXEC THE_DISCRETABOY.alta_funcion 'Editar publicación'
+EXEC THE_DISCRETABOY.alta_funcion 'Gestionar preguntas'
+EXEC THE_DISCRETABOY.alta_funcion 'Rendir compras'
+EXEC THE_DISCRETABOY.alta_funcion 'Listado estadístico'
+--LAS ASIGNO A LOS ROLES
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Publicar','Cliente'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Publicar','Empresa'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Editar publicación','Cliente'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Editar publicación','Empresa'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Gestionar preguntas','Cliente'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Gestionar preguntas','Empresa'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Rendir compras','Cliente'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Rendir compras','Empresa'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Listado estadístico','Cliente'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Listado estadístico','Empresa'
+--FUNCIONES NO PARA EMPRESAS
+EXEC THE_DISCRETABOY.alta_funcion 'Calificar vendedor'
+EXEC THE_DISCRETABOY.alta_funcion 'Historial de cliente'
+EXEC THE_DISCRETABOY.alta_funcion 'Comprar/ Ofertar'
+--LAS ASIGNO A LOS ROLES
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Calificar vendedor','Cliente'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Historial de cliente','Cliente'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Comprar/ Ofertar','Cliente'
+--FUNCIONES SOLO PARA EL ADMINISTRADOR GENERAL
+EXEC THE_DISCRETABOY.alta_funcion 'ABM de Rol'
+EXEC THE_DISCRETABOY.alta_funcion 'ABM de Cliente'
+EXEC THE_DISCRETABOY.alta_funcion 'ABM de Empresa'
+EXEC THE_DISCRETABOY.alta_funcion 'ABM de Visibilidad'
+
+
+GO
+--CARGO ROLES DE USUARIOS CREADOS DE CLIENTES
+INSERT INTO THE_DISCRETABOY.Rol_por_user
+(
+rol,
+usuario
+)
+SELECT
+THE_DISCRETABOY.f_cod_rol('Cliente'),
+C.usuario
+FROM
+THE_DISCRETABOY.Cliente C,THE_DISCRETABOY.Usuario U
+WHERE C.usuario=U.username
+
+GO
+--CARGO ROLES DE USUARIOS CREADOS DE EMPRESAS
+INSERT INTO THE_DISCRETABOY.Rol_por_user
+(
+rol,
+usuario
+)
+SELECT
+THE_DISCRETABOY.f_cod_rol('Empresa'),
+E.usuario
+FROM
+THE_DISCRETABOY.Empresa E,THE_DISCRETABOY.Usuario U
+WHERE E.usuario=U.username
+
+GO

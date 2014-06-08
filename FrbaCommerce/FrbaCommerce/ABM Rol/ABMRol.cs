@@ -29,12 +29,12 @@ namespace FrbaCommerce.ABM_Rol
 
         private void Modificar_Click(object sender, EventArgs e)
         {
-            AsistenteVistas.mostrarNuevaVentana(new ModificionRol(this, (IniciarSesion)padre), this);
+            AsistenteVistas.mostrarNuevaVentana(new ModificionRol(this), this);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            AsistenteVistas.mostrarNuevaVentana(new Bajas(this, (IniciarSesion)padre), this);
+            AsistenteVistas.mostrarNuevaVentana(new Bajas(this), this);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

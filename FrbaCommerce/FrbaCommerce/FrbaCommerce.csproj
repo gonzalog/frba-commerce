@@ -36,6 +36,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -116,6 +117,12 @@
     </Compile>
     <Compile Include="Calificar Vendedor\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CambioPassword\CambioPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CambioPassword\CambioPassword.Designer.cs">
+      <DependentUpon>CambioPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Comprar-Ofertar\Form1.cs">
       <SubType>Form</SubType>
@@ -213,11 +220,17 @@
     <EmbeddedResource Include="ABM Rol\ModificionRol.resx">
       <DependentUpon>ModificionRol.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CambioPassword\CambioPassword.resx">
+      <DependentUpon>CambioPassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\ElegirRol.resx">
       <DependentUpon>ElegirRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Logueo.resx">
       <DependentUpon>Logueo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PantallaPrincipal.resx">
+      <DependentUpon>PantallaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\OpcionTipoRegistro.resx">
       <DependentUpon>OpcionTipoRegistro.cs</DependentUpon>

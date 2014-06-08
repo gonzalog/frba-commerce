@@ -56,11 +56,25 @@ namespace FrbaCommerce.Asistentes
             chequearMail(box.Text,errores);
         }
 
+        public static void chequearTextboxNoNuloYTelCliente(TextBox box, List<string> errores, string nombre)
+        {
+            chequearTextboxNoNulo(box, errores, nombre);
+            chequearTelCliente(box.Text, errores);
+        }
+
         public static void chequearMail(string mail, List<string> errores)
         {
              if( ! tieneFormatoMail(mail))
             {
                 errores.Add("El mail tiene un formato inválido.");
+            }
+        }
+
+        public static void chequearTelCliente(string tel, List<string> errores) 
+        {
+            if (AsistenteCliente.existeTelefonoCliente(tel))
+            {
+                errores.Add("Ya existe un cliente registrado con tal número telefónico.");
             }
         }
 

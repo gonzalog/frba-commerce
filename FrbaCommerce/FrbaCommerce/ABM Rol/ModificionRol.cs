@@ -13,12 +13,10 @@ namespace FrbaCommerce.ABM_Rol
     public partial class ModificionRol : Form
     {
         public Form padre;
-        IniciarSesion pantallaPrincipal;
 
-        public ModificionRol(Form padre, IniciarSesion pantallaPrincipal)
+        public ModificionRol(Form padre)
         {
             InitializeComponent();
-            this.pantallaPrincipal = pantallaPrincipal;
             this.padre = padre;
             AsistenteVistas.CargarGrilla(grillaRoles, AsistenteRol.getRoles());
             cargarBotonCambiarFunciones();

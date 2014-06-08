@@ -115,6 +115,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ABMRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ABM Rol";
             this.Load += new System.EventHandler(this.ABMRol_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

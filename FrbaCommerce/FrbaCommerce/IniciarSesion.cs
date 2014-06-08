@@ -30,9 +30,6 @@ namespace FrbaCommerce
         private void Login_Click(object sender, EventArgs e)
         {
             AsistenteVistas.mostrarNuevaVentana(new Logueo(this), this);
-
-            //testing
-            //AsistenteVistas.mostrarNuevaVentana(new ABMRol(this), this);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

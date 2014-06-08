@@ -32,10 +32,8 @@
             this.errorBox = new System.Windows.Forms.TextBox();
             this.username = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.eleccionUsername = new System.Windows.Forms.TextBox();
             this.eleccionPassword = new System.Windows.Forms.TextBox();
-            this.eleccionRol = new System.Windows.Forms.DomainUpDown();
             this.nombre = new System.Windows.Forms.Label();
             this.apellido = new System.Windows.Forms.Label();
             this.tipoDoc = new System.Windows.Forms.Label();
@@ -50,6 +48,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.elecLocalidad = new System.Windows.Forms.TextBox();
             this.elecDepartamento = new System.Windows.Forms.TextBox();
+            this.elecCP = new System.Windows.Forms.TextBox();
             this.elecNumero = new System.Windows.Forms.TextBox();
             this.elecCalle = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,11 +60,12 @@
             this.elecNroDoc = new System.Windows.Forms.TextBox();
             this.elecEMail = new System.Windows.Forms.TextBox();
             this.elecTelefono = new System.Windows.Forms.TextBox();
-            this.elecCP = new System.Windows.Forms.TextBox();
             this.elecFechaNac = new System.Windows.Forms.DateTimePicker();
             this.aceptar = new System.Windows.Forms.Button();
             this.cancelar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.confirContraseña = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -99,15 +99,6 @@
             this.label2.TabIndex = 53;
             this.label2.Text = "Contraseña:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 128);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 13);
-            this.label3.TabIndex = 54;
-            this.label3.Text = "Rol asignado:";
-            // 
             // eleccionUsername
             // 
             this.eleccionUsername.Location = new System.Drawing.Point(137, 68);
@@ -121,14 +112,6 @@
             this.eleccionPassword.Name = "eleccionPassword";
             this.eleccionPassword.Size = new System.Drawing.Size(214, 20);
             this.eleccionPassword.TabIndex = 56;
-            // 
-            // eleccionRol
-            // 
-            this.eleccionRol.Location = new System.Drawing.Point(137, 126);
-            this.eleccionRol.Name = "eleccionRol";
-            this.eleccionRol.Size = new System.Drawing.Size(214, 20);
-            this.eleccionRol.TabIndex = 57;
-            this.eleccionRol.Text = "Seleccione un rol asignado";
             // 
             // nombre
             // 
@@ -263,6 +246,13 @@
             this.elecDepartamento.Size = new System.Drawing.Size(208, 20);
             this.elecDepartamento.TabIndex = 70;
             // 
+            // elecCP
+            // 
+            this.elecCP.Location = new System.Drawing.Point(125, 157);
+            this.elecCP.Name = "elecCP";
+            this.elecCP.Size = new System.Drawing.Size(208, 20);
+            this.elecCP.TabIndex = 77;
+            // 
             // elecNumero
             // 
             this.elecNumero.Location = new System.Drawing.Point(125, 49);
@@ -350,13 +340,6 @@
             this.elecTelefono.TabIndex = 76;
             this.elecTelefono.TextChanged += new System.EventHandler(this.elecTelefono_TextChanged);
             // 
-            // elecCP
-            // 
-            this.elecCP.Location = new System.Drawing.Point(125, 157);
-            this.elecCP.Name = "elecCP";
-            this.elecCP.Size = new System.Drawing.Size(208, 20);
-            this.elecCP.TabIndex = 77;
-            // 
             // elecFechaNac
             // 
             this.elecFechaNac.Location = new System.Drawing.Point(137, 301);
@@ -395,12 +378,30 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // confirContraseña
+            // 
+            this.confirContraseña.Location = new System.Drawing.Point(137, 124);
+            this.confirContraseña.Name = "confirContraseña";
+            this.confirContraseña.Size = new System.Drawing.Size(214, 20);
+            this.confirContraseña.TabIndex = 109;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 127);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(110, 13);
+            this.label3.TabIndex = 108;
+            this.label3.Text = "Confirmar contraseña:";
+            // 
             // RegistroCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(363, 592);
+            this.Controls.Add(this.confirContraseña);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cancelar);
             this.Controls.Add(this.aceptar);
@@ -419,10 +420,8 @@
             this.Controls.Add(this.tipoDoc);
             this.Controls.Add(this.apellido);
             this.Controls.Add(this.nombre);
-            this.Controls.Add(this.eleccionRol);
             this.Controls.Add(this.eleccionPassword);
             this.Controls.Add(this.eleccionUsername);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.username);
             this.Controls.Add(this.errorBox);
@@ -431,6 +430,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RegistroCliente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Registro de nuevo cliente";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -445,10 +445,8 @@
         private System.Windows.Forms.TextBox errorBox;
         private System.Windows.Forms.Label username;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox eleccionUsername;
         private System.Windows.Forms.TextBox eleccionPassword;
-        private System.Windows.Forms.DomainUpDown eleccionRol;
         private System.Windows.Forms.Label nombre;
         private System.Windows.Forms.Label apellido;
         private System.Windows.Forms.Label tipoDoc;
@@ -479,5 +477,7 @@
         private System.Windows.Forms.TextBox elecLocalidad;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox confirContraseña;
+        private System.Windows.Forms.Label label3;
     }
 }

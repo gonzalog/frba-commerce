@@ -32,7 +32,7 @@ namespace FrbaCommerce.Registro_de_Usuario
 
         private void volver_Click(object sender, EventArgs e)
         {
-            AsistenteVistas.volverAPadreYCerrar(padre, this);
+            AsistenteVistas.mostrarNuevaVentana(padre, this);
         }
 
         private void nuevaEmpresa_Click(object sender, EventArgs e)

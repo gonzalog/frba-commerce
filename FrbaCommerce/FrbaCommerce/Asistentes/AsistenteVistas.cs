@@ -25,6 +25,21 @@ namespace FrbaCommerce.Asistentes
             ventanaPadre.Hide();
         }
 
+        public static void mostrarSimultaneo(Form ventanaHijo)
+        {
+            ventanaHijo.Visible = true;
+            ventanaHijo.Activate();
+            ventanaHijo.Select();
+        }
+
+        public static void mostrarNuevaVentanaYCerrar(Form ventanaNueva, Form ventanaPadre)
+        {
+            ventanaNueva.Visible = true;
+            ventanaNueva.Activate();
+            ventanaNueva.Select();
+            ventanaPadre.Close();
+        }
+
         internal static void CargarGrilla(System.Windows.Forms.DataGridView grid, System.Data.DataTable dataTable)
         {
             grid.DataSource = dataTable;

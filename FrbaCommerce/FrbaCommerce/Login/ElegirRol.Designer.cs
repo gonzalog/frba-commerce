@@ -88,6 +88,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.elecRol);
             this.Name = "ElegirRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Elija el rol con el que desea ingresar";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

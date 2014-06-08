@@ -65,6 +65,11 @@ namespace FrbaCommerce.Login
             if (intentos == 0)
             {
                 errorBox.Text = "Logueo exitoso.";
+                if (!AsistenteLogin.passwordPermanente(userName))
+                {
+                    MessageBox.Show("¡IMPORTANTE!\nLa contraseña que usted utilizó tiene una vida útil de solo un ingreso. Para poder volver a ingresar deberá ir al menú 'Cuenta'->'Cambiar contraseña' y reemplazarla por un nuevo valor a su antojo.");
+                    AsistenteUsuario.inhabilitarUsuario(userName);
+                }
                 AsistenteVistas.mostrarNuevaVentana(new ElegirRol(userName,this),this);
                 return;
             }

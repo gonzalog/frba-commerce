@@ -18,9 +18,7 @@ namespace FrbaCommerce.Registro_de_Usuario
         {
             InitializeComponent();
             this.padre = padre;
-            eleccionRol.Items.AddRange(AsistenteRol.getNombresRolesHabilitados());
-            eleccionPassword.PasswordChar = '*';
-            eleccionRol.ReadOnly = true;
+            eleccionPassword.PasswordChar = confirContraseña.PasswordChar = '*';
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -62,16 +60,15 @@ namespace FrbaCommerce.Registro_de_Usuario
             List<string> errores = new List<string>();
 
             AsistenteUsuario.userNameValido(eleccionUsername.Text, errores);
-            AsistenteUsuario.contraseñaValida(eleccionPassword.Text, errores);
-            AsistenteRol.rolValido(eleccionRol.Text, errores);
+            AsistenteUsuario.contraseñaValida(eleccionPassword.Text,confirContraseña.Text, errores);
+            
+            AsistenteEmpresa.chequearTextboxNoNuloYCUIT(elecCUIT, errores, "CUIT");
+            AsistenteEmpresa.chequearTextboxNoNuloYRSUnica(elecRazonSocial, errores, "Razón Social");
 
-            AsistenteBotones.chequearTextboxNoNulo(elecRazonSocial, errores, "Nombre");
             AsistenteBotones.chequearTextboxNoNuloYMail(elecEMail, errores, "E-Mail");
             AsistenteBotones.chequearTextboxNoNulo(elecTelefono, errores, "Número de teléfono");
             AsistenteBotones.chequearTextboxNoNulo(elecCiudad, errores, "Ciudad");
-            AsistenteBotones.chequearTextboxNoNulo(elecCUIT, errores, "CUIT");
             AsistenteBotones.chequearTextboxNoNulo(elecNombreContacto, errores, "Nombre de contacto");
-
             AsistenteBotones.chequearTextboxNoNulo(elecCalle, errores, "Calle");
             AsistenteBotones.chequearTextboxNoNulo(elecNumero, errores, "Número de calle");
             AsistenteBotones.chequearTextboxNoNulo(elecPiso, errores, "Piso");
@@ -90,7 +87,8 @@ namespace FrbaCommerce.Registro_de_Usuario
                 errorBox.Text = "Registro aceptado.";
                 AsistenteEmpresa.altaEmpresa(eleccionUsername.Text,
                                             eleccionPassword.Text,
-                                            eleccionRol.Text,
+                                            1,
+                                            "Empresa",
                                             elecRazonSocial.Text,
                                             elecEMail.Text,
                                             elecTelefono.Text,

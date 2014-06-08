@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModificionRol));
             this.cancelButton = new System.Windows.Forms.Button();
             this.errorBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -42,9 +43,9 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(183, 374);
+            this.cancelButton.Location = new System.Drawing.Point(357, 373);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(179, 32);
+            this.cancelButton.Size = new System.Drawing.Size(117, 32);
             this.cancelButton.TabIndex = 19;
             this.cancelButton.Text = "Cancelar";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -57,7 +58,7 @@
             this.errorBox.Multiline = true;
             this.errorBox.Name = "errorBox";
             this.errorBox.ReadOnly = true;
-            this.errorBox.Size = new System.Drawing.Size(350, 39);
+            this.errorBox.Size = new System.Drawing.Size(462, 39);
             this.errorBox.TabIndex = 18;
             // 
             // groupBox1
@@ -68,7 +69,7 @@
             this.groupBox1.Controls.Add(this.nombreBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 57);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(350, 81);
+            this.groupBox1.Size = new System.Drawing.Size(462, 81);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Búsqueda";
@@ -85,9 +86,9 @@
             // 
             // limpiarButton
             // 
-            this.limpiarButton.Location = new System.Drawing.Point(262, 48);
+            this.limpiarButton.Location = new System.Drawing.Point(345, 52);
             this.limpiarButton.Name = "limpiarButton";
-            this.limpiarButton.Size = new System.Drawing.Size(82, 23);
+            this.limpiarButton.Size = new System.Drawing.Size(111, 23);
             this.limpiarButton.TabIndex = 1;
             this.limpiarButton.Text = "Limpiar";
             this.limpiarButton.UseVisualStyleBackColor = true;
@@ -116,7 +117,7 @@
             this.grillaRoles.Location = new System.Drawing.Point(12, 144);
             this.grillaRoles.Name = "grillaRoles";
             this.grillaRoles.RowTemplate.ReadOnly = true;
-            this.grillaRoles.Size = new System.Drawing.Size(350, 214);
+            this.grillaRoles.Size = new System.Drawing.Size(462, 214);
             this.grillaRoles.TabIndex = 16;
             this.grillaRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaRoles_CellContentClick);
             // 
@@ -124,12 +125,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(373, 408);
+            this.ClientSize = new System.Drawing.Size(484, 408);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.errorBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grillaRoles);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ModificionRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ListaRoles";
             this.Load += new System.EventHandler(this.ModificionRol_Load);
             this.groupBox1.ResumeLayout(false);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bajas));
             this.cancelButton = new System.Windows.Forms.Button();
             this.errorBox = new System.Windows.Forms.TextBox();
             this.Efectivizar = new System.Windows.Forms.Button();
@@ -94,7 +95,9 @@
             this.Controls.Add(this.Efectivizar);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.errorBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Bajas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Bajas";
             this.ResumeLayout(false);
             this.PerformLayout();

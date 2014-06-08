@@ -50,5 +50,9 @@ namespace FrbaCommerce.Asistentes
             byte[] inputHashBytes = encriptador.ComputeHash(inputEnBytes);
             return BitConverter.ToString(inputHashBytes).Replace("-", String.Empty).ToLower();
         }
+        public static bool passwordPermanente(string user)
+        {
+            return AdaptadorBD.ejecutarProcedureWithReturnValue("password_permanente",user) == 1;
+        }
     }
 }
