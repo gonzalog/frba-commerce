@@ -75,9 +75,13 @@ namespace FrbaCommerce.Login
                 {
                     AsistenteVistas.mostrarNuevaVentana(new ElegirRol(userName, this), this);
                 }
+                else if (rolesDelUsuario.Count == 1)
+                {
+                    AsistenteVistas.mostrarNuevaVentana(new PantallaPrincipal(userName, rolesDelUsuario.Values.ElementAt(0), this), this);
+                }
                 else
                 {
-                    AsistenteVistas.mostrarNuevaVentana(new PantallaPrincipal(userName,rolesDelUsuario.Values.ElementAt(0),this), this);
+                    errorBox.Text = "Usted no dispone de un rol habilitado que le permita ingresar.";
                 }
                 return;
                 

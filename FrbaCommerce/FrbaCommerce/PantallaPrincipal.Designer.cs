@@ -31,6 +31,18 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.editarPublicacion = new System.Windows.Forms.Button();
+            this.publicar = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.inicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,18 +51,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.publicar = new System.Windows.Forms.Button();
-            this.editarPublicacion = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -106,6 +106,140 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(874, 463);
             this.tableLayoutPanel.TabIndex = 2;
+            // 
+            // button12
+            // 
+            this.button12.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button12.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button12.Location = new System.Drawing.Point(728, 80);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(139, 71);
+            this.button12.TabIndex = 11;
+            this.button12.Text = "ABM de Visibilidad";
+            this.button12.UseVisualStyleBackColor = false;
+            // 
+            // button11
+            // 
+            this.button11.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button11.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button11.Location = new System.Drawing.Point(583, 80);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(139, 71);
+            this.button11.TabIndex = 10;
+            this.button11.Text = "ABM de Empresa";
+            this.button11.UseVisualStyleBackColor = false;
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button10.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button10.Location = new System.Drawing.Point(438, 80);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(139, 71);
+            this.button10.TabIndex = 9;
+            this.button10.Text = "ABM de Cliente";
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button9.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button9.Location = new System.Drawing.Point(293, 80);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(139, 71);
+            this.button9.TabIndex = 8;
+            this.button9.Text = "ABM de Rol";
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button8.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Location = new System.Drawing.Point(148, 80);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(139, 71);
+            this.button8.TabIndex = 7;
+            this.button8.Text = "Comprar/ Ofertar";
+            this.button8.UseVisualStyleBackColor = false;
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button7.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.Location = new System.Drawing.Point(3, 80);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(139, 71);
+            this.button7.TabIndex = 6;
+            this.button7.Text = "Historial de cliente";
+            this.button7.UseVisualStyleBackColor = false;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button6.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Location = new System.Drawing.Point(728, 3);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(139, 71);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "Calificar vendedor";
+            this.button6.UseVisualStyleBackColor = false;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button5.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(583, 3);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(139, 71);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Listado estadístico";
+            this.button5.UseVisualStyleBackColor = false;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button4.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(438, 3);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(139, 71);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "Rendir compras";
+            this.button4.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(293, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(139, 71);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Gestionar preguntas";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // editarPublicacion
+            // 
+            this.editarPublicacion.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.editarPublicacion.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editarPublicacion.Location = new System.Drawing.Point(148, 3);
+            this.editarPublicacion.Name = "editarPublicacion";
+            this.editarPublicacion.Size = new System.Drawing.Size(139, 71);
+            this.editarPublicacion.TabIndex = 1;
+            this.editarPublicacion.Text = "Editar publicación";
+            this.editarPublicacion.UseVisualStyleBackColor = false;
+            // 
+            // publicar
+            // 
+            this.publicar.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.publicar.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.publicar.Location = new System.Drawing.Point(3, 3);
+            this.publicar.Name = "publicar";
+            this.publicar.Size = new System.Drawing.Size(139, 71);
+            this.publicar.TabIndex = 0;
+            this.publicar.Text = "Publicar";
+            this.publicar.UseVisualStyleBackColor = false;
             // 
             // menuStrip1
             // 
@@ -193,140 +327,6 @@
             this.button3.Text = "ABM de Rol";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // publicar
-            // 
-            this.publicar.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.publicar.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.publicar.Location = new System.Drawing.Point(3, 3);
-            this.publicar.Name = "publicar";
-            this.publicar.Size = new System.Drawing.Size(139, 71);
-            this.publicar.TabIndex = 0;
-            this.publicar.Text = "Publicar";
-            this.publicar.UseVisualStyleBackColor = false;
-            // 
-            // editarPublicacion
-            // 
-            this.editarPublicacion.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.editarPublicacion.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editarPublicacion.Location = new System.Drawing.Point(148, 3);
-            this.editarPublicacion.Name = "editarPublicacion";
-            this.editarPublicacion.Size = new System.Drawing.Size(139, 71);
-            this.editarPublicacion.TabIndex = 1;
-            this.editarPublicacion.Text = "Editar publicación";
-            this.editarPublicacion.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(293, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 71);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Gestionar preguntas";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button4.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(438, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(139, 71);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Rendir compras";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button5.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(583, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(139, 71);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Listado estadístico";
-            this.button5.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button6.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(728, 3);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(139, 71);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Calificar vendedor";
-            this.button6.UseVisualStyleBackColor = false;
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button7.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(3, 80);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(139, 71);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Historial de cliente";
-            this.button7.UseVisualStyleBackColor = false;
-            // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button8.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(148, 80);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(139, 71);
-            this.button8.TabIndex = 7;
-            this.button8.Text = "Comprar/ Ofertar";
-            this.button8.UseVisualStyleBackColor = false;
-            // 
-            // button9
-            // 
-            this.button9.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button9.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(293, 80);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(139, 71);
-            this.button9.TabIndex = 8;
-            this.button9.Text = "ABM de Rol";
-            this.button9.UseVisualStyleBackColor = false;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button10
-            // 
-            this.button10.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button10.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button10.Location = new System.Drawing.Point(438, 80);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(139, 71);
-            this.button10.TabIndex = 9;
-            this.button10.Text = "ABM de Cliente";
-            this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // button11
-            // 
-            this.button11.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button11.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button11.Location = new System.Drawing.Point(583, 80);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(139, 71);
-            this.button11.TabIndex = 10;
-            this.button11.Text = "ABM de Empresa";
-            this.button11.UseVisualStyleBackColor = false;
-            // 
-            // button12
-            // 
-            this.button12.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button12.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button12.Location = new System.Drawing.Point(728, 80);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(139, 71);
-            this.button12.TabIndex = 11;
-            this.button12.Text = "ABM de Visibilidad";
-            this.button12.UseVisualStyleBackColor = false;
-            // 
             // PantallaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,7 +339,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "PantallaPrincipal";
             this.Text = "Menu Principal";
             this.statusStrip1.ResumeLayout(false);

@@ -46,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -63,6 +69,12 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abm Cliente\ABMCliente.cs">
@@ -151,6 +163,7 @@
     <Compile Include="Asistentes\AsistenteLogin.cs" />
     <Compile Include="Asistentes\AsistenteRol.cs" />
     <Compile Include="Asistentes\AsistenteUsuario.cs" />
+    <Compile Include="Asistentes\AsistenteVisibilidad.cs" />
     <Compile Include="Asistentes\AsistenteVistas.cs" />
     <Compile Include="Calificar Vendedor\Form1.cs">
       <SubType>Form</SubType>
@@ -181,6 +194,7 @@
     <Compile Include="Excepciones\ElTamanioDeLosDatosExcedeAlSistema.cs" />
     <Compile Include="Excepciones\HayCamposEnBlanco.cs" />
     <Compile Include="Excepciones\TelefonoYaRegistrado.cs" />
+    <Compile Include="Excepciones\UsuarioYaDadoDeBaja.cs" />
     <Compile Include="Facturar Publicaciones\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Cliente\AltaCliente.resx">
       <DependentUpon>AltaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Cliente\BajaCliente.resx">
+      <DependentUpon>BajaCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Cliente\EditarCliente.resx">
       <DependentUpon>EditarCliente.cs</DependentUpon>

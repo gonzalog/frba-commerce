@@ -47,6 +47,7 @@ namespace FrbaCommerce.Abm_Cliente
             boxTipoDoc.Text = "";
             elecNroDoc.Text = "";
             elecEMail.Text = "";
+            AsistenteVistas.CargarGrilla(grillaClientes, AsistenteCliente.getTableBuscando(nombreBox.Text, elecApe.Text, boxTipoDoc.Text, elecNroDoc.Text, elecEMail.Text));
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

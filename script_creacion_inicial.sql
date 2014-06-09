@@ -1011,7 +1011,6 @@ VALUES
 )
 
 GO
-
 --ALTA CLIENTE
 CREATE PROC THE_DISCRETABOY.alta_cliente
 (
@@ -1346,15 +1345,18 @@ C.nombre 'Nombre',
 C.apellido 'Apellido',
 C.doc_tipo 'Tipo',
 C.doc_numero 'Número',
-C.mail 'Mail'
+C.mail 'Mail',
+(CASE WHEN U.habilitado=1 THEN 'HABILITADO'
+ELSE 'INHABILITADO' END)'Estado'
 FROM
-THE_DISCRETABOY.Cliente C
+THE_DISCRETABOY.Cliente C,THE_DISCRETABOY.Usuario U
 WHERE
 C.nombre LIKE '%'+@nombre+'%' AND
 C.apellido LIKE '%'+@ape+'%' AND
 C.doc_tipo LIKE '%'+@tipo+'%' AND
 C.doc_numero LIKE '%'+@numero+'%' AND
-C.mail LIKE '%'+@email+'%'
+C.mail LIKE '%'+@email+'%' AND
+U.username=C.usuario
 END
 
 GO
@@ -1412,6 +1414,7 @@ id = @id
 END
 
 GO
+
 /* ****** Migrar datos existentes ******* */
 
 --CARGO CALIFICACIONES

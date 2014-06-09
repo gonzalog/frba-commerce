@@ -51,9 +51,9 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(712, 483);
+            this.cancelButton.Location = new System.Drawing.Point(828, 483);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(117, 32);
+            this.cancelButton.Size = new System.Drawing.Size(159, 32);
             this.cancelButton.TabIndex = 23;
             this.cancelButton.Text = "Cancelar";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -66,7 +66,7 @@
             this.errorBox.Multiline = true;
             this.errorBox.Name = "errorBox";
             this.errorBox.ReadOnly = true;
-            this.errorBox.Size = new System.Drawing.Size(812, 39);
+            this.errorBox.Size = new System.Drawing.Size(970, 39);
             this.errorBox.TabIndex = 22;
             // 
             // groupBox1
@@ -85,7 +85,7 @@
             this.groupBox1.Controls.Add(this.nombreBox);
             this.groupBox1.Location = new System.Drawing.Point(17, 57);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(812, 155);
+            this.groupBox1.Size = new System.Drawing.Size(970, 155);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Búsqueda";
@@ -93,36 +93,36 @@
             // boxTipoDoc
             // 
             this.boxTipoDoc.FormattingEnabled = true;
-            this.boxTipoDoc.Location = new System.Drawing.Point(535, 22);
+            this.boxTipoDoc.Location = new System.Drawing.Point(434, 22);
             this.boxTipoDoc.Name = "boxTipoDoc";
-            this.boxTipoDoc.Size = new System.Drawing.Size(271, 21);
+            this.boxTipoDoc.Size = new System.Drawing.Size(180, 21);
             this.boxTipoDoc.TabIndex = 105;
             // 
             // elecEMail
             // 
-            this.elecEMail.Location = new System.Drawing.Point(59, 74);
+            this.elecEMail.Location = new System.Drawing.Point(693, 23);
             this.elecEMail.Name = "elecEMail";
-            this.elecEMail.Size = new System.Drawing.Size(277, 20);
+            this.elecEMail.Size = new System.Drawing.Size(259, 20);
             this.elecEMail.TabIndex = 104;
             // 
             // elecNroDoc
             // 
-            this.elecNroDoc.Location = new System.Drawing.Point(535, 48);
+            this.elecNroDoc.Location = new System.Drawing.Point(434, 48);
             this.elecNroDoc.Name = "elecNroDoc";
-            this.elecNroDoc.Size = new System.Drawing.Size(271, 20);
+            this.elecNroDoc.Size = new System.Drawing.Size(180, 20);
             this.elecNroDoc.TabIndex = 103;
             // 
             // elecApe
             // 
             this.elecApe.Location = new System.Drawing.Point(59, 48);
             this.elecApe.Name = "elecApe";
-            this.elecApe.Size = new System.Drawing.Size(277, 20);
+            this.elecApe.Size = new System.Drawing.Size(224, 20);
             this.elecApe.TabIndex = 101;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 77);
+            this.label7.Location = new System.Drawing.Point(640, 26);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(39, 13);
             this.label7.TabIndex = 100;
@@ -131,7 +131,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(407, 51);
+            this.label6.Location = new System.Drawing.Point(306, 51);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(118, 13);
             this.label6.TabIndex = 99;
@@ -140,7 +140,7 @@
             // tipoDoc
             // 
             this.tipoDoc.AutoSize = true;
-            this.tipoDoc.Location = new System.Drawing.Point(407, 25);
+            this.tipoDoc.Location = new System.Drawing.Point(306, 25);
             this.tipoDoc.Name = "tipoDoc";
             this.tipoDoc.Size = new System.Drawing.Size(102, 13);
             this.tipoDoc.TabIndex = 98;
@@ -167,9 +167,9 @@
             // 
             // limpiarButton
             // 
-            this.limpiarButton.Location = new System.Drawing.Point(579, 115);
+            this.limpiarButton.Location = new System.Drawing.Point(816, 115);
             this.limpiarButton.Name = "limpiarButton";
-            this.limpiarButton.Size = new System.Drawing.Size(227, 23);
+            this.limpiarButton.Size = new System.Drawing.Size(136, 23);
             this.limpiarButton.TabIndex = 1;
             this.limpiarButton.Text = "Limpiar";
             this.limpiarButton.UseVisualStyleBackColor = true;
@@ -189,7 +189,7 @@
             this.nombreBox.Location = new System.Drawing.Point(59, 22);
             this.nombreBox.MaxLength = 255;
             this.nombreBox.Name = "nombreBox";
-            this.nombreBox.Size = new System.Drawing.Size(277, 20);
+            this.nombreBox.Size = new System.Drawing.Size(224, 20);
             this.nombreBox.TabIndex = 5;
             // 
             // grillaClientes
@@ -198,7 +198,7 @@
             this.grillaClientes.Location = new System.Drawing.Point(17, 235);
             this.grillaClientes.Name = "grillaClientes";
             this.grillaClientes.RowTemplate.ReadOnly = true;
-            this.grillaClientes.Size = new System.Drawing.Size(812, 214);
+            this.grillaClientes.Size = new System.Drawing.Size(970, 214);
             this.grillaClientes.TabIndex = 20;
             this.grillaClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaClientes_CellContentClick);
             // 
@@ -206,7 +206,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 527);
+            this.ClientSize = new System.Drawing.Size(999, 527);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.errorBox);
             this.Controls.Add(this.groupBox1);
