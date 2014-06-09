@@ -35,7 +35,8 @@ namespace FrbaCommerce.Login
         {
             if (this.rolesElegibles.Keys.Contains(elecRol.Text))
             {
-                AsistenteVistas.mostrarNuevaVentanaYCerrar(new PantallaPrincipal(this.usuario, this.rolesElegibles[elecRol.Text], this), this);
+                AsistenteVistas.mostrarNuevaVentana(new PantallaPrincipal(this.usuario, this.rolesElegibles[elecRol.Text], this.padre), this);
+                this.Close();
             }
             else
             {

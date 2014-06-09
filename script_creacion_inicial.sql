@@ -40,7 +40,7 @@ CREATE TABLE THE_DISCRETABOY.Cliente (
 	doc_numero [numeric](18, 0),
 	doc_tipo varchar(3) NOT NULL CHECK(doc_tipo = 'DNI' OR doc_tipo = 'LE' OR doc_tipo = 'LC'), -- DNI (Documento Nacional de Identidad), LE (Libreta de Enrolamiento), LC (Libreta Civica)
 	nombre [nvarchar](255),
-	aprellido [nvarchar](255),
+	apellido [nvarchar](255),
 	mail [nvarchar](255),
 	telefono [numeric](18),
 	direccion numeric(18) NOT NULL, --FK
@@ -1032,7 +1032,7 @@ usuario,
 doc_numero,
 doc_tipo,
 nombre,
-aprellido,
+apellido,
 mail,
 telefono,
 direccion,
@@ -1193,6 +1193,26 @@ END
 
 GO
 
+CREATE PROC THE_DISCRETABOY.existe_telefono_cliente_exceptuando_a
+(
+@telefono numeric (18,0),
+@user nvarchar(20)
+)
+AS
+BEGIN
+DECLARE @EXISTE NUMERIC (18,0)
+SELECT
+@EXISTE = CASE WHEN COUNT (*)>0 THEN 1 ELSE 0 END
+FROM
+THE_DISCRETABOY.Cliente C
+WHERE
+@telefono = C.telefono and
+@user != C.usuario
+RETURN @EXISTE
+END
+
+GO
+
 CREATE PROC THE_DISCRETABOY.existe_tipo_y_numero_doc
 (
 @TIPO VARCHAR(3),
@@ -1212,7 +1232,28 @@ RETURN @EXISTE
 END
 
 GO
+--CHEQUEA SI YA HAY OTRO CON TAL COMBINACION PARA CUANDO SE QUIERE CAMBIAR
+CREATE PROC THE_DISCRETABOY.existe_tipo_y_numero_doc_exceptuando_a
+(
+@TIPO VARCHAR(3),
+@NRO NUMERIC (18,0),
+@user nvarchar(20)
+)
+AS
+BEGIN
+DECLARE @EXISTE NUMERIC(18,0)
+SELECT 
+@EXISTE = CASE WHEN COUNT (*)>0 THEN 1 ELSE 0 END
+FROM
+THE_DISCRETABOY.Cliente C
+WHERE
+C.doc_tipo = @TIPO AND
+C.doc_numero = @NRO AND
+C.usuario != @user
+RETURN @EXISTE
+END
 
+GO
 --RETORNAR PASSWORDPERMANENTE
 CREATE PROC THE_DISCRETABOY.password_permanente
 (@user nvarchar(20))
@@ -1261,6 +1302,116 @@ END
 
 GO
 
+CREATE PROC THE_DISCRETABOY.get_data_cliente
+(@USER NVARCHAR(20))
+AS
+BEGIN
+SELECT TOP 1
+*
+FROM
+THE_DISCRETABOY.Cliente C
+WHERE
+C.usuario = @USER
+END
+
+GO
+
+CREATE PROC THE_DISCRETABOY.get_data_direccion
+(@id nvarchar(18))
+AS
+BEGIN
+SELECT TOP 1
+*
+FROM
+THE_DISCRETABOY.Direccion D
+WHERE
+D.id = @id
+END
+
+GO
+
+CREATE PROC THE_DISCRETABOY.get_clientes_buscando
+(
+@nombre nvarchar(255),
+@ape nvarchar(255),
+@tipo varchar(3),
+@numero nvarchar(255),
+@email nvarchar(255)
+)
+AS
+BEGIN
+SELECT
+C.usuario 'Usuario',
+C.nombre 'Nombre',
+C.apellido 'Apellido',
+C.doc_tipo 'Tipo',
+C.doc_numero 'Número',
+C.mail 'Mail'
+FROM
+THE_DISCRETABOY.Cliente C
+WHERE
+C.nombre LIKE '%'+@nombre+'%' AND
+C.apellido LIKE '%'+@ape+'%' AND
+C.doc_tipo LIKE '%'+@tipo+'%' AND
+C.doc_numero LIKE '%'+@numero+'%' AND
+C.mail LIKE '%'+@email+'%'
+END
+
+GO
+--EDITAR UN CLIENTE
+CREATE PROC THE_DISCRETABOY.editar_cliente
+(
+@user nvarchar(20), 
+@nombre nvarchar(255),
+@apellido nvarchar(255),
+@tipoDoc varchar(3), 
+@nroDoc numeric(18,0),
+@mail nvarchar(255),
+@telefono numeric(18,0),
+@fechaNac datetime
+)
+AS
+BEGIN
+UPDATE THE_DISCRETABOY.Cliente
+SET
+apellido = @apellido,
+nombre = @nombre,
+doc_tipo = @tipoDoc,
+doc_numero = @nroDoc,
+mail = @mail,
+telefono = @telefono,
+fecha_nacimiento = @fechaNac
+WHERE
+usuario = @user
+END
+
+GO
+--EDITAR UNA DIRECCION
+CREATE PROC THE_DISCRETABOY.editar_direccion
+(
+@id numeric(18,0), 
+@calle nvarchar(255),
+@numero numeric(18,0),
+@piso numeric(18,0), 
+@depto nvarchar(50),
+@cp nvarchar(50),
+@localidad nvarchar(255)
+)
+AS
+BEGIN
+UPDATE THE_DISCRETABOY.Direccion
+SET
+calle = @calle,
+numero = @numero,
+piso = @piso,
+depto = @depto,
+cod_post = @cp,
+localidad = @localidad
+WHERE
+id = @id
+END
+
+GO
 /* ****** Migrar datos existentes ******* */
 
 --CARGO CALIFICACIONES
@@ -1369,7 +1520,7 @@ GO
 --CARGO clientes
 INSERT INTO THE_DISCRETABOY.Cliente
 (
-aprellido,
+apellido,
 direccion,
 doc_numero,
 doc_tipo,

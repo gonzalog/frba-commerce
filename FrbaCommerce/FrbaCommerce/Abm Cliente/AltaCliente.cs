@@ -63,7 +63,7 @@ namespace FrbaCommerce.Abm_Cliente
             else
             {
                 errorBox.Text = "Registro aceptado.";
-                string usernameAuxiliar = "Cliente_"+elecTelefono;
+                string usernameAuxiliar = "Cliente_"+elecTelefono.Text;
                 AsistenteCliente.altaCliente(usernameAuxiliar,
                                             "UTNFRBA",
                                             1,
@@ -82,7 +82,8 @@ namespace FrbaCommerce.Abm_Cliente
                                             elecCP.Text,
                                             elecFechaNac.Value.Date
                                             );
-                MessageBox.Show("Usuario creado con éxito.\n¡Bienvenido " + usernameAuxiliar + " a FRBA-Commerce!");
+                MessageBox.Show("Usuario creado con éxito.\n" + usernameAuxiliar + " ahora es parte de FRBA-Commerce.");
+                AsistenteVistas.volverAPadreYCerrar(this.padre,this);
             }
         }
 

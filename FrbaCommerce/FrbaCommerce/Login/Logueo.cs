@@ -70,8 +70,17 @@ namespace FrbaCommerce.Login
                     MessageBox.Show("¡IMPORTANTE!\nLa contraseña que usted utilizó tiene una vida útil de solo un ingreso. Para poder volver a ingresar deberá ir al menú 'Cuenta'->'Cambiar contraseña' y reemplazarla por un nuevo valor a su antojo.");
                     AsistenteUsuario.inhabilitarUsuario(userName);
                 }
-                AsistenteVistas.mostrarNuevaVentana(new ElegirRol(userName,this),this);
+                Dictionary<string, int> rolesDelUsuario = AsistenteRol.getRolesDe(userName);
+                if (rolesDelUsuario.Count > 1)
+                {
+                    AsistenteVistas.mostrarNuevaVentana(new ElegirRol(userName, this), this);
+                }
+                else
+                {
+                    AsistenteVistas.mostrarNuevaVentana(new PantallaPrincipal(userName,rolesDelUsuario.Values.ElementAt(0),this), this);
+                }
                 return;
+                
             }
             else if (intentos == 3)
             {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FrbaCommerce.Asistentes;
+using System.Data;
+using FrbaCommerce.Registro_de_Usuario;
 
 namespace FrbaCommerce.Asistentes
 {
@@ -109,6 +111,16 @@ namespace FrbaCommerce.Asistentes
         public static void habilitarUsuario(string user)
         {
             ejecutarProcedure("habilitar_user", user);
+        }
+
+        public static DataRow getDataDireccion(string id)
+        {
+            return traerDataTable("get_data_direccion",id).Rows[0];
+        }
+
+        public static void editarDireccion(Direccion dir)
+        {
+            ejecutarProcedure("editar_direccion",dir.id,dir.calle,dir.numero,dir.piso,dir.depto,dir.codPostal,dir.localidad);
         }
     }
 }

@@ -39,10 +39,20 @@ namespace FrbaCommerce.ABM_Rol
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            AsistenteVistas.volverAPadreYCerrar(padre,this);
+            this.Close();
         }
 
         private void ABMRol_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(AsistenteVistas.nombreProyecto + "\n" + "Desarrollado por THE_DISCRETABOY");
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

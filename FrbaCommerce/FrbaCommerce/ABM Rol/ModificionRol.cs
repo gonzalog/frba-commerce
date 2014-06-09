@@ -23,15 +23,12 @@ namespace FrbaCommerce.ABM_Rol
 
             MinimizeBox = false;
             MaximizeBox = false;
-
-            //dimensionarColumnas();
         }
 
         public void cargarRoles()
         {
             DataTable rolesExistentes = AsistenteRol.getRoles();
             AsistenteVistas.CargarGrilla(grillaRoles, rolesExistentes);
-            //dimensionarColumnas();
         }
 
         private void cargarBotonCambiarFunciones()
@@ -97,14 +94,5 @@ namespace FrbaCommerce.ABM_Rol
                 errorBox.Text = "Click inválido.";
             }
         }
-
-       /* private void dimensionarColumnas()
-        {
-            grillaRoles.Columns[0].Width = 10;
-            grillaRoles.Columns[1].Width = 50;
-            grillaRoles.Columns[2].Width = 100;
-            grillaRoles.Columns[3].Width = 100;
-        }*/
-
     }
 }

@@ -62,6 +62,25 @@
     <Compile Include="Abm Cliente\AltaCliente.Designer.cs">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Cliente\BajaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Cliente\BajaCliente.Designer.cs">
+      <DependentUpon>BajaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Cliente\Cliente.cs" />
+    <Compile Include="Abm Cliente\EditarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Cliente\EditarCliente.Designer.cs">
+      <DependentUpon>EditarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Cliente\ModificacionClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Cliente\ModificacionClientes.Designer.cs">
+      <DependentUpon>ModificacionClientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Empresa\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +162,10 @@
     <Compile Include="Editar Publicacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Excepciones\DocumentoRepetido.cs" />
+    <Compile Include="Excepciones\ElTamanioDeLosDatosExcedeAlSistema.cs" />
+    <Compile Include="Excepciones\HayCamposEnBlanco.cs" />
+    <Compile Include="Excepciones\TelefonoYaRegistrado.cs" />
     <Compile Include="Facturar Publicaciones\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +184,7 @@
     <Compile Include="PantallaPrincipal.Designer.cs">
       <DependentUpon>PantallaPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registro de Usuario\Direccion.cs" />
     <Compile Include="Registro de Usuario\OpcionTipoRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,8 +235,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Abm Cliente\ABMCliente.resx">
+      <DependentUpon>ABMCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Cliente\AltaCliente.resx">
       <DependentUpon>AltaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Cliente\EditarCliente.resx">
+      <DependentUpon>EditarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Cliente\ModificacionClientes.resx">
+      <DependentUpon>ModificacionClientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\ABMRol.resx">
       <DependentUpon>ABMRol.cs</DependentUpon>
@@ -258,12 +291,6 @@
     <EmbeddedResource Include="Registro de Usuario\RegistroEmpresa.resx">
       <DependentUpon>RegistroEmpresa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tests\TestEjecutarProc.resx">
-      <DependentUpon>TestEjecutarProc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Tests\TestMostrarRoles.resx">
-      <DependentUpon>TestMostrarRoles.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -284,18 +311,6 @@
     </Compile>
     <Compile Include="Registro de Usuario\RegistroEmpresa.Designer.cs">
       <DependentUpon>RegistroEmpresa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\TestEjecutarProc.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tests\TestEjecutarProc.Designer.cs">
-      <DependentUpon>TestEjecutarProc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\TestMostrarRoles.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tests\TestMostrarRoles.Designer.cs">
-      <DependentUpon>TestMostrarRoles.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

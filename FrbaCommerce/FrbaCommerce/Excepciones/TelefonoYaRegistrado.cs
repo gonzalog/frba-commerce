@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace FrbaCommerce.Excepciones
+{
+    class TelefonoYaRegistrado : Exception
+    {
+        public TelefonoYaRegistrado()
+    {
+    }
+
+    public TelefonoYaRegistrado(string message)
+        : base(message)
+    {
+    }
+
+    public TelefonoYaRegistrado(string message, Exception inner)
+        : base(message, inner)
+    {
+    }
+    }
+}

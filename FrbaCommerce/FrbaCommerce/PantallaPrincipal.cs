@@ -51,7 +51,7 @@ namespace FrbaCommerce
 
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AsistenteVistas.mostrarNuevaVentanaYCerrar(new IniciarSesion(),this);
+            AsistenteVistas.volverAPadreYCerrar(this.padre,this);
         }
 
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,12 +61,12 @@ namespace FrbaCommerce
 
         private void button9_Click(object sender, EventArgs e)
         {
-            AsistenteVistas.mostrarNuevaVentana(new ABM_Rol.ABMRol(this), this);
+            AsistenteVistas.mostrarSimultaneo(new ABM_Rol.ABMRol(this));
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            AsistenteVistas.mostrarNuevaVentana(new ABMCliente(this), this);
+            AsistenteVistas.mostrarSimultaneo(new ABMCliente(this));
         }
     }
 }
