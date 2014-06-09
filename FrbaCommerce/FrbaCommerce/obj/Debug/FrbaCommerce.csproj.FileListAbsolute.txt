@@ -24,3 +24,5 @@ C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerc
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Cliente.ModificacionClientes.resources
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Cliente.EditarCliente.resources
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Cliente.BajaCliente.resources
+C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Empresa.ABMEmpresa.resources
+C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Empresa.AltaEmpresa.resources

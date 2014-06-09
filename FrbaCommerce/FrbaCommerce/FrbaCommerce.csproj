@@ -108,11 +108,17 @@
     <Compile Include="Abm Cliente\ModificacionClientes.Designer.cs">
       <DependentUpon>ModificacionClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Empresa\Form1.cs">
+    <Compile Include="Abm Empresa\ABMEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Empresa\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Empresa\ABMEmpresa.Designer.cs">
+      <DependentUpon>ABMEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Empresa\AltaEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Empresa\AltaEmpresa.Designer.cs">
+      <DependentUpon>AltaEmpresa.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM Rol\ABMRol.cs">
       <SubType>Form</SubType>
@@ -278,6 +284,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Cliente\ModificacionClientes.resx">
       <DependentUpon>ModificacionClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Empresa\ABMEmpresa.resx">
+      <DependentUpon>ABMEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Empresa\AltaEmpresa.resx">
+      <DependentUpon>AltaEmpresa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\ABMRol.resx">
       <DependentUpon>ABMRol.cs</DependentUpon>

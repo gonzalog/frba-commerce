@@ -8,15 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Asistentes;
 
-namespace FrbaCommerce.Abm_Cliente
+namespace FrbaCommerce.Abm_Empresa
 {
-    public partial class ABMCliente : Form
+    public partial class ABMEmpresa : Form
     {
-        public Form padre;
-        public ABMCliente(Form padre)
+        public ABMEmpresa()
         {
             InitializeComponent();
-            this.padre = padre;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -31,22 +29,7 @@ namespace FrbaCommerce.Abm_Cliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AsistenteVistas.mostrarNuevaVentana(new AltaCliente(this),this);
-        }
-
-        private void Modificar_Click(object sender, EventArgs e)
-        {
-            AsistenteVistas.mostrarNuevaVentana(new ModificacionClientes(this), this);
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            AsistenteVistas.mostrarNuevaVentana(new BajaCliente(this), this);
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            AsistenteVistas.mostrarNuevaVentana(new AltaEmpresa(this), this);
         }
     }
 }
