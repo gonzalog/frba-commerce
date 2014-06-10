@@ -85,5 +85,10 @@ namespace FrbaCommerce.Abm_Cliente
             }
         }
 
+        private void elecNroDoc_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

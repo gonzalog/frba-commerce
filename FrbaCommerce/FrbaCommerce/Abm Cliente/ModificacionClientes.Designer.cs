@@ -111,6 +111,7 @@
             this.elecNroDoc.Name = "elecNroDoc";
             this.elecNroDoc.Size = new System.Drawing.Size(180, 20);
             this.elecNroDoc.TabIndex = 103;
+            this.elecNroDoc.TextChanged += new System.EventHandler(this.elecNroDoc_TextChanged);
             // 
             // elecApe
             // 

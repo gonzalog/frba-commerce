@@ -5,18 +5,18 @@ using System.Text;
 
 namespace FrbaCommerce.Excepciones
 {
-    class BajaYaEfectuada : Exception
+    class CodigoRepetido : Exception
     {
-        public BajaYaEfectuada()
+        public CodigoRepetido()
         {
         }
 
-        public BajaYaEfectuada(string message)
+        public CodigoRepetido(string message)
             : base(message)
         {
         }
 
-        public BajaYaEfectuada(string message, Exception inner)
+        public CodigoRepetido(string message, Exception inner)
             : base(message, inner)
         {
         }

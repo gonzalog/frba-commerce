@@ -68,17 +68,24 @@ namespace FrbaCommerce.Asistentes
             {
                 return ejecutarProcedureWithReturnValue("existe_telefono_cliente_exceptuando_a", Convert.ToInt64(telefono), user) == 1;
             }
-            catch (OverflowException)
+            catch (Exception)
             {
-                throw new ElTamanioDeLosDatosExcedeAlSistema();
+                throw new ElTamanioDeLosDatosExcedeAlSistema("El contenido del campo telefono no es soportado por el sistema.");
             }
         }
 
         public static void chequearTipoYNroDocNoRepetido(string tipo, string numero, List<string> errores) 
         {
-            if (existeTipoYNumeroDoc(tipo, Convert.ToInt64(numero)))
+            try
             {
-                errores.Add("Ya existe un cliente con tal tipo y número de documento.\n Se le recuerda que cada cliente puede estar registrado una única vez.");
+                if (existeTipoYNumeroDoc(tipo, Convert.ToInt64(numero)))
+                {
+                    errores.Add("Ya existe un cliente con tal tipo y número de documento.\n Se le recuerda que cada cliente puede estar registrado una única vez.");
+                }
+            }
+            catch (OverflowException)
+            {
+                throw new ElTamanioDeLosDatosExcedeAlSistema("El contenido del campo número de documento no es soportado por el sistema.");
             }
         }
 

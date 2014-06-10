@@ -85,7 +85,7 @@ namespace FrbaCommerce.Abm_Cliente
                             AsistenteUsuario.inhabilitarUsuario(clienteADarDeBaja);
                             AsistenteVistas.CargarGrilla(grillaClientes, AsistenteCliente.getTableBuscando(nombreBox.Text, elecApe.Text, boxTipoDoc.Text, elecNroDoc.Text, elecEMail.Text));
                         }
-                        catch (UsuarioYaDadoDeBaja)
+                        catch (BajaYaEfectuada)
                         {
                             MessageBox.Show(clienteADarDeBaja+" ya se encontraba dado de baja.");
                         }

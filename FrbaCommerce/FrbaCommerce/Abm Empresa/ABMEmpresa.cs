@@ -31,5 +31,15 @@ namespace FrbaCommerce.Abm_Empresa
         {
             AsistenteVistas.mostrarNuevaVentana(new AltaEmpresa(this), this);
         }
+
+        private void Modificar_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarNuevaVentana(new ModificarEmpresas(this), this);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarNuevaVentana(new BajaEmpresas(this), this);
+        }
     }
 }

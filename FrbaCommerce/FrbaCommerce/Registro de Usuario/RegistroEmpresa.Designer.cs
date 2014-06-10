@@ -141,6 +141,7 @@
             this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 90;
             this.label1.Text = "Razón social:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // elecRazonSocial
             // 
@@ -148,6 +149,7 @@
             this.elecRazonSocial.Name = "elecRazonSocial";
             this.elecRazonSocial.Size = new System.Drawing.Size(214, 20);
             this.elecRazonSocial.TabIndex = 91;
+            this.elecRazonSocial.TextChanged += new System.EventHandler(this.elecRazonSocial_TextChanged);
             // 
             // elecTelefono
             // 
@@ -163,6 +165,7 @@
             this.elecEMail.Name = "elecEMail";
             this.elecEMail.Size = new System.Drawing.Size(214, 20);
             this.elecEMail.TabIndex = 94;
+            this.elecEMail.TextChanged += new System.EventHandler(this.elecEMail_TextChanged);
             // 
             // label8
             // 
@@ -172,6 +175,7 @@
             this.label8.Size = new System.Drawing.Size(52, 13);
             this.label8.TabIndex = 93;
             this.label8.Text = "Telefono:";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label7
             // 
@@ -181,6 +185,7 @@
             this.label7.Size = new System.Drawing.Size(39, 13);
             this.label7.TabIndex = 92;
             this.label7.Text = "E-Mail:";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // groupBox1
             // 
@@ -202,6 +207,7 @@
             this.groupBox1.TabIndex = 96;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dirección";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // elecPiso
             // 
@@ -309,6 +315,7 @@
             this.label12.Size = new System.Drawing.Size(43, 13);
             this.label12.TabIndex = 97;
             this.label12.Text = "Ciudad:";
+            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // elecCiudad
             // 
@@ -316,6 +323,7 @@
             this.elecCiudad.Name = "elecCiudad";
             this.elecCiudad.Size = new System.Drawing.Size(214, 20);
             this.elecCiudad.TabIndex = 98;
+            this.elecCiudad.TextChanged += new System.EventHandler(this.elecCiudad_TextChanged);
             // 
             // elecCUIT
             // 
@@ -333,6 +341,7 @@
             this.label13.Size = new System.Drawing.Size(35, 13);
             this.label13.TabIndex = 99;
             this.label13.Text = "CUIT:";
+            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // label14
             // 
@@ -342,6 +351,7 @@
             this.label14.Size = new System.Drawing.Size(107, 13);
             this.label14.TabIndex = 101;
             this.label14.Text = "Nombre de contacto:";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // elecNombreContacto
             // 
@@ -349,6 +359,7 @@
             this.elecNombreContacto.Name = "elecNombreContacto";
             this.elecNombreContacto.Size = new System.Drawing.Size(214, 20);
             this.elecNombreContacto.TabIndex = 102;
+            this.elecNombreContacto.TextChanged += new System.EventHandler(this.elecNombreContacto_TextChanged);
             // 
             // label15
             // 
@@ -358,6 +369,7 @@
             this.label15.Size = new System.Drawing.Size(99, 13);
             this.label15.TabIndex = 103;
             this.label15.Text = "Fecha de creación:";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // elecFechaCreacion
             // 
@@ -365,6 +377,7 @@
             this.elecFechaCreacion.Name = "elecFechaCreacion";
             this.elecFechaCreacion.Size = new System.Drawing.Size(214, 20);
             this.elecFechaCreacion.TabIndex = 104;
+            this.elecFechaCreacion.ValueChanged += new System.EventHandler(this.elecFechaCreacion_ValueChanged);
             // 
             // cancelar
             // 

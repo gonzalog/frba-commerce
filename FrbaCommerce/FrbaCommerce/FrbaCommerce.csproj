@@ -120,6 +120,25 @@
     <Compile Include="Abm Empresa\AltaEmpresa.Designer.cs">
       <DependentUpon>AltaEmpresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Empresa\BajaEmpresas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Empresa\BajaEmpresas.Designer.cs">
+      <DependentUpon>BajaEmpresas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Empresa\EditarEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Empresa\EditarEmpresa.Designer.cs">
+      <DependentUpon>EditarEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Empresa\Empresa.cs" />
+    <Compile Include="Abm Empresa\ModificarEmpresas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Empresa\ModificarEmpresas.Designer.cs">
+      <DependentUpon>ModificarEmpresas.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM Rol\ABMRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,12 +175,37 @@
     <Compile Include="Abm Rubro\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Visibilidad\Form1.cs">
+    <Compile Include="Abm Visibilidad\ABMVisibilidad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Visibilidad\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Visibilidad\ABMVisibilidad.Designer.cs">
+      <DependentUpon>ABMVisibilidad.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Visibilidad\AltaVisibilidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Visibilidad\AltaVisibilidad.Designer.cs">
+      <DependentUpon>AltaVisibilidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Visibilidad\BajaVisibilidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Visibilidad\BajaVisibilidad.Designer.cs">
+      <DependentUpon>BajaVisibilidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Visibilidad\EditarVisibilidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Visibilidad\EditarVisibilidad.Designer.cs">
+      <DependentUpon>EditarVisibilidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Visibilidad\ModificarVisibilidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Visibilidad\ModificarVisibilidad.Designer.cs">
+      <DependentUpon>ModificarVisibilidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Visibilidad\Visibilidad.cs" />
     <Compile Include="Asistentes\AsistenteBotones.cs" />
     <Compile Include="Asistentes\AsistenteCliente.cs" />
     <Compile Include="Asistentes\AsistenteColecciones.cs" />
@@ -196,8 +240,11 @@
     <Compile Include="Editar Publicacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Excepciones\CodigoRepetido.cs" />
+    <Compile Include="Excepciones\CUITRepetido.cs" />
     <Compile Include="Excepciones\DocumentoRepetido.cs" />
     <Compile Include="Excepciones\ElTamanioDeLosDatosExcedeAlSistema.cs" />
+    <Compile Include="Excepciones\FallaDelMotor.cs" />
     <Compile Include="Excepciones\HayCamposEnBlanco.cs" />
     <Compile Include="Excepciones\TelefonoYaRegistrado.cs" />
     <Compile Include="Excepciones\UsuarioYaDadoDeBaja.cs" />
@@ -291,6 +338,15 @@
     <EmbeddedResource Include="Abm Empresa\AltaEmpresa.resx">
       <DependentUpon>AltaEmpresa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Empresa\BajaEmpresas.resx">
+      <DependentUpon>BajaEmpresas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Empresa\EditarEmpresa.resx">
+      <DependentUpon>EditarEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Empresa\ModificarEmpresas.resx">
+      <DependentUpon>ModificarEmpresas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\ABMRol.resx">
       <DependentUpon>ABMRol.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,6 +361,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\ModificionRol.resx">
       <DependentUpon>ModificionRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Visibilidad\ABMVisibilidad.resx">
+      <DependentUpon>ABMVisibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Visibilidad\AltaVisibilidad.resx">
+      <DependentUpon>AltaVisibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Visibilidad\BajaVisibilidad.resx">
+      <DependentUpon>BajaVisibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Visibilidad\EditarVisibilidad.resx">
+      <DependentUpon>EditarVisibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Visibilidad\ModificarVisibilidad.resx">
+      <DependentUpon>ModificarVisibilidad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CambioPassword\CambioPassword.resx">
       <DependentUpon>CambioPassword.cs</DependentUpon>

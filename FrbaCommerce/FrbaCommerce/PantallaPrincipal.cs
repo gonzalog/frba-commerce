@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using FrbaCommerce.Asistentes;
 using FrbaCommerce.Abm_Cliente;
 using FrbaCommerce.Abm_Empresa;
+using FrbaCommerce.Abm_Visibilidad;
 
 namespace FrbaCommerce
 {
@@ -73,6 +74,11 @@ namespace FrbaCommerce
         private void button11_Click(object sender, EventArgs e)
         {
             AsistenteVistas.mostrarSimultaneo(new ABMEmpresa());
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarSimultaneo(new ABMVisibilidad());
         }
     }
 }

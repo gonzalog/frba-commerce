@@ -96,7 +96,8 @@ CREATE TABLE THE_DISCRETABOY.Visibilidad (
 	codigo numeric(18) NOT NULL, --PK
 	porcentaje [numeric](18, 2) NOT NULL,
 	descripcion [nvarchar](255),
-	precio_por_pub [numeric](18, 2) NOT NULL
+	precio_por_pub [numeric](18, 2) NOT NULL,
+	habilitado bit DEFAULT 1
 );
 
 CREATE TABLE THE_DISCRETABOY.Publicacion (
@@ -726,6 +727,20 @@ ru.usuario = @user
 END
 
 GO
+--TRAER VISIBILIDADES
+CREATE PROC THE_DISCRETABOY.get_visibilidades
+AS
+BEGIN
+SELECT 
+V.codigo 'CÓDIGO', 
+V.descripcion 'DESCRIPCIÓN',
+V.porcentaje 'PORCENTAJE DE LA VENTA',
+V.precio_por_pub 'PRECIO POR PUBLICAR',
+(CASE WHEN V.habilitado=1 THEN 'HABILITADO' ELSE 'INHABILITADO' END) 'ESTADO'
+FROM THE_DISCRETABOY.Visibilidad V 
+END
+
+GO
 
 CREATE PROC THE_DISCRETABOY.get_nombre_rol
 (@cod numeric (18,0))
@@ -1211,7 +1226,47 @@ RETURN @EXISTE
 END
 
 GO
+--PARA FIJARSE SI CUANDO SE CAMBIA UNA EMPRESA NO SE LE ASIGEN UN TEL. YA USADO
+CREATE PROC THE_DISCRETABOY.existe_telefono_empresa_exceptuando_a
+(
+@telefono numeric (18,0),
+@user nvarchar(20)
+)
+AS
+BEGIN
+DECLARE @EXISTE NUMERIC (18,0)
+SELECT
+@EXISTE = CASE WHEN COUNT (*)>0 THEN 1 ELSE 0 END
+FROM
+THE_DISCRETABOY.Empresa C
+WHERE
+@telefono = C.telefono and
+@user != C.usuario
+RETURN @EXISTE
+END
 
+GO
+--PARA SABER SI YA REGISTRARON ESE CUIT
+CREATE PROC THE_DISCRETABOY.existe_cuit_exceptuando_a
+(
+@cuit nvarchar(255),
+@user nvarchar(20)
+)
+AS
+BEGIN
+DECLARE @EXISTE NUMERIC (18,0)
+SELECT
+@EXISTE = CASE WHEN COUNT (*)>0 THEN 1 ELSE 0 END
+FROM
+THE_DISCRETABOY.Empresa E
+WHERE
+@cuit = e.cuit and
+@user != E.usuario
+RETURN @EXISTE
+END
+
+GO
+--PARA SABER SI YA EXISTE ALGUIEN CON ESE DOCUMENTO
 CREATE PROC THE_DISCRETABOY.existe_tipo_y_numero_doc
 (
 @TIPO VARCHAR(3),
@@ -1227,6 +1282,22 @@ THE_DISCRETABOY.Cliente C
 WHERE
 C.doc_tipo = @TIPO AND
 C.doc_numero = @NRO
+RETURN @EXISTE
+END
+
+GO
+--PARA SABER SI EL COD DE VISIBILIDAD NO ESTÁ USADO
+CREATE PROC THE_DISCRETABOY.existe_cod_visibilidad
+(@COD numeric(18,0))
+AS
+BEGIN
+DECLARE @EXISTE NUMERIC(18,0)
+SELECT 
+@EXISTE = CASE WHEN COUNT (*)>0 THEN 1 ELSE 0 END
+FROM
+THE_DISCRETABOY.Visibilidad V
+WHERE
+V.codigo = @COD
 RETURN @EXISTE
 END
 
@@ -1301,6 +1372,7 @@ END
 
 GO
 
+--TRAIGO FILA DEL CLIENTE
 CREATE PROC THE_DISCRETABOY.get_data_cliente
 (@USER NVARCHAR(20))
 AS
@@ -1314,7 +1386,21 @@ C.usuario = @USER
 END
 
 GO
+--TRAIGO FILA DE LA EMPRESA
+CREATE PROC THE_DISCRETABOY.get_data_empresa
+(@USER NVARCHAR(20))
+AS
+BEGIN
+SELECT TOP 1
+*
+FROM
+THE_DISCRETABOY.Empresa E
+WHERE
+E.usuario = @USER
+END
 
+GO
+--TRAIGO FILA DE DIRECCION
 CREATE PROC THE_DISCRETABOY.get_data_direccion
 (@id nvarchar(18))
 AS
@@ -1360,6 +1446,33 @@ U.username=C.usuario
 END
 
 GO
+
+--BUSCAR EMPRESAS
+CREATE PROC THE_DISCRETABOY.get_empresas_buscando
+(
+@razon nvarchar(255),
+@cuit nvarchar(255),
+@email nvarchar(255)
+)
+AS
+BEGIN
+SELECT
+E.usuario 'USUARIO',
+E.razon_social 'RAZON SOCIAL',
+E.cuit 'CUIT',
+E.mail 'E-MAIL',
+(CASE WHEN U.habilitado=1 THEN 'HABILITADO'
+ELSE 'INHABILITADO' END)'ESTADO ACTUAL'
+FROM
+THE_DISCRETABOY.Empresa E,THE_DISCRETABOY.Usuario U
+WHERE 
+U.username = E.usuario AND
+E.razon_social LIKE '%'+@razon+'%' AND
+(E.cuit = @cuit OR @cuit='')AND
+E.mail LIKE '%'+@email+'%'
+END
+
+GO
 --EDITAR UN CLIENTE
 CREATE PROC THE_DISCRETABOY.editar_cliente
 (
@@ -1383,6 +1496,34 @@ doc_numero = @nroDoc,
 mail = @mail,
 telefono = @telefono,
 fecha_nacimiento = @fechaNac
+WHERE
+usuario = @user
+END
+
+GO
+--EDITAR UNA EMPRESA
+CREATE PROC THE_DISCRETABOY.editar_empresa
+(
+@user nvarchar(20), 
+@RS nvarchar(255),
+@mail nvarchar(255),
+@telefono numeric(18,0),
+@ciudad nvarchar(255),
+@cuit nvarchar(255),
+@nombre_contacto nvarchar(255),
+@fechaCreacion datetime
+)
+AS
+BEGIN
+UPDATE THE_DISCRETABOY.Empresa
+SET
+razon_social = @RS,
+mail = @mail,
+telefono = @telefono,
+ciudad = @ciudad,
+cuit = @cuit,
+nombre_de_contacto = @nombre_contacto,
+fecha_creacion = @fechaCreacion
 WHERE
 usuario = @user
 END
@@ -1414,7 +1555,96 @@ id = @id
 END
 
 GO
+--DAR DE ALTA UNA NUEVA VISIBILIDAD
+CREATE PROC THE_DISCRETABOY.alta_visibilidad
+(
+@cod numeric(18,0),
+@desc nvarchar(255),
+@prec numeric(18,2),
+@porc numeric(18,2)
+)
+AS
+BEGIN
+INSERT INTO THE_DISCRETABOY.Visibilidad
+(
+codigo,
+descripcion,
+precio_por_pub,
+porcentaje
+)
+VALUES
+(
+@cod,
+@desc,
+@prec,
+@porc
+)
+END
 
+GO
+--EDITAR VISIBILIDAD
+CREATE PROC THE_DISCRETABOY.editar_visibilidad
+(
+@cod numeric(18,0),
+@desc nvarchar(255),
+@prec numeric(18,2),
+@porc numeric(18,2)
+)
+AS
+BEGIN
+UPDATE THE_DISCRETABOY.Visibilidad
+SET descripcion = @desc,
+precio_por_pub = @prec,
+porcentaje = @porc
+WHERE
+codigo = @cod
+END
+
+GO
+--BUSCAR VISIBILIDADES
+CREATE PROC THE_DISCRETABOY.get_visibilidades_buscando
+(@descrip NVARCHAR(255))
+AS
+BEGIN
+SELECT
+V.codigo 'CÓDIGO',
+V.descripcion 'DESCRIPCIÓN',
+V.porcentaje 'PORCENTAJE',
+V.precio_por_pub 'PRECIO POR PUBLICACIÓN',
+(CASE WHEN V.habilitado=1 THEN 'HABILITADO'
+ELSE 'INHABILITADO' END)'ESTADO ACTUAL'
+FROM
+THE_DISCRETABOY.Visibilidad V
+WHERE V.descripcion LIKE '%'+@descrip+'%'
+END
+
+GO
+--TRAER DATA DE VISIBILIDAD
+CREATE PROC THE_DISCRETABOY.get_data_visibilidad
+(@COD NUMERIC(18,0))
+AS
+BEGIN
+SELECT TOP 1
+*
+FROM
+THE_DISCRETABOY.Visibilidad V
+WHERE
+V.codigo = @COD
+END
+
+GO
+--INHABILITAR VISIBILIDAD
+CREATE PROC THE_DISCRETABOY.inhabilitar_visibilidad
+(@cod numeric(18,0))
+AS
+BEGIN
+UPDATE THE_DISCRETABOY.Visibilidad
+SET habilitado = 0
+WHERE
+codigo = @cod
+END
+
+GO
 /* ****** Migrar datos existentes ******* */
 
 --CARGO CALIFICACIONES

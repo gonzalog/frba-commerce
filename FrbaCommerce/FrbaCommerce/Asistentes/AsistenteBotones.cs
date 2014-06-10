@@ -34,6 +34,11 @@ namespace FrbaCommerce.Asistentes
                 errores.Add("El campo "+nombre+" no puede estar vacío.");
         }
 
+        public static void chequearTextboxNoNulo(TextBox box, string nombre)
+        {
+            if (String.IsNullOrEmpty(box.Text)) throw new HayCamposEnBlanco("El campo "+nombre+" no puede estar vacío.");
+        }
+
         public static void checkSoloNumericos(TextBox box) 
         {
             string tString = box.Text;
@@ -41,6 +46,44 @@ namespace FrbaCommerce.Asistentes
             for (int i = 0; i < tString.Length; i++)
             {
                 if (!char.IsNumber(tString[i]))
+                {
+                    MessageBox.Show("Debe ingresarse un valor numérico.");
+                    box.Text = "";
+                    return;
+                }
+
+            }
+        }
+
+        public static void checkSoloNumericosYMenorOIgualA(TextBox box,int cotaSuperiorCerrada)
+        {
+            string tString = box.Text;
+            if (tString.Trim() == "") return;
+            for (int i = 0; i < tString.Length; i++)
+            {
+                if (!char.IsNumber(tString[i]))
+                {
+                    MessageBox.Show("Debe ingresarse un valor numérico.");
+                    box.Text = "";
+                    return;
+                }
+                if (Convert.ToInt64(tString) > cotaSuperiorCerrada)
+                {
+                    MessageBox.Show("Debe ingresarse un valor menor a "+cotaSuperiorCerrada+".");
+                    box.Text = "";
+                    return;
+                }
+
+            }
+        }
+
+        public static void checkSoloNumericosOGuion(TextBox box)
+        {
+            string tString = box.Text;
+            if (tString.Trim() == "") return;
+            for (int i = 0; i < tString.Length; i++)
+            {
+                if ((!char.IsNumber(tString[i])) & (tString[i]!='-'))
                 {
                     MessageBox.Show("Debe ingresarse un valor numérico.");
                     box.Text = "";
@@ -91,6 +134,11 @@ namespace FrbaCommerce.Asistentes
                 listado += ("\t" + alerta + "\n");
             }
             return listado;
+        }
+        public static string eliminarDecimales(string entrada)
+        {
+            int indiceComa = entrada.IndexOf(',');
+            return entrada.Remove(indiceComa);
         }
     }
 }

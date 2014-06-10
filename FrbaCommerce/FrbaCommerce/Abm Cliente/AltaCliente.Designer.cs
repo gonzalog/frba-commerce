@@ -339,7 +339,7 @@
             this.nombre.TabIndex = 84;
             this.nombre.Text = "Nombre:";
             // 
-            // ABMCliente
+            // AltaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -364,7 +364,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.errorBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ABMCliente";
+            this.Name = "AltaCliente";
             this.Text = "ABM de Cliente";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);

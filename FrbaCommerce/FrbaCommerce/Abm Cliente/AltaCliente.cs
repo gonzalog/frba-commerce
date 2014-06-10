@@ -66,7 +66,7 @@ namespace FrbaCommerce.Abm_Cliente
                 string usernameAuxiliar = "Cliente_"+elecTelefono.Text;
                 AsistenteCliente.altaCliente(usernameAuxiliar,
                                             "UTNFRBA",
-                                            1,
+                                            0,
                                             "Cliente",
                                             elecNombre.Text,
                                             elecApe.Text,
