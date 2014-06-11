@@ -34,7 +34,6 @@ namespace FrbaCommerce.ABM_Rol
         private void cargarNombresFunciones()
         {
             funciones = AsistenteRol.getNombresFunciones();
-            Console.WriteLine("Hay "+funciones.Count()+" funciones cargadas");
             foreach (KeyValuePair<int, string> entry in funciones)
             {
                 checkedListBox1.Items.Add(entry.Value);
@@ -91,11 +90,6 @@ namespace FrbaCommerce.ABM_Rol
         private void Limpiar_Click_1(object sender, EventArgs e)
         {
             inicializarCampos();
-        }
-
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Cancelar_Click(object sender, EventArgs e)

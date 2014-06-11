@@ -31,5 +31,10 @@ namespace FrbaCommerce.Abm_Visibilidad
 
             AsistenteVisibilidad.editarVisibilidad(this);
         }
+
+        public int duracion()
+        {
+            return Convert.ToInt32(Convert.ToDouble(porcentaje)*100);
+        }
     }
 }

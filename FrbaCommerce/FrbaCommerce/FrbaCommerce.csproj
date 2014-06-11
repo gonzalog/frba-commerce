@@ -211,6 +211,7 @@
     <Compile Include="Asistentes\AsistenteColecciones.cs" />
     <Compile Include="Asistentes\AsistenteEmpresa.cs" />
     <Compile Include="Asistentes\AsistenteLogin.cs" />
+    <Compile Include="Asistentes\AsistentePublicacion.cs" />
     <Compile Include="Asistentes\AsistenteRol.cs" />
     <Compile Include="Asistentes\AsistenteUsuario.cs" />
     <Compile Include="Asistentes\AsistenteVisibilidad.cs" />
@@ -254,6 +255,15 @@
     <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Generar Publicacion\Borrador.cs" />
+    <Compile Include="Generar Publicacion\Estado.cs" />
+    <Compile Include="Generar Publicacion\Finalizada.cs" />
+    <Compile Include="Generar Publicacion\Pausa.cs" />
+    <Compile Include="Generar Publicacion\Publicacion.cs" />
+    <Compile Include="Generar Publicacion\Publicada.cs" />
+    <Compile Include="Generar Publicacion\Subasta.cs" />
+    <Compile Include="Generar Publicacion\Tipo.cs" />
+    <Compile Include="Generar Publicacion\VentaDirecta.cs" />
     <Compile Include="Login\ElegirRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -285,11 +295,11 @@
     <Compile Include="IniciarSesion.Designer.cs">
       <DependentUpon>IniciarSesion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicacion\Form1.cs">
+    <Compile Include="Generar Publicacion\GenerarPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Publicacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Generar Publicacion\GenerarPublicacion.Designer.cs">
+      <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Gestion de Preguntas\Form1.cs">
       <SubType>Form</SubType>
@@ -379,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CambioPassword\CambioPassword.resx">
       <DependentUpon>CambioPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\GenerarPublicacion.resx">
+      <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\ElegirRol.resx">
       <DependentUpon>ElegirRol.cs</DependentUpon>

@@ -9,7 +9,7 @@ namespace FrbaCommerce.Asistentes
 {
     class AsistenteVistas
     {
-        public static string nombreProyecto = "FRBA-Commerce";
+        public static string nombreProyecto = "FRBA-Commerce 1.0.0";
         public static void volverAPadreYCerrar(Form ventanaPadre, Form ventana)
         {
             ventanaPadre.Visible = true;

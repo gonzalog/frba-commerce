@@ -34,3 +34,4 @@ C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerc
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Visibilidad.EditarVisibilidad.resources
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Visibilidad.ModificarVisibilidad.resources
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Visibilidad.BajaVisibilidad.resources
+C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Generar_Publicacion.GenerarPublicacion.resources

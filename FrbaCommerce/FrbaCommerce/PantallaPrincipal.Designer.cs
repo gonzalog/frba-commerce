@@ -242,6 +242,7 @@
             this.publicar.TabIndex = 0;
             this.publicar.Text = "Publicar";
             this.publicar.UseVisualStyleBackColor = false;
+            this.publicar.Click += new System.EventHandler(this.publicar_Click);
             // 
             // menuStrip1
             // 

@@ -37,13 +37,13 @@ namespace FrbaCommerce.Abm_Visibilidad
 
         private void elecPrec_TextChanged(object sender, EventArgs e)
         {
-            //AsistenteBotones.checkSoloNumericos(elecPrec);
+            AsistenteBotones.checkSoloReales(elecPrec);
             visi.precio = elecPrec.Text;
         }
 
         private void elecPorcen_TextChanged(object sender, EventArgs e)
         {
-           // AsistenteBotones.checkSoloNumericos(elecPorcen);
+            AsistenteBotones.checkSoloReales(elecPorcen);
             visi.porcentaje = elecPorcen.Text;
         }
 

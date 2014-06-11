@@ -39,6 +39,12 @@ namespace FrbaCommerce.Asistentes
             if (String.IsNullOrEmpty(box.Text)) throw new HayCamposEnBlanco("El campo "+nombre+" no puede estar vacío.");
         }
 
+        public static void chequearTextboxNoNulos(params TextBox[] boxes)
+        {
+            foreach(TextBox box in boxes)
+                if (String.IsNullOrEmpty(box.Text)) throw new HayCamposEnBlanco(box);
+        }
+
         public static void checkSoloNumericos(TextBox box) 
         {
             string tString = box.Text;
@@ -60,23 +66,31 @@ namespace FrbaCommerce.Asistentes
             string tString = box.Text;
             if (tString.Trim() == "") return;
             for (int i = 0; i < tString.Length; i++)
-            {
                 if (!char.IsNumber(tString[i]))
                 {
                     MessageBox.Show("Debe ingresarse un valor numérico.");
                     box.Text = "";
                     return;
                 }
-                if (Convert.ToInt64(tString) > cotaSuperiorCerrada)
+
+            checkMenorA(box,cotaSuperiorCerrada); 
+        }
+
+        public static void checkMenorA(TextBox box, int cotaSuperiorCerrada)
+        {
+            try
+            {
+                if (Convert.ToInt64(box.Text) > cotaSuperiorCerrada)
                 {
-                    MessageBox.Show("Debe ingresarse un valor menor a "+cotaSuperiorCerrada+".");
+                    MessageBox.Show("Debe ingresarse un valor menor a " + cotaSuperiorCerrada + ".");
                     box.Text = "";
                     return;
                 }
-
+            }
+            catch (FormatException)
+            { 
             }
         }
-
         public static void checkSoloNumericosOGuion(TextBox box)
         {
             string tString = box.Text;
@@ -140,5 +154,50 @@ namespace FrbaCommerce.Asistentes
             int indiceComa = entrada.IndexOf(',');
             return entrada.Remove(indiceComa);
         }
+
+        public static void checkSoloNumericosYComa(TextBox box)
+        {
+            string tString = box.Text;
+            if (tString.Trim() == "") return;
+            for (int i = 0; i < tString.Length; i++)
+            {
+                if (!(char.IsNumber(tString[i]) | tString[i]==','))
+                {
+                    MessageBox.Show("Valor incorrecto.");
+                    box.Text = "";
+                    return;
+                }
+
+            }
+        }
+
+        public static void checkMaximoNCaracter(char car,int maximo,TextBox box)
+        {
+            int veces = 0;
+            foreach (char letra in box.Text)
+                if (letra == car) veces++;
+            if (veces > maximo)
+            {
+                MessageBox.Show("Valor incorrecto.");
+                box.Text = "";
+                return;
+            }
+        }
+
+        public static void checkSoloReales(TextBox box)
+        { 
+            checkSoloNumericosYComa(box);
+            checkMaximoNCaracter(',', 1, box);
+        }
+        public static void hacerNoEditable(ComboBox box)
+        {
+            box.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        public static void hacerNoEditables(params ComboBox[] boxes)
+        {
+            foreach (ComboBox box in boxes) hacerNoEditable(box);
+        }
+
     }
 }

@@ -27,12 +27,13 @@ namespace FrbaCommerce.Abm_Visibilidad
 
         private void elecPrec_TextChanged(object sender, EventArgs e)
         {
-            AsistenteBotones.checkSoloNumericos(elecPrec);
+            AsistenteBotones.checkSoloReales(elecPrec);
         }
 
         private void elecPorcen_TextChanged(object sender, EventArgs e)
         {
-            AsistenteBotones.checkSoloNumericosYMenorOIgualA(elecPorcen,100);
+            AsistenteBotones.checkMenorA(elecPorcen,1);
+            AsistenteBotones.checkSoloReales(elecPorcen);
         }
 
         private void cancelar_Click(object sender, EventArgs e)

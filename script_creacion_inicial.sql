@@ -101,12 +101,14 @@ CREATE TABLE THE_DISCRETABOY.Visibilidad (
 );
 
 CREATE TABLE THE_DISCRETABOY.Publicacion (
-	id [numeric](18, 0) NOT NULL, --PK
-	estado [nvarchar](255),
-	Visibilidad numeric(18),--FK
+	id [numeric](18, 0) NOT NULL IDENTITY(1,1), --PK
+	estado [nvarchar](255) NOT NULL,
+	Visibilidad numeric(18) NOT NULL,--FK
+	usuario nvarchar(20) NOT NULL,--FK
 	descripcion [nvarchar](255),
 	fecha [datetime],
-	fecha_venc [datetime]
+	fecha_venc [datetime],
+	hay_preguntas bit DEFAULT 0
 );
 
 CREATE TABLE THE_DISCRETABOY.Venta_directa (
@@ -410,10 +412,6 @@ ALTER TABLE THE_DISCRETABOY.Cliente ADD CONSTRAINT FK_Cliente_direccion
         FOREIGN KEY (direccion) REFERENCES THE_DISCRETABOY.Direccion (id)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Publicacion ADD CONSTRAINT FK_Public_vISib
-        FOREIGN KEY (Visibilidad) REFERENCES THE_DISCRETABOY.Visibilidad (codigo)
-;
-
 ALTER TABLE THE_DISCRETABOY.Rol_por_user ADD CONSTRAINT FK_Rol_por_user_usuario
         FOREIGN KEY (usuario) REFERENCES THE_DISCRETABOY.Usuario (username)
 ;
@@ -436,6 +434,10 @@ ALTER TABLE THE_DISCRETABOY.Visibilidad_por_user ADD CONSTRAINT FK_Visibilidad_p
 
 ALTER TABLE THE_DISCRETABOY.Visibilidad_por_user ADD CONSTRAINT FK_Visibilidad_por_user_usuario
         FOREIGN KEY (usuario) REFERENCES THE_DISCRETABOY.Usuario (username)
+;
+
+ALTER TABLE THE_DISCRETABOY.Publicacion ADD CONSTRAINT FK_Public_visibilidad_por_user
+        FOREIGN KEY (usuario,Visibilidad) REFERENCES THE_DISCRETABOY.Visibilidad_por_user (usuario,Visibilidad)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Venta_directa ADD CONSTRAINT FK_Venta_directa
@@ -1582,6 +1584,27 @@ VALUES
 END
 
 GO
+--HACER VISIBILIDAD POR USER
+CREATE PROC THE_DISCRETABOY.alta_visibilidad_por_user
+(
+@VISI NUMERIC(18,0),
+@USER NVARCHAR(20)
+)
+AS
+INSERT INTO THE_DISCRETABOY.Visibilidad_por_user
+(
+Visibilidad,
+usuario,
+cant_ventas
+)
+VALUES
+(
+@VISI,
+@USER,
+0
+)
+
+GO
 --EDITAR VISIBILIDAD
 CREATE PROC THE_DISCRETABOY.editar_visibilidad
 (
@@ -1642,6 +1665,105 @@ UPDATE THE_DISCRETABOY.Visibilidad
 SET habilitado = 0
 WHERE
 codigo = @cod
+END
+
+GO
+
+--TRAER RUBROS
+CREATE PROC THE_DISCRETABOY.get_rubros
+AS
+BEGIN
+SELECT *
+FROM
+THE_DISCRETABOY.Rubro R
+END
+
+GO
+
+--ALTA PUBLICACION
+CREATE PROC THE_DISCRETABOY._alta_publicacion --PARA SER UTILIZADO EN EL ALTA DE VENTA DIRECTA O SUBASTA
+(
+@ESTADO NVARCHAR(255),
+@VISI NUMERIC(18,0),
+@USUARIO NVARCHAR(20),
+@DESCRI NVARCHAR(255),
+@FECHA DATETIME,
+@VENCIMIENTO DATETIME
+)
+AS
+BEGIN
+INSERT INTO THE_DISCRETABOY.Publicacion
+(
+estado,
+Visibilidad,
+usuario,
+descripcion,
+fecha,
+fecha_venc
+)
+VALUES
+(
+@ESTADO,
+@VISI,
+@USUARIO,
+@DESCRI,
+@FECHA,
+@VENCIMIENTO
+)
+END
+
+GO
+--ALTA VENTA DIRECTA
+CREATE PROC THE_DISCRETABOY.alta_venta_directa
+(
+@ESTADO NVARCHAR(255),
+@VISI NUMERIC(18,0),
+@USUARIO NVARCHAR(20),
+@DESCRI NVARCHAR(255),
+@FECHA DATETIME,
+@VENCIMIENTO DATETIME,
+@STOCK NUMERIC(18,0)
+)
+AS
+BEGIN
+EXEC THE_DISCRETABOY._alta_publicacion @ESTADO,@VISI,@USUARIO,@DESCRI,@FECHA,@VENCIMIENTO
+INSERT INTO THE_DISCRETABOY.Venta_directa
+(
+publicacion,
+stock
+) 
+VALUES 
+(
+(SELECT @@IDENTITY),
+@STOCK
+)
+END
+
+GO
+--ALTA SUBASTA
+CREATE PROC THE_DISCRETABOY.alta_subasta
+(
+@ESTADO NVARCHAR(255),
+@VISI NUMERIC(18,0),
+@USUARIO NVARCHAR(20),
+@DESCRI NVARCHAR(255),
+@FECHA DATETIME,
+@VENCIMIENTO DATETIME,
+@CANTIDAD NUMERIC(18,0)
+)
+AS
+BEGIN
+EXEC THE_DISCRETABOY._alta_publicacion @ESTADO,@VISI,@USUARIO,@DESCRI,@FECHA,@VENCIMIENTO
+INSERT INTO THE_DISCRETABOY.Subasta
+(
+publicacion,
+cantidad
+) 
+VALUES 
+(
+(SELECT @@IDENTITY),
+@CANTIDAD
+)
 END
 
 GO
@@ -1887,13 +2009,48 @@ m.Publicacion_Visibilidad_Porcentaje,
 m.Publicacion_Visibilidad_Precio
 
 GO
+--CARGO Visibilidades POR USUARIOS
+INSERT INTO THE_DISCRETABOY.Visibilidad_por_user
+(
+Visibilidad,
+usuario,
+cant_ventas
+)
+(
+SELECT
+M.Publicacion_Visibilidad_Cod,
+C.usuario,
+0
+FROM
+gd_esquema.Maestra M,THE_DISCRETABOY.Cliente C
+WHERE M.Publ_Cli_Dni=C.doc_numero
+GROUP BY 
+M.Publicacion_Visibilidad_Cod,
+C.usuario
 
+UNION
+
+SELECT
+M.Publicacion_Visibilidad_Cod,
+E.usuario,
+0
+FROM
+gd_esquema.Maestra M,THE_DISCRETABOY.Empresa E
+WHERE M.Publ_Empresa_Cuit=E.cuit
+GROUP BY 
+M.Publicacion_Visibilidad_Cod,
+E.usuario
+)
+
+GO
 --CARGO PUBLICACIONES
+SET IDENTITY_INSERT THE_DISCRETABOY.Publicacion ON
 INSERT INTO THE_DISCRETABOY.Publicacion
 (
 id,
 estado,
 Visibilidad,
+usuario,
 descripcion,
 fecha,
 fecha_venc
@@ -1902,21 +2059,44 @@ SELECT
 M.Publicacion_Cod,
 M.Publicacion_Estado,
 M.Publicacion_Visibilidad_Cod,
+'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)),
 M.Publicacion_Descripcion,
 M.Publicacion_Fecha,
 M.Publicacion_Fecha_Venc
 FROM gd_esquema.Maestra M
-WHERE M.Publicacion_Cod IS NOT NULL
+WHERE M.Publicacion_Cod IS NOT NULL AND M.Publ_Empresa_Cuit IS NOT NULL
 GROUP BY 
 M.Publicacion_Cod,
 M.Publicacion_Estado,
 M.Publicacion_Visibilidad_Cod,
+M.Publ_Empresa_Cuit,
 M.Publicacion_Descripcion,
 M.Publicacion_Fecha,
 M.Publicacion_Fecha_Venc
 
-GO
+UNION
 
+SELECT
+M.Publicacion_Cod,
+M.Publicacion_Estado,
+M.Publicacion_Visibilidad_Cod,
+'Clie_'+cast(M.Publ_Cli_Dni as nvarchar(20)),
+M.Publicacion_Descripcion,
+M.Publicacion_Fecha,
+M.Publicacion_Fecha_Venc
+FROM gd_esquema.Maestra M
+WHERE M.Publicacion_Cod IS NOT NULL AND M.Publ_Cli_Dni IS NOT NULL
+GROUP BY 
+M.Publicacion_Cod,
+M.Publicacion_Estado,
+M.Publicacion_Visibilidad_Cod,
+M.Publ_Cli_Dni,
+M.Publicacion_Descripcion,
+M.Publicacion_Fecha,
+M.Publicacion_Fecha_Venc
+
+SET IDENTITY_INSERT THE_DISCRETABOY.Publicacion OFF
+GO
 --CARGO CLIENTES POR PUBLICACIONES
 INSERT INTO THE_DISCRETABOY.Cliente_por_publicacion
 (
@@ -2098,38 +2278,7 @@ M.Publicacion_Cod
 
 GO
 
---CARGO Visibilidades POR USUARIOS
-INSERT INTO THE_DISCRETABOY.Visibilidad_por_user
-(
-Visibilidad,
-usuario,
-cant_ventas
-)
-(
-SELECT
-M.Publicacion_Visibilidad_Cod,
-C.usuario,
-0
-FROM
-gd_esquema.Maestra M,THE_DISCRETABOY.Cliente C
-WHERE M.Publ_Cli_Dni=C.doc_numero
-GROUP BY 
-M.Publicacion_Visibilidad_Cod,
-C.usuario
 
-UNION
-
-SELECT
-M.Publicacion_Visibilidad_Cod,
-E.usuario,
-0
-FROM
-gd_esquema.Maestra M,THE_DISCRETABOY.Empresa E
-WHERE M.Publ_Empresa_Cuit=E.cuit
-GROUP BY 
-M.Publicacion_Visibilidad_Cod,
-E.usuario
-)
 
 --Alta roles default.
 EXEC THE_DISCRETABOY.alta_rol 'Empresa', 1

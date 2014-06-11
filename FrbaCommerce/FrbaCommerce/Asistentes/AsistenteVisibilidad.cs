@@ -69,7 +69,7 @@ namespace FrbaCommerce.Asistentes
             return new Visibilidad(susDatos);
         }
 
-        private static DataRow getDataVisi(int cod)
+        public static DataRow getDataVisi(int cod)
         {
             return traerDataTable("get_data_visibilidad", cod).Rows[0];
         }
@@ -86,5 +86,18 @@ namespace FrbaCommerce.Asistentes
                 System.Windows.Forms.MessageBox.Show("La baja no pudo realizarse.");
             }
         }
+        public static Dictionary<string, int> getVisibilidades()
+        {
+            Dictionary<string, int> visibilidades = new Dictionary<string,int>();
+            DataTable tabla = getTableBuscando("");
+            foreach (DataRow fila in tabla.Rows)
+            {
+                string descrip = fila["DESCRIPCIÓN"].ToString();
+                int cod = Convert.ToInt32(fila["CÓDIGO"].ToString());
+                visibilidades.Add(descrip, cod);
+            }
+            return visibilidades;
+        }
+
     }
 }
