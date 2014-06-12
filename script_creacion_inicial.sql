@@ -114,7 +114,8 @@ CREATE TABLE THE_DISCRETABOY.Publicacion (
 CREATE TABLE THE_DISCRETABOY.Venta_directa (
 	id numeric(18) NOT NULL Identity(1,1), --PK
 	stock [numeric](18, 0) NOT NULL,
-	publicacion [numeric](18,0) NOT NULL---FK
+	publicacion [numeric](18,0) NOT NULL,--FK
+	precio numeric(18,2)
 );
 
 CREATE TABLE THE_DISCRETABOY.Cliente_por_publicacion (
@@ -185,7 +186,8 @@ CREATE TABLE THE_DISCRETABOY.Rubro_por_publicacion (
 CREATE TABLE THE_DISCRETABOY.Subasta (
 	id [numeric](18, 0) NOT NULL Identity(1,1), --PK
 	cantidad [numeric](18, 0),
-	publicacion [numeric](18, 0)---FK
+	publicacion [numeric](18, 0),---FK
+	precio_inicial [numeric](18, 2)
 );
 
 CREATE TABLE THE_DISCRETABOY.Rubro (
@@ -921,7 +923,79 @@ WHERE R.nombre LIKE '%'+@nombre_a_buscar+'%'
 END
 
 GO
+--BUSCAR PUBLICACIONES
+CREATE PROC THE_DISCRETABOY.get_publicaciones_buscando
+(@descrip nvarchar(255))
+AS
+BEGIN
+SELECT 
+P.id 'ID',
+P.descripcion 'DESCRIPCION',
+P.estado 'ESTADO',
+P.fecha 'CREACION',
+P.fecha_venc 'VENCIMIENTO',
+'Compra inmediata' 'TIPO',
+V.stock 'STOCK'
+FROM THE_DISCRETABOY.Publicacion P, THE_DISCRETABOY.Venta_directa V, THE_DISCRETABOY.Visibilidad VI
+WHERE 
+P.descripcion LIKE '%'+@descrip+'%' AND 
+V.publicacion = P.id AND 
+VI.codigo = P.Visibilidad
 
+UNION
+
+SELECT 
+P.id 'ID',
+P.descripcion 'DESCRIPCION',
+P.estado 'ESTADO',
+P.fecha 'CREACION',
+P.fecha_venc 'VENCIMIENTO',
+'Subasta' 'TIPO',
+S.cantidad 'STOCK'
+FROM THE_DISCRETABOY.Publicacion P, THE_DISCRETABOY.Subasta S, THE_DISCRETABOY.Visibilidad VI
+WHERE 
+P.descripcion LIKE '%'+@descrip+'%' AND 
+S.publicacion = P.id AND 
+VI.codigo = P.Visibilidad
+
+END
+
+GO
+--BUSCAR LAS DE UN USER EN PARTICULAR
+CREATE PROC THE_DISCRETABOY.get_publics_de_user_buscando
+(@descrip nvarchar(255),@USUARIO NVARCHAR(20))
+AS
+BEGIN
+SELECT 
+P.id 'ID',
+P.descripcion 'DESCRIPCION',
+P.estado 'ESTADO',
+P.fecha 'CREACION',
+P.fecha_venc 'VENCIMIENTO',
+'Compra inmediata' 'TIPO',
+V.stock 'STOCK'
+FROM THE_DISCRETABOY.Publicacion P, THE_DISCRETABOY.Venta_directa V, THE_DISCRETABOY.Visibilidad VI, THE_DISCRETABOY.Visibilidad_por_user VU
+WHERE 
+P.descripcion LIKE '%'+@descrip+'%' AND 
+P.USUARIO = @USUARIO
+
+UNION
+
+SELECT 
+P.id 'ID',
+P.descripcion 'DESCRIPCION',
+P.estado 'ESTADO',
+P.fecha 'CREACION',
+P.fecha_venc 'VENCIMIENTO',
+'Subasta' 'TIPO',
+S.cantidad 'STOCK'
+FROM THE_DISCRETABOY.Publicacion P, THE_DISCRETABOY.Subasta S, THE_DISCRETABOY.Visibilidad VI, THE_DISCRETABOY.Visibilidad_por_user VU
+WHERE 
+P.descripcion LIKE '%'+@descrip+'%' AND 
+P.USUARIO = @USUARIO
+END
+
+GO
 --GET CODIGO DE FUNCION
 CREATE PROC THE_DISCRETABOY.get_cod_funcion
 (@nombre NVARCHAR(255))
@@ -1688,7 +1762,8 @@ CREATE PROC THE_DISCRETABOY._alta_publicacion --PARA SER UTILIZADO EN EL ALTA DE
 @USUARIO NVARCHAR(20),
 @DESCRI NVARCHAR(255),
 @FECHA DATETIME,
-@VENCIMIENTO DATETIME
+@VENCIMIENTO DATETIME,
+@HAY_PREGUNTAS BIT
 )
 AS
 BEGIN
@@ -1699,7 +1774,8 @@ Visibilidad,
 usuario,
 descripcion,
 fecha,
-fecha_venc
+fecha_venc,
+HAY_PREGUNTAS
 )
 VALUES
 (
@@ -1708,7 +1784,8 @@ VALUES
 @USUARIO,
 @DESCRI,
 @FECHA,
-@VENCIMIENTO
+@VENCIMIENTO,
+@HAY_PREGUNTAS
 )
 END
 
@@ -1716,24 +1793,28 @@ GO
 --ALTA VENTA DIRECTA
 CREATE PROC THE_DISCRETABOY.alta_venta_directa
 (
+@PRECIO NUMERIC(18,2),
 @ESTADO NVARCHAR(255),
 @VISI NUMERIC(18,0),
 @USUARIO NVARCHAR(20),
 @DESCRI NVARCHAR(255),
 @FECHA DATETIME,
 @VENCIMIENTO DATETIME,
-@STOCK NUMERIC(18,0)
+@STOCK NUMERIC(18,0),
+@HAY_PREGUNTAS BIT
 )
 AS
 BEGIN
-EXEC THE_DISCRETABOY._alta_publicacion @ESTADO,@VISI,@USUARIO,@DESCRI,@FECHA,@VENCIMIENTO
+EXEC THE_DISCRETABOY._alta_publicacion @ESTADO,@VISI,@USUARIO,@DESCRI,@FECHA,@VENCIMIENTO,@HAY_PREGUNTAS
 INSERT INTO THE_DISCRETABOY.Venta_directa
 (
+precio,
 publicacion,
 stock
 ) 
 VALUES 
 (
+@PRECIO,
 (SELECT @@IDENTITY),
 @STOCK
 )
@@ -1743,24 +1824,28 @@ GO
 --ALTA SUBASTA
 CREATE PROC THE_DISCRETABOY.alta_subasta
 (
+@PRECIO_INICIAL NUMERIC(18,2),
 @ESTADO NVARCHAR(255),
 @VISI NUMERIC(18,0),
 @USUARIO NVARCHAR(20),
 @DESCRI NVARCHAR(255),
 @FECHA DATETIME,
 @VENCIMIENTO DATETIME,
-@CANTIDAD NUMERIC(18,0)
+@CANTIDAD NUMERIC(18,0),
+@HAY_PREGUNTAS BIT
 )
 AS
 BEGIN
-EXEC THE_DISCRETABOY._alta_publicacion @ESTADO,@VISI,@USUARIO,@DESCRI,@FECHA,@VENCIMIENTO
+EXEC THE_DISCRETABOY._alta_publicacion @ESTADO,@VISI,@USUARIO,@DESCRI,@FECHA,@VENCIMIENTO,@HAY_PREGUNTAS
 INSERT INTO THE_DISCRETABOY.Subasta
 (
+precio_inicial,
 publicacion,
 cantidad
 ) 
 VALUES 
 (
+@PRECIO_INICIAL,
 (SELECT @@IDENTITY),
 @CANTIDAD
 )

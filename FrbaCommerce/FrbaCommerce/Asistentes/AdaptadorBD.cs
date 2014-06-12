@@ -26,29 +26,20 @@ namespace FrbaCommerce.Asistentes
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
 
-            try
+            conexionSql(conexion, comando);
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.CommandText = "THE_DISCRETABOY." + procedure;
+            if (_validateArgumentsAndParameters(args, values))
             {
-                conexionSql(conexion, comando);
-                comando.CommandType = CommandType.StoredProcedure;
-                comando.CommandText = "THE_DISCRETABOY." + procedure;
-                if (_validateArgumentsAndParameters(args, values))
-                {
-                    _loadSqlCommand(args, values, comando);
-                }
-                comando.ExecuteNonQuery();
+                _loadSqlCommand(args, values, comando);
             }
-            catch (Exception excepcion)
-            {
-                throw excepcion;
-            }
+            comando.ExecuteNonQuery();
 
-            finally
+            if (conexion != null)
             {
-                if (conexion != null)
-                {
-                    conexion.Close();
-                }
+                conexion.Close();
             }
+            
         }
 
 

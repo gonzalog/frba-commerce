@@ -231,6 +231,7 @@
             this.editarPublicacion.TabIndex = 1;
             this.editarPublicacion.Text = "Editar publicación";
             this.editarPublicacion.UseVisualStyleBackColor = false;
+            this.editarPublicacion.Click += new System.EventHandler(this.editarPublicacion_Click);
             // 
             // publicar
             // 

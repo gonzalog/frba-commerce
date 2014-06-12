@@ -20,5 +20,14 @@ namespace FrbaCommerce.Asistentes
             }
             return rubros;
         }
+
+        public static DataTable getPublicsBuscando(string descrip)
+        {
+            return traerDataTable("get_publicaciones_buscando",descrip);
+        }
+        public static DataTable getPublicsBuscando(string descrip,string user)
+        {
+            return traerDataTable("get_publics_de_user_buscando", descrip,user);
+        }
     }
 }

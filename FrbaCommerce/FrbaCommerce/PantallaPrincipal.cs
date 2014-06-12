@@ -11,6 +11,7 @@ using FrbaCommerce.Abm_Cliente;
 using FrbaCommerce.Abm_Empresa;
 using FrbaCommerce.Abm_Visibilidad;
 using FrbaCommerce.Generar_Publicacion;
+using FrbaCommerce.Editar_Publicacion;
 
 namespace FrbaCommerce
 {
@@ -85,6 +86,11 @@ namespace FrbaCommerce
         private void publicar_Click(object sender, EventArgs e)
         {
             AsistenteVistas.mostrarSimultaneo(new GenerarPublicacion(this.user));
+        }
+
+        private void editarPublicacion_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarSimultaneo(new VerPublicacionesAEditar(this.user));
         }
     }
 }

@@ -235,11 +235,23 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Asistentes\AdaptadorBD.cs" />
-    <Compile Include="Editar Publicacion\Form1.cs">
+    <Compile Include="Editar Publicacion\EditBorrador.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editar Publicacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Editar Publicacion\EditBorrador.Designer.cs">
+      <DependentUpon>EditBorrador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editar Publicacion\EditCompraInmediataPublicada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editar Publicacion\EditCompraInmediataPublicada.Designer.cs">
+      <DependentUpon>EditCompraInmediataPublicada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editar Publicacion\VerPublicacionesAEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editar Publicacion\VerPublicacionesAEditar.Designer.cs">
+      <DependentUpon>VerPublicacionesAEditar.cs</DependentUpon>
     </Compile>
     <Compile Include="Excepciones\CodigoRepetido.cs" />
     <Compile Include="Excepciones\CUITRepetido.cs" />
@@ -255,12 +267,12 @@
     <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicacion\Borrador.cs" />
-    <Compile Include="Generar Publicacion\Estado.cs" />
-    <Compile Include="Generar Publicacion\Finalizada.cs" />
-    <Compile Include="Generar Publicacion\Pausa.cs" />
+    <Compile Include="Editar Publicacion\Borrador.cs" />
+    <Compile Include="Editar Publicacion\Estado.cs" />
+    <Compile Include="Editar Publicacion\Finalizada.cs" />
+    <Compile Include="Editar Publicacion\Pausa.cs" />
     <Compile Include="Generar Publicacion\Publicacion.cs" />
-    <Compile Include="Generar Publicacion\Publicada.cs" />
+    <Compile Include="Editar Publicacion\Publicada.cs" />
     <Compile Include="Generar Publicacion\Subasta.cs" />
     <Compile Include="Generar Publicacion\Tipo.cs" />
     <Compile Include="Generar Publicacion\VentaDirecta.cs" />
@@ -389,6 +401,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CambioPassword\CambioPassword.resx">
       <DependentUpon>CambioPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editar Publicacion\EditBorrador.resx">
+      <DependentUpon>EditBorrador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editar Publicacion\EditCompraInmediataPublicada.resx">
+      <DependentUpon>EditCompraInmediataPublicada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editar Publicacion\VerPublicacionesAEditar.resx">
+      <DependentUpon>VerPublicacionesAEditar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\GenerarPublicacion.resx">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
