@@ -61,6 +61,7 @@
             this.cancelar.TabIndex = 113;
             this.cancelar.Text = "Cancelar";
             this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // aceptar
             // 
@@ -71,6 +72,7 @@
             this.aceptar.TabIndex = 112;
             this.aceptar.Text = "Aceptar";
             this.aceptar.UseVisualStyleBackColor = true;
+            this.aceptar.Click += new System.EventHandler(this.aceptar_Click);
             // 
             // groupBox1
             // 
@@ -168,6 +170,7 @@
             this.Precio.Name = "Precio";
             this.Precio.Size = new System.Drawing.Size(204, 22);
             this.Precio.TabIndex = 94;
+            this.Precio.TextChanged += new System.EventHandler(this.Precio_TextChanged);
             // 
             // label4
             // 
@@ -194,6 +197,7 @@
             this.Stock.Name = "Stock";
             this.Stock.Size = new System.Drawing.Size(204, 22);
             this.Stock.TabIndex = 92;
+            this.Stock.TextChanged += new System.EventHandler(this.Stock_TextChanged);
             // 
             // label3
             // 
@@ -253,6 +257,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 110;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // EditBorrador
             // 

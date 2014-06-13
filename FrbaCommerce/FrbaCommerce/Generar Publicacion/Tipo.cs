@@ -10,13 +10,17 @@ namespace FrbaCommerce.Generar_Publicacion
 {
     public abstract class Tipo
     {
+        public int id;
+        public int stock;
+        public decimal precioInicial;
+
         public abstract string procedure();
         private static Dictionary<string, Tipo> tipos = new Dictionary<string, Tipo>() 
         { 
-            { "Subasta", new Subasta() },
-            { "Compra inmediata", new VentaDirecta() }         
+            { "Subasta", Subasta.newSaver() },
+            { "Compra inmediata", VentaDirecta.newSaver() }         
         };
-        public static Tipo getTipo(string nombre)
+        public static Tipo getTipoSaver(string nombre)
         { 
             return tipos[nombre];
         }
@@ -48,5 +52,8 @@ namespace FrbaCommerce.Generar_Publicacion
             }
             AdaptadorBD.ejecutarProcedure(this.procedure(), prec, estado, visiCod, user, descrip, DateTime.Now.Date, DateTime.Now.AddDays(duracion).Date, Convert.ToInt32(stock), hayPreguntas ? 1 : 0);
         }
+
+        public abstract void abrirEditorEnEstado(Estado estado,Publicacion publi);
+        public abstract string nombreTipo();
     }
 }

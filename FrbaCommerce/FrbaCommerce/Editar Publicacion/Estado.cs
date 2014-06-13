@@ -15,9 +15,13 @@ namespace FrbaCommerce.Generar_Publicacion
             {"Finalizada", new Finalizada()}
         };
 
-        public Estado getEstado(string nombre)
+        public static Estado getEstado(string nombre)
         {
             return estados[nombre];
         }
+
+        public abstract void abrirEditorParaSubasta(Publicacion publi);
+        public abstract void abrirEditorParaVentaDirecta(Publicacion publi);
+
     }
 }

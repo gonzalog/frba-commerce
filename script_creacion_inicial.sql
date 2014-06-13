@@ -977,7 +977,8 @@ V.stock 'STOCK'
 FROM THE_DISCRETABOY.Publicacion P, THE_DISCRETABOY.Venta_directa V, THE_DISCRETABOY.Visibilidad VI, THE_DISCRETABOY.Visibilidad_por_user VU
 WHERE 
 P.descripcion LIKE '%'+@descrip+'%' AND 
-P.USUARIO = @USUARIO
+P.USUARIO = @USUARIO AND 
+V.publicacion = P.id
 
 UNION
 
@@ -989,10 +990,11 @@ P.fecha 'CREACION',
 P.fecha_venc 'VENCIMIENTO',
 'Subasta' 'TIPO',
 S.cantidad 'STOCK'
-FROM THE_DISCRETABOY.Publicacion P, THE_DISCRETABOY.Subasta S, THE_DISCRETABOY.Visibilidad VI, THE_DISCRETABOY.Visibilidad_por_user VU
+FROM THE_DISCRETABOY.Publicacion P, THE_DISCRETABOY.Subasta S
 WHERE 
 P.descripcion LIKE '%'+@descrip+'%' AND 
-P.USUARIO = @USUARIO
+P.USUARIO = @USUARIO AND 
+S.publicacion = P.id
 END
 
 GO
@@ -1850,6 +1852,42 @@ VALUES
 @CANTIDAD
 )
 END
+
+GO
+--TRAER UNA FILA DE PUBLICACION
+CREATE PROC THE_DISCRETABOY.get_fila_publicacion
+(@ID NUMERIC(18,0))
+AS
+SELECT TOP 1
+*
+FROM
+THE_DISCRETABOY.Publicacion P
+WHERE
+P.id = @ID
+
+GO
+--BUSCAR SUABSTA DADA UNA PUBLICACION
+CREATE PROC THE_DISCRETABOY.subasta_por_pub
+(@PUB NUMERIC (18,0))
+AS
+SELECT TOP 1
+*
+FROM
+THE_DISCRETABOY.Subasta S
+WHERE
+S.publicacion = @PUB
+
+GO
+--BUSCAR VENTA DIRECTA DADA UNA PUBLICACION
+CREATE PROC THE_DISCRETABOY.venta_dir_por_pub
+(@PUB NUMERIC (18,0))
+AS
+SELECT TOP 1
+*
+FROM
+THE_DISCRETABOY.Venta_directa V
+WHERE
+V.publicacion = @PUB
 
 GO
 /* ****** Migrar datos existentes ******* */

@@ -259,7 +259,9 @@
     <Compile Include="Excepciones\ElTamanioDeLosDatosExcedeAlSistema.cs" />
     <Compile Include="Excepciones\FallaDelMotor.cs" />
     <Compile Include="Excepciones\HayCamposEnBlanco.cs" />
+    <Compile Include="Excepciones\SubastaInexistente.cs" />
     <Compile Include="Excepciones\TelefonoYaRegistrado.cs" />
+    <Compile Include="Excepciones\TipoIncorrecto.cs" />
     <Compile Include="Excepciones\UsuarioYaDadoDeBaja.cs" />
     <Compile Include="Facturar Publicaciones\Form1.cs">
       <SubType>Form</SubType>

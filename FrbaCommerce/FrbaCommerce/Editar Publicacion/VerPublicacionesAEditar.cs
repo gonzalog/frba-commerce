@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Asistentes;
+using FrbaCommerce.Generar_Publicacion;
 
 namespace FrbaCommerce.Editar_Publicacion
 {
@@ -70,7 +71,10 @@ namespace FrbaCommerce.Editar_Publicacion
                 int publicAModificar = Convert.ToInt32(grillaPublics.Rows[e.RowIndex].Cells["ID"].Value.ToString());
                 if (e.ColumnIndex == grillaPublics.Rows[e.RowIndex].Cells["EDITAR"].ColumnIndex)
                 {
-                    //AsistenteVistas.mostrarNuevaVentana((new CambiarFunciones(rolAModificar, this)), this);
+                    
+                    int idPublicacion = Convert.ToInt32(grillaPublics.Rows[e.RowIndex].Cells["ID"].Value.ToString());
+                    Publicacion publi = new Publicacion(idPublicacion);
+                    publi.abrirEditor();
                 }
             }
             catch (ArgumentOutOfRangeException)

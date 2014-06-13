@@ -67,20 +67,20 @@ namespace FrbaCommerce.Generar_Publicacion
                 return;
             }
 
-            Tipo tipoDeLaPublicacion = Tipo.getTipo(tipo.Text);
+            Tipo saverTipoDeLaPublicacion = Tipo.getTipoSaver(tipo.Text);
 
             List<string> rubrosElegidos = new List<string>();
             foreach (string eleccion in listadoRubros.CheckedItems) rubrosElegidos.Add(eleccion);
-            //try
-           // {
-                tipoDeLaPublicacion.darDeALta(Descripcion.Text, Stock.Text, Precio.Text,
+            try
+            {
+                saverTipoDeLaPublicacion.darDeALta(Descripcion.Text, Stock.Text, Precio.Text,
                     Visibilidad.Text, this.user, Estado.Text, rubrosElegidos, pregs.Checked);
-            /*}
+            }
             catch (Exception)
             {
-                MessageBox.Show("Los datos ingrsados no son soportados por el sistema.");
+                MessageBox.Show("Los datos ingresados no son soportados por el sistema.");
                 return;
-            }*/
+            }
             MessageBox.Show("Publicación creada exitosamente.");
             Close();
         }
