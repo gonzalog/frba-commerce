@@ -38,5 +38,14 @@ namespace FrbaCommerce.Generar_Publicacion
         {
             return "Venta directa";
         }
+        public override int getCodPublicacion(int codigoPropio) 
+        {
+            return AdaptadorBD.ejecutarProcedureWithReturnValue("get_publicacion_de_venta_directa", codigoPropio);
+        }
+
+        public override void perdurar()
+        {
+            AdaptadorBD.ejecutarProcedure("editar_venta_directa", id, precioInicial, stock);
+        }
     }
 }

@@ -74,6 +74,11 @@ namespace FrbaCommerce.Asistentes
             return traerDataTable("get_data_visibilidad", cod).Rows[0];
         }
 
+        public static DataRow getDataVisi(string descrip)
+        {
+            return traerDataTable("get_data_visi_con_descrip", descrip).Rows[0];
+        }
+
         public static void inhabilitarVisibilidad(string cod)
         {
             try

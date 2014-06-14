@@ -47,5 +47,13 @@ namespace FrbaCommerce.Asistentes
         {
             return System.Text.Encoding.UTF8.GetBytes(cadena);
         }
+
+        public static List<string> getCheckedItemsList(CheckedListBox box)
+        {
+            List<string> chequeados = new List<string>();
+            foreach (string item in box.CheckedItems)
+                chequeados.Add(item);
+            return chequeados;
+        }
     }
 }

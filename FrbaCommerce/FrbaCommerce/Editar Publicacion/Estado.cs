@@ -7,7 +7,7 @@ namespace FrbaCommerce.Generar_Publicacion
 {
     public abstract class Estado
     {
-        private static Dictionary<string, Estado> estados = new Dictionary<string, Estado>() 
+        public static Dictionary<string, Estado> estados = new Dictionary<string, Estado>() 
         { 
             { "Borrador", new Borrador() },
             { "Publicada", new Publicada() },
@@ -22,6 +22,6 @@ namespace FrbaCommerce.Generar_Publicacion
 
         public abstract void abrirEditorParaSubasta(Publicacion publi);
         public abstract void abrirEditorParaVentaDirecta(Publicacion publi);
-
+        public abstract string nombre();
     }
 }

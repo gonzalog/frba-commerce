@@ -45,20 +45,21 @@ namespace FrbaCommerce.Asistentes
                 if (String.IsNullOrEmpty(box.Text)) throw new HayCamposEnBlanco(box);
         }
 
-        public static void checkSoloNumericos(TextBox box) 
+        public static bool checkSoloNumericos(TextBox box) 
         {
             string tString = box.Text;
-            if (tString.Trim() == "") return;
+            if (tString.Trim() == "") return true;
             for (int i = 0; i < tString.Length; i++)
             {
                 if (!char.IsNumber(tString[i]))
                 {
                     MessageBox.Show("Debe ingresarse un valor numérico.");
-                    box.Text = "";
-                    return;
+                    box.Text = "0";
+                    return false;
                 }
 
             }
+            return true;
         }
 
         public static void checkSoloNumericosYMenorOIgualA(TextBox box,int cotaSuperiorCerrada)
@@ -69,7 +70,7 @@ namespace FrbaCommerce.Asistentes
                 if (!char.IsNumber(tString[i]))
                 {
                     MessageBox.Show("Debe ingresarse un valor numérico.");
-                    box.Text = "";
+                    box.Text = "0";
                     return;
                 }
 
@@ -83,7 +84,7 @@ namespace FrbaCommerce.Asistentes
                 if (Convert.ToInt64(box.Text) > cotaSuperiorCerrada)
                 {
                     MessageBox.Show("Debe ingresarse un valor menor a " + cotaSuperiorCerrada + ".");
-                    box.Text = "";
+                    box.Text = "0";
                     return;
                 }
             }
@@ -100,7 +101,7 @@ namespace FrbaCommerce.Asistentes
                 if ((!char.IsNumber(tString[i])) & (tString[i]!='-'))
                 {
                     MessageBox.Show("Debe ingresarse un valor numérico.");
-                    box.Text = "";
+                    box.Text = "0";
                     return;
                 }
 
@@ -155,23 +156,23 @@ namespace FrbaCommerce.Asistentes
             return entrada.Remove(indiceComa);
         }
 
-        public static void checkSoloNumericosYComa(TextBox box)
+        public static bool checkSoloNumericosYComa(TextBox box)
         {
             string tString = box.Text;
-            if (tString.Trim() == "") return;
+            if (tString.Trim() == "") return true;
             for (int i = 0; i < tString.Length; i++)
             {
                 if (!(char.IsNumber(tString[i]) | tString[i]==','))
                 {
                     MessageBox.Show("Valor incorrecto.");
-                    box.Text = "";
-                    return;
+                    box.Text = "0";
+                    return false;
                 }
-
             }
+            return true;
         }
 
-        public static void checkMaximoNCaracter(char car,int maximo,TextBox box)
+        public static bool checkMaximoNCaracter(char car,int maximo,TextBox box)
         {
             int veces = 0;
             foreach (char letra in box.Text)
@@ -179,15 +180,17 @@ namespace FrbaCommerce.Asistentes
             if (veces > maximo)
             {
                 MessageBox.Show("Valor incorrecto.");
-                box.Text = "";
-                return;
+                box.Text = "0";
+                return false;
             }
+            return true;
         }
 
-        public static void checkSoloReales(TextBox box)
-        { 
-            checkSoloNumericosYComa(box);
-            checkMaximoNCaracter(',', 1, box);
+        public static bool checkSoloReales(TextBox box)
+        {
+            if (!checkSoloNumericosYComa(box)) return false;
+            if (!checkMaximoNCaracter(',', 1, box)) return false;
+            return true;
         }
         public static void hacerNoEditable(ComboBox box)
         {

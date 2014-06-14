@@ -9,7 +9,7 @@ namespace FrbaCommerce.Generar_Publicacion
 {
     class Borrador : Estado
     {
-        public string nombre()
+        public override string nombre()
         {
             return "Borrador";
         }

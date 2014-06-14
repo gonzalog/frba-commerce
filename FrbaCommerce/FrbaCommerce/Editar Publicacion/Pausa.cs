@@ -9,7 +9,7 @@ namespace FrbaCommerce.Generar_Publicacion
 {
     class Pausa : Estado
     {
-        public string nombre()
+        public override string nombre()
         {
             return "Pausa";
         }

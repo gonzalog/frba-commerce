@@ -7,7 +7,7 @@ namespace FrbaCommerce.Generar_Publicacion
 {
     class Finalizada : Estado 
     {
-        public string nombre()
+        public override string nombre()
         {
             return "Finalizada";
         }

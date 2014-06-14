@@ -112,6 +112,10 @@
             // 
             // grillaPublics
             // 
+            this.grillaPublics.AccessibleRole = System.Windows.Forms.AccessibleRole.ScrollBar;
+            this.grillaPublics.AllowUserToAddRows = false;
+            this.grillaPublics.AllowUserToDeleteRows = false;
+            this.grillaPublics.AllowUserToResizeRows = false;
             this.grillaPublics.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grillaPublics.Location = new System.Drawing.Point(12, 144);
             this.grillaPublics.Name = "grillaPublics";
@@ -120,7 +124,7 @@
             this.grillaPublics.TabIndex = 20;
             this.grillaPublics.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaPublics_CellContentClick);
             // 
-            // EditarPublicacion
+            // VerPublicacionesAEditar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -129,7 +133,7 @@
             this.Controls.Add(this.errorBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grillaPublics);
-            this.Name = "EditarPublicacion";
+            this.Name = "VerPublicacionesAEditar";
             this.Text = "Editar publicación";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

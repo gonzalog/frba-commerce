@@ -51,9 +51,15 @@ namespace FrbaCommerce.Generar_Publicacion
                 return;
             }
             AdaptadorBD.ejecutarProcedure(this.procedure(), prec, estado, visiCod, user, descrip, DateTime.Now.Date, DateTime.Now.AddDays(duracion).Date, Convert.ToInt32(stock), hayPreguntas ? 1 : 0);
+            int codDePub = AsistentePublicacion.getCodUltimaPublicacion();
+            foreach(string rubro in rubros)
+                AsistentePublicacion.altaRubroPorPublicacion(rubro, codDePub);
         }
 
         public abstract void abrirEditorEnEstado(Estado estado,Publicacion publi);
         public abstract string nombreTipo();
+        public abstract int getCodPublicacion(int codigoPropio);
+
+        public abstract void perdurar();
     }
 }

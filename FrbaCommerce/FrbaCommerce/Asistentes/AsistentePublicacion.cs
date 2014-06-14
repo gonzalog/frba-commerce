@@ -55,5 +55,41 @@ namespace FrbaCommerce.Asistentes
             
             return tipo;
         }
+
+        public static Dictionary<string, int> getRubrosDe(Publicacion publicacion)
+        {
+            Dictionary<string, int> rubros = new Dictionary<string, int>();
+            DataTable tabla = traerDataTable("get_rubros_de",publicacion.id);
+            foreach (DataRow fila in tabla.Rows)
+            {
+                int cod = Convert.ToInt32(fila["codigo"].ToString());
+                string descrip = fila["descripcion"].ToString();
+                rubros.Add(descrip,cod);
+            }
+            return rubros; 
+        }
+
+        public static Dictionary<string, int> getRubrosNoDe(Publicacion publicacion)
+        {
+            Dictionary<string, int> totalRubros = getRubros();
+            Dictionary<string, int> rubrosDe = getRubrosDe(publicacion);
+            return totalRubros.Where(rubro => !rubrosDe.Values.Contains(rubro.Value)).ToDictionary(rubro => rubro.Key, rubro => rubro.Value) ;
+        }
+
+        public static void altaRubroPorPublicacion(string rubro, int codigoPublicacion)
+        {
+            ejecutarProcedure("alta_rubro_por_publicacion", rubro, codigoPublicacion);
+        }
+
+        public static int getCodUltimaPublicacion()
+        {
+            return ejecutarProcedureWithReturnValue("ultima_publicacion");
+        }
+
+        public static void editarPublicacion(Publicacion publicacion)
+        {
+            System.Diagnostics.Debug.WriteLine("Se guarda con el campo hay_preguntas: " + (publicacion.hayPreguntas ? 1 : 0));
+            ejecutarProcedure("editar_publicacion",publicacion.id,publicacion.visibilidad.cod,publicacion.estado.nombre(),publicacion.hayPreguntas?1:0);
+        }
     }
 }

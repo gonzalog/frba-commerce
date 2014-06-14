@@ -47,5 +47,14 @@ namespace FrbaCommerce.Generar_Publicacion
         {
             return "Subasta";
         }
+        public override int getCodPublicacion(int codigoPropio)
+        {
+            return AdaptadorBD.ejecutarProcedureWithReturnValue("get_publicacion_de_subasta", codigoPropio);
+        }
+
+        public override void perdurar()
+        {
+            AdaptadorBD.ejecutarProcedure("editar_subasta",id,precioInicial,stock);
+        }
     }
 }

@@ -318,5 +318,10 @@ namespace FrbaCommerce.Asistentes
             }
         }
 
+        public static int getIdUltimaInsercion()
+        {
+            return ejecutarProcedureWithReturnValue("id_ultima_insercion");
+        }
+
     }
 }

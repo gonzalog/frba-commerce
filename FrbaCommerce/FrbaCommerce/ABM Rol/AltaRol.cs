@@ -49,7 +49,7 @@ namespace FrbaCommerce.ABM_Rol
                 int codigoFuncion = getIdFuncion(funcion);
                 funcionesElegidas.Add(codigoFuncion);
             }
-            Console.WriteLine("Seleccionaste " + funcionesElegidas.Count + " funciones.");
+            
             return funcionesElegidas;
         }
 
