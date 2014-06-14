@@ -278,6 +278,24 @@
     <Compile Include="Generar Publicacion\Subasta.cs" />
     <Compile Include="Generar Publicacion\Tipo.cs" />
     <Compile Include="Generar Publicacion\VentaDirecta.cs" />
+    <Compile Include="Gestion de Preguntas\listadoPreguntas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion de Preguntas\listadoPreguntas.Designer.cs">
+      <DependentUpon>listadoPreguntas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion de Preguntas\responderPregunta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion de Preguntas\responderPregunta.Designer.cs">
+      <DependentUpon>responderPregunta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion de Preguntas\verRespuesta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion de Preguntas\verRespuesta.Designer.cs">
+      <DependentUpon>verRespuesta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\ElegirRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,11 +333,11 @@
     <Compile Include="Generar Publicacion\GenerarPublicacion.Designer.cs">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion de Preguntas\Form1.cs">
+    <Compile Include="Gestion de Preguntas\GestionDePreguntas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion de Preguntas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Gestion de Preguntas\GestionDePreguntas.Designer.cs">
+      <DependentUpon>GestionDePreguntas.cs</DependentUpon>
     </Compile>
     <Compile Include="Historial Cliente\Form1.cs">
       <SubType>Form</SubType>
@@ -415,6 +433,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\GenerarPublicacion.resx">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion de Preguntas\GestionDePreguntas.resx">
+      <DependentUpon>GestionDePreguntas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion de Preguntas\listadoPreguntas.resx">
+      <DependentUpon>listadoPreguntas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\ElegirRol.resx">
       <DependentUpon>ElegirRol.cs</DependentUpon>

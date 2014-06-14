@@ -18,6 +18,7 @@ namespace FrbaCommerce.Editar_Publicacion
         {
             InitializeComponent();
             this.user = user;
+
             cargarPublics();
             agregarBotonEditar();
         }
@@ -71,7 +72,6 @@ namespace FrbaCommerce.Editar_Publicacion
                 int publicAModificar = Convert.ToInt32(grillaPublics.Rows[e.RowIndex].Cells["ID"].Value.ToString());
                 if (e.ColumnIndex == grillaPublics.Rows[e.RowIndex].Cells["EDITAR"].ColumnIndex)
                 {
-                    
                     int idPublicacion = Convert.ToInt32(grillaPublics.Rows[e.RowIndex].Cells["ID"].Value.ToString());
                     Publicacion publi = new Publicacion(idPublicacion);
                     publi.abrirEditor();

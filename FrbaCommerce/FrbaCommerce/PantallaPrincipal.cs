@@ -12,6 +12,7 @@ using FrbaCommerce.Abm_Empresa;
 using FrbaCommerce.Abm_Visibilidad;
 using FrbaCommerce.Generar_Publicacion;
 using FrbaCommerce.Editar_Publicacion;
+using FrbaCommerce.Gestion_de_Preguntas;
 
 namespace FrbaCommerce
 {
@@ -91,6 +92,11 @@ namespace FrbaCommerce
         private void editarPublicacion_Click(object sender, EventArgs e)
         {
             AsistenteVistas.mostrarSimultaneo(new VerPublicacionesAEditar(this.user));
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarSimultaneo(new GestionDePreguntas(this.user));
         }
     }
 }

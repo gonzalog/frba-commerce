@@ -122,5 +122,10 @@ namespace FrbaCommerce.Asistentes
         {
             ejecutarProcedure("editar_direccion",dir.id,dir.calle,dir.numero,dir.piso,dir.depto,dir.codPostal,dir.localidad);
         }
+
+        public static DataTable getPregsParaBuscando(string descripcion, string user)
+        {
+            return traerDataTable("get_pregs_para_buscando",descripcion,user);
+        }
     }
 }

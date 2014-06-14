@@ -9,11 +9,15 @@ using System.Windows.Forms;
 
 namespace FrbaCommerce.Gestion_de_Preguntas
 {
-    public partial class Form1 : Form
+    public partial class responderPregunta : Form
     {
-        public Form1()
+        public int pregunta;
+        private Form padre;
+        public responderPregunta(int pregunta,Form padre)
         {
             InitializeComponent();
+            this.pregunta = pregunta;
+            this.padre = padre;
         }
     }
 }

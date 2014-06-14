@@ -2075,6 +2075,35 @@ VALUES
 )
 
 GO
+--BUSCAR PREGUNTAS PARA UNA PERSONA
+CREATE PROC THE_DISCRETABOY.get_pregs_para_buscando
+(
+@DESCRIP nvarchar(255),
+@USUARIO NVARCHAR(20)
+)
+AS
+SELECT
+PUB.id 'CODIGO PUBLICACION',
+PUB.descripcion 'PUBLICACION',
+PREG.id 'CODIGO PREGUNTA',
+PREG.descripcion 'PREGUNTA',
+PREG.cliente 'CLIENTE PREGUNTADOR'
+FROM
+THE_DISCRETABOY.Pregunta PREG,
+THE_DISCRETABOY.Publicacion PUB
+WHERE
+PREG.publicacion = PUB.id AND
+PUB.usuario = @USUARIO AND
+PREG.descripcion LIKE '%'+@DESCRIP+'%' AND
+PREG.id != ALL 
+(
+SELECT 
+R.pregunta 
+FROM 
+THE_DISCRETABOY.Respuesta R
+)
+
+GO
 /* ****** Migrar datos existentes ******* */
 
 --CARGO CALIFICACIONES

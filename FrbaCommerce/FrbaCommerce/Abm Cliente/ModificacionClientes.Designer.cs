@@ -195,6 +195,9 @@
             // 
             // grillaClientes
             // 
+            this.grillaClientes.AllowUserToAddRows = false;
+            this.grillaClientes.AllowUserToDeleteRows = false;
+            this.grillaClientes.AllowUserToResizeRows = false;
             this.grillaClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grillaClientes.Location = new System.Drawing.Point(17, 235);
             this.grillaClientes.Name = "grillaClientes";
