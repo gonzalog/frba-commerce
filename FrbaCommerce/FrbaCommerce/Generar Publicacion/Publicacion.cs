@@ -94,5 +94,10 @@ namespace FrbaCommerce.Generar_Publicacion
                 if (rubrosPrevios.All(unRubroViejo => !unRubroViejo.Value.Equals(rubroNuevo.Value)))
                     AdaptadorBD.ejecutarProcedure("alta_rubro_cod_por_publicacion", rubroNuevo.Value, this.id);
         }
+
+        public void aumentarStockEn(int aumento)
+        {
+            this.tipo.stock += aumento;
+        }
     }
 }
