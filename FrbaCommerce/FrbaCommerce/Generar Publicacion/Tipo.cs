@@ -61,5 +61,7 @@ namespace FrbaCommerce.Generar_Publicacion
         public abstract int getCodPublicacion(int codigoPropio);
 
         public abstract void perdurar();
+
+        public abstract decimal precioActual();
     }
 }

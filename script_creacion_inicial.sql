@@ -2104,6 +2104,101 @@ THE_DISCRETABOY.Respuesta R
 )
 
 GO
+--BUSCAR PREGUNTAS RESPONDIDAS PARA UNA PERSONA
+CREATE PROC THE_DISCRETABOY.get_pregs_respondidas_para_buscando
+(
+@DESCRIP nvarchar(255),
+@USUARIO NVARCHAR(20)
+)
+AS
+SELECT
+PUB.id 'CODIGO PUBLICACION',
+PUB.descripcion 'PUBLICACION',
+PREG.id 'CODIGO PREGUNTA',
+PREG.descripcion 'PREGUNTA',
+PREG.cliente 'CLIENTE PREGUNTADOR'
+FROM
+THE_DISCRETABOY.Pregunta PREG,
+THE_DISCRETABOY.Publicacion PUB,
+THE_DISCRETABOY.Respuesta RES
+WHERE
+PREG.publicacion = PUB.id AND
+PREG.id = RES.pregunta AND
+PUB.usuario = @USUARIO AND
+PREG.descripcion LIKE '%'+@DESCRIP+'%'
+
+GO
+--ALTA RESPUESTA
+CREATE PROC THE_DISCRETABOY.alta_respuesta
+(
+@PREGUNTA NUMERIC(18,0),
+@RESPUESTA NVARCHAR(255)
+)
+AS
+INSERT INTO THE_DISCRETABOY.Respuesta
+(
+pregunta,
+fecha,
+descripcion
+)
+VALUES
+(
+@PREGUNTA,
+(SELECT CURRENT_TIMESTAMP),
+@RESPUESTA
+)
+
+GO
+--PRECIO ACTUAL DE LA SUBASTA
+CREATE PROC THE_DISCRETABOY.precio_actual_subasta
+(
+@SUBASTA NUMERIC(18,0)
+)
+AS
+SELECT TOP 1
+MAX(O.monto_ofertado) 'PRECIO ACTUAL'
+FROM
+THE_DISCRETABOY.Subasta S, 
+THE_DISCRETABOY.Oferta O
+WHERE
+S.publicacion = O.publicacion AND
+S.id = @SUBASTA
+GROUP BY 
+S.publicacion
+
+UNION
+
+SELECT TOP 1
+S.precio_inicial 'PRECIO ACTUAL'
+FROM
+THE_DISCRETABOY.Subasta S
+WHERE
+S.id = @SUBASTA AND
+S.publicacion != ALL 
+(
+SELECT
+O.publicacion
+FROM
+THE_DISCRETABOY.Oferta O
+)
+
+GO
+--TRAE LA DESCRIPCION DE UNA RESPUESTA
+CREATE PROC THE_DISCRETABOY.get_descripcion_respuesta
+(
+@COD NUMERIC(18,0)
+)
+AS
+BEGIN
+SELECT TOP 1
+R.descripcion
+FROM
+THE_DISCRETABOY.Respuesta R
+WHERE
+R.pregunta = @COD
+END
+
+GO
 /* ****** Migrar datos existentes ******* */
 
 --CARGO CALIFICACIONES

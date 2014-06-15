@@ -7,7 +7,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Data;
-
+using FrbaCommerce.Excepciones;
 
 namespace FrbaCommerce.Asistentes
 {
@@ -121,8 +121,24 @@ namespace FrbaCommerce.Asistentes
             }
             catch (IndexOutOfRangeException)
             {
-                MessageBox.Show("Click inválido.");
-                return "";
+                throw new FallaDelMotor("Error al buscar el string.");
+            }
+        }
+
+        private static decimal _ejecutarProcedureWithReturnDecimal(string procedure, List<string> args, object[] values)
+        {
+            try
+            {
+                DataTable stringEnTabla = _traerDataTable(procedure, args, values);
+                DataRowCollection fila = stringEnTabla.Rows;
+                DataRow primeraFila = fila[0];
+                string contenidoEnCadena = primeraFila[0].ToString();
+                System.Diagnostics.Debug.WriteLine("El contenido de la cadena traída es: "+contenidoEnCadena);
+                return Convert.ToDecimal(contenidoEnCadena);
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw new FallaDelMotor("No se encontró el decimal.");
             }
         }
 
@@ -299,8 +315,13 @@ namespace FrbaCommerce.Asistentes
         {
             List<string> argumentos = _generateArguments(procedure);
             string retorno = _ejecutarProcedureWithReturnString(procedure, argumentos, values);
-            //MessageBox.Show("La primitiva trajo: "+retorno);
             return retorno;
+        }
+
+        public static decimal ejecutarProcedureWithReturnDecimal(string procedure, params object[] values)
+        {
+            List<string> argumentos = _generateArguments(procedure);
+            return _ejecutarProcedureWithReturnDecimal(procedure, argumentos, values);
         }
 
         public static void conexionSql(SqlConnection conexion, SqlCommand cm)

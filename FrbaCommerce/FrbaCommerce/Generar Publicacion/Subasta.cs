@@ -56,5 +56,10 @@ namespace FrbaCommerce.Generar_Publicacion
         {
             AdaptadorBD.ejecutarProcedure("editar_subasta",id,precioInicial,stock);
         }
+
+        public override decimal precioActual()
+        {
+            return AdaptadorBD.ejecutarProcedureWithReturnDecimal("precio_actual_subasta",this.id);
+        }
     }
 }

@@ -46,6 +46,7 @@ namespace FrbaCommerce
                 if (funciones.Select(cod => nombres[cod]).Contains(boton.Text))
                 {
                     boton.Show();
+                    boton.Cursor = Cursors.Hand;
                 }
                 else
                 {

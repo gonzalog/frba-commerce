@@ -47,5 +47,10 @@ namespace FrbaCommerce.Generar_Publicacion
         {
             AdaptadorBD.ejecutarProcedure("editar_venta_directa", id, precioInicial, stock);
         }
+
+        public override decimal precioActual()
+        {
+            return this.precioInicial;
+        }
     }
 }

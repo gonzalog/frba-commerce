@@ -127,5 +127,10 @@ namespace FrbaCommerce.Asistentes
         {
             return traerDataTable("get_pregs_para_buscando",descripcion,user);
         }
+
+        public static DataTable getPregsRespondidasBuscando(string busqueda, string user)
+        {
+            return traerDataTable("get_pregs_respondidas_para_buscando", busqueda, user);
+        }
     }
 }

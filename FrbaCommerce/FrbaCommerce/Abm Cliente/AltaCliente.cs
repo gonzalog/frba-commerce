@@ -30,7 +30,7 @@ namespace FrbaCommerce.Abm_Cliente
 
         private void cancelar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("¿Realmente quiere cancelar? Se perderan todos los datos cargados.", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("¿Realmente quiere cancelar? Se perderán todos los datos cargados.", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 AsistenteVistas.volverAPadreYCerrar(padre, this);
             }

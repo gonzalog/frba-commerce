@@ -13,7 +13,7 @@ namespace FrbaCommerce.Gestion_de_Preguntas
     public partial class listadoPreguntas : Form
     {
         private string user;
-        public delegate Form RespuestaBoton(int pregunta,Form padre);
+        public delegate Form RespuestaBoton(int publicacion,int pregunta, string descripcionDeLaPregunta, Form padre);
         public delegate void CargadorGrilla(DataGridView grilla,string busqueda,string usuario);
         public delegate void AgregadorDeBoton(DataGridView grilla);
         private RespuestaBoton abrirVentana;
@@ -66,11 +66,14 @@ namespace FrbaCommerce.Gestion_de_Preguntas
             }
             try
             {
-                int pregAResponder = Convert.ToInt32(grillaPregs.Rows[e.RowIndex].Cells["CODIGO PREGUNTA"].Value.ToString());
+                int publicacion = Convert.ToInt32(grillaPregs.Rows[e.RowIndex].Cells["CODIGO PUBLICACION"].Value.ToString());
+                int preguntaEnCuestion = Convert.ToInt32(grillaPregs.Rows[e.RowIndex].Cells["CODIGO PREGUNTA"].Value.ToString());
+                System.Diagnostics.Debug.WriteLine("Se pide la descripcion de la pregunta.");
+                string descripcionDeLaPregunta = grillaPregs.Rows[e.RowIndex].Cells["PREGUNTA"].Value.ToString();
                 if (e.ColumnIndex == grillaPregs.Rows[e.RowIndex].Cells["DESEO"].ColumnIndex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Se clickeó para responder a: "+pregAResponder);
-                    AsistenteVistas.mostrarNuevaVentana(this.abrirVentana(pregAResponder,this),this);      
+                    System.Diagnostics.Debug.WriteLine("Se clickeó para responder a: "+preguntaEnCuestion);
+                    AsistenteVistas.mostrarNuevaVentana(this.abrirVentana(publicacion,preguntaEnCuestion, descripcionDeLaPregunta, this), this);      
                 }
             }
             catch (ArgumentOutOfRangeException)

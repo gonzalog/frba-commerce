@@ -211,6 +211,7 @@
     <Compile Include="Asistentes\AsistenteColecciones.cs" />
     <Compile Include="Asistentes\AsistenteEmpresa.cs" />
     <Compile Include="Asistentes\AsistenteLogin.cs" />
+    <Compile Include="Asistentes\AsistentePreguntas.cs" />
     <Compile Include="Asistentes\AsistentePublicacion.cs" />
     <Compile Include="Asistentes\AsistenteRol.cs" />
     <Compile Include="Asistentes\AsistenteUsuario.cs" />
@@ -439,6 +440,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gestion de Preguntas\listadoPreguntas.resx">
       <DependentUpon>listadoPreguntas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion de Preguntas\responderPregunta.resx">
+      <DependentUpon>responderPregunta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion de Preguntas\verRespuesta.resx">
+      <DependentUpon>verRespuesta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\ElegirRol.resx">
       <DependentUpon>ElegirRol.cs</DependentUpon>

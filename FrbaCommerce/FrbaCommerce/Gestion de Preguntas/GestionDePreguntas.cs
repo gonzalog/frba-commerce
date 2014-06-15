@@ -28,9 +28,11 @@ namespace FrbaCommerce.Gestion_de_Preguntas
         private void responderPreguntas_Click(object sender, EventArgs e)
         {
             AsistenteVistas.mostrarNuevaVentana(new listadoPreguntas(
-                delegate(int pregunta,Form padre)
+                delegate(int publicacion,int pregunta, string descripcionDeLaPregunta, Form padre)
                 {
-                    return new responderPregunta(pregunta,padre);
+                    System.Diagnostics.Debug.WriteLine("Se cliqueó el botón.");
+                    
+                    return new responderPregunta(pregunta, descripcionDeLaPregunta, padre);
                 },
                 delegate(DataGridView grilla, string busqueda, string user)
                 {
@@ -49,7 +51,26 @@ namespace FrbaCommerce.Gestion_de_Preguntas
 
         private void verRespuestas_Click(object sender, EventArgs e)
         {
-            //AsistenteVistas.mostrarNuevaVentana(new listadoPreguntas(delegate(int pregunta) { new verRespuesta(); }, this.user), this);
+            AsistenteVistas.mostrarNuevaVentana(new listadoPreguntas(
+                delegate(int publicacion, int pregunta, string descripcionDeLaPregunta, Form padre)
+                {
+                    System.Diagnostics.Debug.WriteLine("Se cliqueó el botón.");
+
+                    return new verRespuesta(publicacion,pregunta, descripcionDeLaPregunta, padre);
+                },
+                delegate(DataGridView grilla, string busqueda, string user)
+                {
+                    AsistenteVistas.CargarGrilla(grilla, AsistenteUsuario.getPregsRespondidasBuscando(busqueda, user));
+                },
+                delegate(DataGridView grilla)
+                {
+                    DataGridViewButtonColumn col = new DataGridViewButtonColumn();
+                    col.Text = "VER RESPUESTA";
+                    col.Name = "DESEO";
+                    col.UseColumnTextForButtonValue = true;
+                    grilla.Columns.Add(col);
+                },
+                this.user), this);
         }
     }
 }
