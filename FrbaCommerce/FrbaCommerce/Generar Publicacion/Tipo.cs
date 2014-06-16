@@ -63,5 +63,7 @@ namespace FrbaCommerce.Generar_Publicacion
         public abstract void perdurar();
 
         public abstract decimal precioActual();
+
+        public abstract void abrirVentanaInteresado(Publicacion publicacion, string user);
     }
 }

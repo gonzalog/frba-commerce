@@ -13,6 +13,7 @@ using FrbaCommerce.Abm_Visibilidad;
 using FrbaCommerce.Generar_Publicacion;
 using FrbaCommerce.Editar_Publicacion;
 using FrbaCommerce.Gestion_de_Preguntas;
+using FrbaCommerce.Comprar_Ofertar;
 
 namespace FrbaCommerce
 {
@@ -98,6 +99,11 @@ namespace FrbaCommerce
         private void button1_Click(object sender, EventArgs e)
         {
             AsistenteVistas.mostrarSimultaneo(new GestionDePreguntas(this.user));
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarSimultaneo(new ComprarOfertar(this.user));
         }
     }
 }

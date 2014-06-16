@@ -91,5 +91,19 @@ namespace FrbaCommerce.Asistentes
             System.Diagnostics.Debug.WriteLine("Se guarda con el campo hay_preguntas: " + (publicacion.hayPreguntas ? 1 : 0));
             ejecutarProcedure("editar_publicacion",publicacion.id,publicacion.visibilidad.cod,publicacion.estado.nombre(),publicacion.hayPreguntas?1:0);
         }
+
+        public static DataTable getPublicsAVer(string user,string descripcion,string rubro)
+        {
+            return traerDataTable("get_publics_a_ver", user,descripcion,rubro);
+        }
+
+        public static List<int> getCodPublicsAVer(string user, string descripcion, string rubro)
+        {
+            List<int> cods = new List<int>();
+            DataTable tabla = getPublicsAVer(user,descripcion,rubro);
+            foreach (DataRow fila in tabla.Rows)
+                cods.Add(Convert.ToInt32(fila["CODIGO"].ToString()));
+            return cods;
+        }
     }
 }

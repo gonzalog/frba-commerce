@@ -99,5 +99,10 @@ namespace FrbaCommerce.Generar_Publicacion
         {
             this.tipo.stock += aumento;
         }
+
+        public void hayUnInteresado(string user)
+        {
+            tipo.abrirVentanaInteresado(this,user);
+        }
     }
 }

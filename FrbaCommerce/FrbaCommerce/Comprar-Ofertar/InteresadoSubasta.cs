@@ -6,12 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaCommerce.Generar_Publicacion;
 
 namespace FrbaCommerce.Comprar_Ofertar
 {
-    public partial class Form1 : Form
+    public partial class InteresadoSubasta : Form
     {
-        public Form1()
+        public InteresadoSubasta(Publicacion publicacion, string user)
         {
             InitializeComponent();
         }

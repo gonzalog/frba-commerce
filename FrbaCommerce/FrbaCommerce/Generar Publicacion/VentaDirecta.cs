@@ -6,6 +6,7 @@ using FrbaCommerce.Asistentes;
 using System.Data;
 using FrbaCommerce.Abm_Visibilidad;
 using FrbaCommerce.Editar_Publicacion;
+using FrbaCommerce.Comprar_Ofertar;
 
 namespace FrbaCommerce.Generar_Publicacion
 {
@@ -27,7 +28,15 @@ namespace FrbaCommerce.Generar_Publicacion
             DataRow fila = AdaptadorBD.traerDataTable("venta_dir_por_pub", idPubli).Rows[0];
             this.id = Convert.ToInt32(fila["id"].ToString());
             this.stock = Convert.ToInt32(fila["stock"].ToString());
-            this.precioInicial = Convert.ToDecimal(fila["precio"].ToString());
+            string cadenaPrecio = fila["precio"].ToString();
+            if (cadenaPrecio != "")
+            {
+                this.precioInicial = Convert.ToDecimal(cadenaPrecio);
+            }
+            else
+            {
+                this.precioInicial = 0;
+            }
         }
 
         public override void abrirEditorEnEstado(Estado estado,Publicacion publi)
@@ -51,6 +60,11 @@ namespace FrbaCommerce.Generar_Publicacion
         public override decimal precioActual()
         {
             return this.precioInicial;
+        }
+
+        public override void abrirVentanaInteresado(Publicacion publicacion, string user)
+        {
+            AsistenteVistas.mostrarSimultaneo(new InteresadoVentaDirecta(publicacion, user));
         }
     }
 }

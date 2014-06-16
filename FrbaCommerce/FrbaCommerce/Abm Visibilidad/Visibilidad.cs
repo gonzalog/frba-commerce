@@ -34,7 +34,7 @@ namespace FrbaCommerce.Abm_Visibilidad
 
         public int duracion()
         {
-            return Convert.ToInt32(Convert.ToDouble(porcentaje)*100);
+            return Convert.ToInt32(Convert.ToDouble(precio)) + 10;
         }
     }
 }

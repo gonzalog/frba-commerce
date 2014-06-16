@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(listadoPreguntas));
             this.cancelButton = new System.Windows.Forms.Button();
             this.errorBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -107,7 +108,7 @@
             this.buscador.Location = new System.Drawing.Point(78, 22);
             this.buscador.MaxLength = 255;
             this.buscador.Name = "buscador";
-            this.buscador.Size = new System.Drawing.Size(362, 20);
+            this.buscador.Size = new System.Drawing.Size(467, 20);
             this.buscador.TabIndex = 5;
             // 
             // grillaPregs
@@ -133,6 +134,10 @@
             this.Controls.Add(this.errorBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grillaPregs);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "listadoPreguntas";
             this.Text = "listadoPreguntas";
             this.groupBox1.ResumeLayout(false);

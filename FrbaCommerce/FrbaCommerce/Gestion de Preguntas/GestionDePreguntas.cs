@@ -31,7 +31,6 @@ namespace FrbaCommerce.Gestion_de_Preguntas
                 delegate(int publicacion,int pregunta, string descripcionDeLaPregunta, Form padre)
                 {
                     System.Diagnostics.Debug.WriteLine("Se cliqueó el botón.");
-                    
                     return new responderPregunta(pregunta, descripcionDeLaPregunta, padre);
                 },
                 delegate(DataGridView grilla, string busqueda, string user)
@@ -55,7 +54,6 @@ namespace FrbaCommerce.Gestion_de_Preguntas
                 delegate(int publicacion, int pregunta, string descripcionDeLaPregunta, Form padre)
                 {
                     System.Diagnostics.Debug.WriteLine("Se cliqueó el botón.");
-
                     return new verRespuesta(publicacion,pregunta, descripcionDeLaPregunta, padre);
                 },
                 delegate(DataGridView grilla, string busqueda, string user)

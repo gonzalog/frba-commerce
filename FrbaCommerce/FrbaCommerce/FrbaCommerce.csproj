@@ -229,13 +229,26 @@
     <Compile Include="CambioPassword\CambioPassword.Designer.cs">
       <DependentUpon>CambioPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comprar-Ofertar\Form1.cs">
+    <Compile Include="Comprar-Ofertar\ComprarOfertar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Comprar-Ofertar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Comprar-Ofertar\ComprarOfertar.Designer.cs">
+      <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </Compile>
     <Compile Include="Asistentes\AdaptadorBD.cs" />
+    <Compile Include="Comprar-Ofertar\InteresadoSubasta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar-Ofertar\InteresadoSubasta.Designer.cs">
+      <DependentUpon>InteresadoSubasta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar-Ofertar\InteresadoVentaDirecta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar-Ofertar\InteresadoVentaDirecta.Designer.cs">
+      <DependentUpon>InteresadoVentaDirecta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar-Ofertar\MuestraDePublicacion.cs" />
     <Compile Include="Editar Publicacion\EditBorrador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -422,6 +435,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CambioPassword\CambioPassword.resx">
       <DependentUpon>CambioPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar-Ofertar\ComprarOfertar.resx">
+      <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editar Publicacion\EditBorrador.resx">
       <DependentUpon>EditBorrador.cs</DependentUpon>

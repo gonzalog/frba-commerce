@@ -2199,6 +2199,62 @@ R.pregunta = @COD
 END
 
 GO
+
+--GET PUBLICACIONES PARA COMPRAR/OFERTAR ORDENADAS
+CREATE PROC THE_DISCRETABOY.get_publics_a_ver
+(
+@USUARIO nvarchar(20),
+@DESCRIPCION NVARCHAR(255),
+@RUBRO NVARCHAR(255)
+)
+AS
+SELECT
+P.id 'CODIGO',
+P.descripcion 'DESCRIPCION',
+'Subasta' 'TIPO',
+V.precio_por_pub 'PRECIO POR PUBLICAR'
+FROM
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Subasta S,
+THE_DISCRETABOY.Visibilidad V,
+THE_DISCRETABOY.Rubro_por_publicacion RP,
+THE_DISCRETABOY.Rubro R
+WHERE
+P.usuario != @USUARIO AND
+P.id = S.publicacion AND
+DATEDIFF(DAY,P.fecha_venc,GETDATE())<0 AND
+V.codigo = P.Visibilidad AND
+P.descripcion LIKE '%'+@DESCRIPCION+'%' AND
+R.codigo = RP.rubro AND
+RP.publicacion = P.id AND
+R.descripcion LIKE '%'+@RUBRO+'%' AND
+P.estado = 'Publicada'
+UNION
+SELECT
+P.id 'CODIGO',
+P.descripcion 'DESCRIPCION',
+'Venta directa' 'TIPO',
+VI.precio_por_pub 'PRECIO POR PUBLICAR'
+FROM
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Venta_directa V,
+THE_DISCRETABOY.Visibilidad VI,
+THE_DISCRETABOY.Rubro_por_publicacion RP,
+THE_DISCRETABOY.Rubro R
+WHERE
+P.usuario != @USUARIO AND
+P.id = V.publicacion AND
+DATEDIFF(DAY,P.fecha_venc,GETDATE())<0 AND
+V.stock>0 AND
+VI.codigo = P.Visibilidad AND
+P.descripcion LIKE '%'+@DESCRIPCION+'%' AND
+R.codigo = RP.rubro AND
+RP.publicacion = P.id AND
+R.descripcion LIKE '%'+@RUBRO+'%' AND
+P.estado = 'Publicada'
+ORDER BY [PRECIO POR PUBLICAR] DESC,CODIGO DESC
+
+GO
 /* ****** Migrar datos existentes ******* */
 
 --CARGO CALIFICACIONES
