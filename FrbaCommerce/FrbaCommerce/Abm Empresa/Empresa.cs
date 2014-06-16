@@ -7,10 +7,11 @@ using FrbaCommerce.Asistentes;
 using FrbaCommerce.Registro_de_Usuario;
 using System.Windows.Forms;
 using FrbaCommerce.Excepciones;
+using FrbaCommerce.Comprar_Ofertar;
 
 namespace FrbaCommerce.Abm_Empresa
 {
-    public class Empresa
+    public class Empresa : Vendedor
     {
         public string user;
         public string razon;
@@ -46,6 +47,10 @@ namespace FrbaCommerce.Abm_Empresa
             if (AsistenteEmpresa.existeCUITExceptuandoA(cuit, user)) throw new CUITRepetido();
             if (AsistenteEmpresa.existeTelefonoEmpresaExceptuandoA(telefono, user)) throw new TelefonoYaRegistrado();
             AsistenteEmpresa.editarEmpresa(this);
+        }
+        public void mostrarDatos()
+        {
+            MessageBox.Show("Empresa vendedora:\n"+AsistenteEmpresa.listarData(this));
         }
     }
 }

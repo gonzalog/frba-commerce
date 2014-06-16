@@ -70,12 +70,14 @@ namespace FrbaCommerce.Generar_Publicacion
             Tipo saverTipoDeLaPublicacion = Tipo.getTipoSaver(tipo.Text);
 
             List<string> rubrosElegidos = new List<string>();
-            if (rubrosElegidos.Count == 0) 
+            
+            foreach (string eleccion in listadoRubros.CheckedItems) rubrosElegidos.Add(eleccion);
+            if (rubrosElegidos.Count == 0)
             {
                 MessageBox.Show("Debe elegir por lo menos un rubro.");
                 return;
             }
-            foreach (string eleccion in listadoRubros.CheckedItems) rubrosElegidos.Add(eleccion);
+
             try
             {
                 saverTipoDeLaPublicacion.darDeALta(Descripcion.Text, Stock.Text, Precio.Text,

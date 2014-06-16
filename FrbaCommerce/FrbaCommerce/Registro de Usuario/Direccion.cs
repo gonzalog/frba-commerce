@@ -26,5 +26,10 @@ namespace FrbaCommerce.Registro_de_Usuario
             localidad = filaDireccion["localidad"].ToString();
             codPostal = filaDireccion["cod_post"].ToString();
         }
+
+        public string listar()
+        {
+            return calle + " " + numero + " " + piso + " " + depto + "\nLocalidad: " + localidad + "\nCódigo postal: " + codPostal;
+        }
     }
 }

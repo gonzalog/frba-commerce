@@ -146,5 +146,17 @@ namespace FrbaCommerce.Asistentes
                 throw new ElTamanioDeLosDatosExcedeAlSistema();
             }
         }
+
+        public static string listarData(Cliente cliente)
+        {
+            return "Usuario: " + cliente.user + "\n" +
+                "Nombre: " + cliente.nombre + "\n" +
+                "Apellido: " + cliente.apellido + "\n" +
+                "Documento personal: " + cliente.tipoDoc + " " + cliente.nroDoc + "\n" +
+                "Fecha de nacimiento: " + cliente.fechaNac + "\n" +
+                "E-mail: " + cliente.mail + "\n" +
+                "Teléfono: " + cliente.telefono + "\n" +
+                "Dirección: \n" + cliente.direccion.listar();
+        }
     }
 }

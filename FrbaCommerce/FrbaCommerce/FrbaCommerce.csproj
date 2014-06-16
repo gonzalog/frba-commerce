@@ -249,6 +249,7 @@
       <DependentUpon>InteresadoVentaDirecta.cs</DependentUpon>
     </Compile>
     <Compile Include="Comprar-Ofertar\MuestraDePublicacion.cs" />
+    <Compile Include="Comprar-Ofertar\Vendedor.cs" />
     <Compile Include="Editar Publicacion\EditBorrador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,6 +323,7 @@
     <Compile Include="PantallaPrincipal.Designer.cs">
       <DependentUpon>PantallaPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registro de Usuario\Administrativo.cs" />
     <Compile Include="Registro de Usuario\Direccion.cs" />
     <Compile Include="Registro de Usuario\OpcionTipoRegistro.cs">
       <SubType>Form</SubType>
@@ -438,6 +440,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comprar-Ofertar\ComprarOfertar.resx">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar-Ofertar\InteresadoSubasta.resx">
+      <DependentUpon>InteresadoSubasta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar-Ofertar\InteresadoVentaDirecta.resx">
+      <DependentUpon>InteresadoVentaDirecta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editar Publicacion\EditBorrador.resx">
       <DependentUpon>EditBorrador.cs</DependentUpon>

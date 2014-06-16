@@ -151,5 +151,17 @@ namespace FrbaCommerce.Asistentes
         {
             return traerDataTable("get_data_empresa", empresa).Rows[0];
         }
+        public static string listarData(Empresa empresa)
+        {
+            return "Razón: " + empresa.razon + "\n" +
+                "Usuario :" + empresa.user + "\n" +
+                "Mail: " + empresa.mail + "\n" +
+                "Telefono: " + empresa.telefono + "\n" +
+                "Dirección: \n" + empresa.direccion.listar() + "\n" +
+                "Ciudad: " + empresa.ciudad + "\n" +
+                "CUIT: " + empresa.cuit + "\n" +
+                "Contacto: " + empresa.nombreDeContacto + "\n" +
+                "Fecha de creación: " + empresa.fechaCreacion + "\n";
+        }
     }
 }

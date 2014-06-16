@@ -43,7 +43,7 @@ namespace FrbaCommerce.Comprar_Ofertar
             codigosDePublicaciones = AsistentePublicacion.getCodPublicsAVer(user, buscador.Text, rubroSearcher.Text);
             System.Diagnostics.Debug.WriteLine("LA CANTIDAD DE PUBLICACIONES TRAIDAS ES: "+codigosDePublicaciones.Count);
             numPag.Text = ((this.indiceMostrador / this.publicacionesPorVez) + 1).ToString() + 
-                " de " + (this.codigosDePublicaciones.Count / this.publicacionesPorVez).ToString();
+                " de " + (((this.codigosDePublicaciones.Count -1)/ this.publicacionesPorVez)+1).ToString();
             cargarPublicaciones();
         }
 
@@ -106,7 +106,7 @@ namespace FrbaCommerce.Comprar_Ofertar
         {
             this.indiceMostrador = 0;
             numPag.Text = ((this.indiceMostrador / this.publicacionesPorVez) + 1).ToString() + 
-                " de " + (this.codigosDePublicaciones.Count / this.publicacionesPorVez).ToString();
+                " de " + (((this.codigosDePublicaciones.Count -1)/ this.publicacionesPorVez)+1).ToString();
             cargarPublicaciones();
         }
 
@@ -128,8 +128,8 @@ namespace FrbaCommerce.Comprar_Ofertar
                     this.indiceMostrador = 0;
             }
             cargarPublicaciones();
-            numPag.Text = ((this.indiceMostrador / this.publicacionesPorVez) + 1).ToString() + 
-                " de " + (this.codigosDePublicaciones.Count / this.publicacionesPorVez).ToString();
+            numPag.Text = ((this.indiceMostrador / this.publicacionesPorVez) + 1).ToString() +
+                " de " + (((this.codigosDePublicaciones.Count - 1) / this.publicacionesPorVez) + 1).ToString();
         }
 
         private void posterior_Click(object sender, EventArgs e)
@@ -145,8 +145,8 @@ namespace FrbaCommerce.Comprar_Ofertar
             {
                 MessageBox.Show("No hay más páginas.");
             }
-            numPag.Text = ((this.indiceMostrador / this.publicacionesPorVez) + 1).ToString() + 
-                " de " + (this.codigosDePublicaciones.Count / this.publicacionesPorVez).ToString();
+            numPag.Text = ((this.indiceMostrador / this.publicacionesPorVez) + 1).ToString() +
+                " de " + (((this.codigosDePublicaciones.Count - 1) / this.publicacionesPorVez) + 1).ToString();
         }
 
         private void anterior_Click(object sender, EventArgs e)
@@ -162,7 +162,7 @@ namespace FrbaCommerce.Comprar_Ofertar
                 MessageBox.Show("Usted ya se encuentra en la primer página.");
             }
             numPag.Text = ((this.indiceMostrador / this.publicacionesPorVez)+1).ToString()+
-                " de "+(this.codigosDePublicaciones.Count /this.publicacionesPorVez).ToString();
+                " de " + (((this.codigosDePublicaciones.Count - 1) / this.publicacionesPorVez) + 1).ToString();
         }
 
         private void rubroSearcher_SelectedIndexChanged(object sender, EventArgs e)

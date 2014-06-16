@@ -202,5 +202,10 @@ namespace FrbaCommerce.Asistentes
             foreach (ComboBox box in boxes) hacerNoEditable(box);
         }
 
+
+        public static void hacerNoEditable(NumericUpDown cantidadCompra)
+        {
+            cantidadCompra.ReadOnly = true;
+        }
     }
 }

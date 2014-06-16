@@ -5,6 +5,9 @@ using System.Text;
 using FrbaCommerce.Asistentes;
 using System.Data;
 using FrbaCommerce.Registro_de_Usuario;
+using FrbaCommerce.Comprar_Ofertar;
+using FrbaCommerce.Abm_Empresa;
+using FrbaCommerce.Abm_Cliente;
 
 namespace FrbaCommerce.Asistentes
 {
@@ -131,6 +134,16 @@ namespace FrbaCommerce.Asistentes
         public static DataTable getPregsRespondidasBuscando(string busqueda, string user)
         {
             return traerDataTable("get_pregs_respondidas_para_buscando", busqueda, user);
+        }
+
+        public static Vendedor getVendedor(string userName)
+        {
+            if (ejecutarProcedureWithReturnValue("es_empresa", userName) == 1)
+                return new Empresa(traerDataTable("get_data_empresa", userName).Rows[0]);
+            if (ejecutarProcedureWithReturnValue("es_cliente", userName) == 1)
+                return new Cliente(traerDataTable("get_data_cliente", userName).Rows[0]);
+            else
+                return new Administrador();
         }
     }
 }

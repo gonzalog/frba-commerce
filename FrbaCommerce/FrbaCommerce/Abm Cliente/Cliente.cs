@@ -7,10 +7,11 @@ using FrbaCommerce.Asistentes;
 using FrbaCommerce.Registro_de_Usuario;
 using System.Windows.Forms;
 using FrbaCommerce.Excepciones;
+using FrbaCommerce.Comprar_Ofertar;
 
 namespace FrbaCommerce.Abm_Cliente
 {
-    public class Cliente
+    public class Cliente : Vendedor
     {
         public string user;
         public string nombre;
@@ -59,6 +60,10 @@ namespace FrbaCommerce.Abm_Cliente
             if (AsistenteCliente.existeTipoYNumeroDocExceptuandoA(tipoDoc,docNumerico,user)) throw new DocumentoRepetido();
             if (AsistenteCliente.existeTelefonoClienteExceptuandoA(telefono, user)) throw new TelefonoYaRegistrado();
             AsistenteCliente.editarCliente(this);
+        }
+        public void mostrarDatos()
+        {
+            MessageBox.Show("Cliente vendedor:\n" + AsistenteCliente.listarData(this));
         }
     }
 }
