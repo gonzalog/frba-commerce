@@ -36,7 +36,12 @@ namespace FrbaCommerce.Generar_Publicacion
             }
             this.id = Convert.ToInt32(fila["id"].ToString());
             this.stock = Convert.ToInt32(fila["cantidad"].ToString());
-            this.precioInicial = Convert.ToDecimal(fila["precio_inicial"].ToString());
+
+            string textoPrecio = fila["precio_inicial"].ToString();
+            if (!textoPrecio.Equals(""))
+                this.precioInicial = Convert.ToDecimal(textoPrecio);
+            else
+                this.precioInicial = 0;
         }
 
         public override void abrirEditorEnEstado(Estado estado,Publicacion publi)

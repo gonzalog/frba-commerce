@@ -81,7 +81,7 @@ namespace FrbaCommerce.Login
                                             elecFechaNac.Value.Date
                                             );
                 MessageBox.Show("Usuario creado con éxito.\n¡Bienvenido "+eleccionUsername.Text+" a FRBA-Commerce!");
-                AsistenteVistas.mostrarNuevaVentana(new ElegirRol(eleccionUsername.Text, this), this);
+                AsistenteVistas.mostrarNuevaVentana(new PantallaPrincipal(eleccionUsername.Text,AsistenteRol.getCodRol("Cliente"), padre), this);
             }
         }
 

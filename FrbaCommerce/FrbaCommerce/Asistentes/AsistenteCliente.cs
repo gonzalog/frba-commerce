@@ -6,6 +6,7 @@ using System.Data;
 using System.Windows.Forms;
 using FrbaCommerce.Abm_Cliente;
 using FrbaCommerce.Excepciones;
+using FrbaCommerce.Calificar_Vendedor;
 
 namespace FrbaCommerce.Asistentes
 {
@@ -157,6 +158,19 @@ namespace FrbaCommerce.Asistentes
                 "E-mail: " + cliente.mail + "\n" +
                 "Teléfono: " + cliente.telefono + "\n" +
                 "Dirección: \n" + cliente.direccion.listar();
+        }
+
+        public static List<Adquisicion> packComprasACalificar(string cliente,int inicial)
+        {
+            DataTable tabla = traerDataTable("get_pack_compras_a_calificar", cliente,inicial);
+            List<Adquisicion> lista = new List<Adquisicion>();
+            foreach (DataRow fila in tabla.Rows)
+            {
+                Adquisicion compra = new Adquisicion
+                    (fila["TIPO"].ToString(), Convert.ToInt32(fila["CODIGO"].ToString()));
+                lista.Add(compra);
+            }
+            return lista;
         }
     }
 }

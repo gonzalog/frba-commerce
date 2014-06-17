@@ -48,10 +48,10 @@ namespace FrbaCommerce.Asistentes
             {
                 tipo = new VentaDirecta(idPubli);
             }
-            catch (Exception)
+            /*catch (Exception)
             {
                 throw new TipoIncorrecto("Se pide un tipo incorrecto");
-            }
+            }*/
             
             return tipo;
         }

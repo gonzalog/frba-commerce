@@ -36,14 +36,14 @@
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.calificar = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.editarPublicacion = new System.Windows.Forms.Button();
             this.publicar = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.inicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,14 +88,14 @@
             this.tableLayoutPanel.Controls.Add(this.button11, 4, 1);
             this.tableLayoutPanel.Controls.Add(this.button10, 3, 1);
             this.tableLayoutPanel.Controls.Add(this.button9, 2, 1);
-            this.tableLayoutPanel.Controls.Add(this.button8, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.button7, 0, 1);
-            this.tableLayoutPanel.Controls.Add(this.button6, 5, 0);
+            this.tableLayoutPanel.Controls.Add(this.calificar, 5, 0);
             this.tableLayoutPanel.Controls.Add(this.button5, 4, 0);
             this.tableLayoutPanel.Controls.Add(this.button4, 3, 0);
             this.tableLayoutPanel.Controls.Add(this.button1, 2, 0);
             this.tableLayoutPanel.Controls.Add(this.editarPublicacion, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.publicar, 0, 0);
+            this.tableLayoutPanel.Controls.Add(this.button8, 1, 1);
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 27);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 6;
@@ -156,18 +156,6 @@
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button8.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(148, 80);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(139, 71);
-            this.button8.TabIndex = 7;
-            this.button8.Text = "Comprar/ Ofertar";
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
             // button7
             // 
             this.button7.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -179,16 +167,17 @@
             this.button7.Text = "Historial de cliente";
             this.button7.UseVisualStyleBackColor = false;
             // 
-            // button6
+            // calificar
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button6.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(728, 3);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(139, 71);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Calificar vendedor";
-            this.button6.UseVisualStyleBackColor = false;
+            this.calificar.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.calificar.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.calificar.Location = new System.Drawing.Point(728, 3);
+            this.calificar.Name = "calificar";
+            this.calificar.Size = new System.Drawing.Size(139, 71);
+            this.calificar.TabIndex = 5;
+            this.calificar.Text = "Calificar vendedor";
+            this.calificar.UseVisualStyleBackColor = false;
+            this.calificar.Click += new System.EventHandler(this.calificar_Click);
             // 
             // button5
             // 
@@ -248,6 +237,18 @@
             this.publicar.Text = "Publicar";
             this.publicar.UseVisualStyleBackColor = false;
             this.publicar.Click += new System.EventHandler(this.publicar_Click);
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button8.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Location = new System.Drawing.Point(148, 80);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(139, 71);
+            this.button8.TabIndex = 7;
+            this.button8.Text = "Comprar/ Ofertar";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // menuStrip1
             // 
@@ -382,7 +383,7 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button calificar;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button1;

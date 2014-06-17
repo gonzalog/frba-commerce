@@ -146,7 +146,7 @@ CREATE TABLE THE_DISCRETABOY.Compra_inmediata (
 );
 
 CREATE TABLE THE_DISCRETABOY.Calificacion (
-	id [numeric](18, 0) NOT NULL, --PK
+	id [numeric](18, 0) NOT NULL IDENTITY(1,1), --PK
 	cant_estrellas [numeric](18, 0),
 	descrip [nvarchar](255)
 );
@@ -1002,6 +1002,20 @@ RETURN @ULTIMAPUBLICACION
 END
 
 GO
+--BUSCAR CODIGO DE ULTIMA CALIFICACION
+CREATE PROC THE_DISCRETABOY.ultima_calificacion
+AS
+BEGIN
+DECLARE @ULTIMA_CALIFICACION NUMERIC(18,0)
+SELECT
+@ULTIMA_CALIFICACION = MAX(C.ID)
+FROM
+THE_DISCRETABOY.Calificacion C
+RETURN @ULTIMA_CALIFICACION
+END
+
+GO
+
 --BUSCAR LAS DE UN USER EN PARTICULAR
 CREATE PROC THE_DISCRETABOY.get_publics_de_user_buscando
 (@descrip nvarchar(255),@USUARIO NVARCHAR(20))
@@ -2361,9 +2375,175 @@ GETDATE(),
 )
 
 GO
+--FUNCION PARA CONOCER EL PRECIO ACTUAL DE UNA SUBASTA
+CREATE FUNCTION THE_DISCRETABOY.f_subasta_precio_actual
+(@SUBASTA NUMERIC(18,0))
+RETURNS NUMERIC (18,2)
+AS
+BEGIN
+DECLARE @VALUE NUMERIC(18,2)
+
+SET @VALUE =
+(
+SELECT TOP 1
+MAX(O.monto_ofertado) 'PRECIO ACTUAL'
+FROM
+THE_DISCRETABOY.Subasta S, 
+THE_DISCRETABOY.Oferta O
+WHERE
+S.publicacion = O.publicacion AND
+S.id = @SUBASTA
+GROUP BY 
+S.publicacion
+
+UNION
+
+SELECT TOP 1
+S.precio_inicial 'PRECIO ACTUAL'
+FROM
+THE_DISCRETABOY.Subasta S
+WHERE
+S.id = @SUBASTA AND
+S.publicacion != ALL 
+(
+SELECT
+O.publicacion
+FROM
+THE_DISCRETABOY.Oferta O
+)
+)
+
+RETURN @VALUE
+END
+
+GO
+--Tomar las compras que se debe calificar
+CREATE PROC THE_DISCRETABOY.compras_a_calificar
+(@CLIENTE NVARCHAR(20))
+AS
+SELECT
+C.id 'CODIGO',
+'COMPRA INMEDIATA' 'TIPO'
+FROM
+THE_DISCRETABOY.Compra_inmediata C
+WHERE 
+C.cliente = @CLIENTE AND
+C.calificacion IS NULL
+UNION
+SELECT
+O.id 'CODIGO',
+'OFERTA' 'TIPO'
+FROM
+THE_DISCRETABOY.Oferta O,
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Cliente_por_publicacion CP,
+THE_DISCRETABOY.Subasta S
+WHERE 
+O.cliente = @CLIENTE AND
+O.calificacion IS NULL AND
+O.publicacion = P.id AND
+P.fecha_venc < GETDATE() AND
+S.publicacion = P.id AND
+(O.monto_ofertado = THE_DISCRETABOY.f_subasta_precio_actual(S.id))
+
+GO
+--TOMAR UNA CANTIDAD A PARTIR DE UN CODIGO
+CREATE PROC THE_DISCRETABOY.get_pack_compras_a_calificar
+(@CLIENTE NVARCHAR(20),@BASE NUMERIC(18,0))
+AS
+SELECT TOP 10
+C.id 'CODIGO',
+'COMPRA INMEDIATA' 'TIPO'
+FROM
+THE_DISCRETABOY.Compra_inmediata C
+WHERE 
+C.cliente = @CLIENTE AND
+C.calificacion IS NULL AND
+C.id > @BASE
+UNION
+SELECT TOP 10
+O.id 'CODIGO',
+'OFERTA' 'TIPO'
+FROM
+THE_DISCRETABOY.Oferta O,
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Cliente_por_publicacion CP,
+THE_DISCRETABOY.Subasta S
+WHERE 
+O.cliente = @CLIENTE AND
+O.calificacion IS NULL AND
+O.publicacion = P.id AND
+P.fecha_venc < GETDATE() AND
+S.publicacion = P.id AND
+(O.monto_ofertado = THE_DISCRETABOY.f_subasta_precio_actual(S.id)) AND
+O.id > @BASE
+ORDER BY 1
+
+GO
+--GET DATA COMPRA
+CREATE PROC THE_DISCRETABOY.get_data_compra
+(@CODIGO NUMERIC(18,0))
+AS
+SELECT TOP 1
+*
+FROM
+THE_DISCRETABOY.Compra_inmediata C
+WHERE
+C.id = @CODIGO
+
+GO
+--ALTA CALIFICACION
+CREATE PROC THE_DISCRETABOY.alta_calificacion
+(
+@ESTRELLAS NUMERIC(18,0),
+@DESCRIP NVARCHAR(255)
+)
+AS
+INSERT INTO THE_DISCRETABOY.Calificacion
+(
+cant_estrellas,
+descrip
+)
+VALUES
+(
+@ESTRELLAS,
+@DESCRIP
+)
+
+GO
+--ASIGNAR CALIF A COMPRA
+CREATE PROC THE_DISCRETABOY.compra_asignar_calificacion
+(
+@COMPRA NUMERIC(18,0),
+@CALIF NUMERIC(18,0)
+)
+AS
+UPDATE THE_DISCRETABOY.Compra_inmediata
+SET 
+calificacion = @CALIF
+WHERE
+id = @COMPRA
+
+GO
+--ASIGNAR CALIF A OFERTA
+CREATE PROC THE_DISCRETABOY.oferta_asignar_calificacion
+(
+@OFERTA NUMERIC(18,0),
+@CALIF NUMERIC(18,0)
+)
+AS
+UPDATE THE_DISCRETABOY.Oferta
+SET 
+calificacion = @CALIF
+WHERE
+id = @OFERTA
+
+GO
 /* ****** Migrar datos existentes ******* */
 
 --CARGO CALIFICACIONES
+SET IDENTITY_INSERT THE_DISCRETABOY.Calificacion ON
+
 INSERT INTO THE_DISCRETABOY.Calificacion
 (
 id,
@@ -2378,8 +2558,9 @@ m.Calificacion_Descripcion as descrip
 FROM gd_esquema.Maestra m
 WHERE m.Calificacion_Codigo IS NOT NULL
 
-GO
+SET IDENTITY_INSERT THE_DISCRETABOY.Calificacion OFF
 
+GO
 --CARGO DIRECCIONES
 INSERT INTO THE_DISCRETABOY.Direccion
 (

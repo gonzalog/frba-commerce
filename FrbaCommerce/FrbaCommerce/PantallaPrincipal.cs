@@ -14,6 +14,7 @@ using FrbaCommerce.Generar_Publicacion;
 using FrbaCommerce.Editar_Publicacion;
 using FrbaCommerce.Gestion_de_Preguntas;
 using FrbaCommerce.Comprar_Ofertar;
+using FrbaCommerce.Calificar_Vendedor;
 
 namespace FrbaCommerce
 {
@@ -22,6 +23,7 @@ namespace FrbaCommerce
         private string user;
         private int rol;
         public Form padre;
+
         public PantallaPrincipal(string user, int rol,Form padre)
         {
             this.rol = rol;
@@ -103,7 +105,22 @@ namespace FrbaCommerce
 
         private void button8_Click(object sender, EventArgs e)
         {
-            AsistenteVistas.mostrarSimultaneo(new ComprarOfertar(this.user));
+            List<Adquisicion> pendientes = AsistenteCliente.packComprasACalificar(user,0);
+            System.Diagnostics.Debug.WriteLine("Se comienza a buscar calificaciones pendientes.");
+            if (pendientes.Count > 4)
+            {
+                MessageBox.Show("Para poner comprar/ofertar necesita efectuar las calificaciones pendiente.");
+            }
+            else
+            {
+                AsistenteVistas.mostrarSimultaneo(new ComprarOfertar(this.user));
+            }
+            return;
+        }
+
+        private void calificar_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarSimultaneo(new Calificar(user));
         }
     }
 }

@@ -209,6 +209,7 @@
     <Compile Include="Asistentes\AsistenteBotones.cs" />
     <Compile Include="Asistentes\AsistenteCliente.cs" />
     <Compile Include="Asistentes\AsistenteColecciones.cs" />
+    <Compile Include="Asistentes\AsistenteCompra.cs" />
     <Compile Include="Asistentes\AsistenteEmpresa.cs" />
     <Compile Include="Asistentes\AsistenteLogin.cs" />
     <Compile Include="Asistentes\AsistentePreguntas.cs" />
@@ -217,11 +218,18 @@
     <Compile Include="Asistentes\AsistenteUsuario.cs" />
     <Compile Include="Asistentes\AsistenteVisibilidad.cs" />
     <Compile Include="Asistentes\AsistenteVistas.cs" />
-    <Compile Include="Calificar Vendedor\Form1.cs">
+    <Compile Include="Calificar Vendedor\Compra.cs" />
+    <Compile Include="Calificar Vendedor\Calificar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Calificar Vendedor\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Calificar Vendedor\Calificar.Designer.cs">
+      <DependentUpon>Calificar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Calificar Vendedor\DarPuntaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Calificar Vendedor\DarPuntaje.Designer.cs">
+      <DependentUpon>DarPuntaje.cs</DependentUpon>
     </Compile>
     <Compile Include="CambioPassword\CambioPassword.cs">
       <SubType>Form</SubType>
@@ -434,6 +442,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Visibilidad\ModificarVisibilidad.resx">
       <DependentUpon>ModificarVisibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calificar Vendedor\Calificar.resx">
+      <DependentUpon>Calificar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calificar Vendedor\DarPuntaje.resx">
+      <DependentUpon>DarPuntaje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CambioPassword\CambioPassword.resx">
       <DependentUpon>CambioPassword.cs</DependentUpon>
