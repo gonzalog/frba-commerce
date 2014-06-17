@@ -319,6 +319,12 @@
     <Compile Include="Gestion de Preguntas\verRespuesta.Designer.cs">
       <DependentUpon>verRespuesta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Historial Cliente\MuestraHistorial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Historial Cliente\MuestraHistorial.Designer.cs">
+      <DependentUpon>MuestraHistorial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\ElegirRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,11 +369,11 @@
     <Compile Include="Gestion de Preguntas\GestionDePreguntas.Designer.cs">
       <DependentUpon>GestionDePreguntas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Historial Cliente\Form1.cs">
+    <Compile Include="Historial Cliente\Historial.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Historial Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Historial Cliente\Historial.Designer.cs">
+      <DependentUpon>Historial.cs</DependentUpon>
     </Compile>
     <Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
@@ -484,6 +490,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gestion de Preguntas\verRespuesta.resx">
       <DependentUpon>verRespuesta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\Historial.resx">
+      <DependentUpon>Historial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\MuestraHistorial.resx">
+      <DependentUpon>MuestraHistorial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\ElegirRol.resx">
       <DependentUpon>ElegirRol.cs</DependentUpon>

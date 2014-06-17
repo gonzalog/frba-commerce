@@ -172,5 +172,15 @@ namespace FrbaCommerce.Asistentes
             }
             return lista;
         }
+
+        public static DataTable getHistorialCompras(string user)
+        {
+            return traerDataTable("compras_con_user",user);
+        }
+
+        public static DataTable getHistorialOfertas(string user)
+        {
+            return traerDataTable("ofertas_con_user", user);
+        }
     }
 }

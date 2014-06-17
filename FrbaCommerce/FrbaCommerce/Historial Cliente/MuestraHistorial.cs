@@ -6,14 +6,17 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaCommerce.Asistentes;
 
 namespace FrbaCommerce.Historial_Cliente
 {
-    public partial class Form1 : Form
+    public partial class MuestraHistorial : Form
     {
-        public Form1()
+        public delegate DataTable traerTabla();
+        public MuestraHistorial(traerTabla delegado)
         {
             InitializeComponent();
+            AsistenteVistas.CargarGrilla(dataGridView1,delegado());
         }
     }
 }

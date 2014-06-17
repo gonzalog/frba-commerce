@@ -15,6 +15,7 @@ using FrbaCommerce.Editar_Publicacion;
 using FrbaCommerce.Gestion_de_Preguntas;
 using FrbaCommerce.Comprar_Ofertar;
 using FrbaCommerce.Calificar_Vendedor;
+using FrbaCommerce.Historial_Cliente;
 
 namespace FrbaCommerce
 {
@@ -121,6 +122,11 @@ namespace FrbaCommerce
         private void calificar_Click(object sender, EventArgs e)
         {
             AsistenteVistas.mostrarSimultaneo(new Calificar(user));
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarSimultaneo(new Historial(user));
         }
     }
 }

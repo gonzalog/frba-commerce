@@ -2539,6 +2539,94 @@ WHERE
 id = @OFERTA
 
 GO
+--COMPRAS QUE PARTICIPA UN USUARIO
+CREATE PROC THE_DISCRETABOY.compras_con_user
+(@USUARIO NVARCHAR(20))
+AS
+SELECT
+P.usuario 'VENDEDOR',
+COM.cliente 'COMPRADOR',
+P.descripcion 'PUBLICACION',
+V.precio 'PRECIO',
+COM.fecha 'FECHA',
+CAL.descrip 'COMENTARIO',
+CAL.cant_estrellas 'ESTRELLAS'
+FROM
+THE_DISCRETABOY.Compra_inmediata COM,
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Venta_directa V,
+THE_DISCRETABOY.Calificacion CAL
+WHERE
+COM.publicacion = P.id AND
+P.id = V.publicacion AND
+CAL.id = COM.calificacion AND
+((P.usuario = @USUARIO) OR (COM.cliente = @USUARIO))
+
+GO
+--OFERTAS QUE PARTICIPA UN USUARIO
+CREATE PROC THE_DISCRETABOY.ofertas_con_user
+(@USUARIO NVARCHAR(20))
+AS
+SELECT
+P.usuario 'VENDEDOR',
+OFE.cliente 'OFERTANTE',
+P.descripcion 'PUBLICACION',
+OFE.monto_ofertado 'MONTO OFRECIDO',
+OFE.fecha 'FECHA',
+CAL.descrip 'COMENTARIO',
+CAL.cant_estrellas 'ESTRELLAS',
+(
+CASE 
+WHEN 
+(
+(OFE.monto_ofertado=THE_DISCRETABOY.f_subasta_precio_actual(SUB.id)) AND
+(P.fecha_venc<GETDATE())
+) 
+THEN 'GANADA' 
+ELSE 'NO GANADA' END
+) 'RESULTADO'
+FROM
+THE_DISCRETABOY.Oferta OFE,
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Subasta SUB,
+THE_DISCRETABOY.Calificacion CAL
+WHERE
+OFE.publicacion = P.id AND
+P.id = SUB.publicacion AND
+CAL.id = OFE.calificacion AND
+((P.usuario = @USUARIO) OR (OFE.cliente = @USUARIO)) 
+
+UNION
+
+SELECT
+P.usuario 'VENDEDOR',
+OFE.cliente 'OFERTANTE',
+P.descripcion 'PUBLICACION',
+OFE.monto_ofertado 'MONTO OFRECIDO',
+OFE.fecha 'FECHA',
+NULL 'COMENTARIO',
+NULL 'ESTRELLAS',
+(
+CASE 
+WHEN 
+(
+(OFE.monto_ofertado=THE_DISCRETABOY.f_subasta_precio_actual(SUB.id)) AND
+(P.fecha_venc<GETDATE())
+) 
+THEN 'GANADA' 
+ELSE 'NO GANADA' END
+) 'RESULTADO'
+FROM
+THE_DISCRETABOY.Oferta OFE,
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Subasta SUB
+WHERE
+OFE.publicacion = P.id AND
+P.id = SUB.publicacion AND
+OFE.calificacion IS NULL AND
+((P.usuario = @USUARIO) OR (OFE.cliente = @USUARIO)) 
+
+GO
 /* ****** Migrar datos existentes ******* */
 
 --CARGO CALIFICACIONES
