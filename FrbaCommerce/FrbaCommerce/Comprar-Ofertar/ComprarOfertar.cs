@@ -54,7 +54,7 @@ namespace FrbaCommerce.Comprar_Ofertar
             inicializar();
         }
 
-        private void cargarPublicaciones()
+        public void cargarPublicaciones()
         {
             if (codigosDePublicaciones.Count > indiceMostrador)
             {
@@ -172,28 +172,32 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void boton1_Click(object sender, EventArgs e)
         {
+            cargarPublicaciones();//Se vuelve a buscar la publicación a la base para evitar que muestren datos desactualizados.
             muestras[0].hayUnInteresado(user);
         }
 
         private void boton2_Click(object sender, EventArgs e)
         {
+            cargarPublicaciones();
             muestras[1].hayUnInteresado(user);
         }
 
         private void boton3_Click(object sender, EventArgs e)
         {
+            cargarPublicaciones();
             muestras[2].hayUnInteresado(user);
         }
 
         private void boton4_Click(object sender, EventArgs e)
         {
+            cargarPublicaciones();
             muestras[3].hayUnInteresado(user);
         }
 
         private void boton5_Click(object sender, EventArgs e)
         {
+            cargarPublicaciones();
             muestras[4].hayUnInteresado(user);
         }
-
     }
 }

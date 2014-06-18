@@ -331,10 +331,16 @@
     <Compile Include="Historial Cliente\MuestraHistorial.Designer.cs">
       <DependentUpon>MuestraHistorial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\ElegirRol.cs">
+    <Compile Include="Listado Estadistico\SeleccionDeListado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\ElegirRol.Designer.cs">
+    <Compile Include="Listado Estadistico\SeleccionDeListado.Designer.cs">
+      <DependentUpon>SeleccionDeListado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listado Estadistico\Login\ElegirRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\Login\ElegirRol.Designer.cs">
       <DependentUpon>ElegirRol.cs</DependentUpon>
     </Compile>
     <Compile Include="PantallaPrincipal.cs">
@@ -381,16 +387,16 @@
     <Compile Include="Historial Cliente\Historial.Designer.cs">
       <DependentUpon>Historial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\MuestraTop5.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\MuestraTop5.Designer.cs">
+      <DependentUpon>MuestraTop5.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\Logueo.cs">
+    <Compile Include="Listado Estadistico\Login\Logueo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\Logueo.Designer.cs">
+    <Compile Include="Listado Estadistico\Login\Logueo.Designer.cs">
       <DependentUpon>Logueo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -506,10 +512,16 @@
     <EmbeddedResource Include="Historial Cliente\MuestraHistorial.resx">
       <DependentUpon>MuestraHistorial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\ElegirRol.resx">
+    <EmbeddedResource Include="Listado Estadistico\SeleccionDeListado.resx">
+      <DependentUpon>SeleccionDeListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\MuestraTop5.resx">
+      <DependentUpon>MuestraTop5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\Login\ElegirRol.resx">
       <DependentUpon>ElegirRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\Logueo.resx">
+    <EmbeddedResource Include="Listado Estadistico\Login\Logueo.resx">
       <DependentUpon>Logueo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PantallaPrincipal.resx">

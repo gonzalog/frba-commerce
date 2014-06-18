@@ -18,6 +18,7 @@ using FrbaCommerce.Calificar_Vendedor;
 using FrbaCommerce.Historial_Cliente;
 using FrbaCommerce.Facturar_Publicaciones;
 using FrbaCommerce.Excepciones;
+using FrbaCommerce.Listado_Estadistico;
 
 namespace FrbaCommerce
 {
@@ -142,6 +143,11 @@ namespace FrbaCommerce
             {
                 MessageBox.Show("Usted no tiene publicaciones por facturar.");
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarSimultaneo(new SeleccionDeListado());
         }
     }
 }

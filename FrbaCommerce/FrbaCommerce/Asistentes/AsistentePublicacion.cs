@@ -112,5 +112,14 @@ namespace FrbaCommerce.Asistentes
             else
                 return ejecutarProcedureWithReturnDecimal("comision_subasta", idPub);
         }
+
+        public static List<string> getAnios()
+        {
+            List<string> anios = new List<string>();
+            DataTable tabla = traerDataTable("anios_publicaciones");
+            foreach (DataRow fila in tabla.Rows)
+                anios.Add(fila[0].ToString());
+            return anios;
+        }
     }
 }

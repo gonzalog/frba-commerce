@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InteresadoVentaDirecta));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cantidadCompra = new System.Windows.Forms.NumericUpDown();
             this.vencimiento = new System.Windows.Forms.Label();
             this.publicDate = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,11 +47,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BotonCancelar = new System.Windows.Forms.Button();
-            this.cantidadCompra = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            this.boxConsulta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cantidadCompra)).BeginInit();
+            this.boxConsulta.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -74,6 +74,33 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Publicación";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.label1.Location = new System.Drawing.Point(180, 139);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Cantidad:";
+            // 
+            // cantidadCompra
+            // 
+            this.cantidadCompra.Location = new System.Drawing.Point(183, 154);
+            this.cantidadCompra.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.cantidadCompra.Name = "cantidadCompra";
+            this.cantidadCompra.Size = new System.Drawing.Size(47, 20);
+            this.cantidadCompra.TabIndex = 17;
+            this.cantidadCompra.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // vencimiento
             // 
@@ -227,33 +254,6 @@
             this.BotonCancelar.UseVisualStyleBackColor = true;
             this.BotonCancelar.Click += new System.EventHandler(this.BotonCancelar_Click);
             // 
-            // cantidadCompra
-            // 
-            this.cantidadCompra.Location = new System.Drawing.Point(183, 154);
-            this.cantidadCompra.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.cantidadCompra.Name = "cantidadCompra";
-            this.cantidadCompra.Size = new System.Drawing.Size(47, 20);
-            this.cantidadCompra.TabIndex = 17;
-            this.cantidadCompra.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label1.Location = new System.Drawing.Point(180, 139);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Cantidad:";
-            // 
             // InteresadoVentaDirecta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,9 +269,9 @@
             this.Text = "InteresadoVentaDirecta";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cantidadCompra)).EndInit();
             this.boxConsulta.ResumeLayout(false);
             this.boxConsulta.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cantidadCompra)).EndInit();
             this.ResumeLayout(false);
 
         }
