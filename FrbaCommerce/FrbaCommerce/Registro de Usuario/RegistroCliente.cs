@@ -22,6 +22,8 @@ namespace FrbaCommerce.Login
             elecTipoDoc.Items.Add("LC");
             eleccionPassword.PasswordChar = confirContraseña.PasswordChar = '*';
             elecTipoDoc.ReadOnly = true;
+
+            AsistenteBotones.hacerNoEditable(elecTipoDoc);
         }
 
         private void cancelar_Click(object sender, EventArgs e)

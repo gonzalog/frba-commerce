@@ -283,7 +283,7 @@
             this.elecTipoDoc.Name = "elecTipoDoc";
             this.elecTipoDoc.Size = new System.Drawing.Size(214, 20);
             this.elecTipoDoc.TabIndex = 73;
-            this.elecTipoDoc.Text = "Seleccione un tipo de documento";
+            this.elecTipoDoc.Text = "DNI";
             // 
             // elecNroDoc
             // 

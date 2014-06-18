@@ -207,5 +207,10 @@ namespace FrbaCommerce.Asistentes
         {
             cantidadCompra.ReadOnly = true;
         }
+
+        public static void hacerNoEditable(DomainUpDown elecTipoDoc)
+        {
+            elecTipoDoc.ReadOnly = true;
+        }
     }
 }

@@ -194,13 +194,14 @@
             // button4
             // 
             this.button4.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button4.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Location = new System.Drawing.Point(438, 3);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(139, 71);
             this.button4.TabIndex = 3;
-            this.button4.Text = "Rendir compras";
+            this.button4.Text = "Facturar publicaciones";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button1
             // 

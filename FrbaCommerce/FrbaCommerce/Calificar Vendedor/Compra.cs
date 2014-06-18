@@ -15,6 +15,7 @@ namespace FrbaCommerce.Calificar_Vendedor
         public int codigo;
         public Cliente cliente;
         public Publicacion publicacion;
+        public string cantidad;
         public Adquisicion(string tipo, int cod)
         {
             DataRow fila = AsistenteCompra.getDataCompra(cod);
@@ -25,6 +26,7 @@ namespace FrbaCommerce.Calificar_Vendedor
                 AsistenteCliente.getDataCliente(fila["CLIENTE"].ToString())
                 );
             this.publicacion = new Publicacion(Convert.ToInt32(fila["PUBLICACION"].ToString()));
+            this.cantidad = fila["cant_comprada"].ToString();
         }
 
     }

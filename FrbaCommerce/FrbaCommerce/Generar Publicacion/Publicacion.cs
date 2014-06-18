@@ -7,6 +7,7 @@ using FrbaCommerce.Abm_Visibilidad;
 using FrbaCommerce.Asistentes;
 using System.Data;
 using System.Windows.Forms;
+using FrbaCommerce.Excepciones;
 
 namespace FrbaCommerce.Generar_Publicacion
 {
@@ -27,6 +28,7 @@ namespace FrbaCommerce.Generar_Publicacion
 
         public Publicacion(int id)
         {
+            System.Diagnostics.Debug.WriteLine("Se instancia publicación con id: "+id);
             this.id = id;
             DataRow fila = AsistentePublicacion.getFila(id);
             estado = Estado.getEstado(fila["estado"].ToString());
@@ -103,6 +105,18 @@ namespace FrbaCommerce.Generar_Publicacion
         public void hayUnInteresado(string user)
         {
             tipo.abrirVentanaInteresado(this,user);
+        }
+
+        public decimal comisionPorUnidadesVendidas()
+        {
+            try
+            {
+                return AsistentePublicacion.comisionPorUnidadesVendidas(this.id, this.tipo.nombreTipo());
+            }
+            catch (FallaDelMotor)
+            {
+                return 0;
+            }
         }
     }
 }

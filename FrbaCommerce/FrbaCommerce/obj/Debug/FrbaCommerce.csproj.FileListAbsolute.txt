@@ -49,3 +49,4 @@ C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerc
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Calificar_Vendedor.DarPuntaje.resources
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Historial_Cliente.Historial.resources
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Historial_Cliente.MuestraHistorial.resources
+C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Facturar_Publicaciones.SiguienteARendir.resources

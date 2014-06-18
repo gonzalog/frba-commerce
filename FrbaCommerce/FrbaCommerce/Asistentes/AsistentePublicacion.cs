@@ -48,10 +48,6 @@ namespace FrbaCommerce.Asistentes
             {
                 tipo = new VentaDirecta(idPubli);
             }
-            /*catch (Exception)
-            {
-                throw new TipoIncorrecto("Se pide un tipo incorrecto");
-            }*/
             
             return tipo;
         }
@@ -104,6 +100,17 @@ namespace FrbaCommerce.Asistentes
             foreach (DataRow fila in tabla.Rows)
                 cods.Add(Convert.ToInt32(fila["CODIGO"].ToString()));
             return cods;
+        }
+
+        public static decimal comisionPorUnidadesVendidas(int idPub,string tipo)
+        {
+            if (tipo.Equals("Venta directa"))
+            {
+                System.Diagnostics.Debug.WriteLine("Se buscan comisiones para la public. : " + idPub);
+                return ejecutarProcedureWithReturnDecimal("comisiones_compras_inmediatas", idPub);
+            }
+            else
+                return ejecutarProcedureWithReturnDecimal("comision_subasta", idPub);
         }
     }
 }

@@ -161,21 +161,18 @@ CREATE TABLE THE_DISCRETABOY.Oferta (
 );
 
 CREATE TABLE THE_DISCRETABOY.Factura (
-	numero [numeric](18, 0) NOT NULL, --PK
+	numero [numeric](18, 0) NOT NULL IDENTITY(1,1), --PK
 	fecha [datetime],
-	total [numeric](18, 2)
+	total numeric(18,2)
 );
 
 CREATE TABLE THE_DISCRETABOY.Renglon_factura (
 	factura [numeric](18, 0) NOT NULL, --FK ---PK
-	nro_renglon numeric(18) NOT NULL Identity(1,1), ---PK
+	nro_renglon numeric(18) NOT NULL identity(1,1), ---PK
 	publicacion [numeric](18, 0), ---FK
-	forma_de_pago numeric(18) ---FK
-);
-
-CREATE TABLE THE_DISCRETABOY.Forma_de_pago (
-	id numeric(18) NOT NULL Identity(1,1), ---PK
-	descripcion [nvarchar](255)
+	comision_visibilidad numeric(18,2),
+	comision_por_unidades numeric(18,2),
+	forma_de_pago nvarchar(255) NOT NULL
 );
 
 CREATE TABLE THE_DISCRETABOY.Rubro_por_publicacion (
@@ -196,12 +193,9 @@ CREATE TABLE THE_DISCRETABOY.Rubro (
 );
 
 CREATE TABLE THE_DISCRETABOY.Tarjeta_credito (
-	numero [numeric](16, 0) NOT NULL, --PK
+	numero [nvarchar](255) NOT NULL, --PK
 	nombre [nvarchar](255),
 	apellido [nvarchar](255),
-	valido_desde datetime NOT NULL,
-	valido_hasta datetime NOT NULL,
-	cod_segur [nvarchar](5),
 	factura [numeric](18, 0) NOT NULL, --FK 
 	nro_renglon numeric(18) NOT NULL --FK
 );
@@ -392,10 +386,6 @@ ALTER TABLE THE_DISCRETABOY.Rubro_por_publicacion ADD CONSTRAINT PK_Rubro_por_pu
         PRIMARY KEY CLUSTERED (rubro,publicacion)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Forma_de_pago ADD CONSTRAINT PK_Forma_de_pago
-        PRIMARY KEY CLUSTERED (id)
-;
-
 -- Create Foreign Key Constraints
 
 ALTER TABLE THE_DISCRETABOY.Empresa ADD CONSTRAINT FK_Empresa_user
@@ -483,10 +473,6 @@ ALTER TABLE THE_DISCRETABOY.Renglon_factura ADD CONSTRAINT FK_Renglon_factura_fa
 
 ALTER TABLE THE_DISCRETABOY.Renglon_factura ADD CONSTRAINT FK_Renglon_factura_pub
         FOREIGN KEY (publicacion) REFERENCES THE_DISCRETABOY.Publicacion (id)
-;
-
-ALTER TABLE THE_DISCRETABOY.Renglon_factura ADD CONSTRAINT FK_Reng_fact_forma_pago
-        FOREIGN KEY (forma_de_pago) REFERENCES THE_DISCRETABOY.Forma_de_pago (id)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Rubro_por_publicacion ADD CONSTRAINT FK_Rubro_por_publicacion_public
@@ -2627,6 +2613,162 @@ OFE.calificacion IS NULL AND
 ((P.usuario = @USUARIO) OR (OFE.cliente = @USUARIO)) 
 
 GO
+--GET SIGUIENTE A FACTURAR
+CREATE PROC THE_DISCRETABOY.siguiente_publi_a_facturar
+(@USUARIO NVARCHAR(20))
+AS
+SELECT
+P.id
+FROM
+THE_DISCRETABOY.Publicacion P
+WHERE
+P.usuario = @USUARIO AND
+P.id != ALL
+(
+SELECT 
+R.publicacion
+FROM
+THE_DISCRETABOY.Renglon_factura R
+)
+ORDER BY
+P.fecha
+
+GO
+--GET COMISIONES DE UNIDADES VENDIDAS DE UNA PUBLICACION VENTA DIRECTA
+--Como siempre que se devuelve un decimal, se trae en un DataTable.
+CREATE PROC THE_DISCRETABOY.comisiones_compras_inmediatas
+(@PUBLI NUMERIC(18,0))
+AS
+SELECT
+SUM(CI.cant_comprada*V.precio)
+FROM
+THE_DISCRETABOY.Compra_inmediata CI,
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Venta_directa V,
+THE_DISCRETABOY.Visibilidad VI
+WHERE
+CI.publicacion = P.id AND
+P.id = V.publicacion AND
+P.id = @PUBLI AND
+P.Visibilidad = VI.codigo
+GROUP BY
+P.id
+
+GO
+--GET COMISIONES DE UNIDADES VENDIDAS DE UNA PUBLICACION SUBASTA
+CREATE PROC THE_DISCRETABOY.comision_subasta
+(@PUBLI NUMERIC(18,0))
+AS
+SELECT
+THE_DISCRETABOY.f_subasta_precio_actual(S.id)*(VI.porcentaje)
+FROM
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Visibilidad VI,
+THE_DISCRETABOY.Subasta S
+WHERE
+P.Visibilidad = VI.codigo AND
+S.publicacion = P.id AND
+P.id = @PUBLI
+
+GO
+--ALTA TARJETA
+CREATE PROC THE_DISCRETABOY.alta_tarjeta
+(
+@NUMERO NVARCHAR(255),
+@NOMBRE NVARCHAR(255),
+@APELLIDO NVARCHAR(255),
+@FACTURA NUMERIC(18),
+@NRO_DE_RENGLON NUMERIC(18)
+)
+AS
+INSERT INTO THE_DISCRETABOY.Tarjeta_credito
+(
+numero,
+nombre,
+apellido,
+factura,
+nro_renglon
+)
+VALUES
+(
+@NUMERO,
+@NOMBRE,
+@APELLIDO,
+@FACTURA,
+@NRO_DE_RENGLON
+)
+
+GO
+--GET NUMERO ULTIMA FACTURA
+CREATE PROC THE_DISCRETABOY.ultima_factura
+AS
+BEGIN
+DECLARE @ULTIMA NUMERIC(18,0)
+SELECT
+@ULTIMA = MAX(F.numero)
+FROM
+THE_DISCRETABOY.Factura F
+RETURN @ULTIMA
+END
+
+GO
+--ALTA RENGLON
+CREATE PROC THE_DISCRETABOY.alta_renglon
+(
+@FACTURA NUMERIC(18,0),
+@NRO_RENGLON NUMERIC(18,0),
+@PUBLI NUMERIC(18,0),
+@COMI_VISI NUMERIC(18,2),
+@COMI_UNIDADES NUMERIC(18,2),
+@FORMA_DE_PAGO NVARCHAR(255)
+)
+AS
+BEGIN
+SET IDENTITY_INSERT THE_DISCRETABOY.Renglon_factura ON
+INSERT INTO THE_DISCRETABOY.Renglon_factura
+(
+factura,
+nro_renglon,
+publicacion,
+comision_visibilidad,
+comision_por_unidades,
+forma_de_pago
+)
+VALUES
+(
+@FACTURA,
+@NRO_RENGLON,
+@PUBLI,
+@COMI_VISI,
+@COMI_UNIDADES,
+@FORMA_DE_PAGO
+)
+END
+
+GO
+--ALTA FACTURA
+CREATE PROC THE_DISCRETABOY.alta_factura
+AS
+INSERT INTO THE_DISCRETABOY.Factura
+(fecha,total)
+VALUES
+(GETDATE(),0)
+
+GO
+
+--TRIGGER PARA ACTUALIZAR EL TOTAL DE LA FACTURA
+CREATE TRIGGER THE_DISCRETABOY.actualizar_total_factura
+ON THE_DISCRETABOY.Renglon_factura
+AFTER INSERT
+AS
+BEGIN
+UPDATE THE_DISCRETABOY.Factura
+SET TOTAL = TOTAL + (SELECT TOP 1 COMISION_POR_UNIDADES+COMISION_VISIBILIDAD FROM INSERTED)
+WHERE
+NUMERO=(select TOP 1 FACTURA from INSERTED)
+END
+
+GO
 /* ****** Migrar datos existentes ******* */
 
 --CARGO CALIFICACIONES
@@ -3005,6 +3147,7 @@ M.Calificacion_Codigo
 GO
 
 --CARGO FACTURAS
+SET IDENTITY_INSERT THE_DISCRETABOY.Factura ON
 INSERT INTO THE_DISCRETABOY.Factura
 (
 numero,
@@ -3023,7 +3166,7 @@ M.Factura_Fecha,
 M.Factura_Total
 
 GO
-
+SET IDENTITY_INSERT THE_DISCRETABOY.Factura OFF
 --CARGO OFERTAS
 INSERT INTO THE_DISCRETABOY.Oferta
 (
@@ -3095,19 +3238,6 @@ M.Publicacion_Stock
 
 GO
 
---CARGO FORMAS DE PAGO
-INSERT INTO THE_DISCRETABOY.Forma_de_pago
-(
-descripcion
-)
-SELECT
-M.Forma_Pago_Desc
-FROM gd_esquema.Maestra M
-WHERE M.Forma_Pago_Desc IS NOT NULL
-GROUP BY M.Forma_Pago_Desc
-
-GO
-
 --CARGO RENGLONES DE FACTURAS
 INSERT INTO THE_DISCRETABOY.Renglon_factura
 (
@@ -3118,15 +3248,14 @@ forma_de_pago
 SELECT
 M.Factura_Nro,
 M.Publicacion_Cod,
-FP.id
-FROM gd_esquema.Maestra M,THE_DISCRETABOY.Forma_de_pago FP
+M.Forma_Pago_Desc
+FROM gd_esquema.Maestra M
 WHERE
-M.Factura_Nro IS NOT NULL AND
-FP.descripcion=M.Forma_Pago_Desc
+M.Factura_Nro IS NOT NULL
 GROUP BY
 M.Factura_Nro,
 M.Publicacion_Cod,
-FP.id
+M.Forma_Pago_Desc
 
 GO
 
@@ -3232,7 +3361,7 @@ R.nombre = 'Administrador General'
 EXEC THE_DISCRETABOY.alta_funcion 'Publicar'
 EXEC THE_DISCRETABOY.alta_funcion 'Editar publicación'
 EXEC THE_DISCRETABOY.alta_funcion 'Gestionar preguntas'
-EXEC THE_DISCRETABOY.alta_funcion 'Rendir compras'
+EXEC THE_DISCRETABOY.alta_funcion 'Facturar publicaciones'
 EXEC THE_DISCRETABOY.alta_funcion 'Listado estadístico'
 --LAS ASIGNO A LOS ROLES
 EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Publicar','Cliente'
@@ -3241,8 +3370,8 @@ EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Editar publicación','Cliente
 EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Editar publicación','Empresa'
 EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Gestionar preguntas','Cliente'
 EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Gestionar preguntas','Empresa'
-EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Rendir compras','Cliente'
-EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Rendir compras','Empresa'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Facturar publicaciones','Cliente'
+EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Facturar publicaciones','Empresa'
 EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Listado estadístico','Cliente'
 EXEC THE_DISCRETABOY.alta_funcion_por_rol_nombres 'Listado estadístico','Empresa'
 --FUNCIONES NO PARA EMPRESAS

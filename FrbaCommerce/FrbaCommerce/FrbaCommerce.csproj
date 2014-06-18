@@ -282,20 +282,26 @@
     <Compile Include="Excepciones\ElTamanioDeLosDatosExcedeAlSistema.cs" />
     <Compile Include="Excepciones\FallaDelMotor.cs" />
     <Compile Include="Excepciones\HayCamposEnBlanco.cs" />
+    <Compile Include="Excepciones\NoHayMasParaFacturar.cs" />
     <Compile Include="Excepciones\SubastaInexistente.cs" />
     <Compile Include="Excepciones\TelefonoYaRegistrado.cs" />
     <Compile Include="Excepciones\TipoIncorrecto.cs" />
     <Compile Include="Excepciones\UsuarioYaDadoDeBaja.cs" />
-    <Compile Include="Facturar Publicaciones\Form1.cs">
+    <Compile Include="Facturar Publicaciones\Efectivo.cs" />
+    <Compile Include="Facturar Publicaciones\Factura.cs" />
+    <Compile Include="Facturar Publicaciones\FormaDePago.cs" />
+    <Compile Include="Facturar Publicaciones\Renglon.cs" />
+    <Compile Include="Facturar Publicaciones\SiguienteARendir.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Facturar Publicaciones\SiguienteARendir.Designer.cs">
+      <DependentUpon>SiguienteARendir.cs</DependentUpon>
     </Compile>
     <Compile Include="Editar Publicacion\Borrador.cs" />
     <Compile Include="Editar Publicacion\Estado.cs" />
     <Compile Include="Editar Publicacion\Finalizada.cs" />
     <Compile Include="Editar Publicacion\Pausa.cs" />
+    <Compile Include="Facturar Publicaciones\Tarjeta.cs" />
     <Compile Include="Generar Publicacion\Publicacion.cs" />
     <Compile Include="Editar Publicacion\Publicada.cs" />
     <Compile Include="Generar Publicacion\Subasta.cs" />
@@ -475,6 +481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editar Publicacion\VerPublicacionesAEditar.resx">
       <DependentUpon>VerPublicacionesAEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturar Publicaciones\SiguienteARendir.resx">
+      <DependentUpon>SiguienteARendir.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\GenerarPublicacion.resx">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>

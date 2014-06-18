@@ -16,6 +16,8 @@ using FrbaCommerce.Gestion_de_Preguntas;
 using FrbaCommerce.Comprar_Ofertar;
 using FrbaCommerce.Calificar_Vendedor;
 using FrbaCommerce.Historial_Cliente;
+using FrbaCommerce.Facturar_Publicaciones;
+using FrbaCommerce.Excepciones;
 
 namespace FrbaCommerce
 {
@@ -127,6 +129,19 @@ namespace FrbaCommerce
         private void button7_Click(object sender, EventArgs e)
         {
             AsistenteVistas.mostrarSimultaneo(new Historial(user));
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Factura factura = new Factura(user);
+            try
+            {
+                AsistenteVistas.mostrarSimultaneo(new SiguienteARendir(factura,0));
+            }
+            catch (NoHayMasParaFacturar)
+            {
+                MessageBox.Show("Usted no tiene publicaciones por facturar.");
+            }
         }
     }
 }
