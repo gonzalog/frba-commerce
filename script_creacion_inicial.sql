@@ -22,7 +22,7 @@ RETURN CAST('2014-01-01T12:00:00' as datetime)
 END
 GO
 
--- Create Tables
+-- Creación de tablas
 CREATE TABLE THE_DISCRETABOY.Empresa (
 	usuario nvarchar(20) NOT NULL, --FK --PK
 	cuit [nvarchar](50) NOT NULL,
@@ -102,13 +102,18 @@ CREATE TABLE THE_DISCRETABOY.Visibilidad (
 
 CREATE TABLE THE_DISCRETABOY.Publicacion (
 	id [numeric](18, 0) NOT NULL IDENTITY(1,1), --PK
-	estado [nvarchar](255) NOT NULL,
-	Visibilidad numeric(18) NOT NULL,--FK
-	usuario nvarchar(20) NOT NULL,--FK
+	estado [numeric](18, 0) NOT NULL, --FK
+	Visibilidad numeric(18) NOT NULL, --FK
+	usuario nvarchar(20) NOT NULL, --FK
 	descripcion [nvarchar](255),
 	fecha [datetime],
 	fecha_venc [datetime],
 	hay_preguntas bit DEFAULT 0
+);
+
+CREATE TABLE THE_DISCRETABOY.Estado (
+	id [numeric](18,0) NOT NULL IDENTITY(1,1), --PK
+	NOMBRE NVARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE THE_DISCRETABOY.Venta_directa (
@@ -116,11 +121,6 @@ CREATE TABLE THE_DISCRETABOY.Venta_directa (
 	stock [numeric](18, 0) NOT NULL,
 	publicacion [numeric](18,0) NOT NULL,--FK
 	precio numeric(18,2)
-);
-
-CREATE TABLE THE_DISCRETABOY.Cliente_por_publicacion (
-	cliente nvarchar(20) NOT NULL, --FK --PK
-	publicacion [numeric](18, 0) NOT NULL --FK --PK
 );
 
 CREATE TABLE THE_DISCRETABOY.Pregunta (
@@ -136,17 +136,17 @@ CREATE TABLE THE_DISCRETABOY.Respuesta(
 	fecha datetime	
 );
 
-CREATE TABLE THE_DISCRETABOY.Compra_inmediata (
+CREATE TABLE THE_DISCRETABOY.compra (
 	id numeric(18) NOT NULL Identity(1,1), --PK
 	cliente nvarchar(20) NOT NULL, --FK
 	publicacion [numeric](18, 0) NOT NULL, --FK
 	fecha [datetime],
-	cant_comprada [numeric](18, 0),
-	calificacion [numeric](18, 0) ---FK
+	cant_comprada [numeric](18, 0)
 );
 
 CREATE TABLE THE_DISCRETABOY.Calificacion (
-	id [numeric](18, 0) NOT NULL IDENTITY(1,1), --PK
+	id [numeric](18, 0) IDENTITY(1,1), --PK
+	compra [numeric](18, 0) NOT NULL, --FK
 	cant_estrellas [numeric](18, 0),
 	descrip [nvarchar](255)
 );
@@ -156,8 +156,7 @@ CREATE TABLE THE_DISCRETABOY.Oferta (
 	cliente nvarchar(20) NOT NULL, --FK
 	publicacion [numeric](18, 0) NOT NULL, --FK
 	fecha [datetime],
-	monto_ofertado [numeric](18, 2),
-	calificacion [numeric](18, 0) default NULL ---FK
+	monto_ofertado [numeric](18, 2)
 );
 
 CREATE TABLE THE_DISCRETABOY.Factura (
@@ -176,8 +175,8 @@ CREATE TABLE THE_DISCRETABOY.Renglon_factura (
 );
 
 CREATE TABLE THE_DISCRETABOY.Rubro_por_publicacion (
-	publicacion [numeric](18, 0) NOT NULL, --FK---pk
-	rubro [numeric](18, 0) NOT NULL --FK---pk
+	publicacion [numeric](18, 0) NOT NULL, --FK --PK
+	rubro [numeric](18, 0) NOT NULL --FK --PK
 );
 
 CREATE TABLE THE_DISCRETABOY.Subasta (
@@ -291,8 +290,6 @@ ALTER TABLE THE_DISCRETABOY.Usuario ADD CONSTRAINT CHK_menos_de_cuatro_intentos
         CHECK(INTENTOS<4)
 ;
 
--- UNIQUE Constraints ...
-
 -- Create Primary Key Constraints
 ALTER TABLE THE_DISCRETABOY.Empresa ADD CONSTRAINT PK_Empresa
         PRIMARY KEY CLUSTERED (usuario)
@@ -338,8 +335,8 @@ ALTER TABLE THE_DISCRETABOY.Publicacion ADD CONSTRAINT PK_Publicacion
         PRIMARY KEY CLUSTERED (id)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Cliente_por_publicacion ADD CONSTRAINT PK_Cliente_por_publicacion
-        PRIMARY KEY CLUSTERED (cliente,publicacion)
+ALTER TABLE THE_DISCRETABOY.Estado ADD CONSTRAINT PK_Estado
+        PRIMARY KEY CLUSTERED (id)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Venta_directa ADD CONSTRAINT PK_Venta_directa
@@ -354,7 +351,7 @@ ALTER TABLE THE_DISCRETABOY.Respuesta ADD CONSTRAINT PK_Respuesta
         PRIMARY KEY CLUSTERED (pregunta)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Compra_inmediata ADD CONSTRAINT PK_Compra_inmediata
+ALTER TABLE THE_DISCRETABOY.compra ADD CONSTRAINT PK_compra
         PRIMARY KEY CLUSTERED (id)
 ;
 
@@ -432,36 +429,40 @@ ALTER TABLE THE_DISCRETABOY.Publicacion ADD CONSTRAINT FK_Public_visibilidad_por
         FOREIGN KEY (usuario,Visibilidad) REFERENCES THE_DISCRETABOY.Visibilidad_por_user (usuario,Visibilidad)
 ;
 
+ALTER TABLE THE_DISCRETABOY.Publicacion ADD CONSTRAINT FK_Public_estado
+        FOREIGN KEY (estado) REFERENCES THE_DISCRETABOY.Estado (id)
+;
+
 ALTER TABLE THE_DISCRETABOY.Venta_directa ADD CONSTRAINT FK_Venta_directa
         FOREIGN KEY (publicacion) REFERENCES THE_DISCRETABOY.Publicacion (id)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Cliente_por_publicacion ADD CONSTRAINT FK_Cliente_por_publicacion_cliente
-        FOREIGN KEY (cliente) REFERENCES THE_DISCRETABOY.Cliente (usuario)
+ALTER TABLE THE_DISCRETABOY.Oferta with check ADD CONSTRAINT FK_Oferta_cli
+        FOREIGN KEY (cliente) REFERENCES THE_DISCRETABOY.Usuario (username)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Cliente_por_publicacion ADD CONSTRAINT FK_Cliente_por_publicacion_public
+ALTER TABLE THE_DISCRETABOY.Oferta with check ADD CONSTRAINT FK_Oferta_pub
         FOREIGN KEY (publicacion) REFERENCES THE_DISCRETABOY.Publicacion (id)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Oferta with check ADD CONSTRAINT FK_Oferta_cli_pub
-        FOREIGN KEY (cliente,publicacion) REFERENCES THE_DISCRETABOY.Cliente_por_publicacion (cliente,publicacion)
+ALTER TABLE THE_DISCRETABOY.compra with check ADD CONSTRAINT FK_Compra_inmed_cli
+        FOREIGN KEY (cliente) REFERENCES THE_DISCRETABOY.Usuario (username)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Oferta with check ADD CONSTRAINT FK_Oferta_calif
-        FOREIGN KEY (calificacion) REFERENCES THE_DISCRETABOY.Calificacion (id)
+ALTER TABLE THE_DISCRETABOY.compra with check ADD CONSTRAINT FK_Compra_inmed_pub
+        FOREIGN KEY (publicacion) REFERENCES THE_DISCRETABOY.Publicacion (id)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Compra_inmediata with check ADD CONSTRAINT FK_Compra_inmed_clien_pub
-        FOREIGN KEY (cliente,publicacion) REFERENCES THE_DISCRETABOY.Cliente_por_publicacion (cliente,publicacion)
+ALTER TABLE THE_DISCRETABOY.Calificacion with check ADD CONSTRAINT FK_Calif_compra
+        FOREIGN KEY (compra) REFERENCES THE_DISCRETABOY.compra (id)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Compra_inmediata with check ADD CONSTRAINT FK_Compra_inmed_calif
-        FOREIGN KEY (calificacion) REFERENCES THE_DISCRETABOY.Calificacion (id)
+ALTER TABLE THE_DISCRETABOY.Pregunta with check ADD CONSTRAINT FK_Pregunta_cli
+        FOREIGN KEY (cliente) REFERENCES THE_DISCRETABOY.Usuario (username)
 ;
 
-ALTER TABLE THE_DISCRETABOY.Pregunta with check ADD CONSTRAINT FK_Pregunta
-        FOREIGN KEY (cliente,publicacion) REFERENCES THE_DISCRETABOY.Cliente_por_publicacion (cliente,publicacion)
+ALTER TABLE THE_DISCRETABOY.Pregunta with check ADD CONSTRAINT FK_Pregunta_pub
+        FOREIGN KEY (publicacion) REFERENCES THE_DISCRETABOY.Publicacion (id)
 ;
 
 ALTER TABLE THE_DISCRETABOY.Respuesta ADD CONSTRAINT FK_Respuesta_pregunta
@@ -917,7 +918,14 @@ BEGIN
 SELECT 
 P.id 'ID',
 P.descripcion 'DESCRIPCION',
-P.estado 'ESTADO',
+(
+SELECT TOP 1
+E.NOMBRE
+FROM
+THE_DISCRETABOY.Estado E
+WHERE
+E.id = P.estado
+)'ESTADO',
 P.fecha 'CREACION',
 P.fecha_venc 'VENCIMIENTO',
 'Compra inmediata' 'TIPO',
@@ -933,7 +941,14 @@ UNION
 SELECT 
 P.id 'ID',
 P.descripcion 'DESCRIPCION',
-P.estado 'ESTADO',
+(
+SELECT TOP 1
+E.NOMBRE
+FROM
+THE_DISCRETABOY.Estado E
+WHERE
+E.id = P.estado
+)'ESTADO',
 P.fecha 'CREACION',
 P.fecha_venc 'VENCIMIENTO',
 'Subasta' 'TIPO',
@@ -988,20 +1003,6 @@ RETURN @ULTIMAPUBLICACION
 END
 
 GO
---BUSCAR CODIGO DE ULTIMA CALIFICACION
-CREATE PROC THE_DISCRETABOY.ultima_calificacion
-AS
-BEGIN
-DECLARE @ULTIMA_CALIFICACION NUMERIC(18,0)
-SELECT
-@ULTIMA_CALIFICACION = MAX(C.ID)
-FROM
-THE_DISCRETABOY.Calificacion C
-RETURN @ULTIMA_CALIFICACION
-END
-
-GO
-
 --BUSCAR LAS DE UN USER EN PARTICULAR
 CREATE PROC THE_DISCRETABOY.get_publics_de_user_buscando
 (@descrip nvarchar(255),@USUARIO NVARCHAR(20))
@@ -1010,7 +1011,14 @@ BEGIN
 SELECT 
 P.id 'ID',
 P.descripcion 'DESCRIPCION',
-P.estado 'ESTADO',
+(
+SELECT TOP 1
+E.NOMBRE
+FROM
+THE_DISCRETABOY.Estado E
+WHERE
+E.id = P.estado
+)'ESTADO',
 P.fecha 'CREACION',
 P.fecha_venc 'VENCIMIENTO',
 'Compra inmediata' 'TIPO',
@@ -1026,7 +1034,14 @@ UNION
 SELECT 
 P.id 'ID',
 P.descripcion 'DESCRIPCION',
-P.estado 'ESTADO',
+(
+SELECT TOP 1
+E.NOMBRE
+FROM
+THE_DISCRETABOY.Estado E
+WHERE
+E.id = P.estado
+)'ESTADO',
 P.fecha 'CREACION',
 P.fecha_venc 'VENCIMIENTO',
 'Subasta' 'TIPO',
@@ -1851,7 +1866,14 @@ HAY_PREGUNTAS
 )
 VALUES
 (
-@ESTADO,
+(
+SELECT TOP 1
+E.id
+FROM
+THE_DISCRETABOY.Estado E
+WHERE
+E.NOMBRE = @ESTADO
+),
 @VISI,
 @USUARIO,
 @DESCRI,
@@ -2004,6 +2026,29 @@ estado = @ESTADO,
 hay_preguntas = @HAYPREGUNTAS
 WHERE
 id = @ID
+
+IF ((THE_DISCRETABOY.get_estado_publi(@ID) = 'Finalizada') AND (THE_DISCRETABOY.ES_VENTA_DIRECTA(@ID) = 0))
+BEGIN
+INSERT INTO THE_DISCRETABOY.compra
+(
+publicacion,
+cliente,
+cant_comprada,
+fecha
+)
+SELECT TOP 1
+S.publicacion,
+O.cliente,
+S.cantidad,
+O.fecha
+FROM
+THE_DISCRETABOY.Subasta S,
+THE_DISCRETABOY.Oferta O
+WHERE 
+S.publicacion = O.publicacion AND
+THE_DISCRETABOY.F_SUBASTA_PRECIO_ACTUAL(S.id) = O.monto_ofertado
+END
+
 END
 
 GO
@@ -2199,7 +2244,6 @@ R.pregunta = @COD
 END
 
 GO
-
 --GET PUBLICACIONES PARA COMPRAR/OFERTAR ORDENADAS
 CREATE PROC THE_DISCRETABOY.get_publics_a_ver
 (
@@ -2228,8 +2272,17 @@ P.descripcion LIKE '%'+@DESCRIPCION+'%' AND
 R.codigo = RP.rubro AND
 RP.publicacion = P.id AND
 R.descripcion LIKE '%'+@RUBRO+'%' AND
-P.estado = 'Publicada'
+P.estado = (
+SELECT TOP 1
+E.id
+FROM
+THE_DISCRETABOY.Estado E
+WHERE
+E.NOMBRE = 'Publicada'
+)
+
 UNION
+
 SELECT
 P.id 'CODIGO',
 P.descripcion 'DESCRIPCION',
@@ -2251,21 +2304,16 @@ P.descripcion LIKE '%'+@DESCRIPCION+'%' AND
 R.codigo = RP.rubro AND
 RP.publicacion = P.id AND
 R.descripcion LIKE '%'+@RUBRO+'%' AND
-P.estado = 'Publicada'
-ORDER BY [PRECIO POR PUBLICAR] DESC,CODIGO DESC
-
-GO
---ALTA CLIENTE POR PUBLICACIÓN
-CREATE PROC THE_DISCRETABOY.alta_cliente_por_publicacion
+P.estado = 
 (
-@CLIENTE NVARCHAR(20),
-@PUBLICACION NUMERIC(18,0)
+SELECT TOP 1
+E.id
+FROM
+THE_DISCRETABOY.Estado E
+WHERE
+E.NOMBRE = 'Publicada'
 )
-AS
-INSERT INTO THE_DISCRETABOY.Cliente_por_publicacion
-(cliente,publicacion)
-VALUES
-(@CLIENTE,@PUBLICACION)
+ORDER BY [PRECIO POR PUBLICAR] DESC,CODIGO DESC
 
 GO
 --ALTA PREGUNTA
@@ -2343,14 +2391,14 @@ END
 
 GO
 --SE REGISTRA UNA COMPRA
-CREATE PROC THE_DISCRETABOY.alta_compra_inmediata
+CREATE PROC THE_DISCRETABOY.alta_compra
 (
 @CLIENTE NVARCHAR(20),
 @PUBLICACION NUMERIC(18,0),
 @CANTIDAD NUMERIC(18,0)
 )
 AS
-INSERT INTO THE_DISCRETABOY.Compra_inmediata
+INSERT INTO THE_DISCRETABOY.compra
 (cliente,publicacion,fecha,cant_comprada)
 VALUES
 (
@@ -2362,13 +2410,32 @@ GETDATE(),
 
 GO
 --TRIGGER PARA DECREMENTAR EL STOCK
+CREATE FUNCTION THE_DISCRETABOY.ES_VENTA_DIRECTA
+(@PUB NUMERIC(18,0))
+RETURNS BIT 
+AS
+BEGIN
+RETURN
+(
+SELECT
+COUNT(*)
+FROM
+THE_DISCRETABOY.VENTA_DIRECTA V
+WHERE
+V.PUBLICACION = @PUB
+)
+END
+
+GO
+
 CREATE TRIGGER THE_DISCRETABOY.decrementar_stock_por_compra
-ON THE_DISCRETABOY.Compra_inmediata
+ON THE_DISCRETABOY.compra
 AFTER INSERT
 AS
 BEGIN
+IF THE_DISCRETABOY.ES_VENTA_DIRECTA((SELECT TOP 1 PUBLICACION FROM INSERTED)) = 1
 UPDATE THE_DISCRETABOY.Venta_directa
-SET stock = stock - (SELECT TOP 1 cant_comprada from INSERTED)
+SET stock = stock - (SELECT TOP 1 cant_comprada FROM INSERTED)
 END
 
 GO
@@ -2419,29 +2486,19 @@ CREATE PROC THE_DISCRETABOY.compras_a_calificar
 (@CLIENTE NVARCHAR(20))
 AS
 SELECT
-C.id 'CODIGO',
-'COMPRA INMEDIATA' 'TIPO'
+C.id 'CODIGO'
 FROM
-THE_DISCRETABOY.Compra_inmediata C
+THE_DISCRETABOY.compra C
 WHERE 
 C.cliente = @CLIENTE AND
-C.calificacion IS NULL
-UNION
+(
 SELECT
-O.id 'CODIGO',
-'OFERTA' 'TIPO'
+COUNT(*)
 FROM
-THE_DISCRETABOY.Oferta O,
-THE_DISCRETABOY.Publicacion P,
-THE_DISCRETABOY.Cliente_por_publicacion CP,
-THE_DISCRETABOY.Subasta S
-WHERE 
-O.cliente = @CLIENTE AND
-O.calificacion IS NULL AND
-O.publicacion = P.id AND
-P.fecha_venc < GETDATE() AND
-S.publicacion = P.id AND
-(O.monto_ofertado = THE_DISCRETABOY.f_subasta_precio_actual(S.id))
+THE_DISCRETABOY.Calificacion CA
+WHERE
+CA.COMPRA = C.id
+)=0
 
 GO
 --TOMAR UNA CANTIDAD A PARTIR DE UN CODIGO
@@ -2450,30 +2507,21 @@ CREATE PROC THE_DISCRETABOY.get_pack_compras_a_calificar
 AS
 SELECT TOP 10
 C.id 'CODIGO',
-'COMPRA INMEDIATA' 'TIPO'
+'COMPRA' 'TIPO'
 FROM
-THE_DISCRETABOY.Compra_inmediata C
+THE_DISCRETABOY.compra C
 WHERE 
 C.cliente = @CLIENTE AND
-C.calificacion IS NULL AND
-C.id > @BASE
-UNION
-SELECT TOP 10
-O.id 'CODIGO',
-'OFERTA' 'TIPO'
+C.id > @BASE AND
+(
+SELECT
+COUNT(*)
 FROM
-THE_DISCRETABOY.Oferta O,
-THE_DISCRETABOY.Publicacion P,
-THE_DISCRETABOY.Cliente_por_publicacion CP,
-THE_DISCRETABOY.Subasta S
-WHERE 
-O.cliente = @CLIENTE AND
-O.calificacion IS NULL AND
-O.publicacion = P.id AND
-P.fecha_venc < GETDATE() AND
-S.publicacion = P.id AND
-(O.monto_ofertado = THE_DISCRETABOY.f_subasta_precio_actual(S.id)) AND
-O.id > @BASE
+THE_DISCRETABOY.Calificacion CA
+WHERE
+CA.COMPRA = C.id
+)=0
+
 ORDER BY 1
 
 GO
@@ -2484,7 +2532,7 @@ AS
 SELECT TOP 1
 *
 FROM
-THE_DISCRETABOY.Compra_inmediata C
+THE_DISCRETABOY.compra C
 WHERE
 C.id = @CODIGO
 
@@ -2492,48 +2540,23 @@ GO
 --ALTA CALIFICACION
 CREATE PROC THE_DISCRETABOY.alta_calificacion
 (
+@COMPRA NUMERIC(18,0),
 @ESTRELLAS NUMERIC(18,0),
 @DESCRIP NVARCHAR(255)
 )
 AS
 INSERT INTO THE_DISCRETABOY.Calificacion
 (
+compra ,
 cant_estrellas,
 descrip
 )
 VALUES
 (
+@COMPRA,
 @ESTRELLAS,
 @DESCRIP
 )
-
-GO
---ASIGNAR CALIF A COMPRA
-CREATE PROC THE_DISCRETABOY.compra_asignar_calificacion
-(
-@COMPRA NUMERIC(18,0),
-@CALIF NUMERIC(18,0)
-)
-AS
-UPDATE THE_DISCRETABOY.Compra_inmediata
-SET 
-calificacion = @CALIF
-WHERE
-id = @COMPRA
-
-GO
---ASIGNAR CALIF A OFERTA
-CREATE PROC THE_DISCRETABOY.oferta_asignar_calificacion
-(
-@OFERTA NUMERIC(18,0),
-@CALIF NUMERIC(18,0)
-)
-AS
-UPDATE THE_DISCRETABOY.Oferta
-SET 
-calificacion = @CALIF
-WHERE
-id = @OFERTA
 
 GO
 --COMPRAS QUE PARTICIPA UN USUARIO
@@ -2549,14 +2572,14 @@ COM.fecha 'FECHA',
 CAL.descrip 'COMENTARIO',
 CAL.cant_estrellas 'ESTRELLAS'
 FROM
-THE_DISCRETABOY.Compra_inmediata COM,
+THE_DISCRETABOY.compra COM,
 THE_DISCRETABOY.Publicacion P,
 THE_DISCRETABOY.Venta_directa V,
 THE_DISCRETABOY.Calificacion CAL
 WHERE
 COM.publicacion = P.id AND
 P.id = V.publicacion AND
-CAL.id = COM.calificacion AND
+CAL.compra = COM.id AND
 ((P.usuario = @USUARIO) OR (COM.cliente = @USUARIO))
 
 GO
@@ -2586,41 +2609,13 @@ FROM
 THE_DISCRETABOY.Oferta OFE,
 THE_DISCRETABOY.Publicacion P,
 THE_DISCRETABOY.Subasta SUB,
-THE_DISCRETABOY.Calificacion CAL
+THE_DISCRETABOY.Compra COM
+LEFT JOIN THE_DISCRETABOY.Calificacion CAL ON
+COM.id = CAL.COMPRA
 WHERE
 OFE.publicacion = P.id AND
 P.id = SUB.publicacion AND
-CAL.id = OFE.calificacion AND
-((P.usuario = @USUARIO) OR (OFE.cliente = @USUARIO)) 
-
-UNION
-
-SELECT
-P.usuario 'VENDEDOR',
-OFE.cliente 'OFERTANTE',
-P.descripcion 'PUBLICACION',
-OFE.monto_ofertado 'MONTO OFRECIDO',
-OFE.fecha 'FECHA',
-NULL 'COMENTARIO',
-NULL 'ESTRELLAS',
-(
-CASE 
-WHEN 
-(
-(OFE.monto_ofertado=THE_DISCRETABOY.f_subasta_precio_actual(SUB.id)) AND
-(P.fecha_venc<GETDATE())
-) 
-THEN 'GANADA' 
-ELSE 'NO GANADA' END
-) 'RESULTADO'
-FROM
-THE_DISCRETABOY.Oferta OFE,
-THE_DISCRETABOY.Publicacion P,
-THE_DISCRETABOY.Subasta SUB
-WHERE
-OFE.publicacion = P.id AND
-P.id = SUB.publicacion AND
-OFE.calificacion IS NULL AND
+COM.publicacion = P.id AND
 ((P.usuario = @USUARIO) OR (OFE.cliente = @USUARIO)) 
 
 GO
@@ -2653,7 +2648,7 @@ AS
 SELECT
 SUM(CI.cant_comprada*V.precio)
 FROM
-THE_DISCRETABOY.Compra_inmediata CI,
+THE_DISCRETABOY.compra CI,
 THE_DISCRETABOY.Publicacion P,
 THE_DISCRETABOY.Venta_directa V,
 THE_DISCRETABOY.Visibilidad VI
@@ -2809,7 +2804,8 @@ WHERE
 P.usuario = U.username AND
 MONTH(P.fecha) = @MES AND
 V.publicacion = P.id AND
-P.Visibilidad LIKE '%'+@VISI+'%'
+P.Visibilidad = VI.codigo AND
+VI.descripcion LIKE '%'+@VISI+'%'
 GROUP BY 
 U.username
 ORDER BY 
@@ -2835,7 +2831,11 @@ THE_DISCRETABOY.Visibilidad VI
 WHERE
 P.usuario = U.username AND
 V.publicacion = P.id AND
-P.Visibilidad LIKE '%'+@VISI+'%'
+P.Visibilidad = VI.codigo AND
+VI.descripcion LIKE '%'+@VISI+'%' AND
+YEAR(P.fecha) = @ANIO AND
+MONTH(P.fecha)<=(@TRIME*3) AND
+MONTH(P.fecha)>((@TRIME-1)*3)
 GROUP BY 
 U.username
 ORDER BY 
@@ -2879,12 +2879,11 @@ SELECT
 @PROM = AVG(C.cant_estrellas)
 FROM
 THE_DISCRETABOY.Calificacion C,
-THE_DISCRETABOY.Compra_inmediata CI,
-THE_DISCRETABOY.Oferta O,
+THE_DISCRETABOY.compra CO,
 THE_DISCRETABOY.Publicacion P
 WHERE
-((CI.CALIFICACION = C.id AND CI.PUBLICACION = P.ID) OR
-(O.CALIFICACION = C.id AND O.PUBLICACION = P.ID)) AND
+C.compra = CO.id AND 
+CO.PUBLICACION = P.ID AND
 P.USUARIO = @USER
 
 RETURN @PROM
@@ -2901,19 +2900,21 @@ AS
 BEGIN
 SELECT TOP 5
 P.usuario 'USUARIO',
-AVG(C.cant_estrellas) 'PROMEDIO'
+AVG(CA.cant_estrellas) 'PROMEDIO'
 FROM
-THE_DISCRETABOY.Calificacion C,
-THE_DISCRETABOY.Compra_inmediata CI,
-THE_DISCRETABOY.Oferta O,
+THE_DISCRETABOY.Calificacion CA,
+THE_DISCRETABOY.compra CO,
 THE_DISCRETABOY.Publicacion P
 WHERE
-((CI.CALIFICACION = C.id AND CI.PUBLICACION = P.ID) OR
-(O.CALIFICACION = C.id AND O.PUBLICACION = P.ID))
+CA.compra = CO.id AND 
+CO.PUBLICACION = P.ID AND
+YEAR(P.fecha) = @ANIO AND
+MONTH(P.fecha)<=(@TRIME*3) AND
+MONTH(P.fecha)>((@TRIME-1)*3)
 GROUP BY
 P.usuario
 ORDER BY
-AVG(C.cant_estrellas) DESC
+AVG(CA.cant_estrellas) DESC
 END
 
 GO
@@ -2928,37 +2929,52 @@ SELECT TOP 5
 CO.cliente 'CLIENTE',
 COUNT(CO.id) 'CANTIDAD SIN CALIFICAR'
 FROM
-THE_DISCRETABOY.Compra_inmediata CO
+THE_DISCRETABOY.compra CO
+LEFT JOIN THE_DISCRETABOY.Calificacion CA ON
+CO.id = CA.COMPRA 
+LEFT JOIN THE_DISCRETABOY.Publicacion P ON
+P.id = CO.publicacion
 WHERE
-CO.calificacion IS NULL
+CA.cant_estrellas IS NULL AND
+YEAR(P.fecha) = @ANIO AND
+MONTH(P.fecha)<=(@TRIME*3) AND
+MONTH(P.fecha)>((@TRIME-1)*3)
 GROUP BY
 CO.cliente
 ORDER BY
 COUNT(CO.id) DESC
 
 GO
-/* ****** Migrar datos existentes ******* */
-
---CARGO CALIFICACIONES
-SET IDENTITY_INSERT THE_DISCRETABOY.Calificacion ON
-
-INSERT INTO THE_DISCRETABOY.Calificacion
-(
-id,
-cant_estrellas,
-descrip
-)
-
-SELECT 
-DISTINCT m.Calificacion_Codigo as id,
-m.Calificacion_Cant_Estrellas as cant_estrellas,
-m.Calificacion_Descripcion as descrip
-FROM gd_esquema.Maestra m
-WHERE m.Calificacion_Codigo IS NOT NULL
-
-SET IDENTITY_INSERT THE_DISCRETABOY.Calificacion OFF
+--RETORNA EL NOMBRE DE UN ESTADO
+CREATE PROC THE_DISCRETABOY.get_nombre_estado
+(@CODIGO NUMERIC(18,0))
+AS
+SELECT TOP 1
+E.NOMBRE
+FROM
+THE_DISCRETABOY.Estado E
+WHERE
+E.id = @CODIGO
 
 GO
+--RETORNA EL CODIGO DE UN ESTADO
+CREATE PROC THE_DISCRETABOY.get_cod_estado
+(@NOMBRE NVARCHAR(255))
+AS
+BEGIN
+DECLARE @COD NUMERIC(18,0)
+SELECT TOP 1
+@COD = E.id
+FROM
+THE_DISCRETABOY.Estado E
+WHERE
+E.NOMBRE = @NOMBRE
+RETURN @COD
+END
+
+GO
+/* ****** Migrar datos existentes ******* */
+
 --CARGO DIRECCIONES
 INSERT INTO THE_DISCRETABOY.Direccion
 (
@@ -3216,6 +3232,12 @@ E.usuario
 )
 
 GO
+--CARGO ESTADOS
+INSERT INTO THE_DISCRETABOY.Estado(NOMBRE)VALUES('Borrador')
+INSERT INTO THE_DISCRETABOY.Estado(NOMBRE)VALUES('Publicada')
+INSERT INTO THE_DISCRETABOY.Estado(NOMBRE)VALUES('Pausada')
+INSERT INTO THE_DISCRETABOY.Estado(NOMBRE)VALUES('Finalizada')
+
 --CARGO PUBLICACIONES
 SET IDENTITY_INSERT THE_DISCRETABOY.Publicacion ON
 INSERT INTO THE_DISCRETABOY.Publicacion
@@ -3230,7 +3252,14 @@ fecha_venc
 )
 SELECT
 M.Publicacion_Cod,
-M.Publicacion_Estado,
+(
+SELECT TOP 1
+E.ID
+FROM
+THE_DISCRETABOY.ESTADO E
+WHERE
+E.NOMBRE = M.PUBLICACION_ESTADO
+),
 M.Publicacion_Visibilidad_Cod,
 'Empre_'+CAST(m.Publ_Empresa_Cuit as nvarchar(50)),
 M.Publicacion_Descripcion,
@@ -3251,7 +3280,14 @@ UNION
 
 SELECT
 M.Publicacion_Cod,
-M.Publicacion_Estado,
+(
+SELECT TOP 1
+E.ID
+FROM
+THE_DISCRETABOY.ESTADO E
+WHERE
+E.NOMBRE = M.PUBLICACION_ESTADO
+),
 M.Publicacion_Visibilidad_Cod,
 'Clie_'+cast(M.Publ_Cli_Dni as nvarchar(20)),
 M.Publicacion_Descripcion,
@@ -3270,50 +3306,59 @@ M.Publicacion_Fecha_Venc
 
 SET IDENTITY_INSERT THE_DISCRETABOY.Publicacion OFF
 GO
---CARGO CLIENTES POR PUBLICACIONES
-INSERT INTO THE_DISCRETABOY.Cliente_por_publicacion
-(
-cliente,
-publicacion
-)
-SELECT
-'Clie_'+cast(M.Cli_Dni as nvarchar(20)),
-M.Publicacion_Cod
-FROM gd_esquema.Maestra M
-WHERE M.Publicacion_Cod IS NOT NULL  AND M.Cli_Dni IS NOT NULL
-GROUP BY
-M.Publicacion_Cod,
-M.Cli_Dni
 
-GO
-
-
---CARGO COMPRAS INMEDIATAS
-INSERT INTO THE_DISCRETABOY.Compra_inmediata
+--CARGO COMPRAS
+INSERT INTO THE_DISCRETABOY.compra
 (
 cliente,
 publicacion,
 fecha,
-cant_comprada,
-calificacion
+cant_comprada
 )
 SELECT
 'Clie_'+CAST(m.Cli_Dni as nvarchar(20)),
 M.Publicacion_Cod,
 M.Compra_Fecha,
-M.Compra_Cantidad,
-M.Calificacion_Codigo
+M.Compra_Cantidad
 FROM gd_esquema.Maestra M
 WHERE M.Compra_Cantidad IS NOT NULL
 GROUP BY
 M.Cli_Dni,
 M.Publicacion_Cod,
 M.Compra_Fecha,
-M.Compra_Cantidad,
-M.Calificacion_Codigo
+M.Compra_Cantidad
 
 GO
+--CARGO CALIFICACIONES
+SET IDENTITY_INSERT THE_DISCRETABOY.Calificacion ON
+INSERT INTO THE_DISCRETABOY.Calificacion
+(
+id,
+compra,
+cant_estrellas,
+descrip
+)
+SELECT 
+DISTINCT 
+m.Calificacion_Codigo,
+(
+SELECT TOP 1
+COM.id
+FROM
+THE_DISCRETABOY.compra COM
+WHERE
+COM.fecha = M.Compra_Fecha AND
+COM.publicacion = M.Publicacion_Cod AND
+COM.cliente = 'Clie_'+CAST(M.Cli_Dni as nvarchar(20))
+),
+m.Calificacion_Cant_Estrellas,
+m.Calificacion_Descripcion
+FROM gd_esquema.Maestra m
+WHERE 
+m.Calificacion_Codigo IS NOT NULL
 
+SET IDENTITY_INSERT THE_DISCRETABOY.Calificacion OFF
+GO
 --CARGO FACTURAS
 SET IDENTITY_INSERT THE_DISCRETABOY.Factura ON
 INSERT INTO THE_DISCRETABOY.Factura
@@ -3335,21 +3380,20 @@ M.Factura_Total
 
 GO
 SET IDENTITY_INSERT THE_DISCRETABOY.Factura OFF
+
 --CARGO OFERTAS
 INSERT INTO THE_DISCRETABOY.Oferta
 (
 cliente,
 publicacion,
 fecha,
-monto_ofertado,
-calificacion
+monto_ofertado
 )
 SELECT
 'Clie_'+CAST(M.Cli_Dni as nvarchar(20)),
 M.Publicacion_Cod,
 M.Oferta_Fecha,
-M.Oferta_Monto,
-M.Calificacion_Codigo
+M.Oferta_Monto
 FROM
 gd_esquema.Maestra M
 WHERE M.Oferta_Fecha IS NOT NULL
@@ -3405,7 +3449,46 @@ M.Publicacion_Cod,
 M.Publicacion_Stock
 
 GO
+--CARGO LAS COMPRAS PARA QUIENES GANARON LAS SUBASTAS
+CREATE FUNCTION THE_DISCRETABOY.get_estado_publi
+(@PUBLI NUMERIC(18,0))
+RETURNS NVARCHAR(255)
+AS
+BEGIN
+DECLARE @ESTADO NVARCHAR(255)
+SELECT TOP 1
+@ESTADO = E.NOMBRE
+FROM
+THE_DISCRETABOY.PUBLICACION P
+LEFT JOIN THE_DISCRETABOY.ESTADO E ON
+P.ESTADO = E.ID
+WHERE P.ID = @PUBLI
+RETURN @ESTADO
+END
 
+GO
+
+INSERT INTO THE_DISCRETABOY.compra
+(
+publicacion,
+cliente,
+cant_comprada,
+fecha
+)
+SELECT
+S.publicacion,
+O.cliente,
+S.cantidad,
+O.fecha
+FROM
+THE_DISCRETABOY.Subasta S,
+THE_DISCRETABOY.Oferta O
+WHERE 
+S.publicacion = O.publicacion AND
+THE_DISCRETABOY.get_estado_publi(O.publicacion) = 'Finalizada' AND
+THE_DISCRETABOY.F_SUBASTA_PRECIO_ACTUAL(S.id) = O.monto_ofertado
+
+GO
 --CARGO RENGLONES DE FACTURAS
 INSERT INTO THE_DISCRETABOY.Renglon_factura
 (
@@ -3443,8 +3526,6 @@ GROUP BY
 M.Publicacion_Cod
 
 GO
-
-
 
 --Alta roles default.
 EXEC THE_DISCRETABOY.alta_rol 'Empresa', 1

@@ -78,16 +78,16 @@ namespace FrbaCommerce.Generar_Publicacion
                 return;
             }
 
-            try
-            {
+            //try
+            //{
                 saverTipoDeLaPublicacion.darDeALta(Descripcion.Text, Stock.Text, Precio.Text,
                     Visibilidad.Text, this.user, Estado.Text, rubrosElegidos, pregs.Checked);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Los datos ingresados no son soportados por el sistema.");
-                return;
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Los datos ingresados no son soportados por el sistema.");
+             //   return;
+            //}
             MessageBox.Show("Publicación creada exitosamente.");
             Close();
         }

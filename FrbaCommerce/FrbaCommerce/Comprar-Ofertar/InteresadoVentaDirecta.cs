@@ -50,15 +50,8 @@ namespace FrbaCommerce.Comprar_Ofertar
                 MessageBox.Show("Concretar una compra es una funcionalidad exclusiva de usuarios de tipo cliente.");
                 return;
             }
-            try
-            {
-                AdaptadorBD.ejecutarProcedure("alta_cliente_por_publicacion", usuario, publicacion.id);
-            }
-            catch (Exception)
-            {
-                //Los datos ya estaban cargados previamente.
-            }
-            AdaptadorBD.ejecutarProcedure("alta_compra_inmediata", usuario, publicacion.id, cantidadCompra.Value);
+
+            AdaptadorBD.ejecutarProcedure("alta_compra", usuario, publicacion.id, cantidadCompra.Value);
             vendedor.mostrarDatos();
             Close();
         }

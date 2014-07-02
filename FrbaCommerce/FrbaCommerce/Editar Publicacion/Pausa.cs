@@ -9,9 +9,21 @@ namespace FrbaCommerce.Generar_Publicacion
 {
     class Pausa : Estado
     {
+        private int codigo;
+
+        public Pausa()
+        {
+            codigo = AsistentePublicacion.getCodigoEstado("Pausada");
+        }
+
         public override string nombre()
         {
-            return "Pausa";
+            return "Pausada";
+        }
+
+        public override int getCodigo()
+        {
+            return codigo;
         }
 
         public override void abrirEditorParaSubasta(Publicacion publi)

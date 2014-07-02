@@ -41,7 +41,7 @@ namespace FrbaCommerce.Listado_Estadistico
                         },
                         "TOP 5 Vendedores con mayor cantidad de productos no vendidos.",
                         Convert.ToInt32(elecTrimestre.Text),
-                        160
+                        120
                     )
                 );
         }

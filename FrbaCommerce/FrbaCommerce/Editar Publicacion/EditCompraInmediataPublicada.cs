@@ -19,7 +19,7 @@ namespace FrbaCommerce.Editar_Publicacion
             InitializeComponent();
             this.publiAEditar = publi;
             AsistenteBotones.hacerNoEditables(estado);
-            estado.Items.AddRange(new string[2]{"Publicada","Pausa"});
+            estado.Items.AddRange(new string[2]{"Publicada","Pausada"});
             estado.Text = "Publicada";
         }
 

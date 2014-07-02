@@ -31,7 +31,7 @@ namespace FrbaCommerce.Generar_Publicacion
             System.Diagnostics.Debug.WriteLine("Se instancia publicación con id: "+id);
             this.id = id;
             DataRow fila = AsistentePublicacion.getFila(id);
-            estado = Estado.getEstado(fila["estado"].ToString());
+            estado = Estado.getEstado(Convert.ToInt32(fila["estado"].ToString()));
             int codVisi = Convert.ToInt32(fila["Visibilidad"].ToString());
             visibilidad = new Visibilidad(AsistenteVisibilidad.getDataVisi(codVisi));
             usuarioCreador = fila["usuario"].ToString();

@@ -16,22 +16,9 @@ namespace FrbaCommerce.Asistentes
             return traerDataTable("get_data_compra",cod).Rows[0];
         }
 
-        public static void altaCalificacion(int estrellas, string opinion, int adquisicion,string tipo)
+        public static void altaCalificacion(int estrellas, string opinion, int compra)
         {
-            ejecutarProcedure("alta_calificacion",estrellas,opinion);
-            int idCalif = ejecutarProcedureWithReturnValue("ultima_calificacion");
-            if (tipo.Equals("Venta directa"))
-            {
-                ejecutarProcedure("compra_asignar_calificacion",adquisicion,idCalif);
-            }
-            else if (tipo.Equals("Subasta"))
-            {
-                ejecutarProcedure("oferta_asignar_calificacion", adquisicion, idCalif);
-            }
-            else
-            {
-                throw new TipoIncorrecto("El tipo no es ni subasta ni venta directa.");
-            }
+            ejecutarProcedure("alta_calificacion", compra, estrellas, opinion);
         }
 
         public static Publicacion siguienteAFacturar(string usuario, int numeroDeRendido)

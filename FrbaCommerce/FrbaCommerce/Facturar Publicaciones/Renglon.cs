@@ -33,8 +33,11 @@ namespace FrbaCommerce.Facturar_Publicaciones
                 formaDePago.getNombre());
 
             formaDePago.perdurar(factura,nroDeRenglon);
+            System.Diagnostics.Debug.WriteLine("Se perduró la forma de pago.");
             publicacion.setEstado("Finalizada");
+            System.Diagnostics.Debug.WriteLine("Se da finalizar la publicación");
             publicacion.perdurar();
+            System.Diagnostics.Debug.WriteLine("Se perduró la publicación.");
         }
     }
 }

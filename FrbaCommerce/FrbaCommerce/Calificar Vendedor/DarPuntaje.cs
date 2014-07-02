@@ -15,17 +15,17 @@ namespace FrbaCommerce.Calificar_Vendedor
     {
         public Adquisicion adqui;
         public Calificar padre;
-        public DarPuntaje(Adquisicion adqui,Calificar padre)
+        public DarPuntaje(Adquisicion compra,Calificar padre)
         {
             InitializeComponent();
             this.padre = padre;
-            this.adqui = adqui;
+            this.adqui = compra;
             this.Text = adqui.publicacion.descripcion;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AsistenteCompra.altaCalificacion(Convert.ToInt32(numericUpDown1.Value),textBox1.Text,adqui.codigo,adqui.publicacion.tipo.nombreTipo());
+            AsistenteCompra.altaCalificacion(Convert.ToInt32(numericUpDown1.Value),textBox1.Text,adqui.codigo);
             padre.recargar();
             AsistenteVistas.volverAPadreYCerrar(padre,this);
         }

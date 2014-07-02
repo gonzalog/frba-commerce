@@ -44,9 +44,9 @@
             // 
             this.grillaTopFive.AllowUserToAddRows = false;
             this.grillaTopFive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaTopFive.Location = new System.Drawing.Point(1, 36);
+            this.grillaTopFive.Location = new System.Drawing.Point(12, 36);
             this.grillaTopFive.Name = "grillaTopFive";
-            this.grillaTopFive.Size = new System.Drawing.Size(331, 140);
+            this.grillaTopFive.Size = new System.Drawing.Size(255, 176);
             this.grillaTopFive.TabIndex = 0;
             // 
             // groupBox1
@@ -55,9 +55,9 @@
             this.groupBox1.Controls.Add(this.limpiar);
             this.groupBox1.Controls.Add(this.buscarMes);
             this.groupBox1.Controls.Add(this.buscarVisi);
-            this.groupBox1.Location = new System.Drawing.Point(12, 182);
+            this.groupBox1.Location = new System.Drawing.Point(12, 231);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(320, 96);
+            this.groupBox1.Size = new System.Drawing.Size(255, 96);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
@@ -65,7 +65,7 @@
             // opcionMes
             // 
             this.opcionMes.AutoSize = true;
-            this.opcionMes.Location = new System.Drawing.Point(200, 19);
+            this.opcionMes.Location = new System.Drawing.Point(151, 33);
             this.opcionMes.Name = "opcionMes";
             this.opcionMes.Size = new System.Drawing.Size(98, 17);
             this.opcionMes.TabIndex = 4;
@@ -87,7 +87,7 @@
             // buscarMes
             // 
             this.buscarMes.FormattingEnabled = true;
-            this.buscarMes.Location = new System.Drawing.Point(200, 39);
+            this.buscarMes.Location = new System.Drawing.Point(151, 53);
             this.buscarMes.Name = "buscarMes";
             this.buscarMes.Size = new System.Drawing.Size(96, 21);
             this.buscarMes.TabIndex = 2;
@@ -99,17 +99,17 @@
             this.buscarVisi.FormattingEnabled = true;
             this.buscarVisi.Location = new System.Drawing.Point(8, 29);
             this.buscarVisi.Name = "buscarVisi";
-            this.buscarVisi.Size = new System.Drawing.Size(156, 21);
+            this.buscarVisi.Size = new System.Drawing.Size(119, 21);
             this.buscarVisi.TabIndex = 1;
             this.buscarVisi.SelectedIndexChanged += new System.EventHandler(this.buscarVisi_SelectedIndexChanged);
             // 
             // titulo
             // 
             this.titulo.AutoSize = true;
-            this.titulo.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titulo.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titulo.Location = new System.Drawing.Point(8, 9);
             this.titulo.Name = "titulo";
-            this.titulo.Size = new System.Drawing.Size(69, 24);
+            this.titulo.Size = new System.Drawing.Size(39, 14);
             this.titulo.TabIndex = 2;
             this.titulo.Text = "label1";
             // 
@@ -117,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 183);
+            this.ClientSize = new System.Drawing.Size(270, 222);
             this.Controls.Add(this.titulo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grillaTopFive);

@@ -19,7 +19,7 @@ namespace FrbaCommerce.Calificar_Vendedor
             InitializeComponent();
             this.username = username;
             this.pendientesMostrados = AsistenteCliente.packComprasACalificar(username, 0);
-            string[] codigos = pendientesMostrados.Select(com => com.publicacion.descripcion).ToArray();
+            string[] codigos = pendientesMostrados.Select(com => "Publicacion " + com.publicacion.descripcion).ToArray();
             listado.Items.AddRange(codigos);
             label1.Text = "Pendientes: \n(Presione para calificar)";
         }

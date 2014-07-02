@@ -9,6 +9,18 @@ namespace FrbaCommerce.Generar_Publicacion
 {
     class Publicada : Estado
     {
+        private int codigo;
+
+        public Publicada()
+        {
+            codigo = AsistentePublicacion.getCodigoEstado("Publicada");
+        }
+
+        public override int getCodigo()
+        {
+            return codigo;
+        }
+
         public override string nombre()
         {
             return "Publicada";
