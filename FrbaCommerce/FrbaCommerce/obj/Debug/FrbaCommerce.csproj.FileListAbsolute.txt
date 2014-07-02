@@ -52,3 +52,4 @@ C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerc
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Facturar_Publicaciones.SiguienteARendir.resources
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Listado_Estadistico.MuestraTop5.resources
 C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Listado_Estadistico.SeleccionDeListado.resources
+C:\Users\Gonzalo\Google Drive\2014\Gestión de datos\TP\Repositorio\frba-commerce\FrbaCommerce\FrbaCommerce\obj\Debug\FrbaCommerce.Abm_Cliente.AgregarRol.resources

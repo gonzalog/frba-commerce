@@ -58,6 +58,7 @@
             this.apellido = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.Label();
             this.errorBox = new System.Windows.Forms.TextBox();
+            this.nuevoRol = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -65,7 +66,7 @@
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(215, 446);
+            this.cancelar.Location = new System.Drawing.Point(215, 481);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(136, 40);
             this.cancelar.TabIndex = 119;
@@ -75,7 +76,7 @@
             // 
             // aceptar
             // 
-            this.aceptar.Location = new System.Drawing.Point(12, 446);
+            this.aceptar.Location = new System.Drawing.Point(12, 481);
             this.aceptar.Name = "aceptar";
             this.aceptar.Size = new System.Drawing.Size(121, 40);
             this.aceptar.TabIndex = 118;
@@ -337,6 +338,16 @@
             this.errorBox.Size = new System.Drawing.Size(269, 38);
             this.errorBox.TabIndex = 101;
             // 
+            // nuevoRol
+            // 
+            this.nuevoRol.Location = new System.Drawing.Point(12, 435);
+            this.nuevoRol.Name = "nuevoRol";
+            this.nuevoRol.Size = new System.Drawing.Size(339, 27);
+            this.nuevoRol.TabIndex = 120;
+            this.nuevoRol.Text = "Asignarle un nuevo rol a ";
+            this.nuevoRol.UseVisualStyleBackColor = true;
+            this.nuevoRol.Click += new System.EventHandler(this.nuevoRol_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::FrbaCommerce.Properties.Resources.commerce2;
@@ -352,7 +363,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 498);
+            this.ClientSize = new System.Drawing.Size(361, 533);
+            this.Controls.Add(this.nuevoRol);
             this.Controls.Add(this.cancelar);
             this.Controls.Add(this.aceptar);
             this.Controls.Add(this.elecFechaNac);
@@ -415,5 +427,6 @@
         private System.Windows.Forms.Label nombre;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox errorBox;
+        private System.Windows.Forms.Button nuevoRol;
     }
 }

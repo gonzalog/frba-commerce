@@ -2169,7 +2169,10 @@ THE_DISCRETABOY.Respuesta RES
 WHERE
 PREG.publicacion = PUB.id AND
 PREG.id = RES.pregunta AND
-PUB.usuario = @USUARIO AND
+(
+PUB.usuario = @USUARIO OR
+PREG.cliente = @USUARIO
+) AND
 PREG.descripcion LIKE '%'+@DESCRIP+'%'
 
 GO
@@ -2971,6 +2974,28 @@ WHERE
 E.NOMBRE = @NOMBRE
 RETURN @COD
 END
+
+GO
+--RETORNA LOS ROLES QUE PUEDEN ASIGNARSE A UN USUARIO
+CREATE PROC THE_DISCRETABOY.get_roles_habilitados_no_de
+(@USER NVARCHAR(20))
+AS
+SELECT
+R.cod_rol,
+R.nombre
+FROM
+THE_DISCRETABOY.Rol R 
+LEFT JOIN THE_DISCRETABOY.Rol_por_user RU ON
+(
+RU.rol = R.cod_rol AND
+RU.usuario = @USER 
+)
+WHERE
+RU.usuario IS NULL AND
+R.habilitado = 1
+GROUP BY
+R.cod_rol,
+R.nombre
 
 GO
 /* ****** Migrar datos existentes ******* */

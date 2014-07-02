@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using FrbaCommerce.Asistentes;
 using FrbaCommerce.Registro_de_Usuario;
 using FrbaCommerce.Excepciones;
+using FrbaCommerce.Abm_Cliente;
 
 namespace FrbaCommerce.Abm_Empresa
 {
@@ -22,6 +23,7 @@ namespace FrbaCommerce.Abm_Empresa
             this.padre = padre;
             this.empresa = AsistenteEmpresa.newEmpresa(user);
             setearValoresDefault();
+            nuevoRol.Text = nuevoRol.Text + user;
         }
 
         private void setearValoresDefault()
@@ -162,6 +164,11 @@ namespace FrbaCommerce.Abm_Empresa
                     MessageBox.Show("El teléfono ingresado ya se encuentra registrado en el sistema.");
                 }
             } 
+        }
+
+        private void nuevoRol_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarNuevaVentana(new AgregarRol(empresa.user, this), this);
         }
     }
 }

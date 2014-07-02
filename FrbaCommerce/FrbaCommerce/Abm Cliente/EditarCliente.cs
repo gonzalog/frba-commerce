@@ -22,6 +22,7 @@ namespace FrbaCommerce.Abm_Cliente
             this.padre = padre;
             this.cliente = AsistenteCliente.newCliente(usuarioDelCliente);
             setearValoresDefault();
+            nuevoRol.Text = nuevoRol.Text + usuarioDelCliente;
         }
 
         private void setearValoresDefault()
@@ -148,6 +149,11 @@ namespace FrbaCommerce.Abm_Cliente
         private void elecCP_TextChanged(object sender, EventArgs e)
         {
             cliente.direccion.codPostal = elecCP.Text;
+        }
+
+        private void nuevoRol_Click(object sender, EventArgs e)
+        {
+            AsistenteVistas.mostrarNuevaVentana(new AgregarRol(cliente.user,this),this);
         }
     }
 }

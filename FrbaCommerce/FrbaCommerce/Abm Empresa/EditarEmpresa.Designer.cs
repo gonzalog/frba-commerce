@@ -59,13 +59,14 @@
             this.label7 = new System.Windows.Forms.Label();
             this.elecRazonSocial = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.nuevoRol = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(215, 460);
+            this.cancelar.Location = new System.Drawing.Point(215, 513);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(136, 40);
             this.cancelar.TabIndex = 138;
@@ -75,7 +76,7 @@
             // 
             // aceptar
             // 
-            this.aceptar.Location = new System.Drawing.Point(12, 460);
+            this.aceptar.Location = new System.Drawing.Point(12, 513);
             this.aceptar.Name = "aceptar";
             this.aceptar.Size = new System.Drawing.Size(121, 40);
             this.aceptar.TabIndex = 137;
@@ -347,11 +348,22 @@
             this.label2.TabIndex = 139;
             this.label2.Text = "Razón social:";
             // 
+            // nuevoRol
+            // 
+            this.nuevoRol.Location = new System.Drawing.Point(12, 461);
+            this.nuevoRol.Name = "nuevoRol";
+            this.nuevoRol.Size = new System.Drawing.Size(339, 27);
+            this.nuevoRol.TabIndex = 153;
+            this.nuevoRol.Text = "Asignarle un nuevo rol a ";
+            this.nuevoRol.UseVisualStyleBackColor = true;
+            this.nuevoRol.Click += new System.EventHandler(this.nuevoRol_Click);
+            // 
             // EditarEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 512);
+            this.ClientSize = new System.Drawing.Size(361, 565);
+            this.Controls.Add(this.nuevoRol);
             this.Controls.Add(this.elecFechaCreacion);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.elecNombreContacto);
@@ -414,5 +426,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox elecRazonSocial;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button nuevoRol;
     }
 }
