@@ -85,7 +85,7 @@ namespace FrbaCommerce.Asistentes
         public static void editarPublicacion(Publicacion publicacion)
         {
             System.Diagnostics.Debug.WriteLine("Se guarda con el campo hay_preguntas: " + (publicacion.hayPreguntas ? 1 : 0));
-            ejecutarProcedure("editar_publicacion",publicacion.id,publicacion.visibilidad.cod,publicacion.estado.getCodigo(),publicacion.hayPreguntas?1:0);
+            ejecutarProcedure("editar_publicacion",publicacion.id,publicacion.visibilidad.cod,publicacion.estado.nombre(),publicacion.hayPreguntas?1:0);
         }
 
         public static DataTable getPublicsAVer(string user,string descripcion,string rubro)

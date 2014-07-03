@@ -38,7 +38,7 @@
             this.listado.FormattingEnabled = true;
             this.listado.Location = new System.Drawing.Point(12, 38);
             this.listado.Name = "listado";
-            this.listado.Size = new System.Drawing.Size(190, 147);
+            this.listado.Size = new System.Drawing.Size(319, 147);
             this.listado.TabIndex = 1;
             this.listado.SelectedIndexChanged += new System.EventHandler(this.listado_SelectedIndexChanged);
             // 
@@ -53,7 +53,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(127, 202);
+            this.button1.Location = new System.Drawing.Point(256, 193);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -65,7 +65,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(214, 228);
+            this.ClientSize = new System.Drawing.Size(343, 228);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listado);

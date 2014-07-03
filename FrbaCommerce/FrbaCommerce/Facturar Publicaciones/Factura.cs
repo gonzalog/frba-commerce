@@ -28,7 +28,7 @@ namespace FrbaCommerce.Facturar_Publicaciones
        
             for (int i = 0; i < renglones.Count; i++)
                 renglones[i].perdurar(codigo,i);
-            System.Windows.Forms.MessageBox.Show("El número correspondiente a esta nueva factura es: "+codigo);
+            System.Windows.Forms.MessageBox.Show("El número correspondiente a esta nueva factura es: " + codigo);
         }
     }
 }

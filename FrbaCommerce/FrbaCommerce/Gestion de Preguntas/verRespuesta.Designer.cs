@@ -232,6 +232,7 @@
             this.respuesta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.respuesta.ForeColor = System.Drawing.SystemColors.InfoText;
             this.respuesta.Location = new System.Drawing.Point(6, 68);
+            this.respuesta.MaximumSize = new System.Drawing.Size(350, 0);
             this.respuesta.Name = "respuesta";
             this.respuesta.Size = new System.Drawing.Size(67, 13);
             this.respuesta.TabIndex = 3;
@@ -243,6 +244,7 @@
             this.laPregunta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.laPregunta.ForeColor = System.Drawing.SystemColors.InfoText;
             this.laPregunta.Location = new System.Drawing.Point(6, 25);
+            this.laPregunta.MaximumSize = new System.Drawing.Size(350, 0);
             this.laPregunta.Name = "laPregunta";
             this.laPregunta.Size = new System.Drawing.Size(50, 13);
             this.laPregunta.TabIndex = 2;
