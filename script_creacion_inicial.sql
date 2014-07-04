@@ -10,18 +10,6 @@ SET LANGUAGE 'Español'
 SET DATEFIRST 1
 GO
 
---Funcion con la fecha de migracion
-
-CREATE FUNCTION THE_DISCRETABOY.FechaMigracion() --esta funcion almacena la fecha que se utiliza en la migracion como referencia
-RETURNS datetime
-AS
-BEGIN
-
-RETURN CAST('2014-01-01T12:00:00' as datetime)
-
-END
-GO
-
 -- Creación de tablas
 CREATE TABLE THE_DISCRETABOY.Empresa (
 	usuario nvarchar(20) NOT NULL, --FK --PK
