@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using FrbaCommerce.Excepciones;
 
 namespace FrbaCommerce.Asistentes
 {
@@ -284,6 +285,19 @@ namespace FrbaCommerce.Asistentes
         public static void altaRolPorUser(int rol, string user)
         {
             ejecutarProcedure("alta_rol_por_user",rol,user);
+        }
+
+        public static void cambiarNombre(int rol, string nuevoNombre)
+        {
+            if (nuevoNombre == "")
+                throw new NombreInvalido("El nombre no puede estar en blanco.");
+            Dictionary<int, string> roles = getRolesExistentes();
+            roles.Remove(rol);
+            foreach(KeyValuePair<int, string> otroRol in roles )
+                if(otroRol.Value == nuevoNombre)
+                    throw new NombreInvalido("El nombre de rol ya existe.");
+
+            ejecutarProcedure("editar_nombre_rol", rol, nuevoNombre);
         }
     }
 }

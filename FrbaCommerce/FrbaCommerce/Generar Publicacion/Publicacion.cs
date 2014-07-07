@@ -118,5 +118,11 @@ namespace FrbaCommerce.Generar_Publicacion
                 return 0;
             }
         }
+
+
+        public bool sosDecimaFacturada()
+        {
+            return (tipo.cantidadFacturada(usuarioCreador) % 10) == 9; 
+        }
     }
 }

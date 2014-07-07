@@ -131,5 +131,20 @@ namespace FrbaCommerce.Asistentes
         {
             return ejecutarProcedureWithReturnValue("get_cod_estado",nombre);
         }
+
+        public static bool alcanzoLimiteGratuitas(string user)
+        {
+            return ejecutarProcedureWithReturnValue("cantidad_gratuitas_de",user) >= 4;
+        }
+
+        public static int cantidadVentasDirectosFacturadas(string usuario)
+        {
+            return ejecutarProcedureWithReturnValue("cant_ventas_directas_facturadas", usuario);
+        }
+
+        public static int cantidadSubastasFacturadas(string usuario)
+        {
+            return ejecutarProcedureWithReturnValue("cant_subastas_facturadas", usuario);
+        }
     }
 }

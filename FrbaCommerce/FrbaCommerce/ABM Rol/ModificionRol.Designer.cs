@@ -113,6 +113,7 @@
             // 
             // grillaRoles
             // 
+            this.grillaRoles.AllowUserToAddRows = false;
             this.grillaRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grillaRoles.Location = new System.Drawing.Point(12, 144);
             this.grillaRoles.Name = "grillaRoles";
@@ -131,6 +132,8 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grillaRoles);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ModificionRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ListaRoles";

@@ -59,7 +59,11 @@ namespace FrbaCommerce.Asistentes
             }
             catch (OverflowException)
             {
-                throw new ElTamanioDeLosDatosExcedeAlSistema();
+                throw new ElTamanioDeLosDatosExcedeAlSistema("El teléfono es muy largo.");
+            }
+            catch (FormatException)
+            {
+                throw new HayCamposEnBlanco("El teléfono no puede estar en blanco.");
             }
         }
 
@@ -87,6 +91,10 @@ namespace FrbaCommerce.Asistentes
             catch (OverflowException)
             {
                 throw new ElTamanioDeLosDatosExcedeAlSistema("El contenido del campo número de documento no es soportado por el sistema.");
+            }
+            catch (FormatException)
+            {
+                throw new HayCamposEnBlanco("El número de documento no puede estar en blanco.");
             }
         }
 

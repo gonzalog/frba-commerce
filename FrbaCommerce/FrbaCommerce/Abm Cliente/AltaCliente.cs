@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Asistentes;
+using FrbaCommerce.Excepciones;
 
 namespace FrbaCommerce.Abm_Cliente
 {
@@ -41,18 +42,31 @@ namespace FrbaCommerce.Abm_Cliente
             errorBox.Text = "Evaluando solicitud...";
             List<string> errores = new List<string>();
 
-            AsistenteBotones.chequearTextboxNoNulo(elecNombre, errores, "Nombre");
-            AsistenteBotones.chequearTextboxNoNulo(elecApe, errores, "Apellido");
-            AsistenteBotones.chequearTextboxNoNulo(elecNroDoc, errores, "Número documento");
-            AsistenteCliente.chequearTipoYNroDocNoRepetido(elecTipoDoc.Text, elecNroDoc.Text, errores);
-            AsistenteBotones.chequearTextboxNoNuloYMail(elecEMail, errores, "E-Mail");
-            AsistenteBotones.chequearTextboxNoNuloYTelCliente(elecTelefono, errores, "Número de teléfono");
-            AsistenteBotones.chequearTextboxNoNulo(elecCalle, errores, "Calle");
-            AsistenteBotones.chequearTextboxNoNulo(elecNumero, errores, "Número de calle");
-            AsistenteBotones.chequearTextboxNoNulo(elecPiso, errores, "Piso");
-            AsistenteBotones.chequearTextboxNoNulo(elecDepartamento, errores, "Departamento");
-            AsistenteBotones.chequearTextboxNoNulo(elecLocalidad, errores, "Localidad");
-            AsistenteBotones.chequearTextboxNoNulo(elecCP, errores, "Código postal");
+            try
+            {
+                AsistenteBotones.chequearTextboxNoNulo(elecNombre, errores, "Nombre");
+                AsistenteBotones.chequearTextboxNoNulo(elecApe, errores, "Apellido");
+                AsistenteBotones.chequearTextboxNoNulo(elecNroDoc, errores, "Número documento");
+                AsistenteCliente.chequearTipoYNroDocNoRepetido(elecTipoDoc.Text, elecNroDoc.Text, errores);
+                AsistenteBotones.chequearTextboxNoNuloYMail(elecEMail, errores, "E-Mail");
+                AsistenteBotones.chequearTextboxNoNuloYTelCliente(elecTelefono, errores, "Número de teléfono");
+                AsistenteBotones.chequearTextboxNoNulo(elecCalle, errores, "Calle");
+                AsistenteBotones.chequearTextboxNoNulo(elecNumero, errores, "Número de calle");
+                AsistenteBotones.chequearTextboxNoNulo(elecPiso, errores, "Piso");
+                AsistenteBotones.chequearTextboxNoNulo(elecDepartamento, errores, "Departamento");
+                AsistenteBotones.chequearTextboxNoNulo(elecLocalidad, errores, "Localidad");
+                AsistenteBotones.chequearTextboxNoNulo(elecCP, errores, "Código postal");
+            }
+            catch (HayCamposEnBlanco hayBlancos)
+            {
+                MessageBox.Show(hayBlancos.Message);
+                return;
+            }
+            catch (ElTamanioDeLosDatosExcedeAlSistema muyGrande)
+            {
+                MessageBox.Show(muyGrande.Message);
+                return;
+            }
 
             if (errores.Count() > 0)
             {

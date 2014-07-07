@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CambiarFunciones));
-            this.nombreDelRol = new System.Windows.Forms.Label();
             this.Aceptar = new System.Windows.Forms.Button();
             this.Cancelar = new System.Windows.Forms.Button();
             this.funcionesDelRol = new System.Windows.Forms.ListBox();
@@ -39,17 +38,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.errorBox = new System.Windows.Forms.TextBox();
+            this.nombre = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // nombreDelRol
-            // 
-            this.nombreDelRol.AutoSize = true;
-            this.nombreDelRol.Font = new System.Drawing.Font("Nirmala UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreDelRol.Location = new System.Drawing.Point(5, 9);
-            this.nombreDelRol.Name = "nombreDelRol";
-            this.nombreDelRol.Size = new System.Drawing.Size(94, 40);
-            this.nombreDelRol.TabIndex = 0;
-            this.nombreDelRol.Text = "label1";
             // 
             // Aceptar
             // 
@@ -133,11 +124,29 @@
             this.errorBox.Size = new System.Drawing.Size(187, 38);
             this.errorBox.TabIndex = 43;
             // 
+            // nombre
+            // 
+            this.nombre.Location = new System.Drawing.Point(12, 31);
+            this.nombre.Name = "nombre";
+            this.nombre.Size = new System.Drawing.Size(192, 20);
+            this.nombre.TabIndex = 44;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.TabIndex = 45;
+            this.label4.Text = "Nombre:";
+            // 
             // CambiarFunciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(222, 392);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.nombre);
             this.Controls.Add(this.errorBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -147,8 +156,9 @@
             this.Controls.Add(this.funcionesDelRol);
             this.Controls.Add(this.Cancelar);
             this.Controls.Add(this.Aceptar);
-            this.Controls.Add(this.nombreDelRol);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CambiarFunciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CambiarFunciones";
@@ -159,7 +169,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label nombreDelRol;
         private System.Windows.Forms.Button Aceptar;
         private System.Windows.Forms.Button Cancelar;
         private System.Windows.Forms.ListBox funcionesDelRol;
@@ -169,5 +178,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox errorBox;
+        private System.Windows.Forms.TextBox nombre;
+        private System.Windows.Forms.Label label4;
     }
 }

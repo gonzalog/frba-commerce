@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Asistentes;
+using FrbaCommerce.Excepciones;
 
 namespace FrbaCommerce.ABM_Rol
 {
@@ -17,14 +18,14 @@ namespace FrbaCommerce.ABM_Rol
 
         Dictionary<string,int> funcionesQueQuedarian;
         Dictionary<string, int> lasQueNoQuedarian;
-        Form padre;
+        ModificionRol padre;
 
-        public CambiarFunciones(int rolAModificar,Form ventanaPadre)
+        public CambiarFunciones(int rolAModificar, ModificionRol ventanaPadre)
         {
             InitializeComponent();
             this.padre = ventanaPadre;
             rol = rolAModificar;
-            this.nombreDelRol.Text = AsistenteRol.getNombreRol(rol);
+            this.nombre.Text = AsistenteRol.getNombreRol(rol);
 
             funcionesQueQuedarian = asociarNombresFunciones(AsistenteRol.getFuncionesDe(rol));
             lasQueNoQuedarian = asociarNombresFunciones(AsistenteRol.getFuncionesNoDe(rol));
@@ -82,7 +83,17 @@ namespace FrbaCommerce.ABM_Rol
 
         private void Aceptar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                AsistenteRol.cambiarNombre(rol, nombre.Text);
+            }
+            catch (NombreInvalido expcepcion)
+            {
+                MessageBox.Show(expcepcion.Message + "Por favor, cámbielo.");
+                return;
+            }
             AsistenteRol.perdurarFuncionesA(funcionesQueQuedarian.Values.ToList(), lasQueNoQuedarian.Values.ToList(), rol);
+            padre.cargarRoles();
             AsistenteVistas.volverAPadreYCerrar(this.padre,this);
 
         }

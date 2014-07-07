@@ -5,6 +5,7 @@ using System.Text;
 using FrbaCommerce.Asistentes;
 using System.Data;
 using FrbaCommerce.Abm_Visibilidad;
+using FrbaCommerce.Excepciones;
 
 namespace FrbaCommerce.Generar_Publicacion
 {
@@ -30,6 +31,13 @@ namespace FrbaCommerce.Generar_Publicacion
             int visiCod = AsistenteVisibilidad.getVisibilidades()[visi];
             DataRow visiData = AsistenteVisibilidad.getDataVisi(visiCod);
             Visibilidad visibilidad = new Visibilidad(visiData);
+
+            if (!(Convert.ToDecimal(visibilidad.precio) > 0))
+                if (AsistentePublicacion.alcanzoLimiteGratuitas(user))
+                {
+                    throw new LimiteGratuitas("No pueden hacerse más publicaciones gratuitas.");
+                }
+
             int duracion = visibilidad.duracion();
             try
             {
@@ -45,11 +53,17 @@ namespace FrbaCommerce.Generar_Publicacion
             {
                 prec = Convert.ToDecimal(precio);
             }
-            catch (Exception)
+            catch (FormatException)
             {
-                System.Windows.Forms.MessageBox.Show("Precio inválido.");
+                System.Windows.Forms.MessageBox.Show("Formato de precio inválido.");
                 return;
             }
+            catch(OverflowException)
+            {
+                System.Windows.Forms.MessageBox.Show("El campo precio es demasiado largo.");
+                return;
+            }
+
             AdaptadorBD.ejecutarProcedure(this.procedure(), prec, estado, visiCod, user, descrip, DateTime.Now.Date, DateTime.Now.AddDays(duracion).Date, Convert.ToInt32(stock), hayPreguntas ? 1 : 0);
             int codDePub = AsistentePublicacion.getCodUltimaPublicacion();
             foreach(string rubro in rubros)
@@ -65,5 +79,7 @@ namespace FrbaCommerce.Generar_Publicacion
         public abstract decimal precioActual();
 
         public abstract void abrirVentanaInteresado(Publicacion publicacion, string user);
+
+        public abstract int cantidadFacturada(string usuario);
     }
 }

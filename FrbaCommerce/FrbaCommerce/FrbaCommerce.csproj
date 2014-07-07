@@ -243,27 +243,27 @@
     <Compile Include="CambioPassword\CambioPassword.Designer.cs">
       <DependentUpon>CambioPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comprar-Ofertar\ComprarOfertar.cs">
+    <Compile Include="Generar Publicacion\Comprar-Ofertar\ComprarOfertar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Comprar-Ofertar\ComprarOfertar.Designer.cs">
+    <Compile Include="Generar Publicacion\Comprar-Ofertar\ComprarOfertar.Designer.cs">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </Compile>
     <Compile Include="Asistentes\AdaptadorBD.cs" />
-    <Compile Include="Comprar-Ofertar\InteresadoSubasta.cs">
+    <Compile Include="Generar Publicacion\Comprar-Ofertar\InteresadoSubasta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Comprar-Ofertar\InteresadoSubasta.Designer.cs">
+    <Compile Include="Generar Publicacion\Comprar-Ofertar\InteresadoSubasta.Designer.cs">
       <DependentUpon>InteresadoSubasta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comprar-Ofertar\InteresadoVentaDirecta.cs">
+    <Compile Include="Generar Publicacion\Comprar-Ofertar\InteresadoVentaDirecta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Comprar-Ofertar\InteresadoVentaDirecta.Designer.cs">
+    <Compile Include="Generar Publicacion\Comprar-Ofertar\InteresadoVentaDirecta.Designer.cs">
       <DependentUpon>InteresadoVentaDirecta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comprar-Ofertar\MuestraDePublicacion.cs" />
-    <Compile Include="Comprar-Ofertar\Vendedor.cs" />
+    <Compile Include="Generar Publicacion\Comprar-Ofertar\MuestraDePublicacion.cs" />
+    <Compile Include="Generar Publicacion\Comprar-Ofertar\Vendedor.cs" />
     <Compile Include="Editar Publicacion\EditBorrador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -288,7 +288,9 @@
     <Compile Include="Excepciones\ElTamanioDeLosDatosExcedeAlSistema.cs" />
     <Compile Include="Excepciones\FallaDelMotor.cs" />
     <Compile Include="Excepciones\HayCamposEnBlanco.cs" />
+    <Compile Include="Excepciones\LimiteGratuitas.cs" />
     <Compile Include="Excepciones\NoHayMasParaFacturar.cs" />
+    <Compile Include="Excepciones\NombreInvalido.cs" />
     <Compile Include="Excepciones\SubastaInexistente.cs" />
     <Compile Include="Excepciones\TelefonoYaRegistrado.cs" />
     <Compile Include="Excepciones\TipoIncorrecto.cs" />
@@ -479,13 +481,13 @@
     <EmbeddedResource Include="CambioPassword\CambioPassword.resx">
       <DependentUpon>CambioPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Comprar-Ofertar\ComprarOfertar.resx">
+    <EmbeddedResource Include="Generar Publicacion\Comprar-Ofertar\ComprarOfertar.resx">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Comprar-Ofertar\InteresadoSubasta.resx">
+    <EmbeddedResource Include="Generar Publicacion\Comprar-Ofertar\InteresadoSubasta.resx">
       <DependentUpon>InteresadoSubasta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Comprar-Ofertar\InteresadoVentaDirecta.resx">
+    <EmbeddedResource Include="Generar Publicacion\Comprar-Ofertar\InteresadoVentaDirecta.resx">
       <DependentUpon>InteresadoVentaDirecta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editar Publicacion\EditBorrador.resx">

@@ -27,7 +27,9 @@ namespace FrbaCommerce.Asistentes
             {
                 DataRow fila = traerDataTable("siguiente_publi_a_facturar", usuario).Rows[numeroDeRendido];
                 System.Diagnostics.Debug.WriteLine("Se instancia publicación de id: " + fila["id"].ToString());
-                return new Publicacion(Convert.ToInt32(fila["id"].ToString()));
+
+                Publicacion publi = new Publicacion(Convert.ToInt32(fila["id"].ToString()));
+                return publi;
             }
             catch (NullReferenceException)
             {

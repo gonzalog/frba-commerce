@@ -24,6 +24,15 @@ namespace FrbaCommerce.Facturar_Publicaciones
 
         public void perdurar(int factura,int nroDeRenglon)
         {
+            if (publicacion.sosDecimaFacturada())
+            {
+                comisionVisibilidad = 0;
+                comisionUnidades = 0;
+
+                System.Windows.Forms.MessageBox.Show(
+                    "¡Enhorabuena! ¡Por ser la decima " + publicacion.tipo.nombreTipo() 
+                    + " la publicación " + publicacion.descripcion +" es gratuita.");
+            }
             AdaptadorBD.ejecutarProcedure("alta_renglon",
                 factura,
                 nroDeRenglon,

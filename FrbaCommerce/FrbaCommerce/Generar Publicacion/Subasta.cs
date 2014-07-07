@@ -72,5 +72,10 @@ namespace FrbaCommerce.Generar_Publicacion
         {
             AsistenteVistas.mostrarSimultaneo(new InteresadoSubasta(publicacion,user));
         }
+
+        public override int cantidadFacturada(string usuario)
+        {
+            return AsistentePublicacion.cantidadSubastasFacturadas(usuario);
+        }
     }
 }

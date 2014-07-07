@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Asistentes;
+using FrbaCommerce.Excepciones;
 
 namespace FrbaCommerce.Generar_Publicacion
 {
@@ -78,16 +79,16 @@ namespace FrbaCommerce.Generar_Publicacion
                 return;
             }
 
-            //try
-            //{
+            try
+            {
                 saverTipoDeLaPublicacion.darDeALta(Descripcion.Text, Stock.Text, Precio.Text,
                     Visibilidad.Text, this.user, Estado.Text, rubrosElegidos, pregs.Checked);
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Los datos ingresados no son soportados por el sistema.");
-             //   return;
-            //}
+            }
+            catch (LimiteGratuitas limitacion)
+            {
+                MessageBox.Show(limitacion.Message);
+                return;
+            }
             MessageBox.Show("Publicación creada exitosamente.");
             Close();
         }

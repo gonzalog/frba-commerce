@@ -892,7 +892,10 @@ CREATE PROC THE_DISCRETABOY.get_roles_buscando
 (@nombre_a_buscar nvarchar(255))
 AS
 BEGIN
-SELECT R.cod_rol 'cod_rol', R.nombre 'nombre'
+SELECT R.cod_rol 'cod_rol', 
+R.nombre 'nombre',
+(CASE WHEN R.habilitado = 1 THEN 'HABILITADO'
+ELSE 'INHABILITADO' END) 'Estado'
 FROM THE_DISCRETABOY.Rol R
 WHERE R.nombre LIKE '%'+@nombre_a_buscar+'%'
 END
@@ -2659,13 +2662,14 @@ WHERE
 P.usuario = @USUARIO AND
 P.id != ALL
 (
-SELECT 
+SELECT
 R.publicacion
 FROM
 THE_DISCRETABOY.Renglon_factura R
 )
 ORDER BY
-P.fecha
+P.fecha,
+P.id ASC
 
 GO
 --GET COMISIONES DE UNIDADES VENDIDAS DE UNA PUBLICACION VENTA DIRECTA
@@ -3021,6 +3025,91 @@ R.habilitado = 1
 GROUP BY
 R.cod_rol,
 R.nombre
+
+GO
+--EDITAR NOMBRE DEL ROL
+CREATE PROC THE_DISCRETABOY.editar_nombre_rol
+(
+@COD NUMERIC(18,0),
+@NOMBRE NVARCHAR(255)
+)
+AS
+UPDATE THE_DISCRETABOY.Rol
+SET nombre = @NOMBRE
+WHERE
+cod_rol = @COD
+
+GO
+--RETORNA LA CANTIDAD DE PUBLICACIONES GRATUITAS
+CREATE PROC THE_DISCRETABOY.cantidad_gratuitas_de
+(@USER NVARCHAR(20))
+AS
+BEGIN
+DECLARE @CANT NUMERIC(18,0)
+SELECT
+@CANT = COUNT(P.id)
+FROM
+THE_DISCRETABOY.Publicacion P
+LEFT JOIN THE_DISCRETABOY.Visibilidad V ON
+P.Visibilidad = V.codigo
+LEFT JOIN THE_DISCRETABOY.Estado E ON
+P.estado = E.id
+WHERE
+P.usuario = @USER AND
+V.precio_por_pub = 0 AND
+E.NOMBRE = 'Publicada' AND
+GETDATE() < P.fecha_venc
+RETURN @CANT
+END
+
+GO
+--RETORNA LA CANTIDAD DE VENTAS DIRECATAS FACTURADAS
+CREATE PROC THE_DISCRETABOY.cant_ventas_directas_facturadas
+(@USER NVARCHAR(20))
+AS
+BEGIN
+DECLARE @CANT NUMERIC(18,0)
+SELECT
+@CANT = COUNT(V.id)
+FROM
+THE_DISCRETABOY.Renglon_factura R,
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Venta_directa V
+WHERE
+R.publicacion = P.id AND
+P.id = V.publicacion AND
+P.usuario = @USER
+RETURN @CANT 
+END
+
+GO
+--RETORNA LA CANTIDAD DE SUBASTAS FACTURADAS
+CREATE PROC THE_DISCRETABOY.cant_subastas_facturadas
+(@USER NVARCHAR(20))
+AS
+BEGIN
+DECLARE @CANT NUMERIC(18,0)
+SELECT
+@CANT = COUNT(S.id)
+FROM
+THE_DISCRETABOY.Renglon_factura R,
+THE_DISCRETABOY.Publicacion P,
+THE_DISCRETABOY.Subasta S
+WHERE
+R.publicacion = P.id AND
+P.id = S.publicacion AND
+P.usuario = @USER AND
+P.Visibilidad !=
+(
+SELECT TOP 1
+v.codigo
+FROM
+THE_DISCRETABOY.Visibilidad V
+WHERE
+V.descripcion = 'Gratis'
+)
+RETURN @CANT 
+END
 
 GO
 /* ****** Migrar datos existentes ******* */

@@ -66,5 +66,10 @@ namespace FrbaCommerce.Generar_Publicacion
         {
             AsistenteVistas.mostrarSimultaneo(new InteresadoVentaDirecta(publicacion, user));
         }
+
+        public override int cantidadFacturada(string usuario)
+        {
+            return AsistentePublicacion.cantidadVentasDirectosFacturadas(usuario);
+        }
     }
 }

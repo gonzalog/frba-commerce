@@ -126,14 +126,38 @@ namespace FrbaCommerce.Abm_Cliente
 
         private void elecNumero_TextChanged(object sender, EventArgs e)
         {
-            AsistenteBotones.checkSoloNumericos(elecNumero);
-            cliente.direccion.numero = Convert.ToInt64(elecNumero.Text);
+            try
+            {
+                AsistenteBotones.checkSoloNumericos(elecNumero);
+                cliente.direccion.numero = Convert.ToInt64(elecNumero.Text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Recuerde que el número no puede estar en blanco.");
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("El número no puede ser tan largo.");
+                elecNumero.Text = "0";
+            }
         }
 
         private void elecPiso_TextChanged(object sender, EventArgs e)
         {
-            AsistenteBotones.checkSoloNumericos(elecPiso);
-            cliente.direccion.piso = Convert.ToInt64(elecPiso.Text);
+            try
+            {
+                AsistenteBotones.checkSoloNumericos(elecPiso);
+                cliente.direccion.piso = Convert.ToInt64(elecPiso.Text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Recuerde que el piso no puede estar en blanco.");
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("El número de piso no puede ser tan largo.");
+                elecPiso.Text = "0";
+            }
         }
 
         private void elecDepartamento_TextChanged(object sender, EventArgs e)

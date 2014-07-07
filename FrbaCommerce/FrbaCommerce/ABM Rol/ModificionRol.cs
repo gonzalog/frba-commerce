@@ -27,15 +27,14 @@ namespace FrbaCommerce.ABM_Rol
 
         public void cargarRoles()
         {
-            DataTable rolesExistentes = AsistenteRol.getRoles();
-            AsistenteVistas.CargarGrilla(grillaRoles, rolesExistentes);
+            AsistenteVistas.CargarGrilla(grillaRoles, AsistenteRol.getRolesBuscando(nombreBox.Text));
         }
 
         private void cargarBotonCambiarFunciones()
         {
             DataGridViewButtonColumn col = new DataGridViewButtonColumn();
-            col.Text = "Cambiar funciones";
-            col.Name = "Funciones";
+            col.Text = "EDITAR";
+            col.Name = "EDITAR";
             col.UseColumnTextForButtonValue = true;
             grillaRoles.Columns.Add(col);
         }
@@ -84,7 +83,7 @@ namespace FrbaCommerce.ABM_Rol
             try
             {
                int rolAModificar = Convert.ToInt32(grillaRoles.Rows[e.RowIndex].Cells["cod_rol"].Value.ToString());
-               if (e.ColumnIndex == grillaRoles.Rows[e.RowIndex].Cells["Funciones"].ColumnIndex)
+               if (e.ColumnIndex == grillaRoles.Rows[e.RowIndex].Cells["EDITAR"].ColumnIndex)
                {
                    AsistenteVistas.mostrarNuevaVentana((new CambiarFunciones(rolAModificar, this)), this);
                }
