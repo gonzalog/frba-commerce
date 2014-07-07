@@ -2841,6 +2841,7 @@ THE_DISCRETABOY.Visibilidad VI
 WHERE
 P.usuario = U.username AND
 MONTH(P.fecha) = @MES AND
+YEAR(P.fecha) = @ANIO AND
 V.publicacion = P.id AND
 P.Visibilidad = VI.codigo AND
 VI.descripcion LIKE '%'+@VISI+'%'
@@ -2858,6 +2859,7 @@ CREATE PROC THE_DISCRETABOY.vendedores_con_mas_no_vendidos
 @VISI NVARCHAR(255)
 )
 AS
+BEGIN
 SELECT TOP 5
 U.username 'USUARIO',
 SUM(V.stock) 'STOCK SIN VENDER'
@@ -2878,6 +2880,7 @@ GROUP BY
 U.username
 ORDER BY 
 SUM(V.stock) DESC
+END
 
 GO
 
@@ -2887,6 +2890,7 @@ CREATE PROC THE_DISCRETABOY.vendedores_con_mas_facturacion
 @TRIME NUMERIC(18,0)
 )
 AS
+BEGIN
 SELECT TOP 5
 P.usuario 'USUARIO',
 SUM(F.total) 'TOTAL FACTURADO'
@@ -2904,6 +2908,7 @@ GROUP BY
 P.usuario
 ORDER BY
 SUM(F.total) DESC
+END
 
 GO
 

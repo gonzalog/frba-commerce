@@ -50,7 +50,7 @@ namespace FrbaCommerce.Listado_Estadistico
                 AsistenteVistas.CargarGrilla(grillaTopFive,
                     buscadorDeTabla(buscarVisi.Text, Convert.ToInt32(buscarMes.Text), opcionMes.Checked));
             }
-            catch (Exception)
+            catch (FormatException)
             {
                 AsistenteVistas.CargarGrilla(grillaTopFive,
                     buscadorDeTabla(buscarVisi.Text, 0, opcionMes.Checked));

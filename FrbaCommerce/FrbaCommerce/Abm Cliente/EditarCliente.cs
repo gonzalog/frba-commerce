@@ -176,6 +176,7 @@ namespace FrbaCommerce.Abm_Cliente
         }
 
         private void nuevoRol_Click(object sender, EventArgs e)
+        //Esta funcionalidad fue descartada de acuerdo con lo indicado en el grupo.
         {
             AsistenteVistas.mostrarNuevaVentana(new AgregarRol(cliente.user,this),this);
         }

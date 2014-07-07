@@ -35,9 +35,19 @@ namespace FrbaCommerce.Listado_Estadistico
                         delegate(string visi, int mes, bool usarMes) 
                         {
                             if (usarMes)
-                                return AdaptadorBD.traerDataTable("vendedores_con_mas_no_vendidos_en_mes",Convert.ToInt32(elecAnio.Text), visi, mes);
+                            {
+                                System.Diagnostics.Debug.WriteLine("Se ejecuta vendedores_con_mas_no_vendidos_en_mes con args: "
+                                    + Convert.ToInt32(elecAnio.Text) + " \"" + visi + "\" " + mes);
+                                return AdaptadorBD.traerDataTable("vendedores_con_mas_no_vendidos_en_mes",
+                                    Convert.ToInt32(elecAnio.Text), visi, mes);
+                            }
                             else
-                                return AdaptadorBD.traerDataTable("vendedores_con_mas_no_vendidos", Convert.ToInt32(elecAnio.Text), Convert.ToInt32(elecTrimestre.Text), visi);
+                            {
+                                System.Diagnostics.Debug.WriteLine("Se ejecuta vendedores_con_mas_no_vendidos con args: "
+                                    + Convert.ToInt32(elecAnio.Text) + " " + Convert.ToInt32(elecTrimestre.Text) + " \"" + visi + "\"");
+                                return AdaptadorBD.traerDataTable("vendedores_con_mas_no_vendidos",
+                                    Convert.ToInt32(elecAnio.Text), Convert.ToInt32(elecTrimestre.Text), visi);
+                            }
                         },
                         "TOP 5 Vendedores con mayor cantidad de productos no vendidos.",
                         Convert.ToInt32(elecTrimestre.Text),

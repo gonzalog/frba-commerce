@@ -66,7 +66,7 @@
             // 
             // cancelar
             // 
-            this.cancelar.Location = new System.Drawing.Point(215, 481);
+            this.cancelar.Location = new System.Drawing.Point(209, 435);
             this.cancelar.Name = "cancelar";
             this.cancelar.Size = new System.Drawing.Size(136, 40);
             this.cancelar.TabIndex = 119;
@@ -76,7 +76,7 @@
             // 
             // aceptar
             // 
-            this.aceptar.Location = new System.Drawing.Point(12, 481);
+            this.aceptar.Location = new System.Drawing.Point(6, 435);
             this.aceptar.Name = "aceptar";
             this.aceptar.Size = new System.Drawing.Size(121, 40);
             this.aceptar.TabIndex = 118;
@@ -340,7 +340,7 @@
             // 
             // nuevoRol
             // 
-            this.nuevoRol.Location = new System.Drawing.Point(12, 435);
+            this.nuevoRol.Location = new System.Drawing.Point(6, 494);
             this.nuevoRol.Name = "nuevoRol";
             this.nuevoRol.Size = new System.Drawing.Size(339, 27);
             this.nuevoRol.TabIndex = 120;
@@ -363,7 +363,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 533);
+            this.ClientSize = new System.Drawing.Size(361, 478);
             this.Controls.Add(this.nuevoRol);
             this.Controls.Add(this.cancelar);
             this.Controls.Add(this.aceptar);
