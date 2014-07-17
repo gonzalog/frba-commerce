@@ -3644,22 +3644,22 @@ INSERT INTO THE_DISCRETABOY.Renglon_factura
 (
 factura,
 publicacion,
+comision_visibilidad,
+comision_por_unidades,
 forma_de_pago
 )
 SELECT
 M.Factura_Nro,
 M.Publicacion_Cod,
+M.Publicacion_Visibilidad_Precio,
+M.Item_Factura_Cantidad * M.Item_Factura_Monto,
 M.Forma_Pago_Desc
-FROM gd_esquema.Maestra M
+FROM
+gd_esquema.Maestra M
 WHERE
 M.Factura_Nro IS NOT NULL
-GROUP BY
-M.Factura_Nro,
-M.Publicacion_Cod,
-M.Forma_Pago_Desc
 
 GO
-
 --CARGO VENTAS DIRECTAS
 INSERT INTO THE_DISCRETABOY.Venta_directa
 (

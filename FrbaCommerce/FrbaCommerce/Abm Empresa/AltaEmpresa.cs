@@ -105,7 +105,7 @@ namespace FrbaCommerce.Abm_Empresa
                     AsistenteVistas.volverAPadreYCerrar(padre, this);
                 }
             }
-            catch(ElTamanioDeLosDatosExcedeAlSistema ex)
+            catch (ElTamanioDeLosDatosExcedeAlSistema ex)
             {
                 MessageBox.Show(ex.Message);
             }
