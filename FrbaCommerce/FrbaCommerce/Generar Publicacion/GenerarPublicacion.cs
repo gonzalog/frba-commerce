@@ -63,6 +63,16 @@ namespace FrbaCommerce.Generar_Publicacion
                 MessageBox.Show("Seleccione un estado.");
                 return;
             }
+            if (tipo.Text == "")
+            {
+                MessageBox.Show("Seleccione un tipo.");
+                return;
+            }
+            if (Visibilidad.Text == "")
+            {
+                MessageBox.Show("Seleccione una visibilidad.");
+                return;
+            }
             try
             {
                 AsistenteBotones.chequearTextboxNoNulos(Descripcion, Precio, Stock);

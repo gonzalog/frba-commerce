@@ -78,6 +78,7 @@
             // 
             this.Descripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Descripcion.Location = new System.Drawing.Point(129, 55);
+            this.Descripcion.MaxLength = 250;
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.Size = new System.Drawing.Size(204, 22);
             this.Descripcion.TabIndex = 87;
@@ -114,6 +115,7 @@
             // 
             this.Stock.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Stock.Location = new System.Drawing.Point(129, 83);
+            this.Stock.MaxLength = 5;
             this.Stock.Name = "Stock";
             this.Stock.Size = new System.Drawing.Size(204, 22);
             this.Stock.TabIndex = 92;
@@ -222,6 +224,7 @@
             // 
             this.Precio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Precio.Location = new System.Drawing.Point(129, 111);
+            this.Precio.MaxLength = 6;
             this.Precio.Name = "Precio";
             this.Precio.Size = new System.Drawing.Size(204, 22);
             this.Precio.TabIndex = 94;

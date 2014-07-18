@@ -243,27 +243,27 @@
     <Compile Include="CambioPassword\CambioPassword.Designer.cs">
       <DependentUpon>CambioPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicacion\Comprar-Ofertar\ComprarOfertar.cs">
+    <Compile Include="Comprar-Ofertar\ComprarOfertar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Publicacion\Comprar-Ofertar\ComprarOfertar.Designer.cs">
+    <Compile Include="Comprar-Ofertar\ComprarOfertar.Designer.cs">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </Compile>
     <Compile Include="Asistentes\AdaptadorBD.cs" />
-    <Compile Include="Generar Publicacion\Comprar-Ofertar\InteresadoSubasta.cs">
+    <Compile Include="Comprar-Ofertar\InteresadoSubasta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Publicacion\Comprar-Ofertar\InteresadoSubasta.Designer.cs">
+    <Compile Include="Comprar-Ofertar\InteresadoSubasta.Designer.cs">
       <DependentUpon>InteresadoSubasta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicacion\Comprar-Ofertar\InteresadoVentaDirecta.cs">
+    <Compile Include="Comprar-Ofertar\InteresadoVentaDirecta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Publicacion\Comprar-Ofertar\InteresadoVentaDirecta.Designer.cs">
+    <Compile Include="Comprar-Ofertar\InteresadoVentaDirecta.Designer.cs">
       <DependentUpon>InteresadoVentaDirecta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicacion\Comprar-Ofertar\MuestraDePublicacion.cs" />
-    <Compile Include="Generar Publicacion\Comprar-Ofertar\Vendedor.cs" />
+    <Compile Include="Comprar-Ofertar\MuestraDePublicacion.cs" />
+    <Compile Include="Comprar-Ofertar\Vendedor.cs" />
     <Compile Include="Editar Publicacion\EditBorrador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -345,10 +345,10 @@
     <Compile Include="Listado Estadistico\SeleccionDeListado.Designer.cs">
       <DependentUpon>SeleccionDeListado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Login\ElegirRol.cs">
+    <Compile Include="Login\ElegirRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Login\ElegirRol.Designer.cs">
+    <Compile Include="Login\ElegirRol.Designer.cs">
       <DependentUpon>ElegirRol.cs</DependentUpon>
     </Compile>
     <Compile Include="PantallaPrincipal.cs">
@@ -401,10 +401,10 @@
     <Compile Include="Listado Estadistico\MuestraTop5.Designer.cs">
       <DependentUpon>MuestraTop5.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Login\Logueo.cs">
+    <Compile Include="Login\Logueo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Login\Logueo.Designer.cs">
+    <Compile Include="Login\Logueo.Designer.cs">
       <DependentUpon>Logueo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -481,13 +481,13 @@
     <EmbeddedResource Include="CambioPassword\CambioPassword.resx">
       <DependentUpon>CambioPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Generar Publicacion\Comprar-Ofertar\ComprarOfertar.resx">
+    <EmbeddedResource Include="Comprar-Ofertar\ComprarOfertar.resx">
       <DependentUpon>ComprarOfertar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Generar Publicacion\Comprar-Ofertar\InteresadoSubasta.resx">
+    <EmbeddedResource Include="Comprar-Ofertar\InteresadoSubasta.resx">
       <DependentUpon>InteresadoSubasta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Generar Publicacion\Comprar-Ofertar\InteresadoVentaDirecta.resx">
+    <EmbeddedResource Include="Comprar-Ofertar\InteresadoVentaDirecta.resx">
       <DependentUpon>InteresadoVentaDirecta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editar Publicacion\EditBorrador.resx">
@@ -529,10 +529,10 @@
     <EmbeddedResource Include="Listado Estadistico\MuestraTop5.resx">
       <DependentUpon>MuestraTop5.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listado Estadistico\Login\ElegirRol.resx">
+    <EmbeddedResource Include="Login\ElegirRol.resx">
       <DependentUpon>ElegirRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listado Estadistico\Login\Logueo.resx">
+    <EmbeddedResource Include="Login\Logueo.resx">
       <DependentUpon>Logueo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PantallaPrincipal.resx">

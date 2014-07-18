@@ -54,7 +54,17 @@ namespace FrbaCommerce.Login
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
+            errorBox.Text = "Evaluando solicitud...";
+
             string userName = usrNameTextBox.Text;
+
+            //Se chequea que no supere la cantidad de facturas pendientes maxima
+            if (AdaptadorBD.ejecutarProcedureWithReturnValue("get_cant_a_fact", userName) > 10)
+            {
+                errorBox.Text = "Usuario " + userName + " se encuentra suspendido por acumulación de facturas impagas.";
+                return;
+            }
+            
             if (!AsistenteLogin.getHabilitadoUsuario(userName))
             {
                 errorBox.Text = "'"+userName+"' no es un usuario habilitado. Por favor, compruebe que esté bien escrito y contactese con el administrador.";
@@ -95,8 +105,6 @@ namespace FrbaCommerce.Login
             {
                 errorBox.Text = "Combinacion usuario/contraseña incorrecta. Intente nuevamiente.";
             }
-
-            
         }
 
         private void registrarse_Click(object sender, EventArgs e)
