@@ -84,6 +84,7 @@
             // elecEMail
             // 
             this.elecEMail.Location = new System.Drawing.Point(554, 22);
+            this.elecEMail.MaxLength = 250;
             this.elecEMail.Name = "elecEMail";
             this.elecEMail.Size = new System.Drawing.Size(176, 20);
             this.elecEMail.TabIndex = 104;
@@ -91,6 +92,7 @@
             // elecCUIT
             // 
             this.elecCUIT.Location = new System.Drawing.Point(322, 22);
+            this.elecCUIT.MaxLength = 20;
             this.elecCUIT.Name = "elecCUIT";
             this.elecCUIT.Size = new System.Drawing.Size(180, 20);
             this.elecCUIT.TabIndex = 103;
@@ -146,7 +148,7 @@
             // elecRS
             // 
             this.elecRS.Location = new System.Drawing.Point(80, 22);
-            this.elecRS.MaxLength = 255;
+            this.elecRS.MaxLength = 250;
             this.elecRS.Name = "elecRS";
             this.elecRS.Size = new System.Drawing.Size(195, 20);
             this.elecRS.TabIndex = 5;

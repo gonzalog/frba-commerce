@@ -119,6 +119,7 @@
             // apellido
             // 
             this.apellido.Location = new System.Drawing.Point(66, 68);
+            this.apellido.MaxLength = 250;
             this.apellido.Name = "apellido";
             this.apellido.Size = new System.Drawing.Size(193, 20);
             this.apellido.TabIndex = 15;
@@ -126,6 +127,7 @@
             // nombre
             // 
             this.nombre.Location = new System.Drawing.Point(67, 42);
+            this.nombre.MaxLength = 250;
             this.nombre.Name = "nombre";
             this.nombre.Size = new System.Drawing.Size(193, 20);
             this.nombre.TabIndex = 14;
@@ -133,6 +135,7 @@
             // numero
             // 
             this.numero.Location = new System.Drawing.Point(67, 19);
+            this.numero.MaxLength = 20;
             this.numero.Name = "numero";
             this.numero.Size = new System.Drawing.Size(193, 20);
             this.numero.TabIndex = 12;

@@ -7,6 +7,7 @@ using System.Data;
 using FrbaCommerce.Abm_Visibilidad;
 using FrbaCommerce.Excepciones;
 using FrbaCommerce.Comprar_Ofertar;
+using System.Windows.Forms;
 
 namespace FrbaCommerce.Generar_Publicacion
 {
@@ -68,9 +69,9 @@ namespace FrbaCommerce.Generar_Publicacion
             return AdaptadorBD.ejecutarProcedureWithReturnDecimal("precio_actual_subasta",this.id);
         }
 
-        public override void abrirVentanaInteresado(Publicacion publicacion, string user) 
+        public override void abrirVentanaInteresado(Form padre, Publicacion publicacion, string user) 
         {
-            AsistenteVistas.mostrarSimultaneo(new InteresadoSubasta(publicacion,user));
+            AsistenteVistas.mostrarNuevaVentana(new InteresadoSubasta(publicacion,user,padre),padre);
         }
 
         public override int cantidadFacturada(string usuario)

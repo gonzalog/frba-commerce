@@ -186,6 +186,7 @@
             // elecPiso
             // 
             this.elecPiso.Location = new System.Drawing.Point(125, 75);
+            this.elecPiso.MaxLength = 2;
             this.elecPiso.Name = "elecPiso";
             this.elecPiso.Size = new System.Drawing.Size(208, 20);
             this.elecPiso.TabIndex = 73;
@@ -203,6 +204,7 @@
             // elecLocalidad
             // 
             this.elecLocalidad.Location = new System.Drawing.Point(125, 131);
+            this.elecLocalidad.MaxLength = 250;
             this.elecLocalidad.Name = "elecLocalidad";
             this.elecLocalidad.Size = new System.Drawing.Size(208, 20);
             this.elecLocalidad.TabIndex = 71;
@@ -210,6 +212,7 @@
             // elecDepartamento
             // 
             this.elecDepartamento.Location = new System.Drawing.Point(125, 103);
+            this.elecDepartamento.MaxLength = 1;
             this.elecDepartamento.Name = "elecDepartamento";
             this.elecDepartamento.Size = new System.Drawing.Size(208, 20);
             this.elecDepartamento.TabIndex = 70;
@@ -217,6 +220,7 @@
             // elecCP
             // 
             this.elecCP.Location = new System.Drawing.Point(125, 157);
+            this.elecCP.MaxLength = 10;
             this.elecCP.Name = "elecCP";
             this.elecCP.Size = new System.Drawing.Size(208, 20);
             this.elecCP.TabIndex = 77;
@@ -224,6 +228,7 @@
             // elecNumero
             // 
             this.elecNumero.Location = new System.Drawing.Point(125, 49);
+            this.elecNumero.MaxLength = 5;
             this.elecNumero.Name = "elecNumero";
             this.elecNumero.Size = new System.Drawing.Size(208, 20);
             this.elecNumero.TabIndex = 69;
@@ -232,6 +237,7 @@
             // elecCalle
             // 
             this.elecCalle.Location = new System.Drawing.Point(125, 23);
+            this.elecCalle.MaxLength = 250;
             this.elecCalle.Name = "elecCalle";
             this.elecCalle.Size = new System.Drawing.Size(208, 20);
             this.elecCalle.TabIndex = 68;
@@ -266,6 +272,7 @@
             // elecNombre
             // 
             this.elecNombre.Location = new System.Drawing.Point(137, 150);
+            this.elecNombre.MaxLength = 250;
             this.elecNombre.Name = "elecNombre";
             this.elecNombre.Size = new System.Drawing.Size(214, 20);
             this.elecNombre.TabIndex = 71;
@@ -273,6 +280,7 @@
             // elecApe
             // 
             this.elecApe.Location = new System.Drawing.Point(137, 176);
+            this.elecApe.MaxLength = 250;
             this.elecApe.Name = "elecApe";
             this.elecApe.Size = new System.Drawing.Size(214, 20);
             this.elecApe.TabIndex = 72;
@@ -288,6 +296,7 @@
             // elecNroDoc
             // 
             this.elecNroDoc.Location = new System.Drawing.Point(137, 224);
+            this.elecNroDoc.MaxLength = 15;
             this.elecNroDoc.Name = "elecNroDoc";
             this.elecNroDoc.Size = new System.Drawing.Size(214, 20);
             this.elecNroDoc.TabIndex = 74;
@@ -296,6 +305,7 @@
             // elecEMail
             // 
             this.elecEMail.Location = new System.Drawing.Point(137, 249);
+            this.elecEMail.MaxLength = 250;
             this.elecEMail.Name = "elecEMail";
             this.elecEMail.Size = new System.Drawing.Size(214, 20);
             this.elecEMail.TabIndex = 75;
@@ -303,6 +313,7 @@
             // elecTelefono
             // 
             this.elecTelefono.Location = new System.Drawing.Point(137, 275);
+            this.elecTelefono.MaxLength = 15;
             this.elecTelefono.Name = "elecTelefono";
             this.elecTelefono.Size = new System.Drawing.Size(214, 20);
             this.elecTelefono.TabIndex = 76;
@@ -367,6 +378,7 @@
             // eleccionUsername
             // 
             this.eleccionUsername.Location = new System.Drawing.Point(137, 68);
+            this.eleccionUsername.MaxLength = 20;
             this.eleccionUsername.Name = "eleccionUsername";
             this.eleccionUsername.Size = new System.Drawing.Size(214, 20);
             this.eleccionUsername.TabIndex = 55;
@@ -374,6 +386,7 @@
             // eleccionPassword
             // 
             this.eleccionPassword.Location = new System.Drawing.Point(137, 98);
+            this.eleccionPassword.MaxLength = 20;
             this.eleccionPassword.Name = "eleccionPassword";
             this.eleccionPassword.Size = new System.Drawing.Size(214, 20);
             this.eleccionPassword.TabIndex = 56;
@@ -390,6 +403,7 @@
             // confirContraseña
             // 
             this.confirContraseña.Location = new System.Drawing.Point(137, 124);
+            this.confirContraseña.MaxLength = 20;
             this.confirContraseña.Name = "confirContraseña";
             this.confirContraseña.Size = new System.Drawing.Size(214, 20);
             this.confirContraseña.TabIndex = 109;

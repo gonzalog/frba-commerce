@@ -65,6 +65,7 @@
             // 
             this.elecPorcen.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.elecPorcen.Location = new System.Drawing.Point(18, 258);
+            this.elecPorcen.MaxLength = 5;
             this.elecPorcen.Name = "elecPorcen";
             this.elecPorcen.Size = new System.Drawing.Size(195, 29);
             this.elecPorcen.TabIndex = 19;
@@ -84,6 +85,7 @@
             // 
             this.elecPrec.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.elecPrec.Location = new System.Drawing.Point(18, 201);
+            this.elecPrec.MaxLength = 5;
             this.elecPrec.Name = "elecPrec";
             this.elecPrec.Size = new System.Drawing.Size(195, 29);
             this.elecPrec.TabIndex = 17;
@@ -103,6 +105,7 @@
             // 
             this.elecDescrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.elecDescrip.Location = new System.Drawing.Point(18, 143);
+            this.elecDescrip.MaxLength = 250;
             this.elecDescrip.Name = "elecDescrip";
             this.elecDescrip.Size = new System.Drawing.Size(195, 29);
             this.elecDescrip.TabIndex = 15;

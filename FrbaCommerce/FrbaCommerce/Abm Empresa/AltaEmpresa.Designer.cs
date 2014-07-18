@@ -36,7 +36,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.elecNombreContacto = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.elecCUIT = new System.Windows.Forms.TextBox();
+            this.elecCUIT1 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.elecCiudad = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -59,6 +59,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.elecRazonSocial = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.elecCUIT2 = new System.Windows.Forms.TextBox();
+            this.elecCUIT3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -124,6 +126,7 @@
             // elecNombreContacto
             // 
             this.elecNombreContacto.Location = new System.Drawing.Point(137, 196);
+            this.elecNombreContacto.MaxLength = 255;
             this.elecNombreContacto.Name = "elecNombreContacto";
             this.elecNombreContacto.Size = new System.Drawing.Size(214, 20);
             this.elecNombreContacto.TabIndex = 119;
@@ -137,13 +140,14 @@
             this.label14.TabIndex = 118;
             this.label14.Text = "Nombre de contacto:";
             // 
-            // elecCUIT
+            // elecCUIT1
             // 
-            this.elecCUIT.Location = new System.Drawing.Point(137, 169);
-            this.elecCUIT.Name = "elecCUIT";
-            this.elecCUIT.Size = new System.Drawing.Size(214, 20);
-            this.elecCUIT.TabIndex = 117;
-            this.elecCUIT.TextChanged += new System.EventHandler(this.elecCUIT_TextChanged);
+            this.elecCUIT1.Location = new System.Drawing.Point(137, 169);
+            this.elecCUIT1.MaxLength = 2;
+            this.elecCUIT1.Name = "elecCUIT1";
+            this.elecCUIT1.Size = new System.Drawing.Size(34, 20);
+            this.elecCUIT1.TabIndex = 117;
+            this.elecCUIT1.TextChanged += new System.EventHandler(this.elecCUIT_TextChanged);
             // 
             // label13
             // 
@@ -157,6 +161,7 @@
             // elecCiudad
             // 
             this.elecCiudad.Location = new System.Drawing.Point(137, 143);
+            this.elecCiudad.MaxLength = 255;
             this.elecCiudad.Name = "elecCiudad";
             this.elecCiudad.Size = new System.Drawing.Size(214, 20);
             this.elecCiudad.TabIndex = 115;
@@ -194,6 +199,7 @@
             // elecPiso
             // 
             this.elecPiso.Location = new System.Drawing.Point(125, 75);
+            this.elecPiso.MaxLength = 2;
             this.elecPiso.Name = "elecPiso";
             this.elecPiso.Size = new System.Drawing.Size(208, 20);
             this.elecPiso.TabIndex = 73;
@@ -211,6 +217,7 @@
             // elecLocalidad
             // 
             this.elecLocalidad.Location = new System.Drawing.Point(125, 131);
+            this.elecLocalidad.MaxLength = 255;
             this.elecLocalidad.Name = "elecLocalidad";
             this.elecLocalidad.Size = new System.Drawing.Size(208, 20);
             this.elecLocalidad.TabIndex = 71;
@@ -218,6 +225,7 @@
             // elecDepartamento
             // 
             this.elecDepartamento.Location = new System.Drawing.Point(125, 103);
+            this.elecDepartamento.MaxLength = 1;
             this.elecDepartamento.Name = "elecDepartamento";
             this.elecDepartamento.Size = new System.Drawing.Size(208, 20);
             this.elecDepartamento.TabIndex = 70;
@@ -225,6 +233,7 @@
             // elecCP
             // 
             this.elecCP.Location = new System.Drawing.Point(125, 157);
+            this.elecCP.MaxLength = 10;
             this.elecCP.Name = "elecCP";
             this.elecCP.Size = new System.Drawing.Size(208, 20);
             this.elecCP.TabIndex = 77;
@@ -232,6 +241,7 @@
             // elecNumero
             // 
             this.elecNumero.Location = new System.Drawing.Point(125, 49);
+            this.elecNumero.MaxLength = 5;
             this.elecNumero.Name = "elecNumero";
             this.elecNumero.Size = new System.Drawing.Size(208, 20);
             this.elecNumero.TabIndex = 69;
@@ -240,6 +250,7 @@
             // elecCalle
             // 
             this.elecCalle.Location = new System.Drawing.Point(125, 23);
+            this.elecCalle.MaxLength = 255;
             this.elecCalle.Name = "elecCalle";
             this.elecCalle.Size = new System.Drawing.Size(208, 20);
             this.elecCalle.TabIndex = 68;
@@ -292,6 +303,7 @@
             // elecTelefono
             // 
             this.elecTelefono.Location = new System.Drawing.Point(137, 116);
+            this.elecTelefono.MaxLength = 15;
             this.elecTelefono.Name = "elecTelefono";
             this.elecTelefono.Size = new System.Drawing.Size(214, 20);
             this.elecTelefono.TabIndex = 112;
@@ -300,6 +312,7 @@
             // elecEMail
             // 
             this.elecEMail.Location = new System.Drawing.Point(137, 90);
+            this.elecEMail.MaxLength = 255;
             this.elecEMail.Name = "elecEMail";
             this.elecEMail.Size = new System.Drawing.Size(214, 20);
             this.elecEMail.TabIndex = 111;
@@ -325,6 +338,7 @@
             // elecRazonSocial
             // 
             this.elecRazonSocial.Location = new System.Drawing.Point(137, 64);
+            this.elecRazonSocial.MaxLength = 255;
             this.elecRazonSocial.Name = "elecRazonSocial";
             this.elecRazonSocial.Size = new System.Drawing.Size(214, 20);
             this.elecRazonSocial.TabIndex = 108;
@@ -338,18 +352,38 @@
             this.label1.TabIndex = 107;
             this.label1.Text = "Razón social:";
             // 
+            // elecCUIT2
+            // 
+            this.elecCUIT2.Location = new System.Drawing.Point(177, 169);
+            this.elecCUIT2.MaxLength = 8;
+            this.elecCUIT2.Name = "elecCUIT2";
+            this.elecCUIT2.Size = new System.Drawing.Size(135, 20);
+            this.elecCUIT2.TabIndex = 124;
+            this.elecCUIT2.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // elecCUIT3
+            // 
+            this.elecCUIT3.Location = new System.Drawing.Point(318, 169);
+            this.elecCUIT3.MaxLength = 2;
+            this.elecCUIT3.Name = "elecCUIT3";
+            this.elecCUIT3.Size = new System.Drawing.Size(33, 20);
+            this.elecCUIT3.TabIndex = 125;
+            this.elecCUIT3.TextChanged += new System.EventHandler(this.elecCUIT3_TextChanged);
+            // 
             // AltaEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(365, 513);
+            this.Controls.Add(this.elecCUIT3);
+            this.Controls.Add(this.elecCUIT2);
             this.Controls.Add(this.cancelar);
             this.Controls.Add(this.aceptar);
             this.Controls.Add(this.elecFechaCreacion);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.elecNombreContacto);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.elecCUIT);
+            this.Controls.Add(this.elecCUIT1);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.elecCiudad);
             this.Controls.Add(this.label12);
@@ -362,6 +396,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.errorBox);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AltaEmpresa";
             this.Text = "AltaEmpresa";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -382,7 +418,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox elecNombreContacto;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox elecCUIT;
+        private System.Windows.Forms.TextBox elecCUIT1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox elecCiudad;
         private System.Windows.Forms.Label label12;
@@ -405,5 +441,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox elecRazonSocial;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox elecCUIT2;
+        private System.Windows.Forms.TextBox elecCUIT3;
     }
 }

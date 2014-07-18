@@ -31,6 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InteresadoSubasta));
             this.BotonCancelar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.montoOferta = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.precioInicial = new System.Windows.Forms.Label();
+            this.precioActual = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.vencimiento = new System.Windows.Forms.Label();
             this.publicDate = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -43,12 +49,6 @@
             this.descrip = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.precioInicial = new System.Windows.Forms.Label();
-            this.precioActual = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.montoOferta = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.boxConsulta.SuspendLayout();
             this.SuspendLayout();
@@ -87,6 +87,66 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Publicación";
+            // 
+            // montoOferta
+            // 
+            this.montoOferta.Location = new System.Drawing.Point(165, 167);
+            this.montoOferta.MaxLength = 10;
+            this.montoOferta.Name = "montoOferta";
+            this.montoOferta.Size = new System.Drawing.Size(78, 20);
+            this.montoOferta.TabIndex = 22;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.label1.Location = new System.Drawing.Point(113, 170);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Monto:";
+            // 
+            // precioInicial
+            // 
+            this.precioInicial.AutoSize = true;
+            this.precioInicial.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.precioInicial.Location = new System.Drawing.Point(124, 68);
+            this.precioInicial.Name = "precioInicial";
+            this.precioInicial.Size = new System.Drawing.Size(41, 13);
+            this.precioInicial.TabIndex = 20;
+            this.precioInicial.Text = "label11";
+            // 
+            // precioActual
+            // 
+            this.precioActual.AutoSize = true;
+            this.precioActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.precioActual.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.precioActual.Location = new System.Drawing.Point(124, 90);
+            this.precioActual.Name = "precioActual";
+            this.precioActual.Size = new System.Drawing.Size(41, 13);
+            this.precioActual.TabIndex = 19;
+            this.precioActual.Text = "label8";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.label6.Location = new System.Drawing.Point(6, 90);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(72, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Precio actual:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.label8.Location = new System.Drawing.Point(6, 68);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Precio inicial:";
             // 
             // vencimiento
             // 
@@ -209,65 +269,6 @@
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Descripción:";
-            // 
-            // precioInicial
-            // 
-            this.precioInicial.AutoSize = true;
-            this.precioInicial.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.precioInicial.Location = new System.Drawing.Point(124, 68);
-            this.precioInicial.Name = "precioInicial";
-            this.precioInicial.Size = new System.Drawing.Size(41, 13);
-            this.precioInicial.TabIndex = 20;
-            this.precioInicial.Text = "label11";
-            // 
-            // precioActual
-            // 
-            this.precioActual.AutoSize = true;
-            this.precioActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.precioActual.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.precioActual.Location = new System.Drawing.Point(124, 90);
-            this.precioActual.Name = "precioActual";
-            this.precioActual.Size = new System.Drawing.Size(41, 13);
-            this.precioActual.TabIndex = 19;
-            this.precioActual.Text = "label8";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label6.Location = new System.Drawing.Point(6, 90);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 13);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Precio actual:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label8.Location = new System.Drawing.Point(6, 68);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 13);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "Precio inicial:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label1.Location = new System.Drawing.Point(113, 170);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Monto:";
-            // 
-            // montoOferta
-            // 
-            this.montoOferta.Location = new System.Drawing.Point(165, 167);
-            this.montoOferta.Name = "montoOferta";
-            this.montoOferta.Size = new System.Drawing.Size(78, 20);
-            this.montoOferta.TabIndex = 22;
             // 
             // InteresadoSubasta
             // 

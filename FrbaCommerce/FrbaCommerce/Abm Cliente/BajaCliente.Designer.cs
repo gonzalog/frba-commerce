@@ -100,6 +100,7 @@
             // elecEMail
             // 
             this.elecEMail.Location = new System.Drawing.Point(705, 22);
+            this.elecEMail.MaxLength = 250;
             this.elecEMail.Name = "elecEMail";
             this.elecEMail.Size = new System.Drawing.Size(200, 20);
             this.elecEMail.TabIndex = 104;
@@ -107,6 +108,7 @@
             // elecNroDoc
             // 
             this.elecNroDoc.Location = new System.Drawing.Point(441, 48);
+            this.elecNroDoc.MaxLength = 15;
             this.elecNroDoc.Name = "elecNroDoc";
             this.elecNroDoc.Size = new System.Drawing.Size(201, 20);
             this.elecNroDoc.TabIndex = 103;
@@ -114,6 +116,7 @@
             // elecApe
             // 
             this.elecApe.Location = new System.Drawing.Point(59, 48);
+            this.elecApe.MaxLength = 250;
             this.elecApe.Name = "elecApe";
             this.elecApe.Size = new System.Drawing.Size(241, 20);
             this.elecApe.TabIndex = 101;
@@ -186,7 +189,7 @@
             // nombreBox
             // 
             this.nombreBox.Location = new System.Drawing.Point(59, 22);
-            this.nombreBox.MaxLength = 255;
+            this.nombreBox.MaxLength = 250;
             this.nombreBox.Name = "nombreBox";
             this.nombreBox.Size = new System.Drawing.Size(241, 20);
             this.nombreBox.TabIndex = 5;

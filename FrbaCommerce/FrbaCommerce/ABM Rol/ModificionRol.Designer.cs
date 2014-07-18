@@ -106,7 +106,7 @@
             // nombreBox
             // 
             this.nombreBox.Location = new System.Drawing.Point(78, 22);
-            this.nombreBox.MaxLength = 255;
+            this.nombreBox.MaxLength = 250;
             this.nombreBox.Name = "nombreBox";
             this.nombreBox.Size = new System.Drawing.Size(100, 20);
             this.nombreBox.TabIndex = 5;

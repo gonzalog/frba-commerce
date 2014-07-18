@@ -64,6 +64,7 @@
             // 
             this.passActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passActual.Location = new System.Drawing.Point(289, 72);
+            this.passActual.MaxLength = 20;
             this.passActual.Name = "passActual";
             this.passActual.Size = new System.Drawing.Size(228, 26);
             this.passActual.TabIndex = 1;
@@ -112,6 +113,7 @@
             // 
             this.passFutura.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passFutura.Location = new System.Drawing.Point(289, 118);
+            this.passFutura.MaxLength = 20;
             this.passFutura.Name = "passFutura";
             this.passFutura.Size = new System.Drawing.Size(228, 26);
             this.passFutura.TabIndex = 8;
@@ -120,6 +122,7 @@
             // 
             this.confirPassFutura.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirPassFutura.Location = new System.Drawing.Point(289, 163);
+            this.confirPassFutura.MaxLength = 20;
             this.confirPassFutura.Name = "confirPassFutura";
             this.confirPassFutura.Size = new System.Drawing.Size(228, 26);
             this.confirPassFutura.TabIndex = 9;

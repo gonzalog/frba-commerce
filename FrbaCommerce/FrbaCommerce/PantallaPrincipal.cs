@@ -117,7 +117,7 @@ namespace FrbaCommerce
             }
             else
             {
-                AsistenteVistas.mostrarSimultaneo(new ComprarOfertar(this.user));
+                AsistenteVistas.mostrarNuevaVentana(new ComprarOfertar(this.user,this),this);
             }
             return;
         }

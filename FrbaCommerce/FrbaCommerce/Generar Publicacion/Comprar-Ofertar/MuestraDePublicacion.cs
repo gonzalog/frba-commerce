@@ -27,9 +27,9 @@ namespace FrbaCommerce.Comprar_Ofertar
             boton.Show();
         }
 
-        public void hayUnInteresado(string user)
+        public void hayUnInteresado(Form padre, string user)
         {
-            this.publicacion.hayUnInteresado(user);
+            this.publicacion.hayUnInteresado(padre, user);
         }
     }
 }

@@ -49,7 +49,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.elecNombreContacto = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.elecCUIT = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.elecCiudad = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -57,9 +56,12 @@
             this.elecEMail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.elecRazonSocial = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.nuevoRol = new System.Windows.Forms.Button();
+            this.elecCUIT3 = new System.Windows.Forms.TextBox();
+            this.elecCUIT2 = new System.Windows.Forms.TextBox();
+            this.elecCUIT1 = new System.Windows.Forms.TextBox();
+            this.elecRazonSocial = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -108,6 +110,7 @@
             // elecPiso
             // 
             this.elecPiso.Location = new System.Drawing.Point(125, 75);
+            this.elecPiso.MaxLength = 2;
             this.elecPiso.Name = "elecPiso";
             this.elecPiso.Size = new System.Drawing.Size(208, 20);
             this.elecPiso.TabIndex = 73;
@@ -125,6 +128,7 @@
             // elecLocalidad
             // 
             this.elecLocalidad.Location = new System.Drawing.Point(125, 131);
+            this.elecLocalidad.MaxLength = 250;
             this.elecLocalidad.Name = "elecLocalidad";
             this.elecLocalidad.Size = new System.Drawing.Size(208, 20);
             this.elecLocalidad.TabIndex = 71;
@@ -133,6 +137,7 @@
             // elecDepartamento
             // 
             this.elecDepartamento.Location = new System.Drawing.Point(125, 103);
+            this.elecDepartamento.MaxLength = 1;
             this.elecDepartamento.Name = "elecDepartamento";
             this.elecDepartamento.Size = new System.Drawing.Size(208, 20);
             this.elecDepartamento.TabIndex = 70;
@@ -141,6 +146,7 @@
             // elecCP
             // 
             this.elecCP.Location = new System.Drawing.Point(125, 157);
+            this.elecCP.MaxLength = 10;
             this.elecCP.Name = "elecCP";
             this.elecCP.Size = new System.Drawing.Size(208, 20);
             this.elecCP.TabIndex = 77;
@@ -149,6 +155,7 @@
             // elecNumero
             // 
             this.elecNumero.Location = new System.Drawing.Point(125, 49);
+            this.elecNumero.MaxLength = 5;
             this.elecNumero.Name = "elecNumero";
             this.elecNumero.Size = new System.Drawing.Size(208, 20);
             this.elecNumero.TabIndex = 69;
@@ -157,6 +164,7 @@
             // elecCalle
             // 
             this.elecCalle.Location = new System.Drawing.Point(125, 23);
+            this.elecCalle.MaxLength = 250;
             this.elecCalle.Name = "elecCalle";
             this.elecCalle.Size = new System.Drawing.Size(208, 20);
             this.elecCalle.TabIndex = 68;
@@ -249,6 +257,7 @@
             // elecNombreContacto
             // 
             this.elecNombreContacto.Location = new System.Drawing.Point(137, 199);
+            this.elecNombreContacto.MaxLength = 250;
             this.elecNombreContacto.Name = "elecNombreContacto";
             this.elecNombreContacto.Size = new System.Drawing.Size(214, 20);
             this.elecNombreContacto.TabIndex = 150;
@@ -263,14 +272,6 @@
             this.label14.TabIndex = 149;
             this.label14.Text = "Nombre de contacto:";
             // 
-            // elecCUIT
-            // 
-            this.elecCUIT.Location = new System.Drawing.Point(137, 172);
-            this.elecCUIT.Name = "elecCUIT";
-            this.elecCUIT.Size = new System.Drawing.Size(214, 20);
-            this.elecCUIT.TabIndex = 148;
-            this.elecCUIT.TextChanged += new System.EventHandler(this.elecCUIT_TextChanged);
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -283,6 +284,7 @@
             // elecCiudad
             // 
             this.elecCiudad.Location = new System.Drawing.Point(137, 146);
+            this.elecCiudad.MaxLength = 250;
             this.elecCiudad.Name = "elecCiudad";
             this.elecCiudad.Size = new System.Drawing.Size(214, 20);
             this.elecCiudad.TabIndex = 146;
@@ -300,6 +302,7 @@
             // elecTelefono
             // 
             this.elecTelefono.Location = new System.Drawing.Point(137, 119);
+            this.elecTelefono.MaxLength = 15;
             this.elecTelefono.Name = "elecTelefono";
             this.elecTelefono.Size = new System.Drawing.Size(214, 20);
             this.elecTelefono.TabIndex = 144;
@@ -308,6 +311,7 @@
             // elecEMail
             // 
             this.elecEMail.Location = new System.Drawing.Point(137, 93);
+            this.elecEMail.MaxLength = 250;
             this.elecEMail.Name = "elecEMail";
             this.elecEMail.Size = new System.Drawing.Size(214, 20);
             this.elecEMail.TabIndex = 143;
@@ -331,14 +335,6 @@
             this.label7.TabIndex = 141;
             this.label7.Text = "E-Mail:";
             // 
-            // elecRazonSocial
-            // 
-            this.elecRazonSocial.Location = new System.Drawing.Point(137, 67);
-            this.elecRazonSocial.Name = "elecRazonSocial";
-            this.elecRazonSocial.Size = new System.Drawing.Size(214, 20);
-            this.elecRazonSocial.TabIndex = 140;
-            this.elecRazonSocial.TextChanged += new System.EventHandler(this.elecRazonSocial_TextChanged);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -358,17 +354,57 @@
             this.nuevoRol.UseVisualStyleBackColor = true;
             this.nuevoRol.Click += new System.EventHandler(this.nuevoRol_Click);
             // 
+            // elecCUIT3
+            // 
+            this.elecCUIT3.Location = new System.Drawing.Point(317, 172);
+            this.elecCUIT3.MaxLength = 2;
+            this.elecCUIT3.Name = "elecCUIT3";
+            this.elecCUIT3.Size = new System.Drawing.Size(35, 20);
+            this.elecCUIT3.TabIndex = 156;
+            this.elecCUIT3.TextChanged += new System.EventHandler(this.elecCUIT3_TextChanged);
+            // 
+            // elecCUIT2
+            // 
+            this.elecCUIT2.Location = new System.Drawing.Point(178, 172);
+            this.elecCUIT2.MaxLength = 8;
+            this.elecCUIT2.Name = "elecCUIT2";
+            this.elecCUIT2.Size = new System.Drawing.Size(133, 20);
+            this.elecCUIT2.TabIndex = 155;
+            this.elecCUIT2.TextChanged += new System.EventHandler(this.elecCUIT2_TextChanged);
+            // 
+            // elecCUIT1
+            // 
+            this.elecCUIT1.Location = new System.Drawing.Point(138, 172);
+            this.elecCUIT1.MaxLength = 2;
+            this.elecCUIT1.Name = "elecCUIT1";
+            this.elecCUIT1.Size = new System.Drawing.Size(34, 20);
+            this.elecCUIT1.TabIndex = 154;
+            this.elecCUIT1.TextChanged += new System.EventHandler(this.elecCUIT1_TextChanged);
+            // 
+            // elecRazonSocial
+            // 
+            this.elecRazonSocial.AutoSize = true;
+            this.elecRazonSocial.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.elecRazonSocial.Location = new System.Drawing.Point(134, 70);
+            this.elecRazonSocial.Name = "elecRazonSocial";
+            this.elecRazonSocial.Size = new System.Drawing.Size(51, 16);
+            this.elecRazonSocial.TabIndex = 157;
+            this.elecRazonSocial.Text = "label3";
+            // 
             // EditarEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 510);
+            this.ClientSize = new System.Drawing.Size(361, 560);
+            this.Controls.Add(this.elecRazonSocial);
+            this.Controls.Add(this.elecCUIT3);
+            this.Controls.Add(this.elecCUIT2);
+            this.Controls.Add(this.elecCUIT1);
             this.Controls.Add(this.nuevoRol);
             this.Controls.Add(this.elecFechaCreacion);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.elecNombreContacto);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.elecCUIT);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.elecCiudad);
             this.Controls.Add(this.label12);
@@ -376,7 +412,6 @@
             this.Controls.Add(this.elecEMail);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.elecRazonSocial);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cancelar);
             this.Controls.Add(this.aceptar);
@@ -416,7 +451,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox elecNombreContacto;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox elecCUIT;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox elecCiudad;
         private System.Windows.Forms.Label label12;
@@ -424,8 +458,11 @@
         private System.Windows.Forms.TextBox elecEMail;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox elecRazonSocial;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button nuevoRol;
+        private System.Windows.Forms.TextBox elecCUIT3;
+        private System.Windows.Forms.TextBox elecCUIT2;
+        private System.Windows.Forms.TextBox elecCUIT1;
+        private System.Windows.Forms.Label elecRazonSocial;
     }
 }

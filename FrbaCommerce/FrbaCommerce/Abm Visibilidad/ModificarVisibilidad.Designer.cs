@@ -105,7 +105,7 @@
             // descripBox
             // 
             this.descripBox.Location = new System.Drawing.Point(152, 22);
-            this.descripBox.MaxLength = 255;
+            this.descripBox.MaxLength = 250;
             this.descripBox.Name = "descripBox";
             this.descripBox.Size = new System.Drawing.Size(576, 20);
             this.descripBox.TabIndex = 5;

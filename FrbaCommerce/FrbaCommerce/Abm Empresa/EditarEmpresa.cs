@@ -28,11 +28,24 @@ namespace FrbaCommerce.Abm_Empresa
 
         private void setearValoresDefault()
         {
+            System.Diagnostics.Debug.WriteLine("Las partes del CUIT son: " + "\n" +
+                empresa.getPrimeraParteCUIT() + "\n" +
+                empresa.getSegundaParteCUIT() + "\n" +
+                empresa.getTerceraParteCUIT() + "\n" +
+                "Las longitudes son: " + empresa.getPrimeraParteCUIT().Length + " " +
+                empresa.getSegundaParteCUIT().Length + " " +
+                empresa.getTerceraParteCUIT().Length
+                );
+
             elecRazonSocial.Text = empresa.razon;
             elecEMail.Text = empresa.mail;
             elecTelefono.Text = empresa.telefono;
             elecCiudad.Text = empresa.ciudad;
-            elecCUIT.Text = empresa.cuit;
+            elecCUIT1.Text = empresa.getPrimeraParteCUIT();
+            System.Diagnostics.Debug.WriteLine("La segunda parte es: " + 
+                empresa.getSegundaParteCUIT());
+            elecCUIT2.Text = empresa.getSegundaParteCUIT();
+            elecCUIT3.Text = empresa.getTerceraParteCUIT();
             elecNombreContacto.Text = empresa.nombreDeContacto;
             elecFechaCreacion.Value = empresa.fechaCreacion;
 
@@ -69,12 +82,6 @@ namespace FrbaCommerce.Abm_Empresa
         private void elecCiudad_TextChanged(object sender, EventArgs e)
         {
             empresa.ciudad = elecCiudad.Text;
-        }
-
-        private void elecCUIT_TextChanged(object sender, EventArgs e)
-        {
-            AsistenteBotones.checkSoloNumericosOGuion(elecCUIT);
-            empresa.cuit = elecCUIT.Text;
         }
 
         private void elecNombreContacto_TextChanged(object sender, EventArgs e)
@@ -166,10 +173,27 @@ namespace FrbaCommerce.Abm_Empresa
             } 
         }
 
-        private void nuevoRol_Click(object sender, EventArgs e) 
-        //Esta funcionalidad fue descartada de acuerdo con lo indicado en el grupo.
+        private void nuevoRol_Click(object sender, EventArgs e)
         {
             AsistenteVistas.mostrarNuevaVentana(new AgregarRol(empresa.user, this), this);
+        }
+
+        private void elecCUIT1_TextChanged(object sender, EventArgs e)
+        {
+            AsistenteBotones.checkSoloNumericos(elecCUIT1);
+            empresa.cuit = elecCUIT1.Text + '-' + empresa.getSegundaParteCUIT() + '-' + empresa.getTerceraParteCUIT();
+        }
+
+        private void elecCUIT2_TextChanged(object sender, EventArgs e)
+        {
+            AsistenteBotones.checkSoloNumericos(elecCUIT2);
+            empresa.cuit = empresa.getPrimeraParteCUIT() + '-' + elecCUIT2.Text + '-' + empresa.getTerceraParteCUIT();
+        }
+
+        private void elecCUIT3_TextChanged(object sender, EventArgs e)
+        {
+            AsistenteBotones.checkSoloNumericos(elecCUIT3);
+            empresa.cuit = empresa.getPrimeraParteCUIT() + '-' + empresa.getSegundaParteCUIT() + '-' + elecCUIT3.Text;
         }
     }
 }

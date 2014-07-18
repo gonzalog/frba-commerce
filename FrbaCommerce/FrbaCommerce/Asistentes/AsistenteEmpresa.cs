@@ -11,7 +11,7 @@ namespace FrbaCommerce.Asistentes
 {
     class AsistenteEmpresa : AdaptadorBD
     {
-        public static void altaEmpresa(  string username,
+        public static void altaEmpresa( string username,
                                         string password,
                                         int passDefinitiva,
                                         string rol,
@@ -41,10 +41,10 @@ namespace FrbaCommerce.Asistentes
                                                 localidad);
                 AdaptadorBD.ejecutarProcedure("alta_empresa",
                     username,
-                    Convert.ToInt32(CUIT),
+                    CUIT,
                     razonSocial,
                     mail,
-                    Convert.ToInt32(telefono),
+                    Convert.ToInt64(telefono),
                     AsistenteUsuario.getIdDireccion(calle, numero, piso, departamento, codPost, localidad),
                     ciudad,
                     nombreContacto,
@@ -70,13 +70,16 @@ namespace FrbaCommerce.Asistentes
 
         public static bool existeRazonSocial(string RS)
         {
-            return AdaptadorBD.ejecutarProcedureWithReturnValue("existe_razon_social",RS)==1;
+            return AdaptadorBD.ejecutarProcedureWithReturnValue("existe_razon_social",RS) == 1;
         }
 
-        public static void chequearTextboxNoNuloYCUIT(TextBox elec, List<string> errores, string campo)
+        public static void chequearTextboxNoNuloYCUIT(TextBox elec1, TextBox elec2, TextBox elec3,
+            List<string> errores)
         {
-            AsistenteBotones.chequearTextboxNoNulo(elec, errores, campo);
-            chequearNoExisteCUIT(elec.Text, errores);
+            AsistenteBotones.chequearTextboxNoNulo(elec1, errores, "Primera parte del CUIT");
+            AsistenteBotones.chequearTextboxNoNulo(elec2, errores, "Segunda parte del CUIT");
+            AsistenteBotones.chequearTextboxNoNulo(elec3, errores, "Tercera parte del CUIT");
+            chequearNoExisteCUIT(elec1.Text + "-" + elec2.Text + "-" + elec3.Text, errores);
         }
 
         public static void chequearNoExisteCUIT(string CUIT, List<string> errores)
@@ -86,7 +89,7 @@ namespace FrbaCommerce.Asistentes
 
         public static bool existeCUIT(string cuit)
         {
-            return AdaptadorBD.ejecutarProcedureWithReturnValue("existe_cuit",cuit)==1;
+            return AdaptadorBD.ejecutarProcedureWithReturnValue("existe_cuit",cuit) == 1;
         }
 
         public static DataTable getTableBuscando(string razon,string cuit,string email)

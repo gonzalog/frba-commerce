@@ -6,6 +6,7 @@ using FrbaCommerce.Asistentes;
 using System.Data;
 using FrbaCommerce.Abm_Visibilidad;
 using FrbaCommerce.Excepciones;
+using System.Windows.Forms;
 
 namespace FrbaCommerce.Generar_Publicacion
 {
@@ -78,7 +79,7 @@ namespace FrbaCommerce.Generar_Publicacion
 
         public abstract decimal precioActual();
 
-        public abstract void abrirVentanaInteresado(Publicacion publicacion, string user);
+        public abstract void abrirVentanaInteresado(Form padre,Publicacion publicacion, string user);
 
         public abstract int cantidadFacturada(string usuario);
     }

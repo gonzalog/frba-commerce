@@ -150,7 +150,7 @@
             // buscador
             // 
             this.buscador.Location = new System.Drawing.Point(78, 22);
-            this.buscador.MaxLength = 255;
+            this.buscador.MaxLength = 250;
             this.buscador.Name = "buscador";
             this.buscador.Size = new System.Drawing.Size(279, 20);
             this.buscador.TabIndex = 5;

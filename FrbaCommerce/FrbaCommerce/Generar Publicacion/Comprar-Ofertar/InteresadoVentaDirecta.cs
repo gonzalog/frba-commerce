@@ -16,8 +16,10 @@ namespace FrbaCommerce.Comprar_Ofertar
         public string usuario;
         public Publicacion publicacion;
         public Vendedor vendedor;
-        public InteresadoVentaDirecta(Publicacion publicacion,string user)
+        public Form padre;
+        public InteresadoVentaDirecta(Publicacion publicacion,string user,Form padre)
         {
+            this.padre = padre;
             InitializeComponent();
             descrip.Text = publicacion.descripcion;
             stock.Text = publicacion.tipo.stock.ToString();
@@ -39,7 +41,7 @@ namespace FrbaCommerce.Comprar_Ofertar
         {
             if (MessageBox.Show("¿Confirma que no quiere comprar?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Close();
+                AsistenteVistas.volverAPadreYCerrar(padre, this);
             }
         }
 
@@ -53,7 +55,7 @@ namespace FrbaCommerce.Comprar_Ofertar
 
             AdaptadorBD.ejecutarProcedure("alta_compra", usuario, publicacion.id, cantidadCompra.Value);
             vendedor.mostrarDatos();
-            Close();
+            AsistenteVistas.volverAPadreYCerrar(padre, this);
         }
 
         private void BotonConsultar_Click(object sender, EventArgs e)

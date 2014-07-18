@@ -26,7 +26,7 @@ namespace FrbaCommerce.Generar_Publicacion
             tipo.Items.Add("Subasta");
             tipo.Items.Add("Compra inmediata");
             
-            Visibilidad.Items.AddRange(AsistenteVisibilidad.getVisibilidades().Keys.ToArray());
+            Visibilidad.Items.AddRange(AsistenteVisibilidad.getVisibilidadesPosibles().Keys.ToArray());
             
             Estado.Items.AddRange(new string[2]{"Borrador","Publicada"});
             
@@ -58,6 +58,11 @@ namespace FrbaCommerce.Generar_Publicacion
 
         private void aceptar_Click(object sender, EventArgs e)
         {
+            if (Estado.Text == "")
+            {
+                MessageBox.Show("Seleccione un estado.");
+                return;
+            }
             try
             {
                 AsistenteBotones.chequearTextboxNoNulos(Descripcion, Precio, Stock);

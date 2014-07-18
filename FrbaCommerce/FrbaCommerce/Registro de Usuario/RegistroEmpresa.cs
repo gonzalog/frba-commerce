@@ -39,9 +39,9 @@ namespace FrbaCommerce.Registro_de_Usuario
             AsistenteBotones.checkSoloNumericos(elecTelefono);
         }
 
-        private void elecCUIT_TextChanged(object sender, EventArgs e)
+        private void elecCUIT1_TextChanged(object sender, EventArgs e)
         {
-            AsistenteBotones.checkSoloNumericos(elecCUIT);
+            AsistenteBotones.checkSoloNumericos(elecCUIT1);
         }
 
         private void elecNumero_TextChanged(object sender, EventArgs e)
@@ -61,8 +61,8 @@ namespace FrbaCommerce.Registro_de_Usuario
 
             AsistenteUsuario.userNameValido(eleccionUsername.Text, errores);
             AsistenteUsuario.contraseñaValida(eleccionPassword.Text,confirContraseña.Text, errores);
-            
-            AsistenteEmpresa.chequearTextboxNoNuloYCUIT(elecCUIT, errores, "CUIT");
+
+            AsistenteEmpresa.chequearTextboxNoNuloYCUIT(elecCUIT1, elecCUIT2, elecCUIT3, errores);
             AsistenteEmpresa.chequearTextboxNoNuloYRSUnica(elecRazonSocial, errores, "Razón Social");
 
             AsistenteBotones.chequearTextboxNoNuloYMail(elecEMail, errores, "E-Mail");
@@ -99,7 +99,7 @@ namespace FrbaCommerce.Registro_de_Usuario
                                             elecLocalidad.Text,
                                             elecCP.Text,
                                             elecCiudad.Text,
-                                            elecCUIT.Text,
+                                            elecCUIT1.Text + "-" + elecCUIT2.Text + "-" + elecCUIT3.Text,
                                             elecNombreContacto.Text,
                                             elecFechaCreacion.Value.Date
                                             );
@@ -108,69 +108,14 @@ namespace FrbaCommerce.Registro_de_Usuario
             }
         }
 
-        private void elecFechaCreacion_ValueChanged(object sender, EventArgs e)
+        private void elecCUIT2_TextChanged(object sender, EventArgs e)
         {
-
+            AsistenteBotones.checkSoloNumericos(elecCUIT2);
         }
 
-        private void label15_Click(object sender, EventArgs e)
+        private void elecCUIT3_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void elecNombreContacto_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void elecCiudad_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void elecEMail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void elecRazonSocial_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            AsistenteBotones.checkSoloNumericos(elecCUIT3);
         }
     }
 }

@@ -40,7 +40,7 @@ namespace FrbaCommerce.Abm_Empresa
 
         private void elecCUIT_TextChanged(object sender, EventArgs e)
         {
-            AsistenteBotones.checkSoloNumericos(elecCUIT);
+            AsistenteBotones.checkSoloNumericos(elecCUIT1);
         }
 
         private void elecNumero_TextChanged(object sender, EventArgs e)
@@ -59,8 +59,11 @@ namespace FrbaCommerce.Abm_Empresa
             List<string> errores = new List<string>();
             try
             {
-
-                AsistenteEmpresa.chequearTextboxNoNuloYCUIT(elecCUIT, errores, "CUIT");
+                System.Diagnostics.Debug.WriteLine("Se comienza a checkear");
+                System.Diagnostics.Debug.WriteLine("Se chequea el cuit: " + elecCUIT1.Text + elecCUIT2.Text + elecCUIT3.Text);
+                AsistenteEmpresa.chequearTextboxNoNuloYCUIT(elecCUIT1, elecCUIT2, elecCUIT3, errores);
+                System.Diagnostics.Debug.WriteLine("Se pasa el checkeo del cuit: " + 
+                    elecCUIT1.Text + elecCUIT2.Text + elecCUIT3.Text);
                 AsistenteEmpresa.chequearTextboxNoNuloYRSUnica(elecRazonSocial, errores, "Razón Social");
 
                 AsistenteBotones.chequearTextboxNoNuloYMail(elecEMail, errores, "E-Mail");
@@ -83,7 +86,8 @@ namespace FrbaCommerce.Abm_Empresa
                 else
                 {
                     errorBox.Text = "Registro aceptado.";
-                    AsistenteEmpresa.altaEmpresa(elecRazonSocial.Text,
+                    AsistenteEmpresa.altaEmpresa(
+                                                elecRazonSocial.Text,
                                                 "UTNFRBA",
                                                 0,
                                                 "Empresa",
@@ -97,7 +101,7 @@ namespace FrbaCommerce.Abm_Empresa
                                                 elecLocalidad.Text,
                                                 elecCP.Text,
                                                 elecCiudad.Text,
-                                                elecCUIT.Text,
+                                                elecCUIT1.Text + "-" + elecCUIT2.Text + "-" + elecCUIT3.Text,
                                                 elecNombreContacto.Text,
                                                 elecFechaCreacion.Value.Date
                                                 );
@@ -109,6 +113,16 @@ namespace FrbaCommerce.Abm_Empresa
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            AsistenteBotones.checkSoloNumericos(elecCUIT2);
+        }
+
+        private void elecCUIT3_TextChanged(object sender, EventArgs e)
+        {
+            AsistenteBotones.checkSoloNumericos(elecCUIT3);
         }
     }
 }

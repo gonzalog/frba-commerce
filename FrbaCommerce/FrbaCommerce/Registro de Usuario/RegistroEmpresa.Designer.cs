@@ -57,7 +57,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.elecCiudad = new System.Windows.Forms.TextBox();
-            this.elecCUIT = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.elecNombreContacto = new System.Windows.Forms.TextBox();
@@ -66,6 +65,9 @@
             this.cancelar = new System.Windows.Forms.Button();
             this.aceptar = new System.Windows.Forms.Button();
             this.confirContraseña = new System.Windows.Forms.TextBox();
+            this.elecCUIT3 = new System.Windows.Forms.TextBox();
+            this.elecCUIT2 = new System.Windows.Forms.TextBox();
+            this.elecCUIT1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -95,6 +97,7 @@
             // eleccionPassword
             // 
             this.eleccionPassword.Location = new System.Drawing.Point(140, 88);
+            this.eleccionPassword.MaxLength = 20;
             this.eleccionPassword.Name = "eleccionPassword";
             this.eleccionPassword.Size = new System.Drawing.Size(214, 20);
             this.eleccionPassword.TabIndex = 88;
@@ -102,6 +105,7 @@
             // eleccionUsername
             // 
             this.eleccionUsername.Location = new System.Drawing.Point(140, 58);
+            this.eleccionUsername.MaxLength = 20;
             this.eleccionUsername.Name = "eleccionUsername";
             this.eleccionUsername.Size = new System.Drawing.Size(214, 20);
             this.eleccionUsername.TabIndex = 87;
@@ -141,19 +145,19 @@
             this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 90;
             this.label1.Text = "Razón social:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // elecRazonSocial
             // 
             this.elecRazonSocial.Location = new System.Drawing.Point(140, 142);
+            this.elecRazonSocial.MaxLength = 250;
             this.elecRazonSocial.Name = "elecRazonSocial";
             this.elecRazonSocial.Size = new System.Drawing.Size(214, 20);
             this.elecRazonSocial.TabIndex = 91;
-            this.elecRazonSocial.TextChanged += new System.EventHandler(this.elecRazonSocial_TextChanged);
             // 
             // elecTelefono
             // 
             this.elecTelefono.Location = new System.Drawing.Point(140, 193);
+            this.elecTelefono.MaxLength = 15;
             this.elecTelefono.Name = "elecTelefono";
             this.elecTelefono.Size = new System.Drawing.Size(214, 20);
             this.elecTelefono.TabIndex = 95;
@@ -162,10 +166,10 @@
             // elecEMail
             // 
             this.elecEMail.Location = new System.Drawing.Point(140, 167);
+            this.elecEMail.MaxLength = 250;
             this.elecEMail.Name = "elecEMail";
             this.elecEMail.Size = new System.Drawing.Size(214, 20);
             this.elecEMail.TabIndex = 94;
-            this.elecEMail.TextChanged += new System.EventHandler(this.elecEMail_TextChanged);
             // 
             // label8
             // 
@@ -175,7 +179,6 @@
             this.label8.Size = new System.Drawing.Size(52, 13);
             this.label8.TabIndex = 93;
             this.label8.Text = "Telefono:";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label7
             // 
@@ -185,7 +188,6 @@
             this.label7.Size = new System.Drawing.Size(39, 13);
             this.label7.TabIndex = 92;
             this.label7.Text = "E-Mail:";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // groupBox1
             // 
@@ -207,11 +209,11 @@
             this.groupBox1.TabIndex = 96;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dirección";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // elecPiso
             // 
             this.elecPiso.Location = new System.Drawing.Point(125, 75);
+            this.elecPiso.MaxLength = 2;
             this.elecPiso.Name = "elecPiso";
             this.elecPiso.Size = new System.Drawing.Size(208, 20);
             this.elecPiso.TabIndex = 73;
@@ -229,6 +231,7 @@
             // elecLocalidad
             // 
             this.elecLocalidad.Location = new System.Drawing.Point(125, 131);
+            this.elecLocalidad.MaxLength = 250;
             this.elecLocalidad.Name = "elecLocalidad";
             this.elecLocalidad.Size = new System.Drawing.Size(208, 20);
             this.elecLocalidad.TabIndex = 71;
@@ -236,6 +239,7 @@
             // elecDepartamento
             // 
             this.elecDepartamento.Location = new System.Drawing.Point(125, 103);
+            this.elecDepartamento.MaxLength = 1;
             this.elecDepartamento.Name = "elecDepartamento";
             this.elecDepartamento.Size = new System.Drawing.Size(208, 20);
             this.elecDepartamento.TabIndex = 70;
@@ -243,6 +247,7 @@
             // elecCP
             // 
             this.elecCP.Location = new System.Drawing.Point(125, 157);
+            this.elecCP.MaxLength = 10;
             this.elecCP.Name = "elecCP";
             this.elecCP.Size = new System.Drawing.Size(208, 20);
             this.elecCP.TabIndex = 77;
@@ -250,6 +255,7 @@
             // elecNumero
             // 
             this.elecNumero.Location = new System.Drawing.Point(125, 49);
+            this.elecNumero.MaxLength = 5;
             this.elecNumero.Name = "elecNumero";
             this.elecNumero.Size = new System.Drawing.Size(208, 20);
             this.elecNumero.TabIndex = 69;
@@ -258,6 +264,7 @@
             // elecCalle
             // 
             this.elecCalle.Location = new System.Drawing.Point(125, 23);
+            this.elecCalle.MaxLength = 250;
             this.elecCalle.Name = "elecCalle";
             this.elecCalle.Size = new System.Drawing.Size(208, 20);
             this.elecCalle.TabIndex = 68;
@@ -315,23 +322,14 @@
             this.label12.Size = new System.Drawing.Size(43, 13);
             this.label12.TabIndex = 97;
             this.label12.Text = "Ciudad:";
-            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // elecCiudad
             // 
             this.elecCiudad.Location = new System.Drawing.Point(140, 220);
+            this.elecCiudad.MaxLength = 250;
             this.elecCiudad.Name = "elecCiudad";
             this.elecCiudad.Size = new System.Drawing.Size(214, 20);
             this.elecCiudad.TabIndex = 98;
-            this.elecCiudad.TextChanged += new System.EventHandler(this.elecCiudad_TextChanged);
-            // 
-            // elecCUIT
-            // 
-            this.elecCUIT.Location = new System.Drawing.Point(140, 246);
-            this.elecCUIT.Name = "elecCUIT";
-            this.elecCUIT.Size = new System.Drawing.Size(214, 20);
-            this.elecCUIT.TabIndex = 100;
-            this.elecCUIT.TextChanged += new System.EventHandler(this.elecCUIT_TextChanged);
             // 
             // label13
             // 
@@ -341,7 +339,6 @@
             this.label13.Size = new System.Drawing.Size(35, 13);
             this.label13.TabIndex = 99;
             this.label13.Text = "CUIT:";
-            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // label14
             // 
@@ -351,15 +348,14 @@
             this.label14.Size = new System.Drawing.Size(107, 13);
             this.label14.TabIndex = 101;
             this.label14.Text = "Nombre de contacto:";
-            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // elecNombreContacto
             // 
             this.elecNombreContacto.Location = new System.Drawing.Point(140, 273);
+            this.elecNombreContacto.MaxLength = 250;
             this.elecNombreContacto.Name = "elecNombreContacto";
             this.elecNombreContacto.Size = new System.Drawing.Size(214, 20);
             this.elecNombreContacto.TabIndex = 102;
-            this.elecNombreContacto.TextChanged += new System.EventHandler(this.elecNombreContacto_TextChanged);
             // 
             // label15
             // 
@@ -369,7 +365,6 @@
             this.label15.Size = new System.Drawing.Size(99, 13);
             this.label15.TabIndex = 103;
             this.label15.Text = "Fecha de creación:";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // elecFechaCreacion
             // 
@@ -377,7 +372,6 @@
             this.elecFechaCreacion.Name = "elecFechaCreacion";
             this.elecFechaCreacion.Size = new System.Drawing.Size(214, 20);
             this.elecFechaCreacion.TabIndex = 104;
-            this.elecFechaCreacion.ValueChanged += new System.EventHandler(this.elecFechaCreacion_ValueChanged);
             // 
             // cancelar
             // 
@@ -402,9 +396,37 @@
             // confirContraseña
             // 
             this.confirContraseña.Location = new System.Drawing.Point(140, 115);
+            this.confirContraseña.MaxLength = 20;
             this.confirContraseña.Name = "confirContraseña";
             this.confirContraseña.Size = new System.Drawing.Size(214, 20);
             this.confirContraseña.TabIndex = 107;
+            // 
+            // elecCUIT3
+            // 
+            this.elecCUIT3.Location = new System.Drawing.Point(321, 246);
+            this.elecCUIT3.MaxLength = 2;
+            this.elecCUIT3.Name = "elecCUIT3";
+            this.elecCUIT3.Size = new System.Drawing.Size(32, 20);
+            this.elecCUIT3.TabIndex = 128;
+            this.elecCUIT3.TextChanged += new System.EventHandler(this.elecCUIT3_TextChanged);
+            // 
+            // elecCUIT2
+            // 
+            this.elecCUIT2.Location = new System.Drawing.Point(179, 246);
+            this.elecCUIT2.MaxLength = 8;
+            this.elecCUIT2.Name = "elecCUIT2";
+            this.elecCUIT2.Size = new System.Drawing.Size(136, 20);
+            this.elecCUIT2.TabIndex = 127;
+            this.elecCUIT2.TextChanged += new System.EventHandler(this.elecCUIT2_TextChanged);
+            // 
+            // elecCUIT1
+            // 
+            this.elecCUIT1.Location = new System.Drawing.Point(139, 246);
+            this.elecCUIT1.MaxLength = 2;
+            this.elecCUIT1.Name = "elecCUIT1";
+            this.elecCUIT1.Size = new System.Drawing.Size(34, 20);
+            this.elecCUIT1.TabIndex = 126;
+            this.elecCUIT1.TextChanged += new System.EventHandler(this.elecCUIT1_TextChanged);
             // 
             // RegistroEmpresa
             // 
@@ -412,6 +434,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(369, 590);
+            this.Controls.Add(this.elecCUIT3);
+            this.Controls.Add(this.elecCUIT2);
+            this.Controls.Add(this.elecCUIT1);
             this.Controls.Add(this.confirContraseña);
             this.Controls.Add(this.cancelar);
             this.Controls.Add(this.aceptar);
@@ -419,7 +444,6 @@
             this.Controls.Add(this.label15);
             this.Controls.Add(this.elecNombreContacto);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.elecCUIT);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.elecCiudad);
             this.Controls.Add(this.label12);
@@ -482,7 +506,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox elecCiudad;
-        private System.Windows.Forms.TextBox elecCUIT;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox elecNombreContacto;
@@ -491,5 +514,8 @@
         private System.Windows.Forms.Button cancelar;
         private System.Windows.Forms.Button aceptar;
         private System.Windows.Forms.TextBox confirContraseña;
+        private System.Windows.Forms.TextBox elecCUIT3;
+        private System.Windows.Forms.TextBox elecCUIT2;
+        private System.Windows.Forms.TextBox elecCUIT1;
     }
 }

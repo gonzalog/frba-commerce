@@ -18,10 +18,11 @@ namespace FrbaCommerce.Comprar_Ofertar
         public string user;
         private int publicacionesPorVez;
         private MuestraDePublicacion[] muestras = new MuestraDePublicacion[5];
-        public ComprarOfertar(string user)
+        public Form principal;
+        public ComprarOfertar(string user,Form principal)
         {
             InitializeComponent();
-            
+            this.principal = principal;
             publicacionesPorVez = 5;
             this.user = user;
             List<string> rubros=AsistentePublicacion.getRubros().Keys.ToList();
@@ -34,7 +35,7 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            Close();
+            AsistenteVistas.volverAPadreYCerrar(principal,this);
         }
 
         private void inicializar()
@@ -173,31 +174,36 @@ namespace FrbaCommerce.Comprar_Ofertar
         private void boton1_Click(object sender, EventArgs e)
         {
             cargarPublicaciones();//Se vuelve a buscar la publicación a la base para evitar que muestren datos desactualizados.
-            muestras[0].hayUnInteresado(user);
+            muestras[0].hayUnInteresado(principal, user);
+            Close();
         }
 
         private void boton2_Click(object sender, EventArgs e)
         {
             cargarPublicaciones();
-            muestras[1].hayUnInteresado(user);
+            muestras[1].hayUnInteresado(principal, user);
+            Close();
         }
 
         private void boton3_Click(object sender, EventArgs e)
         {
             cargarPublicaciones();
-            muestras[2].hayUnInteresado(user);
+            muestras[2].hayUnInteresado(principal, user);
+            Close();
         }
 
         private void boton4_Click(object sender, EventArgs e)
         {
             cargarPublicaciones();
-            muestras[3].hayUnInteresado(user);
+            muestras[3].hayUnInteresado(principal, user);
+            Close();
         }
 
         private void boton5_Click(object sender, EventArgs e)
         {
             cargarPublicaciones();
-            muestras[4].hayUnInteresado(user);
+            muestras[4].hayUnInteresado(principal, user);
+            Close();
         }
     }
 }

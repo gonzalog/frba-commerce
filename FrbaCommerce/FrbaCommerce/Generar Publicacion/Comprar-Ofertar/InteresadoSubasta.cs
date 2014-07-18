@@ -16,11 +16,13 @@ namespace FrbaCommerce.Comprar_Ofertar
         public string usuario;
         public Publicacion publicacion;
         public Vendedor vendedor;
-        public InteresadoSubasta(Publicacion publicacion, string user)
+        public Form padre;
+        public InteresadoSubasta(Publicacion publicacion, string user,Form padre)
         {
             InitializeComponent();
             this.publicacion = publicacion;
             this.usuario = user;
+            this.padre = padre;
             vendedor = AsistenteUsuario.getVendedor(publicacion.usuarioCreador);
 
             if (!publicacion.hayPreguntas)
@@ -70,26 +72,19 @@ namespace FrbaCommerce.Comprar_Ofertar
                 MessageBox.Show("Por favor, ingrese un valor entero en el campo 'Monto'.");
                 return;
             }
-            if(monto>publicacion.tipo.precioActual())
+            if(monto > publicacion.tipo.precioActual())
             {
-                try
-                {
-                    AdaptadorBD.ejecutarProcedure("alta_cliente_por_publicacion", usuario, publicacion.id);
-                }
-                catch (Exception)
-                {
-                    //Los datos ya estaban cargados previamente.
-                }
                 AdaptadorBD.ejecutarProcedure("alta_oferta",usuario,publicacion.id,monto);
                 MessageBox.Show("Oferta exitosa.");
                 precioActual.Text = publicacion.tipo.precioActual().ToString();
                 montoOferta.Text = "";
+                AsistenteVistas.volverAPadreYCerrar(padre,this);
             }
         }
 
         private void BotonCancelar_Click(object sender, EventArgs e)
         {
-            Close();
+            AsistenteVistas.volverAPadreYCerrar(padre,this);
         }
     }
 }

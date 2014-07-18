@@ -2479,6 +2479,8 @@ BEGIN
 IF THE_DISCRETABOY.ES_VENTA_DIRECTA((SELECT TOP 1 PUBLICACION FROM INSERTED)) = 1
 UPDATE THE_DISCRETABOY.Venta_directa
 SET stock = stock - (SELECT TOP 1 cant_comprada FROM INSERTED)
+WHERE
+PUBLICACION = (SELECT TOP 1 PUBLICACION FROM INSERTED)
 END
 
 GO
@@ -3651,8 +3653,8 @@ forma_de_pago
 SELECT
 M.Factura_Nro,
 M.Publicacion_Cod,
-M.Publicacion_Visibilidad_Precio,
-M.Item_Factura_Cantidad * M.Item_Factura_Monto,
+0,
+M.Item_Factura_Monto,
 M.Forma_Pago_Desc
 FROM
 gd_esquema.Maestra M

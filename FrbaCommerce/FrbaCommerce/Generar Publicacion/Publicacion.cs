@@ -102,9 +102,9 @@ namespace FrbaCommerce.Generar_Publicacion
             this.tipo.stock += aumento;
         }
 
-        public void hayUnInteresado(string user)
+        public void hayUnInteresado(Form padre, string user)
         {
-            tipo.abrirVentanaInteresado(this,user);
+            tipo.abrirVentanaInteresado(padre, this, user);
         }
 
         public decimal comisionPorUnidadesVendidas()

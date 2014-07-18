@@ -52,5 +52,25 @@ namespace FrbaCommerce.Abm_Empresa
         {
             MessageBox.Show("Empresa vendedora:\n"+AsistenteEmpresa.listarData(this));
         }
+
+        public string getPrimeraParteCUIT()
+        {
+            return getParteCuit(0);
+        }
+        public string getSegundaParteCUIT()
+        {
+            return getParteCuit(1);
+        }
+        public string getTerceraParteCUIT()
+        {
+            return getParteCuit(2);
+        }
+
+        public string getParteCuit(int parteNumero)
+        {
+            string[] partes = cuit.Split(new Char[] { '-' });
+
+            return partes[parteNumero];
+        }
     }
 }

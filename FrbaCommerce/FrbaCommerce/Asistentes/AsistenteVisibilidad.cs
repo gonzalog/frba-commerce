@@ -104,5 +104,19 @@ namespace FrbaCommerce.Asistentes
             return visibilidades;
         }
 
+
+        public static Dictionary<string, int> getVisibilidadesPosibles()
+        {
+            Dictionary<string, int> visibilidades = new Dictionary<string, int>();
+            DataTable tabla = getTableBuscando("");
+            foreach (DataRow fila in tabla.Rows)
+            {
+                string descrip = fila["DESCRIPCIÓN"].ToString();
+                int cod = Convert.ToInt32(fila["CÓDIGO"].ToString());
+                if (fila["ESTADO ACTUAL"].ToString() == "HABILITADO")
+                    visibilidades.Add(descrip, cod);
+            }
+            return visibilidades;
+        }
     }
 }
